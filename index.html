@@ -1,124 +1,1234 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Metrou Bucuresti - Your Smart Commute Companion</title>
-    <meta name="description" content="The ultimate app for navigating the Bucharest Metro with real-time tracking, route planning, and detailed station info.">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Metrou București - Navigate Bucharest Metro with Ease</title>
+    <meta name="description" content="The ultimate Bucharest metro navigation app. Plan routes, track journeys, find stations, and navigate the subway system with real-time updates and accessibility features.">
+    <meta name="keywords" content="bucharest metro, subway navigation, public transport, route planning, metrou bucuresti, romania transport">
     
-    <!-- Tailwind CSS for modern styling -->
-    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Metrou București - Navigate Bucharest Metro with Ease">
+    <meta property="og:description" content="The ultimate Bucharest metro navigation app with route planning, real-time tracking, and accessibility features.">
+    <meta property="og:image" content="https://via.placeholder.com/1200x630/2563eb/ffffff?text=Metrou+București">
     
-    <!-- Google Fonts for clean typography -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:title" content="Metrou București - Navigate Bucharest Metro with Ease">
+    <meta property="twitter:description" content="The ultimate Bucharest metro navigation app with route planning, real-time tracking, and accessibility features.">
     
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <style>
-        /* Best practice: Define font-family in a central place */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-blue: #2563eb;
+            --primary-dark: #1e40af;
+            --secondary-green: #10b981;
+            --accent-purple: #8b5cf6;
+            --text-dark: #1f2937;
+            --text-light: #6b7280;
+            --background-light: #f8fafc;
+            --white: #ffffff;
+            --gradient-primary: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
+            --gradient-secondary: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            --gradient-accent: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
+            --shadow-soft: 0 10px 25px rgba(37, 99, 235, 0.1);
+            --shadow-medium: 0 20px 40px rgba(37, 99, 235, 0.15);
+            --shadow-strong: 0 25px 50px rgba(37, 99, 235, 0.25);
+        }
+
         body {
-            font-family: 'Inter', sans-serif;
-            background-color: #f8f9fa; /* A very light gray for a clean look */
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            overflow-x: hidden;
         }
-        
-        /* Smooth transition for CTA buttons */
-        .cta-button {
-            transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1rem 0;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid rgba(37, 99, 235, 0.1);
         }
-        
-        .cta-button:hover {
+
+        .navbar.scrolled {
+            background: rgba(255, 255, 255, 0.98);
+            box-shadow: var(--shadow-soft);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-blue);
+            text-decoration: none;
+        }
+
+        .logo i {
+            margin-right: 0.5rem;
+            font-size: 2rem;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-blue);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gradient-primary);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .language-selector {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-left: 2rem;
+        }
+
+        .language-selector select {
+            background: transparent;
+            border: 2px solid var(--primary-blue);
+            border-radius: 8px;
+            padding: 0.5rem 1rem;
+            color: var(--primary-blue);
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .language-selector select:hover {
+            background: var(--primary-blue);
+            color: white;
+        }
+
+        .language-selector select:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.3);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--primary-blue);
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: var(--gradient-primary);
+            color: white;
+            padding: 120px 0 80px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+            opacity: 0.3;
+        }
+
+        .hero-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-content {
+            padding-right: 2rem;
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            line-height: 1.1;
+            background: linear-gradient(135deg, #ffffff 0%, #e0e7ff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            line-height: 1.6;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .cta-btn {
+            display: inline-flex;
+            align-items: center;
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .cta-btn.primary {
+            background: white;
+            color: var(--primary-blue);
+            box-shadow: var(--shadow-soft);
+        }
+
+        .cta-btn.primary:hover {
             transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            box-shadow: var(--shadow-medium);
+        }
+
+        .cta-btn.secondary {
+            background: transparent;
+            color: white;
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .cta-btn.secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.5);
+        }
+
+        .cta-btn i {
+            margin-right: 0.5rem;
+        }
+
+        .hero-visual {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        .phone-mockup {
+            width: 300px;
+            height: 600px;
+            background: linear-gradient(145deg, #1f2937, #374151);
+            border-radius: 40px;
+            padding: 20px;
+            box-shadow: var(--shadow-strong);
+            position: relative;
+            transform: perspective(1000px) rotateY(-15deg) rotateX(5deg);
+            transition: transform 0.3s ease;
+        }
+
+        .phone-mockup:hover {
+            transform: perspective(1000px) rotateY(-10deg) rotateX(2deg);
+        }
+
+        .phone-screen {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(145deg, #10b981, #059669);
+            border-radius: 30px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            background-image: url('https://lxtech.ro/metroubucuresti/images/splash-screen.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        .phone-screen-overlay {
+            display: none;
+        }
+
+        .phone-screen::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="20" r="2" fill="rgba(255,255,255,0.1)"/><circle cx="80" cy="40" r="1.5" fill="rgba(255,255,255,0.1)"/><circle cx="40" cy="80" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="60" cy="10" r="1" fill="rgba(255,255,255,0.1)"/></svg>');
+        }
+
+        .floating-elements {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            pointer-events: none;
+        }
+
+        .floating-icon {
+            position: absolute;
+            color: rgba(255, 255, 255, 0.1);
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .floating-icon:nth-child(1) { top: 10%; left: 10%; animation-delay: 0s; }
+        .floating-icon:nth-child(2) { top: 20%; right: 15%; animation-delay: 2s; }
+        .floating-icon:nth-child(3) { bottom: 30%; left: 20%; animation-delay: 4s; }
+        .floating-icon:nth-child(4) { bottom: 10%; right: 10%; animation-delay: 1s; }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); opacity: 0.3; }
+            50% { transform: translateY(-20px); opacity: 0.6; }
+        }
+
+        /* Features Section */
+        .features {
+            padding: 80px 0;
+            background: var(--background-light);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 1rem;
+        }
+
+        .section-header p {
+            font-size: 1.1rem;
+            color: var(--text-light);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: var(--shadow-soft);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(37, 99, 235, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--gradient-primary);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-medium);
+        }
+
+        .feature-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--gradient-primary);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-card h3 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+        }
+
+        .feature-card p {
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        /* Screenshots Section */
+        .screenshots {
+            padding: 80px 0;
+            background: white;
+        }
+
+        .screenshots-container {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .screenshots-content h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: var(--text-dark);
+        }
+
+        .screenshots-content p {
+            font-size: 1.1rem;
+            color: var(--text-light);
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        .screenshots-list {
+            list-style: none;
+        }
+
+        .screenshots-list li {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+        }
+
+        .screenshots-list li i {
+            color: var(--secondary-green);
+            margin-right: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .screenshots-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+        }
+
+        .screenshot {
+            aspect-ratio: 9/16;
+            background: #f8fafc;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-dark);
+            font-size: 1.1rem;
+            font-weight: 600;
+            box-shadow: var(--shadow-soft);
+            transition: transform 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        .screenshot.route-planning {
+            background-image: url('https://lxtech.ro/metroubucuresti/images/journey-tracking.png');
+        }
+
+        .screenshot.station-details {
+            background-image: url('https://lxtech.ro/metroubucuresti/images/station-details.png');
+        }
+
+        .screenshot.journey-tracking {
+            background-image: url('https://lxtech.ro/metroubucuresti/images/live_tracking.png');
+        }
+
+        .screenshot-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0,0,0,0.9));
+            color: white;
+            padding: 1.5rem 1rem;
+            text-align: center;
+            font-size: 1rem;
+            font-weight: 600;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+        }
+
+        .screenshot:hover .screenshot-overlay {
+            transform: translateY(0);
+        }
+
+        .screenshot:hover {
+            transform: scale(1.05);
+        }
+
+        .screenshot::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 100%);
+        }
+
+        /* Specs Section */
+        .specs {
+            padding: 80px 0;
+            background: var(--background-light);
+        }
+
+        .specs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .spec-item {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: var(--shadow-soft);
+            transition: transform 0.3s ease;
+        }
+
+        .spec-item:hover {
+            transform: translateY(-3px);
+        }
+
+        .spec-item i {
+            font-size: 2.5rem;
+            color: var(--primary-blue);
+            margin-bottom: 1rem;
+        }
+
+        .spec-item h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--text-dark);
+        }
+
+        .spec-item p {
+            color: var(--text-light);
+        }
+
+        /* CTA Section */
+        .final-cta {
+            padding: 80px 0;
+            background: var(--gradient-primary);
+            color: white;
+            text-align: center;
+        }
+
+        .final-cta h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .final-cta p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .final-cta .cta-buttons {
+            justify-content: center;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--text-dark);
+            color: white;
+            padding: 40px 0;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .footer-section p, .footer-section a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            line-height: 1.6;
+        }
+
+        .footer-section a:hover {
+            color: white;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: white;
+                flex-direction: column;
+                padding: 1rem 2rem;
+                box-shadow: var(--shadow-soft);
+                border-radius: 0 0 10px 10px;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .language-selector {
+                margin-left: 0;
+                margin-top: 1rem;
+            }
+
+            .hero-container {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .hero-content {
+                padding-right: 0;
+                text-align: center;
+            }
+
+            .screenshots-container {
+                grid-template-columns: 1fr;
+            }
+
+            .screenshots-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .phone-mockup {
+                width: 250px;
+                height: 500px;
+            }
+        }
+
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Loading animation */
+        .loading {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1s ease forwards;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
     </style>
 </head>
-<body class="text-gray-800">
-
-    <!-- Header & Navigation -->
-    <header class="sticky top-0 bg-white/80 backdrop-blur-lg shadow-sm z-50">
-        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="#home" class="flex items-center space-x-2">
-                <!-- Placeholder Logo -->
-                <svg class="h-8 w-8 text-blue-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 12h16.5m-16.5 3.75h16.5M3.75 19.5h16.5M5.625 4.5h12.75a1.875 1.875 0 010 3.75H5.625a1.875 1.875 0 010-3.75z" />
-                </svg>
-                <span class="text-2xl font-bold text-gray-900">Metrou Bucuresti</span>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">
+                <i class="fas fa-subway"></i>
+                Metrou București
             </a>
-            <div class="hidden md:flex items-center space-x-8">
-                <a href="#features" class="text-gray-600 hover:text-blue-600 font-medium transition-colors">Features</a>
-                <a href="#download" class="bg-blue-600 text-white font-bold py-2 px-5 rounded-full cta-button">Download</a>
+            <ul class="nav-links">
+                <li><a href="#features" data-en="Features" data-ro="Funcții">Features</a></li>
+                <li><a href="#screenshots" data-en="Screenshots" data-ro="Capturi de ecran">Screenshots</a></li>
+                <li><a href="#specs" data-en="Specifications" data-ro="Specificații">Specifications</a></li>
+                <li><a href="#download" data-en="Download" data-ro="Descărcare">Download</a></li>
+            </ul>
+            <div class="language-selector">
+                <i class="fas fa-globe"></i>
+                <select id="languageSelect" onchange="changeLanguage()">
+                    <option value="en">English</option>
+                    <option value="ro">Română</option>
+                </select>
             </div>
-        </nav>
-    </header>
+            <button class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
 
-    <main>
-        <!-- Hero Section -->
-        <section id="home" class="container mx-auto px-6 py-20 md:py-32 text-center">
-            <h1 class="text-4xl md:text-6xl font-black text-gray-900 leading-tight mb-4">
-                Explore Bucharest,<br class="hidden md:block"> One Metro Stop at a Time.
-            </h1>
-            <p class="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto mb-8">
-                The perfect app for Bucharest's daily commuters, tourists, and students. Travel with confidence using real-time data.
-            </p>
-            <a href="https://play.google.com/store/apps/details?id=com.yourapp.package" target="_blank" class="inline-block bg-blue-600 text-white font-bold text-lg py-4 px-8 rounded-full cta-button">
-                Get it on Google Play
-            </a>
-            <p class="text-sm text-gray-500 mt-4">Free for Android</p>
-        </section>
-
-        <!-- Features Section -->
-        <section id="features" class="bg-white py-20 md:py-24">
-            <div class="container mx-auto px-6 text-center">
-                <h2 class="text-3xl md:text-4xl font-bold mb-4">Everything You Need for the Metro</h2>
-                <p class="text-lg text-gray-600 mb-16">Features designed for smart and easy travel.</p>
-                <div class="grid md:grid-cols-3 gap-12">
-                    <!-- Feature 1: Real-time Tracking -->
-                    <div class="text-center">
-                        <div class="flex items-center justify-center h-16 w-16 rounded-full bg-blue-100 text-blue-600 mx-auto mb-4">
-                            <svg class="h-8 w-8" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-                        </div>
-                        <h3 class="text-xl font-bold mb-2">Real-time Tracking</h3>
-                        <p class="text-gray-600">Never miss your train again. See live train locations and accurate arrival times.</p>
-                    </div>
-                    <!-- Feature 2: Route Planner -->
-                    <div class="text-center">
-                        <div class="flex items-center justify-center h-16 w-16 rounded-full bg-red-100 text-red-600 mx-auto mb-4">
-                            <svg class="h-8 w-8" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 6h9.75M10.5 6a1.5 1.5 0 11-3 0m3 0a1.5 1.5 0 10-3 0M3.75 6H7.5m3 12h9.75m-9.75 12a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-3.75 0H7.5m9-6h3.75m-3.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-9.75 0h9.75" /></svg>
-                        </div>
-                        <h3 class="text-xl font-bold mb-2">Smart Route Planning</h3>
-                        <p class="text-gray-600">Find the fastest and easiest route to your destination, including all transfers.</p>
-                    </div>
-                    <!-- Feature 3: Station Details -->
-                    <div class="text-center">
-                        <div class="flex items-center justify-center h-16 w-16 rounded-full bg-blue-100 text-blue-600 mx-auto mb-4">
-                            <svg class="h-8 w-8" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" /><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" /></svg>
-                        </div>
-                        <h3 class="text-xl font-bold mb-2">Station Details</h3>
-                        <p class="text-gray-600">Access useful info for every station, including exits, hours, and nearby points of interest.</p>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="floating-elements">
+            <i class="fas fa-map-marker-alt floating-icon"></i>
+            <i class="fas fa-route floating-icon"></i>
+            <i class="fas fa-subway floating-icon"></i>
+            <i class="fas fa-navigation floating-icon"></i>
+        </div>
+        <div class="hero-container">
+            <div class="hero-content loading">
+                <h1 data-en="Navigate Bucharest Metro with Ease" data-ro="Navighează prin Metroul București cu ușurință">Navigate Bucharest Metro with Ease</h1>
+                <p data-en="The ultimate subway navigation app for Bucharest. Plan your routes, track your journey in real-time, and discover stations with comprehensive accessibility features and multilingual support." data-ro="Aplicația supremă de navigare pentru metroul din București. Planifică-ți rutele, urmărește-ți călătoria în timp real și descoperă stațiile cu funcții complete de accesibilitate și suport multilingv.">The ultimate subway navigation app for Bucharest. Plan your routes, track your journey in real-time, and discover stations with comprehensive accessibility features and multilingual support.</p>
+                <div class="cta-buttons">
+                    <a href="#download" class="cta-btn primary">
+                        <i class="fab fa-google-play"></i>
+                        <span data-en="Download Now" data-ro="Descarcă acum">Download Now</span>
+                    </a>
+                    <a href="#features" class="cta-btn secondary">
+                        <i class="fas fa-play"></i>
+                        <span data-en="Learn More" data-ro="Află mai multe">Learn More</span>
+                    </a>
+                </div>
+            </div>
+            <div class="hero-visual loading">
+                <div class="phone-mockup">
+                    <div class="phone-screen">
+                        <!-- Image background will show without overlay -->
                     </div>
                 </div>
             </div>
-        </section>
-        
-        <!-- Final CTA / Download Section -->
-        <section id="download" class="container mx-auto px-6 py-20 md:py-24 text-center">
-            <h2 class="text-3xl md:text-4xl font-bold mb-4">Ready to Transform Your Commute?</h2>
-            <p class="text-lg text-gray-600 max-w-2xl mx-auto mb-8">
-                Download the Metrou Bucuresti app today and join thousands who travel smarter.
-            </p>
-            <a href="https://play.google.com/store/apps/details?id=com.yourapp.package" target="_blank" class="inline-block bg-red-500 hover:bg-red-600 text-white font-bold text-lg py-4 px-8 rounded-full cta-button">
-                Download For Free
-            </a>
-        </section>
-    </main>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="container">
+            <div class="section-header loading">
+                <h2>Powerful Features for Every Journey</h2>
+                <p>Discover why thousands of commuters trust our app for their daily metro navigation in Bucharest</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card loading">
+                    <div class="feature-icon">
+                        <i class="fas fa-route"></i>
+                    </div>
+                    <h3>Smart Route Planning</h3>
+                    <p>Advanced route calculation with M1/M3 line optimization, transfer points, and estimated journey times. Find the fastest path to your destination.</p>
+                </div>
+                <div class="feature-card loading">
+                    <div class="feature-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <h3>Real-time Tracking</h3>
+                    <p>Track your journey progress with live notifications, transfer alerts, and door side recommendations for optimal positioning.</p>
+                </div>
+                <div class="feature-card loading">
+                    <div class="feature-icon">
+                        <i class="fas fa-info-circle"></i>
+                    </div>
+                    <h3>Comprehensive Station Info</h3>
+                    <p>Detailed station information including entrances, exits, accessibility features, nearby places, and transport connections.</p>
+                </div>
+                <div class="feature-card loading">
+                    <div class="feature-icon">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <h3>Favorite Routes</h3>
+                    <p>Save your most used routes for quick access. Perfect for daily commuters who want instant navigation.</p>
+                </div>
+                <div class="feature-card loading">
+                    <div class="feature-icon">
+                        <i class="fas fa-universal-access"></i>
+                    </div>
+                    <h3>Accessibility Features</h3>
+                    <p>Full accessibility support with door side indicators, elevator information, and barrier-free route planning.</p>
+                </div>
+                <div class="feature-card loading">
+                    <div class="feature-icon">
+                        <i class="fas fa-globe"></i>
+                    </div>
+                    <h3>Multilingual Support</h3>
+                    <p>Available in multiple languages including Romanian and English, with dynamic language switching.</p>
+                </div>
+                <div class="feature-card loading">
+                    <div class="feature-icon">
+                        <i class="fas fa-map"></i>
+                    </div>
+                    <h3>Interactive Maps</h3>
+                    <p>Detailed station maps with entrance locations, platform layouts, and nearby landmark identification.</p>
+                </div>
+                <div class="feature-card loading">
+                    <div class="feature-icon">
+                        <i class="fas fa-moon"></i>
+                    </div>
+                    <h3>Dark Mode</h3>
+                    <p>Beautiful dark mode interface that's easy on the eyes during night travel or in low-light conditions.</p>
+                </div>
+                <div class="feature-card loading">
+                    <div class="feature-icon">
+                        <i class="fas fa-cog"></i>
+                    </div>
+                    <h3>Customizable Settings</h3>
+                    <p>Personalize your experience with theme selection, font size adjustment, and notification preferences.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Screenshots Section -->
+    <section class="screenshots" id="screenshots">
+        <div class="container">
+            <div class="screenshots-container">
+                <div class="screenshots-content loading">
+                    <h2 data-en="See the App in Action" data-ro="Vezi aplicația în acțiune">See the App in Action</h2>
+                    <p data-en="Experience the intuitive interface designed specifically for Bucharest metro travelers. From route planning to real-time tracking, every feature is crafted for ease of use." data-ro="Experimentează interfața intuitivă creată special pentru călătorii cu metroul din București. De la planificarea rutelor la urmărirea în timp real, fiecare funcție este creată pentru ușurința de utilizare.">Experience the intuitive interface designed specifically for Bucharest metro travelers. From route planning to real-time tracking, every feature is crafted for ease of use.</p>
+                    <ul class="screenshots-list">
+                        <li><i class="fas fa-check"></i> <span data-en="Interactive route visualization" data-ro="Vizualizare interactivă a rutelor">Interactive route visualization</span></li>
+                        <li><i class="fas fa-check"></i> <span data-en="Real-time journey tracking" data-ro="Urmărirea călătoriei în timp real">Real-time journey tracking</span></li>
+                        <li><i class="fas fa-check"></i> <span data-en="Detailed station information" data-ro="Informații detaliate despre stații">Detailed station information</span></li>
+                        <li><i class="fas fa-check"></i> <span data-en="Transfer notifications" data-ro="Notificări de transfer">Transfer notifications</span></li>
+                        <li><i class="fas fa-check"></i> <span data-en="Accessibility indicators" data-ro="Indicatori de accesibilitate">Accessibility indicators</span></li>
+                        <li><i class="fas fa-check"></i> <span data-en="Offline functionality" data-ro="Funcționalitate offline">Offline functionality</span></li>
+                    </ul>
+                </div>
+                <div class="screenshots-grid loading">
+                    <div class="screenshot route-planning">
+                        <div class="screenshot-overlay">
+                            <div data-en="Route Planning" data-ro="Planificare Rută">Route Planning</div>
+                        </div>
+                    </div>
+                    <div class="screenshot station-details">
+                        <div class="screenshot-overlay">
+                            <div data-en="Station Details" data-ro="Detalii Stație">Station Details</div>
+                        </div>
+                    </div>
+                    <div class="screenshot journey-tracking">
+                        <div class="screenshot-overlay">
+                            <div data-en="Journey Tracking" data-ro="Urmărire Călătorie">Journey Tracking</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Specifications Section -->
+    <section class="specs" id="specs">
+        <div class="container">
+            <div class="section-header loading">
+                <h2 data-en="Technical Specifications" data-ro="Specificații Tehnice">Technical Specifications</h2>
+                <p data-en="Built with modern technology for optimal performance and reliability" data-ro="Construit cu tehnologie modernă pentru performanță și fiabilitate optimă">Built with modern technology for optimal performance and reliability</p>
+            </div>
+            <div class="specs-grid">
+                <div class="spec-item loading">
+                    <i class="fab fa-android"></i>
+                    <h3 data-en="Android Support" data-ro="Suport Android">Android Support</h3>
+                    <p data-en="Android 7.0+ (API 24)" data-ro="Android 7.0+ (API 24)">Android 7.0+ (API 24)</p>
+                </div>
+                <div class="spec-item loading">
+                    <i class="fas fa-language"></i>
+                    <h3 data-en="Languages" data-ro="Limbi">Languages</h3>
+                    <p data-en="Romanian, English" data-ro="Română, Engleză">Romanian, English</p>
+                </div>
+                <div class="spec-item loading">
+                    <i class="fas fa-download"></i>
+                    <h3 data-en="App Size" data-ro="Dimensiune aplicație">App Size</h3>
+                    <p data-en="~15 MB" data-ro="~15 MB">~15 MB</p>
+                </div>
+                <div class="spec-item loading">
+                    <i class="fas fa-wifi"></i>
+                    <h3 data-en="Offline Mode" data-ro="Mod offline">Offline Mode</h3>
+                    <p data-en="Core features work offline" data-ro="Funcțiile principale funcționează offline">Core features work offline</p>
+                </div>
+                <div class="spec-item loading">
+                    <i class="fas fa-database"></i>
+                    <h3 data-en="Data Usage" data-ro="Utilizare date">Data Usage</h3>
+                    <p data-en="Minimal data consumption" data-ro="Consum minim de date">Minimal data consumption</p>
+                </div>
+                <div class="spec-item loading">
+                    <i class="fas fa-shield-alt"></i>
+                    <h3 data-en="Privacy" data-ro="Confidențialitate">Privacy</h3>
+                    <p data-en="No personal data collection" data-ro="Fără colectarea datelor personale">No personal data collection</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final CTA Section -->
+    <section class="final-cta" id="download">
+        <div class="container loading">
+            <h2 data-en="Ready to Transform Your Metro Experience?" data-ro="Gata să îți transformi experiența cu metroul?">Ready to Transform Your Metro Experience?</h2>
+            <p data-en="Join thousands of satisfied users who've made their daily commute easier with Metrou București" data-ro="Alătură-te miilor de utilizatori mulțumiți care și-au făcut naveta zilnică mai ușoară cu Metrou București">Join thousands of satisfied users who've made their daily commute easier with Metrou București</p>
+            <div class="cta-buttons">
+                <a href="#" class="cta-btn primary">
+                    <i class="fab fa-google-play"></i>
+                    <span data-en="Download from Google Play" data-ro="Descarcă de pe Google Play">Download from Google Play</span>
+                </a>
+            </div>
+        </div>
+    </section>
 
     <!-- Footer -->
-    <footer class="bg-gray-900 text-white">
-        <div class="container mx-auto px-6 py-8 text-center">
-            <p>&copy; 2025 Metrou Bucuresti. All Rights Reserved.</p>
-            <p class="text-sm text-gray-400 mt-2">Designed to make your travel in Bucharest easier.</p>
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Metrou București</h3>
+                    <p>The ultimate navigation app for Bucharest's metro system. Making public transportation accessible, efficient, and user-friendly for everyone.</p>
+                </div>
+                <div class="footer-section">
+                    <h3 data-en="Features" data-ro="Funcții">Features</h3>
+                    <a href="#features" data-en="Route Planning" data-ro="Planificare Rută">Route Planning</a><br>
+                    <a href="#features" data-en="Real-time Tracking" data-ro="Urmărire în timp real">Real-time Tracking</a><br>
+                    <a href="#features" data-en="Station Information" data-ro="Informații stații">Station Information</a><br>
+                    <a href="#features" data-en="Accessibility Support" data-ro="Suport accesibilitate">Accessibility Support</a>
+                </div>
+                <div class="footer-section">
+                    <h3 data-en="Support" data-ro="Suport">Support</h3>
+                    <a href="mailto:help@lxtech.ro" data-en="Contact Us" data-ro="Contactează-ne">Contact Us</a><br>
+                    <a href="https://lxtech.ro/metroubucuresti/metrou-bucuresti-privacy.html" data-en="Privacy Policy" data-ro="Politica de confidențialitate">Privacy Policy</a><br>
+                    <a href="https://lxtech.ro/metroubucuresti/metrou-bucuresti-terms.html" data-en="Terms of Service" data-ro="Termeni și condiții">Terms of Service</a><br>
+                    <a href="https://lxtech.ro/metroubucuresti/metrou-bucuresti-data-usage.html" data-en="Data Usage Policy" data-ro="Politica utilizare date">Data Usage Policy</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Metrou București. All rights reserved. Built with ❤️ for Bucharest commuters.</p>
+            </div>
         </div>
     </footer>
 
+    <script>
+        // Language switching functionality
+        const translations = {
+            en: {
+                // Navigation
+                'Features': 'Features',
+                'Screenshots': 'Screenshots', 
+                'Specifications': 'Specifications',
+                'Download': 'Download',
+                // Hero section
+                'Navigate Bucharest Metro with Ease': 'Navigate Bucharest Metro with Ease',
+                'The ultimate subway navigation app for Bucharest. Plan your routes, track your journey in real-time, and discover stations with comprehensive accessibility features and multilingual support.': 'The ultimate subway navigation app for Bucharest. Plan your routes, track your journey in real-time, and discover stations with comprehensive accessibility features and multilingual support.',
+                'Download Now': 'Download Now',
+                'Learn More': 'Learn More',
+                'Your Metro Navigator': 'Your Metro Navigator',
+                // Screenshots section
+                'See the App in Action': 'See the App in Action',
+                'Experience the intuitive interface designed specifically for Bucharest metro travelers. From route planning to real-time tracking, every feature is crafted for ease of use.': 'Experience the intuitive interface designed specifically for Bucharest metro travelers. From route planning to real-time tracking, every feature is crafted for ease of use.',
+                'Interactive route visualization': 'Interactive route visualization',
+                'Real-time journey tracking': 'Real-time journey tracking',
+                'Detailed station information': 'Detailed station information',
+                'Transfer notifications': 'Transfer notifications',
+                'Accessibility indicators': 'Accessibility indicators',
+                'Offline functionality': 'Offline functionality',
+                'Route Planning': 'Route Planning',
+                'Station Details': 'Station Details',
+                'Journey Tracking': 'Journey Tracking'
+            },
+            ro: {
+                // Navigation
+                'Features': 'Funcții',
+                'Screenshots': 'Capturi de ecran',
+                'Specifications': 'Specificații', 
+                'Download': 'Descărcare',
+                // Hero section
+                'Navigate Bucharest Metro with Ease': 'Navighează prin Metroul București cu ușurință',
+                'The ultimate subway navigation app for Bucharest. Plan your routes, track your journey in real-time, and discover stations with comprehensive accessibility features and multilingual support.': 'Aplicația supremă de navigare pentru metroul din București. Planifică-ți rutele, urmărește-ți călătoria în timp real și descoperă stațiile cu funcții complete de accesibilitate și suport multilingv.',
+                'Download Now': 'Descarcă acum',
+                'Learn More': 'Află mai multe',
+                'Your Metro Navigator': 'Navigatorul tău de metrou',
+                // Screenshots section
+                'See the App in Action': 'Vezi aplicația în acțiune',
+                'Experience the intuitive interface designed specifically for Bucharest metro travelers. From route planning to real-time tracking, every feature is crafted for ease of use.': 'Experimentează interfața intuitivă creată special pentru călătorii cu metroul din București. De la planificarea rutelor la urmărirea în timp real, fiecare funcție este creată pentru ușurința de utilizare.',
+                'Interactive route visualization': 'Vizualizare interactivă a rutelor',
+                'Real-time journey tracking': 'Urmărirea călătoriei în timp real',
+                'Detailed station information': 'Informații detaliate despre stații',
+                'Transfer notifications': 'Notificări de transfer',
+                'Accessibility indicators': 'Indicatori de accesibilitate',
+                'Offline functionality': 'Funcționalitate offline',
+                'Route Planning': 'Planificare Rută',
+                'Station Details': 'Detalii Stație',
+                'Journey Tracking': 'Urmărire Călătorie',
+                // Final CTA section
+                'Ready to Transform Your Metro Experience?': 'Gata să îți transformi experiența cu metroul?',
+                'Join thousands of satisfied users who\'ve made their daily commute easier with Metrou București': 'Alătură-te miilor de utilizatori mulțumiți care și-au făcut naveta zilnică mai ușoară cu Metrou București',
+                'Download from Google Play': 'Descarcă de pe Google Play',
+                // Technical Specifications
+                'Technical Specifications': 'Specificații Tehnice',
+                'Built with modern technology for optimal performance and reliability': 'Construit cu tehnologie modernă pentru performanță și fiabilitate optimă',
+                'Android Support': 'Suport Android',
+                'Languages': 'Limbi',
+                'Romanian, English': 'Română, Engleză',
+                'App Size': 'Dimensiune aplicație',
+                'Offline Mode': 'Mod offline',
+                'Core features work offline': 'Funcțiile principale funcționează offline',
+                'Data Usage': 'Utilizare date',
+                'Minimal data consumption': 'Consum minim de date',
+                'Privacy': 'Confidențialitate',
+                'No personal data collection': 'Fără colectarea datelor personale',
+                // Footer
+                'Features': 'Funcții',
+                'Support': 'Suport',
+                'Route Planning': 'Planificare Rută',
+                'Real-time Tracking': 'Urmărire în timp real',
+                'Station Information': 'Informații stații',
+                'Accessibility Support': 'Suport accesibilitate',
+                'Contact Us': 'Contactează-ne',
+                'Privacy Policy': 'Politica de confidențialitate',
+                'Terms of Service': 'Termeni și condiții',
+                'Data Usage Policy': 'Politica utilizare date'
+            }
+        };
+
+        function changeLanguage() {
+            const selectedLang = document.getElementById('languageSelect').value;
+            
+            // Update all elements with data attributes
+            document.querySelectorAll('[data-en]').forEach(element => {
+                const enText = element.getAttribute('data-en');
+                const roText = element.getAttribute('data-ro');
+                
+                if (selectedLang === 'ro' && roText) {
+                    element.textContent = roText;
+                } else if (selectedLang === 'en' && enText) {
+                    element.textContent = enText;
+                }
+            });
+
+            // Save language preference
+            localStorage.setItem('preferred-language', selectedLang);
+        }
+
+        // Load saved language preference
+        function loadLanguagePreference() {
+            const savedLang = localStorage.getItem('preferred-language') || 'en';
+            document.getElementById('languageSelect').value = savedLang;
+            
+            if (savedLang === 'ro') {
+                changeLanguage();
+            }
+        }
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Loading animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all loading elements
+        document.querySelectorAll('.loading').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Phone mockup hover effect
+        const phoneMockup = document.querySelector('.phone-mockup');
+        if (phoneMockup) {
+            phoneMockup.addEventListener('mouseenter', () => {
+                phoneMockup.style.transform = 'perspective(1000px) rotateY(-10deg) rotateX(2deg) scale(1.05)';
+            });
+            
+            phoneMockup.addEventListener('mouseleave', () => {
+                phoneMockup.style.transform = 'perspective(1000px) rotateY(-15deg) rotateX(5deg) scale(1)';
+            });
+        }
+
+        // Feature cards stagger animation
+        const featureCards = document.querySelectorAll('.feature-card');
+        featureCards.forEach((card, index) => {
+            card.style.animationDelay = `${index * 0.1}s`;
+        });
+
+        // Mobile menu toggle (basic implementation)
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const navLinks = document.querySelector('.nav-links');
+
+        if (mobileMenuBtn && navLinks) {
+            mobileMenuBtn.addEventListener('click', () => {
+                navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+            });
+        }
+
+        // Add some interactive elements
+        document.addEventListener('DOMContentLoaded', () => {
+            // Load language preference on page load
+            loadLanguagePreference();
+            
+            // Animate floating icons
+            const floatingIcons = document.querySelectorAll('.floating-icon');
+            floatingIcons.forEach((icon, index) => {
+                icon.style.animationDelay = `${index * 0.5}s`;
+            });
+
+            // Add hover effects to CTA buttons
+            const ctaButtons = document.querySelectorAll('.cta-btn');
+            ctaButtons.forEach(btn => {
+                btn.addEventListener('mouseenter', (e) => {
+                    e.target.style.transform = 'translateY(-2px) scale(1.02)';
+                });
+                
+                btn.addEventListener('mouseleave', (e) => {
+                    e.target.style.transform = 'translateY(0) scale(1)';
+                });
+            });
+
+            // Parallax effect for hero section
+            window.addEventListener('scroll', () => {
+                const scrolled = window.pageYOffset;
+                const parallax = document.querySelector('.hero');
+                if (parallax) {
+                    const speed = scrolled * 0.5;
+                    parallax.style.transform = `translateY(${speed}px)`;
+                }
+            });
+        });
+
+        // Add click tracking for download buttons (you can integrate with analytics)
+        document.querySelectorAll('.cta-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                // Add your analytics tracking here
+                console.log('Download button clicked:', e.target.textContent);
+                
+                // If this is a real download link, you would replace the href
+                if (e.target.href === '#' || e.target.closest('a').href.endsWith('#')) {
+                    e.preventDefault();
+                    alert('App download will be available soon! Check back for updates.');
+                }
+            });
+        });
+
+        // Performance optimization: Lazy load images if any are added
+        if ('IntersectionObserver' in window) {
+            const imageObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const img = entry.target;
+                        img.src = img.dataset.src;
+                        img.classList.remove('lazy');
+                        imageObserver.unobserve(img);
+                    }
+                });
+            });
+
+            document.querySelectorAll('img[data-src]').forEach(img => {
+                imageObserver.observe(img);
+            });
+        }
+    </script>
 </body>
 </html>
