@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Metrou Bucuresti - Your Smart Commute Companion</title>
+    <meta name="description" content="The ultimate app for navigating the Bucharest Metro with real-time tracking, route planning, and detailed station info.">
+    
+    <!-- Tailwind CSS for modern styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts for clean typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Best practice: Define font-family in a central place */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8f9fa; /* A very light gray for a clean look */
+        }
+        
+        /* Smooth transition for CTA buttons */
+        .cta-button {
+            transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body class="text-gray-800">
+
+    <!-- Header & Navigation -->
+    <header class="sticky top-0 bg-white/80 backdrop-blur-lg shadow-sm z-50">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#home" class="flex items-center space-x-2">
+                <!-- Placeholder Logo -->
+                <svg class="h-8 w-8 text-blue-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 12h16.5m-16.5 3.75h16.5M3.75 19.5h16.5M5.625 4.5h12.75a1.875 1.875 0 010 3.75H5.625a1.875 1.875 0 010-3.75z" />
+                </svg>
+                <span class="text-2xl font-bold text-gray-900">Metrou Bucuresti</span>
+            </a>
+            <div class="hidden md:flex items-center space-x-8">
+                <a href="#features" class="text-gray-600 hover:text-blue-600 font-medium transition-colors">Features</a>
+                <a href="#download" class="bg-blue-600 text-white font-bold py-2 px-5 rounded-full cta-button">Download</a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section id="home" class="container mx-auto px-6 py-20 md:py-32 text-center">
+            <h1 class="text-4xl md:text-6xl font-black text-gray-900 leading-tight mb-4">
+                Explore Bucharest,<br class="hidden md:block"> One Metro Stop at a Time.
+            </h1>
+            <p class="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto mb-8">
+                The perfect app for Bucharest's daily commuters, tourists, and students. Travel with confidence using real-time data.
+            </p>
+            <a href="https://play.google.com/store/apps/details?id=com.yourapp.package" target="_blank" class="inline-block bg-blue-600 text-white font-bold text-lg py-4 px-8 rounded-full cta-button">
+                Get it on Google Play
+            </a>
+            <p class="text-sm text-gray-500 mt-4">Free for Android</p>
+        </section>
+
+        <!-- Features Section -->
+        <section id="features" class="bg-white py-20 md:py-24">
+            <div class="container mx-auto px-6 text-center">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Everything You Need for the Metro</h2>
+                <p class="text-lg text-gray-600 mb-16">Features designed for smart and easy travel.</p>
+                <div class="grid md:grid-cols-3 gap-12">
+                    <!-- Feature 1: Real-time Tracking -->
+                    <div class="text-center">
+                        <div class="flex items-center justify-center h-16 w-16 rounded-full bg-blue-100 text-blue-600 mx-auto mb-4">
+                            <svg class="h-8 w-8" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">Real-time Tracking</h3>
+                        <p class="text-gray-600">Never miss your train again. See live train locations and accurate arrival times.</p>
+                    </div>
+                    <!-- Feature 2: Route Planner -->
+                    <div class="text-center">
+                        <div class="flex items-center justify-center h-16 w-16 rounded-full bg-red-100 text-red-600 mx-auto mb-4">
+                            <svg class="h-8 w-8" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 6h9.75M10.5 6a1.5 1.5 0 11-3 0m3 0a1.5 1.5 0 10-3 0M3.75 6H7.5m3 12h9.75m-9.75 12a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-3.75 0H7.5m9-6h3.75m-3.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-9.75 0h9.75" /></svg>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">Smart Route Planning</h3>
+                        <p class="text-gray-600">Find the fastest and easiest route to your destination, including all transfers.</p>
+                    </div>
+                    <!-- Feature 3: Station Details -->
+                    <div class="text-center">
+                        <div class="flex items-center justify-center h-16 w-16 rounded-full bg-blue-100 text-blue-600 mx-auto mb-4">
+                            <svg class="h-8 w-8" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" /><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" /></svg>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">Station Details</h3>
+                        <p class="text-gray-600">Access useful info for every station, including exits, hours, and nearby points of interest.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Final CTA / Download Section -->
+        <section id="download" class="container mx-auto px-6 py-20 md:py-24 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold mb-4">Ready to Transform Your Commute?</h2>
+            <p class="text-lg text-gray-600 max-w-2xl mx-auto mb-8">
+                Download the Metrou Bucuresti app today and join thousands who travel smarter.
+            </p>
+            <a href="https://play.google.com/store/apps/details?id=com.yourapp.package" target="_blank" class="inline-block bg-red-500 hover:bg-red-600 text-white font-bold text-lg py-4 px-8 rounded-full cta-button">
+                Download For Free
+            </a>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white">
+        <div class="container mx-auto px-6 py-8 text-center">
+            <p>&copy; 2025 Metrou Bucuresti. All Rights Reserved.</p>
+            <p class="text-sm text-gray-400 mt-2">Designed to make your travel in Bucharest easier.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
