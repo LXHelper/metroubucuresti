@@ -3,301 +3,391 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Terms and Conditions - Metrou București App</title>
-    <meta name="description" content="Terms and Conditions for the Metrou București mobile application">
+    <title>Privacy Policy — Metrou București</title>
+    <meta name="description" content="Privacy Policy for the Metrou București Android application">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Source+Sans+3:ital,wght@0,300;0,400;0,600;1,400&display=swap" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        :root {
+            --navy:       #1A1A2E;
+            --navy-mid:   #16213E;
+            --navy-light: #0F3460;
+            --teal:       #4ECDC4;
+            --teal-dark:  #00A693;
+            --teal-pale:  rgba(78,205,196,0.12);
+            --teal-pale2: rgba(78,205,196,0.06);
+            --white:      #FFFFFF;
+            --off-white:  #F7F9FC;
+            --text-main:  #1A1A2E;
+            --text-body:  #3D4555;
+            --text-muted: #7A8399;
+            --border:     rgba(26,26,46,0.08);
+            --accent-strip: linear-gradient(90deg, #FFD700 20%, #FF0000 40%, #0000FF 60%, #00FF00 80%, #FFA500 100%);
         }
-
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            background-color: #f8f9fa;
-            padding: 20px;
+            font-family: 'Source Sans 3', sans-serif;
+            font-size: 16px;
+            line-height: 1.7;
+            color: var(--text-body);
+            background: var(--off-white);
         }
-
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            background: white;
-            border-radius: 12px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        .line-strip { height: 4px; background: var(--accent-strip); }
+        header {
+            background: var(--navy);
+            color: var(--white);
+            padding: 56px 24px 48px;
+            text-align: center;
+            position: relative;
             overflow: hidden;
         }
-
-        .header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 30px;
-            text-align: center;
+        header::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse 80% 60% at 50% 110%, rgba(78,205,196,0.18) 0%, transparent 70%);
+            pointer-events: none;
         }
-
-        .header h1 {
-            font-size: 2.2rem;
+        .header-icon {
+            width: 56px; height: 56px;
+            border-radius: 16px;
+            background: var(--teal-pale);
+            border: 1.5px solid rgba(78,205,196,0.35);
+            display: flex; align-items: center; justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 26px;
+        }
+        header h1 {
+            font-family: 'Outfit', sans-serif;
+            font-size: clamp(1.8rem, 5vw, 2.6rem);
+            font-weight: 700;
+            letter-spacing: -0.02em;
             margin-bottom: 10px;
-            font-weight: 600;
         }
-
-        .last-updated {
-            font-size: 1rem;
-            opacity: 0.9;
-            font-weight: 300;
+        .header-meta { font-size: 0.9rem; color: rgba(255,255,255,0.55); font-weight: 300; letter-spacing: 0.03em; }
+        .header-badge {
+            display: inline-flex; align-items: center; gap: 6px;
+            margin-top: 18px; padding: 6px 14px;
+            background: var(--teal-pale);
+            border: 1px solid rgba(78,205,196,0.3);
+            border-radius: 999px;
+            font-size: 0.78rem; font-family: 'Outfit', sans-serif; font-weight: 500;
+            color: var(--teal); letter-spacing: 0.04em; text-transform: uppercase;
         }
-
-        .content {
-            padding: 40px;
+        .nav-bar {
+            background: var(--white);
+            border-bottom: 1px solid var(--border);
+            padding: 12px 24px;
+            display: flex; justify-content: center; gap: 10px; flex-wrap: wrap;
+            position: sticky; top: 0; z-index: 100;
+            box-shadow: 0 2px 8px rgba(26,26,46,0.06);
         }
-
-        h2 {
-            color: #2c3e50;
-            font-size: 1.8rem;
-            margin: 30px 0 20px 0;
-            border-bottom: 3px solid #667eea;
-            padding-bottom: 10px;
-        }
-
-        h3 {
-            color: #34495e;
-            font-size: 1.4rem;
-            margin: 25px 0 15px 0;
-        }
-
-        h4 {
-            color: #5a6c7d;
-            font-size: 1.2rem;
-            margin: 20px 0 10px 0;
-        }
-
-        p {
-            margin: 15px 0;
-            text-align: justify;
-        }
-
-        ul {
-            margin: 15px 0;
-            padding-left: 30px;
-        }
-
-        li {
-            margin: 8px 0;
-        }
-
-        strong {
-            color: #2c3e50;
-            font-weight: 600;
-        }
-
-        .footer {
-            background: #f1f3f4;
-            padding: 30px;
-            text-align: center;
-            border-top: 1px solid #e1e5e9;
-        }
-
-        .footer p {
-            margin: 10px 0;
-            color: #6c757d;
-        }
-
-        .footer a {
-            color: #667eea;
+        .nav-bar a {
             text-decoration: none;
-            font-weight: 500;
+            font-family: 'Outfit', sans-serif; font-size: 0.82rem; font-weight: 500;
+            padding: 7px 16px; border-radius: 999px;
+            border: 1.5px solid var(--border); color: var(--text-muted);
+            transition: all 0.2s; white-space: nowrap;
         }
-
-        .footer a:hover {
-            text-decoration: underline;
+        .nav-bar a:hover, .nav-bar a.active { background: var(--navy); border-color: var(--navy); color: var(--white); }
+        .container { max-width: 780px; margin: 0 auto; padding: 48px 24px 80px; }
+        .toc {
+            background: var(--white); border: 1px solid var(--border);
+            border-radius: 16px; padding: 28px 32px; margin-bottom: 48px;
         }
-
-        .nav-links {
-            text-align: center;
-            margin: 20px 0;
+        .toc-title {
+            font-family: 'Outfit', sans-serif; font-size: 0.75rem; font-weight: 600;
+            letter-spacing: 0.1em; text-transform: uppercase; color: var(--teal-dark); margin-bottom: 14px;
         }
-
-        .nav-links a {
-            display: inline-block;
-            margin: 0 15px;
-            padding: 10px 20px;
-            background: #667eea;
-            color: white;
-            text-decoration: none;
-            border-radius: 6px;
-            font-weight: 500;
-            transition: background 0.3s ease;
+        .toc ol { list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 6px 24px; counter-reset: toc-item; }
+        .toc li { counter-increment: toc-item; }
+        .toc a {
+            text-decoration: none; color: var(--text-body); font-size: 0.88rem;
+            display: flex; align-items: baseline; gap: 8px; transition: color 0.15s;
         }
-
-        .nav-links a:hover {
-            background: #5a67d8;
+        .toc a::before {
+            content: counter(toc-item, decimal-leading-zero);
+            font-family: 'Outfit', sans-serif; font-size: 0.72rem; font-weight: 600;
+            color: var(--teal); flex-shrink: 0;
         }
-
-        @media (max-width: 768px) {
-            body {
-                padding: 10px;
-            }
-            
-            .header {
-                padding: 20px;
-            }
-            
-            .header h1 {
-                font-size: 1.8rem;
-            }
-            
-            .content {
-                padding: 20px;
-            }
-            
-            .nav-links a {
-                display: block;
-                margin: 10px 0;
-            }
+        .toc a:hover { color: var(--navy); }
+        @media (max-width: 520px) { .toc ol { grid-template-columns: 1fr; } }
+        .section { margin-bottom: 44px; scroll-margin-top: 80px; }
+        .section-header {
+            display: flex; align-items: center; gap: 14px;
+            margin-bottom: 18px; padding-bottom: 14px; border-bottom: 1px solid var(--border);
         }
+        .section-num {
+            width: 32px; height: 32px; border-radius: 8px;
+            background: var(--navy); color: var(--teal);
+            display: flex; align-items: center; justify-content: center;
+            font-family: 'Outfit', sans-serif; font-size: 0.8rem; font-weight: 700; flex-shrink: 0;
+        }
+        .section h2 { font-family: 'Outfit', sans-serif; font-size: 1.2rem; font-weight: 600; color: var(--text-main); letter-spacing: -0.01em; }
+        .section p { margin-bottom: 14px; }
+        .section p:last-child { margin-bottom: 0; }
+        .section h3 { font-family: 'Outfit', sans-serif; font-size: 1rem; font-weight: 600; color: var(--text-main); margin: 20px 0 10px; }
+        .section ul, .section ol { padding-left: 20px; margin-bottom: 14px; }
+        .section li { margin-bottom: 6px; }
+        .section a { color: var(--teal-dark); text-decoration: none; font-weight: 600; }
+        .section a:hover { text-decoration: underline; }
+        .callout {
+            border-radius: 12px; padding: 16px 20px; margin: 16px 0;
+            display: flex; gap: 12px; align-items: flex-start;
+        }
+        .callout-icon { font-size: 1.1rem; flex-shrink: 0; margin-top: 1px; }
+        .callout-body { flex: 1; font-size: 0.92rem; }
+        .callout-body strong { display: block; margin-bottom: 4px; font-family: 'Outfit', sans-serif; font-size: 0.88rem; font-weight: 600; }
+        .callout.info    { background: var(--teal-pale2); border: 1px solid rgba(78,205,196,0.2); }
+        .callout.info    .callout-body strong { color: var(--teal-dark); }
+        .callout.good    { background: rgba(56,142,60,0.06); border: 1px solid rgba(56,142,60,0.2); }
+        .callout.good    .callout-body strong { color: #2e7d32; }
+        /* Data table */
+        .data-table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 0.9rem; }
+        .data-table th {
+            background: var(--navy); color: var(--teal);
+            font-family: 'Outfit', sans-serif; font-size: 0.78rem; font-weight: 600;
+            letter-spacing: 0.05em; text-transform: uppercase;
+            padding: 10px 14px; text-align: left;
+        }
+        .data-table td { padding: 10px 14px; border-bottom: 1px solid var(--border); vertical-align: top; }
+        .data-table tr:last-child td { border-bottom: none; }
+        .data-table tr:nth-child(even) td { background: var(--teal-pale2); }
+        .tag {
+            display: inline-block; padding: 2px 8px; border-radius: 4px;
+            font-size: 0.72rem; font-family: 'Outfit', sans-serif; font-weight: 600;
+        }
+        .tag.local  { background: rgba(56,142,60,0.12); color: #2e7d32; }
+        .tag.admob  { background: rgba(255,152,0,0.12); color: #e65100; }
+        .tag.never  { background: var(--teal-pale); color: var(--teal-dark); }
+        footer {
+            background: var(--navy); color: rgba(255,255,255,0.55);
+            padding: 40px 24px; text-align: center;
+        }
+        footer .footer-brand { font-family: 'Outfit', sans-serif; font-weight: 600; font-size: 1rem; color: var(--white); margin-bottom: 8px; }
+        footer p { font-size: 0.85rem; margin-bottom: 6px; }
+        footer a { color: var(--teal); text-decoration: none; }
+        footer a:hover { text-decoration: underline; }
+        .footer-links { margin-top: 16px; display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; font-size: 0.83rem; }
+        .footer-copyright { margin-top: 20px; font-size: 0.78rem; opacity: 0.5; }
+        @media (max-width: 600px) { .container { padding: 32px 16px 60px; } .toc { padding: 20px; } .data-table { font-size: 0.82rem; } }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <h1>Terms and Conditions</h1>
-            <p class="last-updated">Metrou București App - Last updated: December 2024</p>
-        </div>
 
-        <div class="nav-links">
-            <a href="metrou-bucuresti-privacy.html">Privacy Policy</a>
-            <a href="metrou-bucuresti-data-usage.html">Data Usage Policy</a>
-        </div>
+<div class="line-strip"></div>
 
-        <div class="content">
-            <h2>Terms and Conditions for Metrou Bucuresti App</h2>
+<header>
+    <div class="header-icon">🔒</div>
+    <h1>Privacy Policy</h1>
+    <p class="header-meta">Metrou București — Android Application</p>
+    <div class="header-badge">🛡️ Last updated: March 2026</div>
+</header>
 
-            <h3>1. Acceptance of Terms</h3>
-            <p>By downloading, installing, or using the Metrou Bucuresti app ("the App"), you agree to be bound by these Terms and Conditions ("Terms"). If you do not agree to these Terms, do not use the App.</p>
+<nav class="nav-bar">
+    <a href="metrou-bucuresti-terms.html">Terms &amp; Conditions</a>
+    <a href="metrou-bucuresti-privacy.html" class="active">Privacy Policy</a>
+    <a href="metrou-bucuresti-data-usage.html">Data Usage</a>
+</nav>
 
-            <h3>2. Description of Service</h3>
-            <p>Metrou Bucuresti is a mobile application that provides:</p>
-            <ul>
-                <li>Metro route planning and navigation</li>
-                <li>Real-time train schedules and information</li>
-                <li>Station details and accessibility information</li>
-                <li>Location-based services for finding nearby stations</li>
-                <li>Personal notes and favorite routes functionality</li>
-            </ul>
+<div class="container">
 
-            <h3>3. User Responsibilities</h3>
-            <p>You agree to:</p>
-            <ul>
-                <li>Use the App only for lawful purposes</li>
-                <li>Not attempt to reverse engineer or modify the App</li>
-                <li>Not use the App in a way that could damage or impair the service</li>
-                <li>Respect the privacy and rights of other users</li>
-            </ul>
-
-            <h3>4. Location Services</h3>
-            <p>The App may request access to your device's location to provide location-based services. You can control location permissions through your device settings. Location data is used only to enhance your user experience and is not stored on our servers.</p>
-
-            <h3>5. Data and Privacy</h3>
-            <p>Your privacy is important to us. Please review our <a href="metrou-bucuresti-privacy.html">Privacy Policy</a> to understand how we collect, use, and protect your information.</p>
-
-            <h3>6. Disclaimer of Warranties</h3>
-            <p><strong>The App is provided on an "as is" and "as available" basis.</strong> We make no representations or warranties of any kind, express or implied, as to the operation of the App or the information, content, materials, or products included in the App.</p>
-            
-            <p>To the fullest extent permitted by applicable law, we disclaim all warranties, express or implied, including but not limited to:</p>
-            <ul>
-                <li><strong>Implied warranties of merchantability</strong></li>
-                <li><strong>Implied warranties of fitness for a particular purpose</strong></li>
-                <li><strong>Warranties of non-infringement</strong></li>
-                <li><strong>Warranties that the App will be error-free or uninterrupted</strong></li>
-            </ul>
-
-            <h3>7. No Guarantee of Functionality</h3>
-            <p><strong>We make no guarantees or promises regarding the functionality, availability, accuracy, or performance of the App.</strong> Specifically, we do not guarantee that:</p>
-            <ul>
-                <li>The App will meet your specific requirements or expectations</li>
-                <li>The App will operate uninterrupted or error-free</li>
-                <li>All defects or errors will be corrected</li>
-                <li>Metro schedules, routes, or station information will be accurate or current</li>
-                <li>Location services will function properly at all times</li>
-                <li>The App will be compatible with your device or operating system</li>
-                <li>Data stored in the App will not be lost or corrupted</li>
-            </ul>
-
-            <h3>8. User Responsibility and Assumption of Risk</h3>
-            <p><strong>You use the App at your own risk.</strong> It is your sole responsibility to:</p>
-            <ul>
-                <li>Evaluate the accuracy and completeness of any information provided</li>
-                <li>Verify metro schedules and routes through official sources</li>
-                <li>Ensure the App's suitability before relying on it for transportation planning</li>
-                <li>Have alternative transportation plans in case of App malfunction</li>
-            </ul>
-            
-            <p><strong>The App is intended for informational purposes only and should not be your sole source for transportation decisions.</strong></p>
-
-            <h3>9. Limitation of Liability</h3>
-            <p><strong>To the fullest extent permitted by law, the Company, its directors, employees, affiliates, agents, contractors, and licensors shall not be liable for any damages, losses, or consequences arising out of your use or inability to use the App.</strong></p>
-            
-            <p>This limitation includes, but is not limited to:</p>
-            <ul>
-                <li><strong>Direct, indirect, incidental, punitive, and consequential damages</strong></li>
-                <li><strong>Loss of profits, revenue, data, or use</strong></li>
-                <li><strong>Business interruption or missed transportation</strong></li>
-                <li><strong>Personal injury or property damage</strong></li>
-                <li><strong>Costs of procurement of substitute services</strong></li>
-            </ul>
-            
-            <p><strong>Even if we have been advised of the possibility of such damages, our total liability shall not exceed the amount you paid for the App (which is zero for free apps).</strong></p>
-
-            <h3>10. Third-Party Services and Content</h3>
-            <p><strong>We are not responsible for any actions, omissions, or content of third parties</strong>, including but not limited to:</p>
-            <ul>
-                <li>Map services (Google Maps, Waze, etc.)</li>
-                <li>Email applications used for crash reporting</li>
-                <li>Official metro authority information or schedule changes</li>
-                <li>Third-party advertising content displayed through AdMob</li>
-                <li>Device operating system functionality</li>
-            </ul>
-
-            <h3>11. Indemnification</h3>
-            <p><strong>You agree to indemnify, defend, and hold harmless</strong> the Company and its officers, directors, employees, and agents from any claims, liabilities, damages, losses, and expenses (including reasonable attorney fees) arising out of or in any way connected with:</p>
-            <ul>
-                <li>Your use of the App</li>
-                <li>Your reliance on App information for transportation decisions</li>
-                <li>Your violation of these Terms</li>
-                <li>Your violation of any rights of a third party</li>
-            </ul>
-
-            <h3>12. Force Majeure</h3>
-            <p>We shall not be liable for any failure or delay in performance under these Terms due to circumstances beyond our reasonable control, including but not limited to acts of God, natural disasters, government actions, network failures, or third-party service interruptions.</p>
-
-            <h3>13. Severability</h3>
-            <p>If any provision of these Terms is found to be invalid or unenforceable, the remaining provisions shall remain in full force and effect. The invalid provision shall be replaced with a valid provision that most closely approximates the intent of the original provision.</p>
-
-            <h3>14. Updates and Changes</h3>
-            <p><strong>Updates to Terms:</strong> We may update these Terms from time to time. Changes will be posted within the App and may be communicated through in-app notifications or updates. Continued use of the App after changes become effective constitutes acceptance of the new Terms.</p>
-            
-            <p>We encourage you to review these Terms periodically to stay informed of any updates. Material changes will be highlighted when you next open the App.</p>
-
-            <h3>15. Contact Information</h3>
-            <p><strong>Contact Us:</strong> For any questions about these Terms, please contact us at:</p>
-            <ul>
-                <li><strong>Email:</strong> <a href="mailto:help@lxtech.ro">help@lxtech.ro</a></li>
-                <li><strong>Support:</strong> Through the App's feedback feature in Settings</li>
-            </ul>
-            
-            <p>We will respond to all inquiries within a reasonable timeframe.</p>
-        </div>
-
-        <div class="footer">
-            <p>&copy; 2025  LuXTech Innovation. All rights reserved.</p>
-            <p><strong>Metrou București App</strong> - Unofficial metro navigation app for Bucharest</p>
-            <p>
-                <a href="mailto:help@lxtech.ro">Contact Support</a> | 
-                <a href="metrou-bucuresti-privacy.html">Privacy Policy</a> | 
-                <a href="metrou-bucuresti-data-usage.html">Data Usage</a>
-            </p>
+    <div class="callout good">
+        <span class="callout-icon">✅</span>
+        <div class="callout-body">
+            <strong>Short version</strong>
+            Almost all data stays on your device. We do not collect personal information, do not run analytics, and do not sell data. The only third-party data processing comes from Google AdMob (for ads), which requires your GDPR consent before activating.
         </div>
     </div>
+
+    <div class="toc">
+        <p class="toc-title">Contents</p>
+        <ol>
+            <li><a href="#s1">What Data the App Uses</a></li>
+            <li><a href="#s2">Local Storage — What Stays on Your Device</a></li>
+            <li><a href="#s3">Advertising &amp; AdMob</a></li>
+            <li><a href="#s4">Permissions</a></li>
+            <li><a href="#s5">Third-Party Integrations</a></li>
+            <li><a href="#s6">Data Sharing</a></li>
+            <li><a href="#s7">Your Rights &amp; Controls</a></li>
+            <li><a href="#s8">Children's Privacy</a></li>
+            <li><a href="#s9">Changes to This Policy</a></li>
+            <li><a href="#s10">Contact</a></li>
+        </ol>
+    </div>
+
+    <section class="section" id="s1">
+        <div class="section-header">
+            <div class="section-num">01</div>
+            <h2>What Data the App Uses</h2>
+        </div>
+        <p>The table below summarises every category of data touched by the App and where it goes.</p>
+        <table class="data-table">
+            <thead>
+                <tr><th>Data type</th><th>Purpose</th><th>Where it goes</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>GPS / location</td><td>Route tracking, nearby stations</td><td><span class="tag local">Local only</span></td></tr>
+                <tr><td>Personal notes</td><td>User-written station notes</td><td><span class="tag local">Local only</span></td></tr>
+                <tr><td>Favourite routes</td><td>Saved route preferences</td><td><span class="tag local">Local only</span></td></tr>
+                <tr><td>App settings &amp; preferences</td><td>Theme, language, font size</td><td><span class="tag local">Local only</span></td></tr>
+                <tr><td>Crash reports</td><td>Debugging (opt-in email only)</td><td><span class="tag local">Local until you send</span></td></tr>
+                <tr><td>Advertising ID</td><td>Personalised ads (consent required)</td><td><span class="tag admob">Google AdMob</span></td></tr>
+                <tr><td>Device / OS info</td><td>Ad targeting (consent required)</td><td><span class="tag admob">Google AdMob</span></td></tr>
+                <tr><td>Your health, contacts, messages</td><td>—</td><td><span class="tag never">Never collected</span></td></tr>
+            </tbody>
+        </table>
+    </section>
+
+    <section class="section" id="s2">
+        <div class="section-header">
+            <div class="section-num">02</div>
+            <h2>Local Storage — What Stays on Your Device</h2>
+        </div>
+        <p>The following data is created and stored exclusively on your Android device using SharedPreferences and local file storage. None of it is transmitted to our servers:</p>
+        <ul>
+            <li><strong>Station notes</strong> — text notes you write for individual stations</li>
+            <li><strong>Favourite routes</strong> — routes you have saved for quick access</li>
+            <li><strong>App settings</strong> — theme (light / dark / system), language, font size, and route-tracking behaviour preference</li>
+            <li><strong>Crash reports</strong> — stored locally if the app crashes; sent to us only if you explicitly choose to email one from Settings</li>
+            <li><strong>Terms &amp; consent state</strong> — a flag indicating you accepted the terms on first launch</li>
+        </ul>
+        <div class="callout info">
+            <span class="callout-icon">ℹ️</span>
+            <div class="callout-body">
+                <strong>GPS during route tracking</strong>
+                When you activate route tracking, the App reads your GPS position to highlight your progress on the route. This data is used in real-time on your device and is not logged or transmitted anywhere.
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="s3">
+        <div class="section-header">
+            <div class="section-num">03</div>
+            <h2>Advertising &amp; AdMob</h2>
+        </div>
+        <p>The App is free and supported by advertisements delivered by <strong>Google AdMob</strong>.</p>
+
+        <h3>GDPR Consent</h3>
+        <p>On first launch (and whenever legally required), a GDPR consent form appears — powered by Google's User Messaging Platform (UMP). You can:</p>
+        <ul>
+            <li><strong>Accept personalised ads</strong> — AdMob may use your Advertising ID and device info to show relevant ads.</li>
+            <li><strong>Decline / use non-personalised ads</strong> — ads are still shown but without personalisation. AdMob still collects some contextual signals (e.g. approximate location, app context).</li>
+        </ul>
+        <p>You can review or reset your consent at any time via <strong>Settings → About → Reset Consent</strong>.</p>
+
+        <h3>What AdMob may collect (if consented)</h3>
+        <ul>
+            <li>Google Advertising ID</li>
+            <li>Device model, OS version, mobile network</li>
+            <li>Approximate location (IP-based)</li>
+            <li>Ad interaction data (impressions, clicks)</li>
+        </ul>
+        <p>For full details see <a href="https://policies.google.com/privacy" target="_blank">Google's Privacy Policy</a> and <a href="https://support.google.com/admob/answer/6128543" target="_blank">AdMob's data practices</a>.</p>
+
+        <h3>Opt out or reset</h3>
+        <ul>
+            <li>Android 12+: <strong>Settings → Privacy → Ads → Delete advertising ID</strong></li>
+            <li>Earlier Android: <strong>Settings → Google → Ads → Opt out of Ads Personalization</strong></li>
+            <li>Or visit <a href="https://www.google.com/settings/ads" target="_blank">Google Ad Settings</a></li>
+        </ul>
+    </section>
+
+    <section class="section" id="s4">
+        <div class="section-header">
+            <div class="section-num">04</div>
+            <h2>Permissions the App Requests</h2>
+        </div>
+        <ul>
+            <li><strong>ACCESS_FINE_LOCATION / ACCESS_COARSE_LOCATION</strong> — optional; used for route tracking and finding nearby stations. Granted and revocable by you at any time in Android Settings.</li>
+            <li><strong>INTERNET</strong> — required to load OSM map tiles and serve AdMob ads.</li>
+            <li><strong>AD_ID</strong> — required by Google Play policy when AdMob is present; only used if you consent to personalised ads.</li>
+            <li><strong>POST_NOTIFICATIONS</strong> (Android 13+) — optional; requested only for route-tracking foreground service notifications.</li>
+        </ul>
+    </section>
+
+    <section class="section" id="s5">
+        <div class="section-header">
+            <div class="section-num">05</div>
+            <h2>Third-Party Integrations</h2>
+        </div>
+        <ul>
+            <li><strong>OpenStreetMap (OSM)</strong> — map tiles are loaded from OSM tile servers when you use the map view. OSM servers receive a standard HTTP request including your IP address.</li>
+            <li><strong>OSRM</strong> — open-source routing queries for the map navigation feature.</li>
+            <li><strong>External map apps</strong> (Google Maps, Waze, etc.) — launched at your explicit request when opening a location externally.</li>
+            <li><strong>Email apps</strong> — used only if you choose to send a crash report; no data is sent automatically.</li>
+        </ul>
+    </section>
+
+    <section class="section" id="s6">
+        <div class="section-header">
+            <div class="section-num">06</div>
+            <h2>Data Sharing</h2>
+        </div>
+        <p>We do not sell, trade, or rent your personal information to any third party. The only data leaving your device is:</p>
+        <ul>
+            <li>Ad-related signals sent to Google AdMob (only after consent)</li>
+            <li>HTTP requests to OSM/OSRM tile and routing servers (standard IP logging by those servers)</li>
+            <li>Crash report emails — sent only if you initiate them manually</li>
+        </ul>
+    </section>
+
+    <section class="section" id="s7">
+        <div class="section-header">
+            <div class="section-num">07</div>
+            <h2>Your Rights &amp; Controls</h2>
+        </div>
+        <ul>
+            <li><strong>Access &amp; deletion</strong> — all your data is on your device; clear it via Android Settings → Apps → Metrou București → Clear Data, or by uninstalling the app.</li>
+            <li><strong>Location</strong> — revoke at any time in Android Settings → Apps → Metrou București → Permissions.</li>
+            <li><strong>Ad consent</strong> — reset via Settings → About → Reset Consent inside the app.</li>
+            <li><strong>Crash reports</strong> — stored locally; you decide whether to send each one. Delete them in the Crash Reporting settings.</li>
+        </ul>
+    </section>
+
+    <section class="section" id="s8">
+        <div class="section-header">
+            <div class="section-num">08</div>
+            <h2>Children's Privacy</h2>
+        </div>
+        <p>The App is not directed at children under the age of 13. We do not knowingly collect personal information from children. If you believe a child has provided personal data through the App, please contact us and we will take appropriate action.</p>
+    </section>
+
+    <section class="section" id="s9">
+        <div class="section-header">
+            <div class="section-num">09</div>
+            <h2>Changes to This Policy</h2>
+        </div>
+        <p>We may update this Privacy Policy from time to time. When we do, we will update the "Last updated" date at the top of this page and may notify you via an in-app notification for material changes. Continued use of the App after changes take effect constitutes acceptance of the updated policy.</p>
+    </section>
+
+    <section class="section" id="s10">
+        <div class="section-header">
+            <div class="section-num">10</div>
+            <h2>Contact</h2>
+        </div>
+        <p>For any privacy-related questions or requests:</p>
+        <ul>
+            <li><strong>Email:</strong> <a href="mailto:help@lxtech.ro">help@lxtech.ro</a></li>
+            <li><strong>In-app:</strong> Settings → About → Contact</li>
+            <li><strong>Website:</strong> <a href="https://www.metroubucuresti.ro" target="_blank">www.metroubucuresti.ro</a></li>
+        </ul>
+    </section>
+
+</div>
+
+<footer>
+    <p class="footer-brand">Metrou București</p>
+    <p>Unofficial metro navigation app for Bucharest · Android</p>
+    <div class="footer-links">
+        <a href="mailto:help@lxtech.ro">help@lxtech.ro</a>
+        <a href="metrou-bucuresti-terms.html">Terms &amp; Conditions</a>
+        <a href="metrou-bucuresti-data-usage.html">Data Usage</a>
+    </div>
+    <p class="footer-copyright">© 2024–2026 LUXTECH INNOVATION SRL. All rights reserved.</p>
+</footer>
+
 </body>
 </html>
