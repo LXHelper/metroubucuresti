@@ -369,10 +369,11 @@
             box-shadow: 0 8px 20px rgba(0,0,0,0.25);
             animation: float-badge 4s ease-in-out infinite;
         }
-        .badge-m1 { background: var(--m1); top: 12%; right: -24px; animation-delay: 0s; }
-        .badge-m2 { background: #5b8df0; color: white; bottom: 32%; right: -32px; animation-delay: 1.2s; }
-        .badge-m3 { background: var(--m3); color: white; top: 36%; left: -32px; animation-delay: 0.6s; }
-        .badge-m4 { background: var(--m4); color: white; bottom: 14%; left: -20px; animation-delay: 1.8s; }
+        .badge-m1 { background: var(--m1); top: 8%; right: -24px; animation-delay: 0s; }
+        .badge-m2 { background: #5b8df0; color: white; top: 26%; left: -32px; animation-delay: 1.2s; }
+        .badge-m3 { background: var(--m3); color: white; top: 42%; right: -32px; animation-delay: 0.6s; }
+        .badge-m4 { background: var(--m4); color: white; top: 58%; left: -20px; animation-delay: 1.8s; }
+        .badge-m5 { background: var(--m5); top: 74%; right: -28px; animation-delay: 2.4s; }
         @keyframes float-badge {
             0%, 100% { transform: translateY(0); }
             50% { transform: translateY(-8px); }
@@ -383,8 +384,8 @@
             .hero-visual { order: -1; }
             .phone-wrap { width: 220px; }
             .phone { width: 220px; }
-            .badge-m1, .badge-m2 { right: -10px; }
-            .badge-m3, .badge-m4 { left: -10px; }
+            .badge-m1, .badge-m3, .badge-m5 { right: -10px; }
+            .badge-m2, .badge-m4 { left: -10px; }
         }
 
         /* ── Lines section ─────────────────────────────────────────────── */
@@ -685,7 +686,6 @@
         <ul class="nav-links" id="nav-links">
             <li><a href="#features"     data-en="Features"     data-ro="Funcții">Features</a></li>
             <li><a href="#screenshots"  data-en="Screenshots"  data-ro="Capturi">Screenshots</a></li>
-            <li><a href="#specs"        data-en="Specs"        data-ro="Specificații">Specs</a></li>
             <li><a href="#download"     data-en="Download"     data-ro="Descarcă">Download</a></li>
         </ul>
         <div class="nav-right">
@@ -750,6 +750,7 @@
                 <div class="line-badge badge-m3">M3 Magistrala 3</div>
                 <div class="line-badge badge-m2">M2 Magistrala 2</div>
                 <div class="line-badge badge-m4">M4 Magistrala 4</div>
+                <div class="line-badge badge-m5">M5 Magistrala 5</div>
             </div>
         </div>
     </div>
@@ -757,11 +758,11 @@
 
 <!-- Metro lines bar -->
 <div class="lines-bar">
-    <div class="line-pill pill-m1"><span class="dot"></span> M1 — Drepanei–Pantelimon</div>
-    <div class="line-pill pill-m2"><span class="dot"></span> M2 — Berceni–Pipera</div>
+    <div class="line-pill pill-m1"><span class="dot"></span> M1 — Dristor–Pantelimon</div>
+    <div class="line-pill pill-m2"><span class="dot"></span> M2 — Tudor Arghezi–Pipera</div>
     <div class="line-pill pill-m3"><span class="dot"></span> M3 — Anghel Saligny–Preciziei</div>
     <div class="line-pill pill-m4"><span class="dot"></span> M4 — Gara de Nord–Străulești</div>
-    <div class="line-pill pill-m5"><span class="dot"></span> M5 — Râul Doamnei–Iancului</div>
+    <div class="line-pill pill-m5"><span class="dot"></span> M5 — Eroilor–Valea Cascadelor–Râul Doamnei</div>
 </div>
 
 <!-- Features -->
@@ -861,56 +862,6 @@
 </section>
 
 <!-- Specs -->
-<section class="section specs-bg" id="specs">
-    <div class="section-inner">
-        <p class="section-label reveal" data-en="Technical details" data-ro="Detalii tehnice">Technical details</p>
-        <h2 class="section-title reveal" data-en="Built for Android" data-ro="Creat pentru Android">Built for Android</h2>
-        <p class="section-sub reveal" data-en="Lightweight, privacy-first, and works on virtually any modern Android device." data-ro="Ușor, orientat spre confidențialitate și funcționează pe aproape orice dispozitiv Android modern.">Lightweight, privacy-first, and works on virtually any modern Android device.</p>
-        <div class="specs-grid">
-            <div class="spec-card reveal reveal-delay-1">
-                <div class="spec-emoji">🤖</div>
-                <p class="spec-name" data-en="Platform" data-ro="Platformă">Platform</p>
-                <p class="spec-value">Android 7.0+</p>
-            </div>
-            <div class="spec-card reveal reveal-delay-2">
-                <div class="spec-emoji">🌍</div>
-                <p class="spec-name" data-en="Languages" data-ro="Limbi">Languages</p>
-                <p class="spec-value">EN RO FR IT DE ES</p>
-            </div>
-            <div class="spec-card reveal reveal-delay-3">
-                <div class="spec-emoji">📦</div>
-                <p class="spec-name" data-en="App size" data-ro="Mărime">App size</p>
-                <p class="spec-value">~15 MB</p>
-            </div>
-            <div class="spec-card reveal reveal-delay-1">
-                <div class="spec-emoji">📵</div>
-                <p class="spec-name" data-en="Offline" data-ro="Offline">Offline</p>
-                <p class="spec-value" data-en="Full support" data-ro="Suport complet">Full support</p>
-            </div>
-            <div class="spec-card reveal reveal-delay-2">
-                <div class="spec-emoji">🛡️</div>
-                <p class="spec-name" data-en="Privacy" data-ro="Confidențialitate">Privacy</p>
-                <p class="spec-value" data-en="Local-only data" data-ro="Date locale">Local-only data</p>
-            </div>
-            <div class="spec-card reveal reveal-delay-3">
-                <div class="spec-emoji">🚇</div>
-                <p class="spec-name" data-en="Lines covered" data-ro="Linii acoperite">Lines covered</p>
-                <p class="spec-value">M1 M2 M3 M4 M5</p>
-            </div>
-            <div class="spec-card reveal reveal-delay-1">
-                <div class="spec-emoji">💾</div>
-                <p class="spec-name" data-en="Data" data-ro="Date">Data</p>
-                <p class="spec-value" data-en="Stays on device" data-ro="Rămâne local">Stays on device</p>
-            </div>
-            <div class="spec-card reveal reveal-delay-2">
-                <div class="spec-emoji">🆓</div>
-                <p class="spec-name" data-en="Price" data-ro="Preț">Price</p>
-                <p class="spec-value" data-en="Free (ad-supported)" data-ro="Gratuit (cu reclame)">Free (ad-supported)</p>
-            </div>
-        </div>
-    </div>
-</section>
-
 <!-- CTA -->
 <section class="cta-section" id="download">
     <div class="cta-card">
@@ -923,7 +874,7 @@
                 <span>▶</span>
                 <span data-en="Get it on Google Play" data-ro="Descarcă pe Google Play">Get it on Google Play</span>
             </a>
-            <a href="mailto:help@lxtech.ro" class="btn-ghost" data-en="Contact support" data-ro="Contactează suportul">Contact support</a>
+            <a href="/cdn-cgi/l/email-protection#a2cac7ced2e2cedad6c7c1ca8cd0cd" class="btn-ghost" data-en="Contact support" data-ro="Contactează suportul">Contact support</a>
         </div>
     </div>
 </section>
@@ -942,7 +893,6 @@
                 <h4 data-en="App" data-ro="Aplicație">App</h4>
                 <a href="#features" data-en="Features"      data-ro="Funcții">Features</a>
                 <a href="#screenshots" data-en="Screenshots" data-ro="Capturi">Screenshots</a>
-                <a href="#specs"     data-en="Specifications" data-ro="Specificații">Specifications</a>
                 <a href="#download"  data-en="Download"      data-ro="Descarcă">Download</a>
             </div>
             <div class="footer-col">
@@ -953,7 +903,7 @@
             </div>
             <div class="footer-col">
                 <h4 data-en="Contact" data-ro="Contact">Contact</h4>
-                <a href="mailto:help@lxtech.ro">help@lxtech.ro</a>
+                <a href="/cdn-cgi/l/email-protection#68000d04182804101c0d0b00461a07"><span class="__cf_email__" data-cfemail="bfd7dad3cfffd3c7cbdadcd791cdd0">[email&#160;protected]</span></a>
                 <a href="https://www.metroubucuresti.ro">metroubucuresti.ro</a>
                 <a href="https://play.google.com/store/apps/details?id=com.MetroBuc" data-en="Google Play" data-ro="Google Play">Google Play</a>
             </div>
@@ -971,7 +921,7 @@
     </div>
 </footer>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 /* ── Language switching ─────────────────────────────────────────── */
 let currentLang = localStorage.getItem('lang') || 'en';
 
@@ -1011,8 +961,4 @@ const revealObserver = new IntersectionObserver((entries) => {
 
 document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
 
-/* ── Init ───────────────────────────────────────────────────────── */
-document.addEventListener('DOMContentLoaded', () => setLang(currentLang));
-</script>
-</body>
-</html>
+/* ── Init ──
