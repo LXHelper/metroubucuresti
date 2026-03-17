@@ -1,964 +1,827 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Metrou București — Navigate Bucharest Metro</title>
-    <meta name="description" content="The smart Bucharest metro navigation app. Plan routes across M1–M5, track your journey with GPS, explore stations and nearby places. Free on Android.">
-    <meta name="keywords" content="bucharest metro, metrou bucuresti, subway navigation, public transport, route planning, romania">
-    <meta property="og:type" content="website">
-    <meta property="og:title" content="Metrou București — Navigate Bucharest Metro">
-    <meta property="og:description" content="Smart route planning, GPS journey tracking, station details and more. Free for Android.">
-    <meta property="og:image" content="https://lxtech.ro/metroubucuresti/images/splash-screen.png">
-    <meta property="twitter:card" content="summary_large_image">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Metrou București — Navigate Bucharest Metro</title>
+<meta name="description" content="The smart Bucharest metro navigation app. Plan routes across M1–M5, GPS journey tracking, station details, door-opening indicators. Free on Android.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Metrou București — Navigate Bucharest Metro">
+<meta property="og:description" content="Smart route planning, GPS journey tracking, station details and more. Free for Android.">
+<meta property="og:image" content="https://lxtech.ro/metroubucuresti/images/splash-screen.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet">
+<style>
+/* ══════════════════════════════════════════════════════
+   TOKENS
+══════════════════════════════════════════════════════ */
+:root {
+  --ink:      #0D0F1A;
+  --ink-mid:  #13152A;
+  --ink-soft: #1C1F35;
+  --teal:     #4ECDC4;
+  --teal-dim: #2A9D96;
+  --teal-glow:rgba(78,205,196,0.15);
+  --white:    #FFFFFF;
+  --chalk:    #F2F4F8;
+  --mist:     rgba(255,255,255,0.07);
+  --border:   rgba(255,255,255,0.08);
+  --m1: #FFD700; --m2: #4A90D9; --m3: #E53935;
+  --m4: #43A047; --m5: #FB8C00;
+  --serif: 'DM Serif Display', Georgia, serif;
+  --sans:  'DM Sans', system-ui, sans-serif;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;font-size:16px}
+body{
+  font-family:var(--sans);
+  background:var(--ink);
+  color:rgba(255,255,255,0.72);
+  overflow-x:hidden;
+  line-height:1.65;
+}
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Source+Sans+3:ital,wght@0,300;0,400;0,600;1,400&display=swap" rel="stylesheet">
+/* ══════════════════════════════════════════════════════
+   SCROLLBAR
+══════════════════════════════════════════════════════ */
+::-webkit-scrollbar{width:4px}
+::-webkit-scrollbar-track{background:var(--ink)}
+::-webkit-scrollbar-thumb{background:var(--teal-dim);border-radius:2px}
 
-    <style>
-        /* ── Design tokens ─────────────────────────────────────────────── */
-        :root {
-            --navy:        #1A1A2E;
-            --navy-mid:    #16213E;
-            --navy-light:  #0F3460;
-            --teal:        #4ECDC4;
-            --teal-dark:   #00A693;
-            --teal-glow:   rgba(78,205,196,0.18);
-            --teal-pale:   rgba(78,205,196,0.10);
-            --white:       #FFFFFF;
-            --off-white:   #F7F9FC;
-            --text-main:   #1A1A2E;
-            --text-body:   #3D4555;
-            --text-muted:  #7A8399;
-            --border:      rgba(26,26,46,0.08);
-            /* Metro line colours */
-            --m1: #FFD700;
-            --m2: #2563EB;
-            --m3: #E53935;
-            --m4: #43A047;
-            --m5: #FB8C00;
-        }
-        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-        html { scroll-behavior: smooth; }
-        body {
-            font-family: 'Source Sans 3', sans-serif;
-            font-size: 16px;
-            line-height: 1.7;
-            color: var(--text-body);
-            background: var(--white);
-            overflow-x: hidden;
-        }
+/* ══════════════════════════════════════════════════════
+   LINE STRIP — fixed top
+══════════════════════════════════════════════════════ */
+.line-strip{
+  position:fixed;top:0;left:0;width:100%;height:3px;z-index:1000;
+  background:linear-gradient(90deg,var(--m1) 0% 20%,var(--m3) 20% 40%,var(--m2) 40% 60%,var(--m4) 60% 80%,var(--m5) 80% 100%);
+}
 
-        /* ── Metro line strip ──────────────────────────────────────────── */
-        .line-strip {
-            height: 5px;
-            background: linear-gradient(90deg,
-                var(--m1) 0% 20%,
-                var(--m3) 20% 40%,
-                var(--m2) 40% 60%,
-                var(--m4) 60% 80%,
-                var(--m5) 80% 100%);
-        }
+/* ══════════════════════════════════════════════════════
+   NAV
+══════════════════════════════════════════════════════ */
+.nav{
+  position:fixed;top:3px;left:0;width:100%;z-index:900;
+  transition:background .3s, backdrop-filter .3s;
+}
+.nav.solid{
+  background:rgba(13,15,26,.95);
+  backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--border);
+}
+.nav-inner{
+  max-width:1280px;margin:0 auto;
+  padding:18px 40px;
+  display:flex;align-items:center;justify-content:space-between;gap:24px;
+}
+.nav-brand{
+  display:flex;align-items:center;gap:10px;
+  text-decoration:none;
+  font-family:var(--serif);font-size:1.15rem;
+  color:var(--white);white-space:nowrap;
+}
+.nav-brand-dot{
+  width:10px;height:10px;border-radius:50%;
+  background:var(--teal);flex-shrink:0;
+  box-shadow:0 0 8px var(--teal);
+}
+.nav-links{display:flex;list-style:none;gap:36px}
+.nav-links a{
+  font-size:.82rem;font-weight:500;letter-spacing:.06em;text-transform:uppercase;
+  color:rgba(255,255,255,.5);text-decoration:none;transition:color .2s;
+}
+.nav-links a:hover{color:var(--teal)}
+.nav-end{display:flex;align-items:center;gap:10px}
+.lang-btn{
+  background:none;border:1px solid var(--border);border-radius:6px;
+  padding:5px 12px;font-family:var(--sans);font-size:.75rem;font-weight:600;
+  letter-spacing:.08em;color:rgba(255,255,255,.4);cursor:pointer;transition:all .2s;
+}
+.lang-btn.on,.lang-btn:hover{border-color:var(--teal);color:var(--teal)}
+.nav-dl{
+  text-decoration:none;background:var(--teal);color:var(--ink);
+  font-weight:700;font-size:.82rem;letter-spacing:.04em;
+  padding:9px 22px;border-radius:8px;transition:opacity .2s,transform .2s;
+  white-space:nowrap;
+}
+.nav-dl:hover{opacity:.88;transform:translateY(-1px)}
+.hamburger{display:none;background:none;border:none;cursor:pointer;padding:4px;flex-direction:column;gap:5px}
+.hamburger span{display:block;width:20px;height:2px;background:var(--white);border-radius:1px;transition:.3s}
 
-        /* ── Navbar ────────────────────────────────────────────────────── */
-        .navbar {
-            position: fixed;
-            top: 5px; /* sits below the strip */
-            width: 100%;
-            z-index: 900;
-            transition: background 0.3s, box-shadow 0.3s;
-        }
-        .navbar.scrolled {
-            background: rgba(26,26,46,0.97);
-            backdrop-filter: blur(12px);
-            box-shadow: 0 4px 24px rgba(0,0,0,0.25);
-        }
-        .nav-inner {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 16px 32px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 24px;
-        }
-        .nav-logo {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            text-decoration: none;
-            font-family: 'Outfit', sans-serif;
-            font-weight: 700;
-            font-size: 1.15rem;
-            color: var(--white);
-            white-space: nowrap;
-        }
-        .nav-logo-mark {
-            width: 36px; height: 36px;
-            border-radius: 10px;
-            background: var(--teal);
-            display: flex; align-items: center; justify-content: center;
-            font-size: 1.1rem;
-            flex-shrink: 0;
-        }
-        .nav-links {
-            display: flex;
-            gap: 32px;
-            list-style: none;
-        }
-        .nav-links a {
-            text-decoration: none;
-            font-family: 'Outfit', sans-serif;
-            font-size: 0.88rem;
-            font-weight: 500;
-            color: rgba(255,255,255,0.7);
-            transition: color 0.2s;
-            letter-spacing: 0.02em;
-        }
-        .nav-links a:hover { color: var(--teal); }
-        .nav-right { display: flex; align-items: center; gap: 16px; }
-        .lang-btn {
-            background: none;
-            border: 1.5px solid rgba(255,255,255,0.25);
-            border-radius: 8px;
-            padding: 6px 14px;
-            color: rgba(255,255,255,0.75);
-            font-family: 'Outfit', sans-serif;
-            font-size: 0.82rem;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-        .lang-btn.active, .lang-btn:hover {
-            border-color: var(--teal);
-            color: var(--teal);
-        }
-        .nav-cta {
-            text-decoration: none;
-            background: var(--teal);
-            color: var(--navy);
-            font-family: 'Outfit', sans-serif;
-            font-size: 0.85rem;
-            font-weight: 700;
-            padding: 9px 20px;
-            border-radius: 10px;
-            transition: opacity 0.2s, transform 0.2s;
-            white-space: nowrap;
-        }
-        .nav-cta:hover { opacity: 0.88; transform: translateY(-1px); }
-        .hamburger {
-            display: none;
-            background: none;
-            border: none;
-            cursor: pointer;
-            flex-direction: column;
-            gap: 5px;
-            padding: 4px;
-        }
-        .hamburger span {
-            display: block;
-            width: 22px; height: 2px;
-            background: var(--white);
-            border-radius: 2px;
-            transition: all 0.3s;
-        }
-        @media (max-width: 860px) {
-            .nav-links, .lang-toggle { display: none; }
-            .hamburger { display: flex; }
-            .nav-links.open {
-                display: flex;
-                flex-direction: column;
-                position: absolute;
-                top: 100%;
-                left: 0; right: 0;
-                background: var(--navy-mid);
-                padding: 20px 32px;
-                gap: 16px;
-                border-top: 1px solid rgba(255,255,255,0.08);
-            }
-        }
+/* ══════════════════════════════════════════════════════
+   HERO
+══════════════════════════════════════════════════════ */
+.hero{
+  min-height:100vh;
+  display:grid;grid-template-columns:1fr 1fr;
+  align-items:center;
+  position:relative;overflow:hidden;
+  padding:120px 0 80px;
+}
+/* animated mesh */
+.hero-mesh{
+  position:absolute;inset:0;z-index:0;pointer-events:none;
+  background:
+    radial-gradient(ellipse 70% 60% at 70% 40%, rgba(78,205,196,.09) 0%, transparent 65%),
+    radial-gradient(ellipse 50% 50% at 20% 80%, rgba(74,144,217,.07) 0%, transparent 60%);
+}
+/* grid lines */
+.hero::before{
+  content:'';position:absolute;inset:0;z-index:0;
+  background-image:
+    linear-gradient(var(--border) 1px,transparent 1px),
+    linear-gradient(90deg,var(--border) 1px,transparent 1px);
+  background-size:64px 64px;
+  mask-image:radial-gradient(ellipse 80% 80% at 50% 50%,black 30%,transparent 100%);
+}
+.hero-left{
+  position:relative;z-index:1;
+  padding:0 48px 0 max(40px, calc((100vw - 1280px)/2 + 40px));
+}
+.hero-tag{
+  display:inline-flex;align-items:center;gap:8px;
+  border:1px solid rgba(78,205,196,.25);border-radius:4px;
+  padding:5px 12px;margin-bottom:28px;
+  font-size:.7rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--teal);
+}
+.hero-tag::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--teal);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(1.4)}}
+.hero h1{
+  font-family:var(--serif);
+  font-size:clamp(3rem,5.5vw,5rem);
+  line-height:.97;letter-spacing:-.02em;
+  color:var(--white);margin-bottom:28px;
+}
+.hero h1 em{
+  font-style:italic;color:var(--teal);
+  display:block;
+}
+.hero-desc{
+  font-size:1rem;line-height:1.75;
+  color:rgba(255,255,255,.5);
+  max-width:420px;margin-bottom:36px;
+}
+.hero-btns{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:52px}
+.btn-fill{
+  display:inline-flex;align-items:center;gap:8px;
+  background:var(--teal);color:var(--ink);
+  font-family:var(--sans);font-size:.88rem;font-weight:700;
+  padding:13px 26px;border-radius:8px;text-decoration:none;
+  transition:opacity .2s,transform .2s;
+  box-shadow:0 0 28px rgba(78,205,196,.25);
+}
+.btn-fill:hover{opacity:.88;transform:translateY(-2px)}
+.btn-line{
+  display:inline-flex;align-items:center;gap:8px;
+  border:1.5px solid var(--border);color:rgba(255,255,255,.65);
+  font-family:var(--sans);font-size:.88rem;font-weight:500;
+  padding:13px 26px;border-radius:8px;text-decoration:none;
+  transition:border-color .2s,color .2s;
+}
+.btn-line:hover{border-color:rgba(78,205,196,.5);color:var(--white)}
+/* stat row */
+.hero-stats{display:flex;gap:28px;flex-wrap:wrap}
+.hstat{display:flex;align-items:center;gap:10px}
+.hstat-icon{
+  width:34px;height:34px;border-radius:8px;
+  background:var(--mist);border:1px solid var(--border);
+  display:flex;align-items:center;justify-content:center;font-size:.95rem;
+  flex-shrink:0;
+}
+.hstat-text{font-size:.82rem;color:rgba(255,255,255,.4);line-height:1.25}
+.hstat-text strong{display:block;color:var(--white);font-weight:600;font-size:.88rem}
 
-        /* ── Hero ──────────────────────────────────────────────────────── */
-        .hero {
-            min-height: 100vh;
-            background: var(--navy);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            position: relative;
-            overflow: hidden;
-            padding-top: 80px;
-        }
-        /* Subtle grid pattern */
-        .hero::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background-image:
-                linear-gradient(rgba(78,205,196,0.04) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(78,205,196,0.04) 1px, transparent 1px);
-            background-size: 48px 48px;
-        }
-        /* Radial glow */
-        .hero::after {
-            content: '';
-            position: absolute;
-            top: -20%;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 900px;
-            height: 900px;
-            background: radial-gradient(circle, rgba(78,205,196,0.12) 0%, transparent 65%);
-            pointer-events: none;
-        }
-        .hero-inner {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 80px 32px;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 64px;
-            align-items: center;
-            position: relative;
-            z-index: 1;
-        }
-        .hero-eyebrow {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: var(--teal-pale);
-            border: 1px solid rgba(78,205,196,0.25);
-            border-radius: 999px;
-            padding: 6px 14px;
-            font-family: 'Outfit', sans-serif;
-            font-size: 0.75rem;
-            font-weight: 600;
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
-            color: var(--teal);
-            margin-bottom: 20px;
-        }
-        .hero-eyebrow::before { content: '🚇'; }
-        .hero h1 {
-            font-family: 'Outfit', sans-serif;
-            font-size: clamp(2.4rem, 5vw, 3.6rem);
-            font-weight: 800;
-            line-height: 1.1;
-            letter-spacing: -0.03em;
-            color: var(--white);
-            margin-bottom: 20px;
-        }
-        .hero h1 .accent { color: var(--teal); }
-        .hero-sub {
-            font-size: 1.1rem;
-            color: rgba(255,255,255,0.6);
-            line-height: 1.7;
-            margin-bottom: 36px;
-            max-width: 480px;
-        }
-        .hero-btns {
-            display: flex;
-            gap: 12px;
-            flex-wrap: wrap;
-            margin-bottom: 48px;
-        }
-        .btn-primary {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: var(--teal);
-            color: var(--navy);
-            font-family: 'Outfit', sans-serif;
-            font-size: 0.95rem;
-            font-weight: 700;
-            padding: 14px 28px;
-            border-radius: 12px;
-            text-decoration: none;
-            transition: opacity 0.2s, transform 0.2s, box-shadow 0.2s;
-            box-shadow: 0 8px 24px rgba(78,205,196,0.3);
-        }
-        .btn-primary:hover { opacity: 0.9; transform: translateY(-2px); box-shadow: 0 12px 32px rgba(78,205,196,0.4); }
-        .btn-ghost {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: rgba(255,255,255,0.07);
-            border: 1.5px solid rgba(255,255,255,0.15);
-            color: rgba(255,255,255,0.85);
-            font-family: 'Outfit', sans-serif;
-            font-size: 0.95rem;
-            font-weight: 500;
-            padding: 14px 28px;
-            border-radius: 12px;
-            text-decoration: none;
-            transition: background 0.2s, border-color 0.2s;
-        }
-        .btn-ghost:hover { background: rgba(255,255,255,0.12); border-color: rgba(255,255,255,0.3); }
-        /* Stat pills */
-        .hero-stats {
-            display: flex;
-            gap: 24px;
-            flex-wrap: wrap;
-        }
-        .stat {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        .stat-icon {
-            width: 36px; height: 36px;
-            border-radius: 8px;
-            background: var(--teal-pale);
-            border: 1px solid rgba(78,205,196,0.2);
-            display: flex; align-items: center; justify-content: center;
-            font-size: 1rem;
-        }
-        .stat-text { font-size: 0.85rem; color: rgba(255,255,255,0.55); line-height: 1.3; }
-        .stat-text strong { display: block; color: var(--white); font-family: 'Outfit', sans-serif; font-size: 0.9rem; font-weight: 600; }
+/* phone side */
+.hero-right{
+  position:relative;z-index:1;
+  display:flex;justify-content:center;align-items:center;
+  padding-right:max(40px, calc((100vw - 1280px)/2 + 40px));
+}
+.phone-scene{position:relative;width:280px}
+.phone-glow{
+  position:absolute;inset:-60px;z-index:0;
+  background:radial-gradient(circle,rgba(78,205,196,.18) 0%,transparent 65%);
+  pointer-events:none;
+}
+.phone-frame{
+  position:relative;z-index:1;width:280px;
+  border-radius:42px;overflow:hidden;
+  box-shadow:
+    0 0 0 1.5px rgba(78,205,196,.25),
+    0 40px 100px rgba(0,0,0,.6),
+    0 10px 30px rgba(0,0,0,.4);
+  transform:perspective(1400px) rotateY(-10deg) rotateX(4deg);
+  transition:transform .5s ease;
+}
+.phone-frame:hover{transform:perspective(1400px) rotateY(-5deg) rotateX(2deg) scale(1.02)}
+.phone-frame img{width:100%;display:block}
+.phone-fallback{
+  width:100%;min-height:560px;
+  background:var(--ink-mid);
+  background-image:
+    linear-gradient(rgba(78,205,196,.04) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(78,205,196,.04) 1px,transparent 1px);
+  background-size:24px 24px;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;
+}
+.phone-fallback span{font-size:2.5rem}
+.phone-fallback p{font-family:var(--serif);font-size:1rem;color:var(--teal);opacity:.6}
+/* line badges */
+.badge{
+  position:absolute;z-index:2;
+  border-radius:8px;padding:7px 13px;
+  font-family:var(--sans);font-weight:700;font-size:.78rem;
+  box-shadow:0 6px 20px rgba(0,0,0,.35);
+  animation:fbadge 4s ease-in-out infinite;
+  white-space:nowrap;
+}
+@keyframes fbadge{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
+.b1{background:var(--m1);color:var(--ink);top:8%;right:-28px;animation-delay:0s}
+.b2{background:var(--m2);color:#fff;top:26%;left:-36px;animation-delay:1.2s}
+.b3{background:var(--m3);color:#fff;top:42%;right:-36px;animation-delay:.6s}
+.b4{background:var(--m4);color:#fff;top:58%;left:-24px;animation-delay:1.8s}
+.b5{background:var(--m5);color:var(--ink);top:74%;right:-30px;animation-delay:2.4s}
 
-        /* Phone visual */
-        .hero-visual {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            position: relative;
-        }
-        .phone-wrap {
-            position: relative;
-            width: 280px;
-        }
-        /* Glow behind phone */
-        .phone-wrap::before {
-            content: '';
-            position: absolute;
-            inset: -40px;
-            background: radial-gradient(circle, rgba(78,205,196,0.2) 0%, transparent 70%);
-            z-index: 0;
-        }
-        .phone {
-            position: relative;
-            z-index: 1;
-            width: 280px;
-            border-radius: 40px;
-            box-shadow:
-                0 0 0 2px rgba(78,205,196,0.3),
-                0 32px 80px rgba(0,0,0,0.5),
-                0 8px 20px rgba(0,0,0,0.3);
-            overflow: hidden;
-            transform: perspective(1200px) rotateY(-8deg) rotateX(3deg);
-            transition: transform 0.4s ease;
-        }
-        .phone:hover {
-            transform: perspective(1200px) rotateY(-4deg) rotateX(1deg) scale(1.02);
-        }
-        .phone img {
-            width: 100%;
-            display: block;
-        }
-        /* Floating line badges */
-        .line-badge {
-            position: absolute;
-            z-index: 2;
-            border-radius: 12px;
-            padding: 8px 14px;
-            font-family: 'Outfit', sans-serif;
-            font-weight: 700;
-            font-size: 0.82rem;
-            color: var(--navy);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.25);
-            animation: float-badge 4s ease-in-out infinite;
-        }
-        .badge-m1 { background: var(--m1); top: 8%; right: -24px; animation-delay: 0s; }
-        .badge-m2 { background: #5b8df0; color: white; top: 26%; left: -32px; animation-delay: 1.2s; }
-        .badge-m3 { background: var(--m3); color: white; top: 42%; right: -32px; animation-delay: 0.6s; }
-        .badge-m4 { background: var(--m4); color: white; top: 58%; left: -20px; animation-delay: 1.8s; }
-        .badge-m5 { background: var(--m5); top: 74%; right: -28px; animation-delay: 2.4s; }
-        @keyframes float-badge {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-8px); }
-        }
+/* ══════════════════════════════════════════════════════
+   LINES BAR
+══════════════════════════════════════════════════════ */
+.lines-bar{
+  background:var(--ink-soft);
+  border-top:1px solid var(--border);border-bottom:1px solid var(--border);
+  padding:16px 40px;
+  display:flex;justify-content:center;align-items:center;gap:10px;flex-wrap:wrap;
+}
+.lpill{
+  display:inline-flex;align-items:center;gap:7px;
+  padding:7px 16px;border-radius:999px;
+  font-family:var(--sans);font-size:.76rem;font-weight:600;letter-spacing:.03em;
+}
+.lpill-dot{width:8px;height:8px;border-radius:50%;opacity:.8}
+.lp1{background:rgba(255,215,0,.1);  color:#FFD700;border:1px solid rgba(255,215,0,.2)}
+.lp2{background:rgba(74,144,217,.1); color:#6aaee8;border:1px solid rgba(74,144,217,.2)}
+.lp3{background:rgba(229,57,53,.1);  color:#ef6c69;border:1px solid rgba(229,57,53,.2)}
+.lp4{background:rgba(67,160,71,.1);  color:#66bb6a;border:1px solid rgba(67,160,71,.2)}
+.lp5{background:rgba(251,140,0,.1);  color:#FFA726;border:1px solid rgba(251,140,0,.2)}
 
-        @media (max-width: 860px) {
-            .hero-inner { grid-template-columns: 1fr; gap: 48px; padding: 60px 24px; }
-            .hero-visual { order: -1; }
-            .phone-wrap { width: 220px; }
-            .phone { width: 220px; }
-            .badge-m1, .badge-m3, .badge-m5 { right: -10px; }
-            .badge-m2, .badge-m4 { left: -10px; }
-        }
+/* ══════════════════════════════════════════════════════
+   FEATURES — editorial asymmetric layout
+══════════════════════════════════════════════════════ */
+.features{
+  padding:120px max(40px, calc((100vw - 1280px)/2 + 40px));
+  background:var(--chalk);
+}
+.feat-header{margin-bottom:72px}
+.feat-eyebrow{
+  font-size:.7rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--teal-dim);margin-bottom:14px;
+}
+.feat-header h2{
+  font-family:var(--serif);
+  font-size:clamp(2.2rem,4vw,3.4rem);
+  line-height:1.05;letter-spacing:-.02em;
+  color:var(--ink);
+}
+.feat-header h2 em{font-style:italic;color:var(--teal-dim)}
+.feat-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:2px;
+  background:rgba(26,26,46,.07);
+  border:1px solid rgba(26,26,46,.07);
+  border-radius:20px;overflow:hidden;
+}
+.feat-item{
+  background:var(--white);
+  padding:36px 32px;
+  transition:background .2s;
+  position:relative;
+}
+.feat-item:hover{background:#EEF1F8}
+.feat-num{
+  font-family:var(--serif);font-size:3rem;font-weight:400;
+  color:rgba(26,26,46,.06);
+  position:absolute;top:20px;right:24px;line-height:1;
+  user-select:none;
+}
+.feat-emoji{font-size:1.6rem;margin-bottom:16px;display:block}
+.feat-name{
+  font-family:var(--sans);font-size:.95rem;font-weight:600;
+  color:var(--ink);margin-bottom:8px;line-height:1.3;
+}
+.feat-copy{font-size:.875rem;color:#5A6279;line-height:1.65}
+@media(max-width:900px){.feat-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.feat-grid{grid-template-columns:1fr}}
 
-        /* ── Lines section ─────────────────────────────────────────────── */
-        .lines-bar {
-            background: var(--navy-mid);
-            padding: 20px 32px;
-            display: flex;
-            justify-content: center;
-            gap: 12px;
-            flex-wrap: wrap;
-        }
-        .line-pill {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 8px 18px;
-            border-radius: 999px;
-            font-family: 'Outfit', sans-serif;
-            font-size: 0.82rem;
-            font-weight: 700;
-            letter-spacing: 0.03em;
-        }
-        .line-pill .dot {
-            width: 10px; height: 10px;
-            border-radius: 50%;
-            background: currentColor;
-            opacity: 0.7;
-        }
-        .pill-m1 { background: rgba(255,215,0,0.12);  color: #FFD700; border: 1px solid rgba(255,215,0,0.25); }
-        .pill-m2 { background: rgba(37,99,235,0.12);  color: #5b8df0; border: 1px solid rgba(37,99,235,0.25); }
-        .pill-m3 { background: rgba(229,57,53,0.12);  color: #ef5350; border: 1px solid rgba(229,57,53,0.25); }
-        .pill-m4 { background: rgba(67,160,71,0.12);  color: #66bb6a; border: 1px solid rgba(67,160,71,0.25); }
-        .pill-m5 { background: rgba(251,140,0,0.12);  color: #FFA726; border: 1px solid rgba(251,140,0,0.25); }
+/* ══════════════════════════════════════════════════════
+   SCREENSHOTS — cinematic split
+══════════════════════════════════════════════════════ */
+.shots{
+  display:grid;grid-template-columns:1fr 1fr;
+  min-height:680px;
+}
+.shots-left{
+  background:var(--ink-mid);
+  padding:80px max(40px, calc((100vw - 1280px)/2 + 40px)) 80px max(40px, calc((100vw - 1280px)/2 + 40px));
+  display:flex;flex-direction:column;justify-content:center;
+}
+.shots-eyebrow{
+  font-size:.7rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--teal);margin-bottom:16px;
+}
+.shots-left h2{
+  font-family:var(--serif);
+  font-size:clamp(1.9rem,3vw,2.8rem);
+  line-height:1.1;letter-spacing:-.02em;
+  color:var(--white);margin-bottom:28px;
+}
+.shots-left h2 em{font-style:italic;color:var(--teal)}
+.shots-list{list-style:none;margin-bottom:36px}
+.shots-list li{
+  display:flex;align-items:flex-start;gap:12px;
+  padding:11px 0;
+  border-bottom:1px solid var(--border);
+  font-size:.9rem;color:rgba(255,255,255,.55);
+}
+.shots-list li:last-child{border-bottom:none}
+.shots-list li::before{
+  content:'';width:18px;height:18px;flex-shrink:0;margin-top:2px;
+  border-radius:4px;background:rgba(78,205,196,.12);
+  border:1px solid rgba(78,205,196,.25);
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10'%3E%3Cpath d='M2 5.5l2 2 4-4' stroke='%234ECDC4' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-size:12px;background-repeat:no-repeat;background-position:center;
+}
+.shots-right{
+  background:var(--ink-soft);
+  display:flex;align-items:center;justify-content:center;
+  gap:14px;
+  padding:60px 40px;
+  position:relative;overflow:hidden;
+}
+.shots-right::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse 80% 60% at 50% 50%,rgba(78,205,196,.06) 0%,transparent 70%);
+}
+.ss{
+  border-radius:24px;overflow:hidden;flex-shrink:0;
+  box-shadow:0 20px 60px rgba(0,0,0,.4);
+  transition:transform .3s;position:relative;z-index:1;
+}
+.ss:hover{transform:translateY(-8px) scale(1.02)}
+.ss img{width:100%;display:block}
+.ss.tall{width:155px}
+.ss.short{width:135px;margin-bottom:28px}
+/* placeholder for missing screenshots */
+.ss-ph{
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:10px;padding:20px;
+  background:var(--ink-mid);
+  background-image:
+    linear-gradient(rgba(78,205,196,.04) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(78,205,196,.04) 1px,transparent 1px);
+  background-size:18px 18px;
+  border:1px solid rgba(78,205,196,.1);
+}
+.ss.tall .ss-ph{min-height:300px}
+.ss.short .ss-ph{min-height:260px}
+.ss-ph span{font-size:1.8rem}
+.ss-ph p{font-size:.68rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:rgba(78,205,196,.4);text-align:center}
 
-        /* ── Sections shared ───────────────────────────────────────────── */
-        .section { padding: 96px 32px; }
-        .section-inner { max-width: 1200px; margin: 0 auto; }
-        .section-label {
-            font-family: 'Outfit', sans-serif;
-            font-size: 0.72rem;
-            font-weight: 700;
-            letter-spacing: 0.12em;
-            text-transform: uppercase;
-            color: var(--teal-dark);
-            margin-bottom: 12px;
-        }
-        .section-title {
-            font-family: 'Outfit', sans-serif;
-            font-size: clamp(1.8rem, 3.5vw, 2.4rem);
-            font-weight: 700;
-            letter-spacing: -0.02em;
-            color: var(--text-main);
-            margin-bottom: 16px;
-            line-height: 1.2;
-        }
-        .section-sub {
-            font-size: 1.05rem;
-            color: var(--text-muted);
-            max-width: 560px;
-            margin-bottom: 56px;
-        }
+/* ══════════════════════════════════════════════════════
+   CTA
+══════════════════════════════════════════════════════ */
+.cta-wrap{padding:100px max(40px, calc((100vw - 1280px)/2 + 40px));background:var(--chalk)}
+.cta-card{
+  background:var(--ink);border-radius:24px;
+  padding:72px 80px;
+  display:grid;grid-template-columns:1fr auto;gap:48px;align-items:center;
+  position:relative;overflow:hidden;
+}
+.cta-card::before{
+  content:'';position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse 60% 80% at 0% 50%,rgba(78,205,196,.1) 0%,transparent 60%),
+    radial-gradient(ellipse 40% 60% at 100% 50%,rgba(74,144,217,.07) 0%,transparent 60%);
+  pointer-events:none;
+}
+/* decorative line colours strip on left edge */
+.cta-card::after{
+  content:'';position:absolute;left:0;top:0;bottom:0;width:4px;
+  background:linear-gradient(180deg,var(--m1) 0%,var(--m3) 25%,var(--m2) 50%,var(--m4) 75%,var(--m5) 100%);
+}
+.cta-text{position:relative;z-index:1}
+.cta-text h2{
+  font-family:var(--serif);
+  font-size:clamp(1.7rem,3vw,2.4rem);
+  line-height:1.1;color:var(--white);margin-bottom:12px;
+}
+.cta-text p{color:rgba(255,255,255,.45);font-size:.95rem;max-width:420px}
+.cta-actions{display:flex;flex-direction:column;gap:10px;position:relative;z-index:1;flex-shrink:0}
 
-        /* ── Features ──────────────────────────────────────────────────── */
-        .features-bg { background: var(--off-white); }
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-        }
-        .feat-card {
-            background: var(--white);
-            border: 1px solid var(--border);
-            border-radius: 18px;
-            padding: 28px;
-            transition: transform 0.2s, box-shadow 0.2s;
-            position: relative;
-            overflow: hidden;
-        }
-        .feat-card::after {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; right: 0;
-            height: 3px;
-            background: linear-gradient(90deg, var(--teal) 0%, var(--teal-dark) 100%);
-            transform: scaleX(0);
-            transform-origin: left;
-            transition: transform 0.3s;
-        }
-        .feat-card:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(26,26,46,0.1); }
-        .feat-card:hover::after { transform: scaleX(1); }
-        .feat-icon {
-            width: 48px; height: 48px;
-            border-radius: 12px;
-            background: var(--teal-pale);
-            display: flex; align-items: center; justify-content: center;
-            font-size: 1.3rem;
-            margin-bottom: 18px;
-        }
-        .feat-title {
-            font-family: 'Outfit', sans-serif;
-            font-size: 1rem;
-            font-weight: 600;
-            color: var(--text-main);
-            margin-bottom: 8px;
-        }
-        .feat-body { font-size: 0.9rem; color: var(--text-muted); line-height: 1.6; }
-        @media (max-width: 900px) { .features-grid { grid-template-columns: repeat(2, 1fr); } }
-        @media (max-width: 560px) { .features-grid { grid-template-columns: 1fr; } }
+/* ══════════════════════════════════════════════════════
+   FOOTER
+══════════════════════════════════════════════════════ */
+footer{
+  background:var(--ink-mid);
+  border-top:1px solid var(--border);
+  padding:60px max(40px, calc((100vw - 1280px)/2 + 40px)) 32px;
+}
+.foot-top{
+  display:grid;grid-template-columns:2fr 1fr 1fr 1fr;
+  gap:48px;padding-bottom:48px;
+  border-bottom:1px solid var(--border);margin-bottom:28px;
+}
+.foot-brand{
+  font-family:var(--serif);font-size:1.1rem;
+  color:var(--white);margin-bottom:12px;
+  display:flex;align-items:center;gap:8px;
+}
+.foot-brand-dot{width:8px;height:8px;border-radius:50%;background:var(--teal);box-shadow:0 0 6px var(--teal)}
+.foot-desc{font-size:.83rem;line-height:1.65;color:rgba(255,255,255,.35);max-width:260px}
+.foot-col h4{
+  font-size:.7rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
+  color:rgba(255,255,255,.25);margin-bottom:16px;
+}
+.foot-col a{
+  display:block;font-size:.85rem;color:rgba(255,255,255,.45);
+  text-decoration:none;margin-bottom:9px;transition:color .2s;
+}
+.foot-col a:hover{color:var(--teal)}
+.foot-bottom{
+  display:flex;align-items:center;justify-content:space-between;
+  flex-wrap:wrap;gap:12px;font-size:.75rem;color:rgba(255,255,255,.25);
+}
+.foot-dots{display:flex;gap:6px}
+.fd{width:7px;height:7px;border-radius:50%}
 
-        /* ── Screenshots ───────────────────────────────────────────────── */
-        .screenshots-layout {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 80px;
-            align-items: center;
-        }
-        .screenshots-phones {
-            display: flex;
-            gap: 16px;
-            align-items: flex-end;
-            justify-content: center;
-        }
-        .ss-phone {
-            border-radius: 28px;
-            overflow: hidden;
-            box-shadow: 0 24px 60px rgba(26,26,46,0.15);
-            transition: transform 0.3s;
-            flex-shrink: 0;
-        }
-        .ss-phone:hover { transform: translateY(-8px); }
-        .ss-phone img { width: 100%; display: block; }
-        .ss-phone.tall { width: 160px; }
-        .ss-phone.short { width: 140px; margin-bottom: 24px; }
-        .check-list { list-style: none; padding: 0; margin-bottom: 32px; }
-        .check-list li {
-            display: flex;
-            align-items: flex-start;
-            gap: 12px;
-            padding: 10px 0;
-            border-bottom: 1px solid var(--border);
-            font-size: 0.95rem;
-            color: var(--text-body);
-        }
-        .check-list li:last-child { border-bottom: none; }
-        .check-list li::before {
-            content: '✓';
-            flex-shrink: 0;
-            width: 22px; height: 22px;
-            border-radius: 6px;
-            background: var(--teal-pale);
-            color: var(--teal-dark);
-            font-weight: 700;
-            font-size: 0.75rem;
-            display: flex; align-items: center; justify-content: center;
-            margin-top: 2px;
-        }
-        @media (max-width: 860px) {
-            .screenshots-layout { grid-template-columns: 1fr; gap: 48px; }
-            .ss-phone.tall { width: 130px; }
-            .ss-phone.short { width: 114px; }
-        }
+/* ══════════════════════════════════════════════════════
+   REVEAL ANIMATION
+══════════════════════════════════════════════════════ */
+.rv{opacity:0;transform:translateY(24px);transition:opacity .65s ease,transform .65s ease}
+.rv.in{opacity:1;transform:none}
+.rv1{transition-delay:.1s}.rv2{transition-delay:.18s}.rv3{transition-delay:.26s}
+.rv4{transition-delay:.34s}.rv5{transition-delay:.42s}.rv6{transition-delay:.50s}
 
-        /* ── Specs ─────────────────────────────────────────────────────── */
-        .specs-bg { background: var(--navy); }
-        .specs-bg .section-label { color: var(--teal); }
-        .specs-bg .section-title { color: var(--white); }
-        .specs-bg .section-sub { color: rgba(255,255,255,0.5); }
-        .specs-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 16px;
-        }
-        .spec-card {
-            background: rgba(255,255,255,0.05);
-            border: 1px solid rgba(255,255,255,0.08);
-            border-radius: 16px;
-            padding: 24px 20px;
-            text-align: center;
-            transition: background 0.2s;
-        }
-        .spec-card:hover { background: rgba(78,205,196,0.08); }
-        .spec-emoji { font-size: 1.8rem; margin-bottom: 12px; }
-        .spec-name {
-            font-family: 'Outfit', sans-serif;
-            font-size: 0.82rem;
-            font-weight: 600;
-            letter-spacing: 0.05em;
-            text-transform: uppercase;
-            color: rgba(255,255,255,0.4);
-            margin-bottom: 6px;
-        }
-        .spec-value {
-            font-family: 'Outfit', sans-serif;
-            font-size: 1rem;
-            font-weight: 600;
-            color: var(--white);
-        }
-        @media (max-width: 760px) { .specs-grid { grid-template-columns: repeat(2, 1fr); } }
-        @media (max-width: 400px) { .specs-grid { grid-template-columns: 1fr; } }
-
-        /* ── CTA banner ────────────────────────────────────────────────── */
-        .cta-section {
-            padding: 80px 32px;
-            background: var(--off-white);
-        }
-        .cta-card {
-            max-width: 860px;
-            margin: 0 auto;
-            background: var(--navy);
-            border-radius: 24px;
-            padding: 56px 64px;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-        .cta-card::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: radial-gradient(ellipse 80% 80% at 50% 110%, rgba(78,205,196,0.2) 0%, transparent 70%);
-            pointer-events: none;
-        }
-        .cta-card h2 {
-            font-family: 'Outfit', sans-serif;
-            font-size: clamp(1.6rem, 3vw, 2.2rem);
-            font-weight: 700;
-            color: var(--white);
-            margin-bottom: 12px;
-            position: relative;
-            z-index: 1;
-        }
-        .cta-card p {
-            color: rgba(255,255,255,0.55);
-            font-size: 1rem;
-            margin-bottom: 32px;
-            position: relative;
-            z-index: 1;
-        }
-        .cta-btns {
-            display: flex;
-            gap: 12px;
-            justify-content: center;
-            flex-wrap: wrap;
-            position: relative;
-            z-index: 1;
-        }
-        @media (max-width: 600px) { .cta-card { padding: 40px 24px; } }
-
-        /* ── Footer ────────────────────────────────────────────────────── */
-        footer {
-            background: var(--navy-mid);
-            padding: 56px 32px 32px;
-            color: rgba(255,255,255,0.5);
-        }
-        .footer-inner {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        .footer-top {
-            display: grid;
-            grid-template-columns: 2fr 1fr 1fr 1fr;
-            gap: 40px;
-            padding-bottom: 40px;
-            border-bottom: 1px solid rgba(255,255,255,0.07);
-            margin-bottom: 28px;
-        }
-        .footer-brand { font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 1rem; color: var(--white); margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
-        .footer-desc { font-size: 0.88rem; line-height: 1.6; max-width: 280px; }
-        .footer-col h4 { font-family: 'Outfit', sans-serif; font-weight: 600; font-size: 0.85rem; letter-spacing: 0.06em; text-transform: uppercase; color: rgba(255,255,255,0.35); margin-bottom: 14px; }
-        .footer-col a { display: block; text-decoration: none; color: rgba(255,255,255,0.55); font-size: 0.88rem; margin-bottom: 8px; transition: color 0.2s; }
-        .footer-col a:hover { color: var(--teal); }
-        .footer-bottom { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; font-size: 0.8rem; }
-        .footer-lines { display: flex; gap: 8px; }
-        .fl { width: 8px; height: 8px; border-radius: 50%; }
-        @media (max-width: 760px) { .footer-top { grid-template-columns: 1fr 1fr; } }
-        @media (max-width: 480px) { .footer-top { grid-template-columns: 1fr; } }
-
-        /* ── Scroll reveal ─────────────────────────────────────────────── */
-        .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.6s ease, transform 0.6s ease; }
-        .reveal.visible { opacity: 1; transform: translateY(0); }
-        .reveal-delay-1 { transition-delay: 0.1s; }
-        .reveal-delay-2 { transition-delay: 0.2s; }
-        .reveal-delay-3 { transition-delay: 0.3s; }
-    </style>
+/* ══════════════════════════════════════════════════════
+   RESPONSIVE
+══════════════════════════════════════════════════════ */
+@media(max-width:1000px){
+  .hero{grid-template-columns:1fr;padding:100px 0 60px}
+  .hero-left{padding:0 32px;text-align:center}
+  .hero-desc{margin:0 auto 36px}
+  .hero-btns{justify-content:center}
+  .hero-stats{justify-content:center}
+  .hero-right{padding:40px 32px;justify-content:center}
+  .phone-scene{width:220px}
+  .phone-frame{width:220px}
+  .b1,.b3,.b5{right:-12px}
+  .b2,.b4{left:-12px}
+  .shots{grid-template-columns:1fr}
+  .shots-left{padding:60px 32px}
+  .shots-right{padding:60px 32px;min-height:360px}
+  .cta-card{grid-template-columns:1fr;padding:48px 40px;text-align:center}
+  .cta-actions{align-items:center}
+  .cta-text p{margin:0 auto}
+  .foot-top{grid-template-columns:1fr 1fr;gap:32px}
+}
+@media(max-width:700px){
+  .nav-links,.lang-toggle{display:none!important}
+  .hamburger{display:flex}
+  .nav-links.open{
+    display:flex!important;flex-direction:column;
+    position:absolute;top:100%;left:0;right:0;
+    background:var(--ink-mid);padding:20px 32px;gap:14px;
+    border-top:1px solid var(--border);
+  }
+  .features{padding:80px 24px}
+  .cta-wrap{padding:60px 24px}
+  footer{padding:48px 24px 24px}
+  .foot-top{grid-template-columns:1fr}
+  .ss.tall{width:130px}
+  .ss.short{width:115px}
+  .nav-inner{padding:14px 24px}
+  .lines-bar{padding:14px 24px}
+}
+</style>
 </head>
 <body>
 
-<!-- Metro line strip (fixed at very top) -->
-<div class="line-strip" style="position:fixed;top:0;width:100%;z-index:1000;"></div>
+<!-- ── Fixed line strip ───────────────────────────────────────── -->
+<div class="line-strip"></div>
 
-<!-- Navbar -->
-<nav class="navbar" id="navbar">
-    <div class="nav-inner">
-        <a href="#" class="nav-logo">
-            <div class="nav-logo-mark">🚇</div>
-            <span>Metrou București</span>
-        </a>
-        <ul class="nav-links" id="nav-links">
-            <li><a href="#features"     data-en="Features"     data-ro="Funcții">Features</a></li>
-            <li><a href="#screenshots"  data-en="Screenshots"  data-ro="Capturi">Screenshots</a></li>
-            <li><a href="#download"     data-en="Download"     data-ro="Descarcă">Download</a></li>
-        </ul>
-        <div class="nav-right">
-            <div class="lang-toggle" style="display:flex;gap:4px;">
-                <button class="lang-btn active" onclick="setLang('en')">EN</button>
-                <button class="lang-btn" onclick="setLang('ro')">RO</button>
-            </div>
-            <a href="#download" class="nav-cta" data-en="Get the App" data-ro="Descarcă">Get the App</a>
-            <button class="hamburger" id="hamburger" aria-label="Menu">
-                <span></span><span></span><span></span>
-            </button>
-        </div>
+<!-- ── Nav ───────────────────────────────────────────────────── -->
+<nav class="nav" id="nav">
+  <div class="nav-inner">
+    <a href="#" class="nav-brand">
+      <div class="nav-brand-dot"></div>
+      Metrou București
+    </a>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="#features"    data-en="Features"    data-ro="Funcții">Features</a></li>
+      <li><a href="#screenshots" data-en="Screenshots" data-ro="Capturi">Screenshots</a></li>
+      <li><a href="#download"    data-en="Download"    data-ro="Descarcă">Download</a></li>
+    </ul>
+    <div class="nav-end">
+      <div class="lang-toggle" style="display:flex;gap:4px">
+        <button class="lang-btn on"  onclick="setLang('en')">EN</button>
+        <button class="lang-btn"     onclick="setLang('ro')">RO</button>
+      </div>
+      <a href="#download" class="nav-dl" data-en="Get the App" data-ro="Descarcă">Get the App</a>
+      <button class="hamburger" id="hbg" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
     </div>
+  </div>
 </nav>
 
-<!-- Hero -->
-<section class="hero">
-    <div class="hero-inner">
-        <div class="hero-content">
-            <div class="hero-eyebrow" data-en="Free Android App" data-ro="Aplicație Android gratuită">Free Android App</div>
-            <h1>
-                <span data-en="Navigate" data-ro="Navighează">Navigate</span>
-                <br><span class="accent" data-en="Bucharest Metro" data-ro="Metroul București">Bucharest Metro</span>
-                <br><span data-en="with Confidence" data-ro="cu Încredere">with Confidence</span>
-            </h1>
-            <p class="hero-sub" data-en="Smart route planning across all 5 metro lines, GPS journey tracking, station details, door-opening indicators, and much more — all stored on your device."
-               data-ro="Planificare inteligentă pe toate cele 5 linii de metrou, urmărire GPS, detalii stații, indicatori pentru uși și multe altele — totul stocat local pe dispozitivul tău.">
-                Smart route planning across all 5 metro lines, GPS journey tracking, station details, door-opening indicators, and much more — all stored on your device.
-            </p>
-            <div class="hero-btns">
-                <a href="#download" class="btn-primary">
-                    <span>▶</span>
-                    <span data-en="Download Free" data-ro="Descarcă gratuit">Download Free</span>
-                </a>
-                <a href="#features" class="btn-ghost">
-                    <span data-en="See Features" data-ro="Vezi funcții">See Features</span>
-                </a>
-            </div>
-            <div class="hero-stats">
-                <div class="stat">
-                    <div class="stat-icon">🛤️</div>
-                    <div class="stat-text"><strong data-en="M1 – M5" data-ro="M1 – M5">M1 – M5</strong><span data-en="All 5 lines" data-ro="Toate 5 liniile">All 5 lines</span></div>
-                </div>
-                <div class="stat">
-                    <div class="stat-icon">🌍</div>
-                    <div class="stat-text"><strong>6 <span data-en="languages" data-ro="limbi">languages</span></strong><span>EN RO FR IT DE ES</span></div>
-                </div>
-                <div class="stat">
-                    <div class="stat-icon">📵</div>
-                    <div class="stat-text"><strong data-en="Works offline" data-ro="Funcționează offline">Works offline</strong><span data-en="No data needed" data-ro="Fără internet">No data needed</span></div>
-                </div>
-            </div>
-        </div>
-        <div class="hero-visual">
-            <div class="phone-wrap">
-                <div class="phone">
-                    <img src="https://lxtech.ro/metroubucuresti/images/splash-screen.png"
-                         onerror="this.style.background='#16213E';this.style.minHeight='540px';"
-                         alt="Metrou București app">
-                </div>
-                <div class="line-badge badge-m1">M1 Magistrala 1</div>
-                <div class="line-badge badge-m3">M3 Magistrala 3</div>
-                <div class="line-badge badge-m2">M2 Magistrala 2</div>
-                <div class="line-badge badge-m4">M4 Magistrala 4</div>
-                <div class="line-badge badge-m5">M5 Magistrala 5</div>
-            </div>
-        </div>
+<!-- ── Hero ──────────────────────────────────────────────────── -->
+<section class="hero" id="top">
+  <div class="hero-mesh"></div>
+  <div class="hero-left">
+    <div class="hero-tag rv" data-en="Free Android App" data-ro="Aplicație Android gratuită">Free Android App</div>
+    <h1 class="rv rv1">
+      <span data-en="Navigate" data-ro="Navighează">Navigate</span><br>
+      <em data-en="Bucharest Metro" data-ro="Metroul București">Bucharest Metro</em><br>
+      <span data-en="with Ease" data-ro="cu Ușurință">with Ease</span>
+    </h1>
+    <p class="hero-desc rv rv2"
+       data-en="Smart route planning across all 5 lines, GPS journey tracking, door-opening indicators, station details and more — everything stored on your device, works fully offline."
+       data-ro="Planificare inteligentă pe toate cele 5 linii, urmărire GPS, indicatori pentru uși, detalii stații și multe altele — totul stocat local, funcționează complet offline.">
+      Smart route planning across all 5 lines, GPS journey tracking, door-opening indicators, station details and more — everything stored on your device, works fully offline.
+    </p>
+    <div class="hero-btns rv rv3">
+      <a href="#download" class="btn-fill">
+        <span>▶</span>
+        <span data-en="Download Free" data-ro="Descarcă gratuit">Download Free</span>
+      </a>
+      <a href="#features" class="btn-line" data-en="Explore Features" data-ro="Vezi funcții">Explore Features</a>
     </div>
+    <div class="hero-stats rv rv4">
+      <div class="hstat">
+        <div class="hstat-icon">🛤️</div>
+        <div class="hstat-text">
+          <strong>M1 – M5</strong>
+          <span data-en="All 5 lines" data-ro="Toate 5 liniile">All 5 lines</span>
+        </div>
+      </div>
+      <div class="hstat">
+        <div class="hstat-icon">🌍</div>
+        <div class="hstat-text">
+          <strong data-en="6 Languages" data-ro="6 Limbi">6 Languages</strong>
+          <span>EN RO FR IT DE ES</span>
+        </div>
+      </div>
+      <div class="hstat">
+        <div class="hstat-icon">📵</div>
+        <div class="hstat-text">
+          <strong data-en="Fully Offline" data-ro="Complet Offline">Fully Offline</strong>
+          <span data-en="No internet needed" data-ro="Fără internet">No internet needed</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="phone-scene">
+      <div class="phone-glow"></div>
+      <div class="phone-frame">
+        <img src="https://lxtech.ro/metroubucuresti/images/splash-screen.png"
+             alt="Metrou București app"
+             onerror="this.parentNode.innerHTML='<div class=\'phone-fallback\'><span>🚇</span><p>Metrou București</p></div>'">
+      </div>
+      <div class="badge b1">M1 Magistrala 1</div>
+      <div class="badge b2">M2 Magistrala 2</div>
+      <div class="badge b3">M3 Magistrala 3</div>
+      <div class="badge b4">M4 Magistrala 4</div>
+      <div class="badge b5">M5 Magistrala 5</div>
+    </div>
+  </div>
 </section>
 
-<!-- Metro lines bar -->
+<!-- ── Lines bar ──────────────────────────────────────────────── -->
 <div class="lines-bar">
-    <div class="line-pill pill-m1"><span class="dot"></span> M1 — Dristor–Pantelimon</div>
-    <div class="line-pill pill-m2"><span class="dot"></span> M2 — Tudor Arghezi–Pipera</div>
-    <div class="line-pill pill-m3"><span class="dot"></span> M3 — Anghel Saligny–Preciziei</div>
-    <div class="line-pill pill-m4"><span class="dot"></span> M4 — Gara de Nord–Străulești</div>
-    <div class="line-pill pill-m5"><span class="dot"></span> M5 — Eroilor–Valea Cascadelor–Râul Doamnei</div>
+  <div class="lpill lp1"><div class="lpill-dot" style="background:var(--m1)"></div>M1 — Dristor–Pantelimon</div>
+  <div class="lpill lp2"><div class="lpill-dot" style="background:var(--m2)"></div>M2 — Tudor Arghezi–Pipera</div>
+  <div class="lpill lp3"><div class="lpill-dot" style="background:var(--m3)"></div>M3 — Anghel Saligny–Preciziei</div>
+  <div class="lpill lp4"><div class="lpill-dot" style="background:var(--m4)"></div>M4 — Gara de Nord–Străulești</div>
+  <div class="lpill lp5"><div class="lpill-dot" style="background:var(--m5)"></div>M5 — Eroilor–Valea Cascadelor–Râul Doamnei</div>
 </div>
 
-<!-- Features -->
-<section class="section features-bg" id="features">
-    <div class="section-inner">
-        <p class="section-label reveal" data-en="What it does" data-ro="Ce face aplicația">What it does</p>
-        <h2 class="section-title reveal" data-en="Everything you need underground" data-ro="Tot ce ai nevoie în subteran">Everything you need underground</h2>
-        <p class="section-sub reveal" data-en="Built for daily commuters and first-time visitors alike. Every feature works without a server — your data stays on your phone." data-ro="Creat pentru naveta zilnică și pentru vizitatori deopotrivă. Toate funcțiile funcționează fără server — datele tale rămân pe telefon.">
-            Built for daily commuters and first-time visitors alike. Every feature works without a server — your data stays on your phone.
-        </p>
-        <div class="features-grid">
-            <div class="feat-card reveal reveal-delay-1">
-                <div class="feat-icon">🗺️</div>
-                <p class="feat-title" data-en="Smart Route Planning" data-ro="Planificare inteligentă">Smart Route Planning</p>
-                <p class="feat-body" data-en="Find the best path across M1–M5 with automatic transfer optimisation, door-side recommendations, and journey time estimates." data-ro="Găsește cel mai bun traseu pe M1–M5 cu optimizare automată a transferurilor, recomandări pentru uși și estimări de timp.">Find the best path across M1–M5 with automatic transfer optimisation, door-side recommendations, and journey time estimates.</p>
-            </div>
-            <div class="feat-card reveal reveal-delay-2">
-                <div class="feat-icon">📍</div>
-                <p class="feat-title" data-en="GPS Route Tracking" data-ro="Urmărire GPS">GPS Route Tracking</p>
-                <p class="feat-body" data-en="Follow your journey step-by-step in real time. Get notified before transfers and when to get off — even with the screen off." data-ro="Urmărește-ți traseul pas cu pas în timp real. Fii notificat înainte de transferuri și când să cobori — chiar și cu ecranul stins.">Follow your journey step-by-step in real time. Get notified before transfers and when to get off — even with the screen off.</p>
-            </div>
-            <div class="feat-card reveal reveal-delay-3">
-                <div class="feat-icon">🚪</div>
-                <p class="feat-title" data-en="Door Direction Indicators" data-ro="Indicatori direcție uși">Door Direction Indicators</p>
-                <p class="feat-body" data-en="Know exactly which side the doors open at each station so you can position yourself before the train arrives." data-ro="Știi exact pe ce parte se deschid ușile la fiecare stație, ca să te poziționezi înainte să sosească trenul.">Know exactly which side the doors open at each station so you can position yourself before the train arrives.</p>
-            </div>
-            <div class="feat-card reveal reveal-delay-1">
-                <div class="feat-icon">🏢</div>
-                <p class="feat-title" data-en="Station Details" data-ro="Detalii stații">Station Details</p>
-                <p class="feat-body" data-en="Explore entrances, transport connections, nearby places and points of interest for every station on the network." data-ro="Explorează intrări, conexiuni de transport, locuri din apropiere și puncte de interes pentru fiecare stație din rețea.">Explore entrances, transport connections, nearby places and points of interest for every station on the network.</p>
-            </div>
-            <div class="feat-card reveal reveal-delay-2">
-                <div class="feat-icon">⭐</div>
-                <p class="feat-title" data-en="Favourites & Notes" data-ro="Favorite și note">Favourites & Notes</p>
-                <p class="feat-body" data-en="Save your most-used routes for one-tap navigation and attach personal notes to any station — stored only on your device." data-ro="Salvează rutele frecvente pentru navigare rapidă și adaugă note personale la orice stație — stocate doar pe dispozitivul tău.">Save your most-used routes for one-tap navigation and attach personal notes to any station — stored only on your device.</p>
-            </div>
-            <div class="feat-card reveal reveal-delay-3">
-                <div class="feat-icon">🌙</div>
-                <p class="feat-title" data-en="Theme & Language" data-ro="Temă și limbă">Theme & Language</p>
-                <p class="feat-body" data-en="Light, dark, or system theme. Switch between English, Romanian, French, Italian, German, and Spanish at any time." data-ro="Temă clară, întunecată sau sistem. Comutați între engleză, română, franceză, italiană, germană și spaniolă oricând.">Light, dark, or system theme. Switch between English, Romanian, French, Italian, German, and Spanish at any time.</p>
-            </div>
-            <div class="feat-card reveal reveal-delay-1">
-                <div class="feat-icon">🗺️</div>
-                <p class="feat-title" data-en="Interactive Metro Map" data-ro="Hartă interactivă">Interactive Metro Map</p>
-                <p class="feat-body" data-en="Zoomable SVG metro map plus an OpenStreetMap view with station markers, entrance locations, and nearby POI overlays." data-ro="Hartă metrou SVG zoomabilă plus o vedere OpenStreetMap cu markere de stații, locații de intrare și suprapuneri POI.">Zoomable SVG metro map plus an OpenStreetMap view with station markers, entrance locations, and nearby POI overlays.</p>
-            </div>
-            <div class="feat-card reveal reveal-delay-2">
-                <div class="feat-icon">🕐</div>
-                <p class="feat-title" data-en="Train Timetables" data-ro="Orare trenuri">Train Timetables</p>
-                <p class="feat-body" data-en="View next departures, first and last train times, and peak-hour schedules for weekdays and weekends — fully offline." data-ro="Vizualizează următoarele plecări, orele primului și ultimului tren și orarele din orele de vârf — complet offline.">View next departures, first and last train times, and peak-hour schedules for weekdays and weekends — fully offline.</p>
-            </div>
-            <div class="feat-card reveal reveal-delay-3">
-                <div class="feat-icon">📵</div>
-                <p class="feat-title" data-en="Works Offline" data-ro="Funcționează offline">Works Offline</p>
-                <p class="feat-body" data-en="All route planning, timetables, station data, and journey tracking work without any internet connection — perfect underground." data-ro="Toate planificările de rute, orarele, datele stațiilor și urmărirea călătoriei funcționează fără internet — perfect sub pământ.">All route planning, timetables, station data, and journey tracking work without any internet connection — perfect underground.</p>
-            </div>
-        </div>
+<!-- ── Features ──────────────────────────────────────────────── -->
+<section class="features" id="features">
+  <div class="feat-header">
+    <p class="feat-eyebrow rv" data-en="What it does" data-ro="Ce face aplicația">What it does</p>
+    <h2 class="rv rv1">
+      <span data-en="Everything you need" data-ro="Tot ce ai nevoie">Everything you need</span><br>
+      <em data-en="underground" data-ro="în subteran">underground</em>
+    </h2>
+  </div>
+  <div class="feat-grid">
+
+    <div class="feat-item rv rv1">
+      <span class="feat-num">01</span>
+      <span class="feat-emoji">🗺️</span>
+      <p class="feat-name" data-en="Smart Route Planning" data-ro="Planificare inteligentă">Smart Route Planning</p>
+      <p class="feat-copy" data-en="Find the best path across M1–M5 with automatic transfer optimisation, door-side recommendations, and journey time estimates." data-ro="Găsește cel mai bun traseu pe M1–M5 cu optimizare automată a transferurilor, recomandări pentru uși și estimări de timp.">Find the best path across M1–M5 with automatic transfer optimisation, door-side recommendations, and journey time estimates.</p>
     </div>
+
+    <div class="feat-item rv rv2">
+      <span class="feat-num">02</span>
+      <span class="feat-emoji">📍</span>
+      <p class="feat-name" data-en="GPS Route Tracking" data-ro="Urmărire GPS">GPS Route Tracking</p>
+      <p class="feat-copy" data-en="Follow your journey step-by-step in real time. Get notified before transfers and when to get off — even with the screen off." data-ro="Urmărește-ți traseul pas cu pas. Fii notificat înainte de transferuri și când să cobori — chiar și cu ecranul stins.">Follow your journey step-by-step in real time. Get notified before transfers and when to get off — even with the screen off.</p>
+    </div>
+
+    <div class="feat-item rv rv3">
+      <span class="feat-num">03</span>
+      <span class="feat-emoji">🚪</span>
+      <p class="feat-name" data-en="Door Direction Indicators" data-ro="Indicatori direcție uși">Door Direction Indicators</p>
+      <p class="feat-copy" data-en="Know exactly which side the doors open at every station so you can position yourself before the train arrives." data-ro="Știi exact pe ce parte se deschid ușile la fiecare stație, ca să te poziționezi înainte să sosească trenul.">Know exactly which side the doors open at every station so you can position yourself before the train arrives.</p>
+    </div>
+
+    <div class="feat-item rv rv1">
+      <span class="feat-num">04</span>
+      <span class="feat-emoji">🏢</span>
+      <p class="feat-name" data-en="Station Details" data-ro="Detalii stații">Station Details</p>
+      <p class="feat-copy" data-en="Explore entrances, transport connections, nearby places and points of interest for every station on the network." data-ro="Explorează intrări, conexiuni de transport, locuri din apropiere și puncte de interes pentru fiecare stație.">Explore entrances, transport connections, nearby places and points of interest for every station on the network.</p>
+    </div>
+
+    <div class="feat-item rv rv2">
+      <span class="feat-num">05</span>
+      <span class="feat-emoji">⭐</span>
+      <p class="feat-name" data-en="Favourites & Notes" data-ro="Favorite și note">Favourites & Notes</p>
+      <p class="feat-copy" data-en="Save your most-used routes for one-tap navigation and attach personal notes to any station — stored only on your device." data-ro="Salvează rutele frecvente și adaugă note personale la orice stație — stocate doar pe dispozitivul tău.">Save your most-used routes for one-tap navigation and attach personal notes to any station — stored only on your device.</p>
+    </div>
+
+    <div class="feat-item rv rv3">
+      <span class="feat-num">06</span>
+      <span class="feat-emoji">🕐</span>
+      <p class="feat-name" data-en="Train Timetables" data-ro="Orare trenuri">Train Timetables</p>
+      <p class="feat-copy" data-en="Next departures, first and last train times, peak-hour schedules for weekdays and weekends — all fully offline." data-ro="Următoarele plecări, orele primului și ultimului tren, orarele de vârf pentru zile lucrătoare și weekend — complet offline.">Next departures, first and last train times, peak-hour schedules for weekdays and weekends — all fully offline.</p>
+    </div>
+
+    <div class="feat-item rv rv1">
+      <span class="feat-num">07</span>
+      <span class="feat-emoji">🗺️</span>
+      <p class="feat-name" data-en="Interactive Maps" data-ro="Hărți interactive">Interactive Maps</p>
+      <p class="feat-copy" data-en="Zoomable SVG metro map plus an OpenStreetMap view with station markers, entrance locations, and nearby POI overlays." data-ro="Hartă metrou SVG zoomabilă plus vedere OpenStreetMap cu markere de stații, intrări și suprapuneri POI.">Zoomable SVG metro map plus an OpenStreetMap view with station markers, entrance locations, and nearby POI overlays.</p>
+    </div>
+
+    <div class="feat-item rv rv2">
+      <span class="feat-num">08</span>
+      <span class="feat-emoji">🌙</span>
+      <p class="feat-name" data-en="Theme & Language" data-ro="Temă și limbă">Theme & Language</p>
+      <p class="feat-copy" data-en="Light, dark, or system theme. Switch instantly between English, Romanian, French, Italian, German, and Spanish." data-ro="Temă clară, întunecată sau sistem. Comută instant între engleză, română, franceză, italiană, germană și spaniolă.">Light, dark, or system theme. Switch instantly between English, Romanian, French, Italian, German, and Spanish.</p>
+    </div>
+
+    <div class="feat-item rv rv3">
+      <span class="feat-num">09</span>
+      <span class="feat-emoji">📵</span>
+      <p class="feat-name" data-en="Works Fully Offline" data-ro="Funcționează offline">Works Fully Offline</p>
+      <p class="feat-copy" data-en="All route planning, timetables, station data, and journey tracking work without any internet — perfect underground." data-ro="Toate rutele, orarele, datele stațiilor și urmărirea funcționează fără internet — perfect sub pământ.">All route planning, timetables, station data, and journey tracking work without any internet — perfect underground.</p>
+    </div>
+
+  </div>
 </section>
 
-<!-- Screenshots -->
-<section class="section" id="screenshots">
-    <div class="section-inner">
-        <div class="screenshots-layout">
-            <div>
-                <p class="section-label reveal" data-en="In action" data-ro="În acțiune">In action</p>
-                <h2 class="section-title reveal" data-en="Designed for the underground" data-ro="Creat pentru subteran">Designed for the underground</h2>
-                <ul class="check-list reveal">
-                    <li data-en="Plan a route in seconds across all 5 lines" data-ro="Planifică o rută în câteva secunde pe toate cele 5 linii">Plan a route in seconds across all 5 lines</li>
-                    <li data-en="Track your journey with GPS step-by-step" data-ro="Urmărește-ți traseul GPS pas cu pas">Track your journey with GPS step-by-step</li>
-                    <li data-en="Know which door side to stand on" data-ro="Știi pe ce parte a ușii să stai">Know which door side to stand on</li>
-                    <li data-en="Explore station details, entrances and nearby places" data-ro="Explorează detalii stație, intrări și locuri din apropiere">Explore station details, entrances and nearby places</li>
-                    <li data-en="Save favourite routes and personal station notes" data-ro="Salvează rute favorite și note personale">Save favourite routes and personal station notes</li>
-                    <li data-en="All features work fully offline" data-ro="Toate funcțiile funcționează complet offline">All features work fully offline</li>
-                </ul>
-                <a href="#download" class="btn-primary reveal" style="display:inline-flex;" data-en="Download the app →" data-ro="Descarcă aplicația →">Download the app →</a>
-            </div>
-            <div class="screenshots-phones reveal">
-                <div class="ss-phone short">
-                    <img src="https://lxtech.ro/metroubucuresti/images/station-details.png"
-                         onerror="this.style.cssText='min-height:260px;background:#16213E;display:block;width:100%;'"
-                         alt="Station details">
-                </div>
-                <div class="ss-phone tall">
-                    <img src="https://lxtech.ro/metroubucuresti/images/journey-tracking.png"
-                         onerror="this.style.cssText='min-height:300px;background:#1A1A2E;display:block;width:100%;'"
-                         alt="Journey tracking">
-                </div>
-                <div class="ss-phone short">
-                    <img src="https://lxtech.ro/metroubucuresti/images/live_tracking.png"
-                         onerror="this.style.cssText='min-height:260px;background:#16213E;display:block;width:100%;'"
-                         alt="Live tracking">
-                </div>
-            </div>
-        </div>
+<!-- ── Screenshots ────────────────────────────────────────────── -->
+<section class="shots" id="screenshots">
+  <div class="shots-left">
+    <p class="shots-eyebrow rv" data-en="In action" data-ro="În acțiune">In action</p>
+    <h2 class="rv rv1">
+      <span data-en="Designed for" data-ro="Creat pentru">Designed for</span><br>
+      <em data-en="the underground" data-ro="subteran">the underground</em>
+    </h2>
+    <ul class="shots-list rv rv2">
+      <li data-en="Plan a route in seconds across all 5 lines" data-ro="Planifică o rută în câteva secunde pe toate cele 5 linii">Plan a route in seconds across all 5 lines</li>
+      <li data-en="GPS tracking step-by-step through your journey" data-ro="Urmărire GPS pas cu pas pe tot traseul">GPS tracking step-by-step through your journey</li>
+      <li data-en="Know which door side to stand on at each station" data-ro="Știi pe ce parte a ușii să stai la fiecare stație">Know which door side to stand on at each station</li>
+      <li data-en="Explore station entrances and nearby places" data-ro="Explorează intrări și locuri din apropierea stațiilor">Explore station entrances and nearby places</li>
+      <li data-en="Save favourite routes and personal station notes" data-ro="Salvează rute favorite și note personale">Save favourite routes and personal station notes</li>
+      <li data-en="Everything works fully offline" data-ro="Totul funcționează complet offline">Everything works fully offline</li>
+    </ul>
+    <a href="#download" class="btn-fill rv rv3" style="align-self:flex-start"
+       data-en="Download the app →" data-ro="Descarcă aplicația →">Download the app →</a>
+  </div>
+  <div class="shots-right">
+    <div class="ss short">
+      <img src="https://lxtech.ro/metroubucuresti/images/station-details.png"
+           alt="Station details"
+           onerror="this.outerHTML='<div class=\'ss-ph\'><span>🏢</span><p>Station Details</p></div>'">
     </div>
+    <div class="ss tall">
+      <img src="https://lxtech.ro/metroubucuresti/images/journey-tracking.png"
+           alt="Route planning"
+           onerror="this.outerHTML='<div class=\'ss-ph\'><span>🗺️</span><p>Route Planning</p></div>'">
+    </div>
+    <div class="ss short">
+      <img src="https://lxtech.ro/metroubucuresti/images/live_tracking.png"
+           alt="Live tracking"
+           onerror="this.outerHTML='<div class=\'ss-ph\'><span>📍</span><p>Live Tracking</p></div>'">
+    </div>
+  </div>
 </section>
 
-<!-- Specs -->
-<!-- CTA -->
-<section class="cta-section" id="download">
-    <div class="cta-card">
-        <h2 data-en="Ready to navigate smarter?" data-ro="Gata să navighezi mai inteligent?">Ready to navigate smarter?</h2>
-        <p data-en="Download Metrou București for free. No account required. Works straight away, even without internet." data-ro="Descarcă Metrou București gratuit. Nu e nevoie de cont. Funcționează imediat, chiar și fără internet.">
-            Download Metrou București for free. No account required. Works straight away, even without internet.
-        </p>
-        <div class="cta-btns">
-            <a href="https://play.google.com/store/apps/details?id=com.MetroBuc" class="btn-primary">
-                <span>▶</span>
-                <span data-en="Get it on Google Play" data-ro="Descarcă pe Google Play">Get it on Google Play</span>
-            </a>
-            <a href="/cdn-cgi/l/email-protection#a2cac7ced2e2cedad6c7c1ca8cd0cd" class="btn-ghost" data-en="Contact support" data-ro="Contactează suportul">Contact support</a>
-        </div>
+<!-- ── CTA ────────────────────────────────────────────────────── -->
+<div class="cta-wrap" id="download">
+  <div class="cta-card rv">
+    <div class="cta-text">
+      <h2 data-en="Ready to navigate smarter?" data-ro="Gata să navighezi mai inteligent?">Ready to navigate smarter?</h2>
+      <p data-en="Download Metrou București for free. No account required. Works straight away, fully offline." data-ro="Descarcă Metrou București gratuit. Fără cont. Funcționează imediat, complet offline.">
+        Download Metrou București for free. No account required. Works straight away, fully offline.
+      </p>
     </div>
-</section>
+    <div class="cta-actions">
+      <a href="https://play.google.com/store/apps/details?id=com.MetroBuc" class="btn-fill">
+        <span>▶</span>
+        <span data-en="Get it on Google Play" data-ro="Descarcă pe Google Play">Get it on Google Play</span>
+      </a>
+      <a href="mailto:help@lxtech.ro" class="btn-line" data-en="Contact support" data-ro="Contactează suportul">Contact support</a>
+    </div>
+  </div>
+</div>
 
-<!-- Footer -->
+<!-- ── Footer ─────────────────────────────────────────────────── -->
 <footer>
-    <div class="footer-inner">
-        <div class="footer-top">
-            <div>
-                <p class="footer-brand"><span>🚇</span> Metrou București</p>
-                <p class="footer-desc" data-en="An unofficial, independently developed Android app for navigating Bucharest's metro system. Not affiliated with Metrorex S.A." data-ro="Aplicație Android independentă pentru navigarea prin metroul din București. Nu este afiliată cu Metrorex S.A.">
-                    An unofficial, independently developed Android app for navigating Bucharest's metro system. Not affiliated with Metrorex S.A.
-                </p>
-            </div>
-            <div class="footer-col">
-                <h4 data-en="App" data-ro="Aplicație">App</h4>
-                <a href="#features" data-en="Features"      data-ro="Funcții">Features</a>
-                <a href="#screenshots" data-en="Screenshots" data-ro="Capturi">Screenshots</a>
-                <a href="#download"  data-en="Download"      data-ro="Descarcă">Download</a>
-            </div>
-            <div class="footer-col">
-                <h4 data-en="Legal" data-ro="Legal">Legal</h4>
-                <a href="https://lxtech.ro/metroubucuresti/metrou-bucuresti-terms.html"      data-en="Terms & Conditions" data-ro="Termeni și condiții">Terms &amp; Conditions</a>
-                <a href="https://lxtech.ro/metroubucuresti/metrou-bucuresti-privacy.html"    data-en="Privacy Policy"     data-ro="Politică confidențialitate">Privacy Policy</a>
-                <a href="https://lxtech.ro/metroubucuresti/metrou-bucuresti-data-usage.html" data-en="Data Usage"         data-ro="Utilizare date">Data Usage</a>
-            </div>
-            <div class="footer-col">
-                <h4 data-en="Contact" data-ro="Contact">Contact</h4>
-                <a href="/cdn-cgi/l/email-protection#68000d04182804101c0d0b00461a07"><span class="__cf_email__" data-cfemail="bfd7dad3cfffd3c7cbdadcd791cdd0">[email&#160;protected]</span></a>
-                <a href="https://www.metroubucuresti.ro">metroubucuresti.ro</a>
-                <a href="https://play.google.com/store/apps/details?id=com.MetroBuc" data-en="Google Play" data-ro="Google Play">Google Play</a>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <span data-en="© 2024–2026 LUXTECH INNOVATION SRL. All rights reserved." data-ro="© 2024–2026 LUXTECH INNOVATION SRL. Toate drepturile rezervate.">© 2024–2026 LUXTECH INNOVATION SRL. All rights reserved.</span>
-            <div class="footer-lines">
-                <div class="fl" style="background:var(--m1)"></div>
-                <div class="fl" style="background:var(--m2)"></div>
-                <div class="fl" style="background:var(--m3)"></div>
-                <div class="fl" style="background:var(--m4)"></div>
-                <div class="fl" style="background:var(--m5)"></div>
-            </div>
-        </div>
+  <div class="foot-top">
+    <div>
+      <p class="foot-brand"><span class="foot-brand-dot"></span>Metrou București</p>
+      <p class="foot-desc" data-en="An unofficial, independently developed Android app for navigating Bucharest's metro system. Not affiliated with Metrorex S.A." data-ro="Aplicație Android independentă pentru navigarea prin metroul din București. Nu este afiliată cu Metrorex S.A.">
+        An unofficial, independently developed Android app for navigating Bucharest's metro system. Not affiliated with Metrorex S.A.
+      </p>
     </div>
+    <div class="foot-col">
+      <h4 data-en="App" data-ro="Aplicație">App</h4>
+      <a href="#features"    data-en="Features"     data-ro="Funcții">Features</a>
+      <a href="#screenshots" data-en="Screenshots"  data-ro="Capturi">Screenshots</a>
+      <a href="#download"    data-en="Download"      data-ro="Descarcă">Download</a>
+    </div>
+    <div class="foot-col">
+      <h4 data-en="Legal" data-ro="Legal">Legal</h4>
+      <a href="https://lxtech.ro/metroubucuresti/metrou-bucuresti-terms.html"      data-en="Terms & Conditions" data-ro="Termeni și condiții">Terms &amp; Conditions</a>
+      <a href="https://lxtech.ro/metroubucuresti/metrou-bucuresti-privacy.html"    data-en="Privacy Policy"     data-ro="Politică confidențialitate">Privacy Policy</a>
+      <a href="https://lxtech.ro/metroubucuresti/metrou-bucuresti-data-usage.html" data-en="Data Usage"         data-ro="Utilizare date">Data Usage</a>
+    </div>
+    <div class="foot-col">
+      <h4 data-en="Contact" data-ro="Contact">Contact</h4>
+      <a href="mailto:help@lxtech.ro">help@lxtech.ro</a>
+      <a href="https://www.metroubucuresti.ro">metroubucuresti.ro</a>
+      <a href="https://play.google.com/store/apps/details?id=com.MetroBuc">Google Play</a>
+    </div>
+  </div>
+  <div class="foot-bottom">
+    <span data-en="© 2024–2026 LUXTECH INNOVATION SRL. All rights reserved." data-ro="© 2024–2026 LUXTECH INNOVATION SRL. Toate drepturile rezervate.">© 2024–2026 LUXTECH INNOVATION SRL. All rights reserved.</span>
+    <div class="foot-dots">
+      <div class="fd" style="background:var(--m1)"></div>
+      <div class="fd" style="background:var(--m2)"></div>
+      <div class="fd" style="background:var(--m3)"></div>
+      <div class="fd" style="background:var(--m4)"></div>
+      <div class="fd" style="background:var(--m5)"></div>
+    </div>
+  </div>
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-/* ── Language switching ─────────────────────────────────────────── */
-let currentLang = localStorage.getItem('lang') || 'en';
-
-function setLang(lang) {
-    currentLang = lang;
-    localStorage.setItem('lang', lang);
-    document.querySelectorAll('[data-en]').forEach(el => {
-        el.textContent = lang === 'ro'
-            ? (el.getAttribute('data-ro') || el.getAttribute('data-en'))
-            : el.getAttribute('data-en');
-    });
-    document.querySelectorAll('.lang-btn').forEach(btn => {
-        btn.classList.toggle('active', btn.textContent.trim() === lang.toUpperCase());
-    });
+<script>
+/* ── Lang ── */
+let lang = localStorage.getItem('lang') || 'en';
+function setLang(l) {
+  lang = l;
+  localStorage.setItem('lang', l);
+  document.querySelectorAll('[data-en]').forEach(el => {
+    el.textContent = l === 'ro'
+      ? (el.getAttribute('data-ro') || el.getAttribute('data-en'))
+      : el.getAttribute('data-en');
+  });
+  document.querySelectorAll('.lang-btn').forEach(b =>
+    b.classList.toggle('on', b.textContent.trim() === l.toUpperCase())
+  );
 }
 
-/* ── Navbar scroll effect ───────────────────────────────────────── */
-const navbar = document.getElementById('navbar');
-window.addEventListener('scroll', () => {
-    navbar.classList.toggle('scrolled', window.scrollY > 60);
-}, { passive: true });
+/* ── Nav scroll ── */
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => nav.classList.toggle('solid', scrollY > 60), {passive:true});
 
-/* ── Hamburger ─────────────────────────────────────────────────── */
-const hamburger = document.getElementById('hamburger');
-const navLinks  = document.getElementById('nav-links');
-hamburger.addEventListener('click', () => navLinks.classList.toggle('open'));
+/* ── Hamburger ── */
+document.getElementById('hbg').addEventListener('click', () =>
+  document.getElementById('nav-links').classList.toggle('open')
+);
 
-/* ── Scroll reveal ─────────────────────────────────────────────── */
-const revealObserver = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-        if (e.isIntersecting) {
-            e.target.classList.add('visible');
-            revealObserver.unobserve(e.target);
-        }
-    });
-}, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+/* ── Reveal ── */
+new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); } });
+}, { threshold: 0.08, rootMargin: '0px 0px -32px 0px' })
+.observe(...[...document.querySelectorAll('.rv')].map(el => (new IntersectionObserver((entries) => {
+  entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('in'); } });
+},{threshold:0.08,rootMargin:'0px 0px -32px 0px'}).observe(el), el)));
 
-document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+// simpler reveal
+document.querySelectorAll('.rv').forEach(el => {
+  new IntersectionObserver(([e]) => { if(e.isIntersecting) e.target.classList.add('in'); },
+    {threshold:0.08}).observe(el);
+});
 
-/* ── Init ──
+/* ── Init ── */
+document.addEventListener('DOMContentLoaded', () => setLang(lang));
+</script>
+</body>
+</html>
