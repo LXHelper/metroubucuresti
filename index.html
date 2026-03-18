@@ -3,12 +3,110 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Metrou București — Navigate Bucharest Metro</title>
-<meta name="description" content="The smart Bucharest metro navigation app. Plan routes across M1–M5, GPS journey tracking, station details, door-opening indicators. Free on Android.">
+
+<!-- ═══════════════════════════════════════
+     PRIMARY SEO
+════════════════════════════════════════ -->
+<title>Metrou București — Navigate Bucharest Metro | Free Android App</title>
+<meta name="description" content="The smart Bucharest metro app. Plan routes across M1–M5, GPS journey tracking, door-opening indicators, station details, offline timetables. Free on Android.">
+<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+<meta name="author" content="LUXTECH INNOVATION SRL">
+<meta name="theme-color" content="#0D0F1A">
+<link rel="canonical" href="https://www.metroubucuresti.ro/">
+
+<!-- ═══════════════════════════════════════
+     OPEN GRAPH (Facebook, LinkedIn, WhatsApp, etc.)
+════════════════════════════════════════ -->
 <meta property="og:type" content="website">
+<meta property="og:site_name" content="Metrou București">
+<meta property="og:locale" content="en_US">
+<meta property="og:locale:alternate" content="ro_RO">
+<meta property="og:url" content="https://www.metroubucuresti.ro/">
 <meta property="og:title" content="Metrou București — Navigate Bucharest Metro">
-<meta property="og:description" content="Smart route planning, GPS journey tracking, station details and more. Free for Android.">
+<meta property="og:description" content="Smart route planning across all 5 metro lines, GPS journey tracking, door-opening indicators, station details and more. Free for Android.">
 <meta property="og:image" content="https://lxtech.ro/metroubucuresti/images/splash-screen.png">
+<meta property="og:image:width" content="1080">
+<meta property="og:image:height" content="1920">
+<meta property="og:image:alt" content="Metrou București app screenshot showing the route planner">
+
+<!-- ═══════════════════════════════════════
+     TWITTER / X CARD
+════════════════════════════════════════ -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Metrou București — Navigate Bucharest Metro">
+<meta name="twitter:description" content="Smart route planning across all 5 metro lines, GPS journey tracking, offline timetables. Free Android app.">
+<meta name="twitter:image" content="https://lxtech.ro/metroubucuresti/images/splash-screen.png">
+<meta name="twitter:image:alt" content="Metrou București app screenshot">
+
+<!-- ═══════════════════════════════════════
+     MOBILE / APP
+════════════════════════════════════════ -->
+<!-- Tells Google to show the Play Store smart banner on Android Chrome -->
+<meta name="google-play-app" content="app-id=com.MetroBuc">
+
+<!-- ═══════════════════════════════════════
+     FAVICON (update paths to your actual assets)
+════════════════════════════════════════ -->
+<link rel="icon" type="image/png" sizes="32x32" href="https://lxtech.ro/metroubucuresti/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="https://lxtech.ro/metroubucuresti/images/favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="https://lxtech.ro/metroubucuresti/images/apple-touch-icon.png">
+
+<!-- ═══════════════════════════════════════
+     JSON-LD STRUCTURED DATA
+════════════════════════════════════════ -->
+<script type="application/ld+json">
+[
+  {
+    "@context": "https://schema.org",
+    "@type": "MobileApplication",
+    "name": "Metrou București",
+    "description": "Smart Bucharest metro navigation app. Route planning across M1–M5, GPS journey tracking, door-opening indicators, station details, offline timetables.",
+    "url": "https://www.metroubucuresti.ro/",
+    "applicationCategory": "TravelApplication",
+    "operatingSystem": "ANDROID",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "installUrl": "https://play.google.com/store/apps/details?id=com.MetroBuc",
+    "screenshot": "https://lxtech.ro/metroubucuresti/images/splash-screen.png",
+    "featureList": [
+      "Route planning across M1–M5",
+      "GPS journey tracking",
+      "Door-opening indicators",
+      "Station details and entrances",
+      "Offline timetables",
+      "6 languages",
+      "Dark and light theme"
+    ],
+    "inLanguage": ["en", "ro", "fr", "it", "de", "es"],
+    "publisher": {
+      "@type": "Organization",
+      "name": "LUXTECH INNOVATION SRL",
+      "url": "https://lxtech.ro",
+      "email": "help@lxtech.ro"
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "LUXTECH INNOVATION SRL",
+    "url": "https://lxtech.ro",
+    "email": "help@lxtech.ro",
+    "sameAs": [
+      "https://play.google.com/store/apps/details?id=com.MetroBuc"
+    ]
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "Metrou București",
+    "url": "https://www.metroubucuresti.ro/"
+  }
+]
+</script>
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet">
@@ -143,7 +241,7 @@ body{
 }
 .hero-left{
   position:relative;z-index:1;
-  padding:0 48px 0 max(40px, calc((100vw - 1280px)/2 + 40px));
+  padding:0 48px 0 clamp(24px, calc((100vw - 1280px)/2 + 40px), 200px);
 }
 .hero-tag{
   display:inline-flex;align-items:center;gap:8px;
@@ -202,7 +300,7 @@ body{
 .hero-right{
   position:relative;z-index:1;
   display:flex;justify-content:center;align-items:center;
-  padding-right:max(40px, calc((100vw - 1280px)/2 + 40px));
+  padding-right:clamp(24px, calc((100vw - 1280px)/2 + 40px), 200px);
 }
 .phone-scene{position:relative;width:280px}
 .phone-glow{
@@ -282,7 +380,7 @@ body{
    FEATURES
 ══════════════════════════════════════════════════════ */
 .features{
-  padding:120px max(40px, calc((100vw - 1280px)/2 + 40px));
+  padding:120px clamp(24px, calc((100vw - 1280px)/2 + 40px), 200px);
 }
 .feat-header{margin-bottom:72px}
 .feat-eyebrow{
@@ -336,7 +434,7 @@ body{
   border-bottom:1px solid var(--border);
 }
 .shots-left{
-  padding:80px max(40px, calc((100vw - 1280px)/2 + 40px)) 80px max(40px, calc((100vw - 1280px)/2 + 40px));
+  padding:80px clamp(24px, calc((100vw - 1280px)/2 + 40px), 200px);
   display:flex;flex-direction:column;justify-content:center;
   border-right:1px solid var(--border);
 }
@@ -403,7 +501,7 @@ body{
 /* ══════════════════════════════════════════════════════
    CTA
 ══════════════════════════════════════════════════════ */
-.cta-wrap{padding:100px max(40px, calc((100vw - 1280px)/2 + 40px))}
+.cta-wrap{padding:100px clamp(24px, calc((100vw - 1280px)/2 + 40px), 200px)}
 .cta-card{
   background:rgba(255,255,255,.04);
   border:1px solid var(--border);
@@ -437,7 +535,7 @@ body{
 ══════════════════════════════════════════════════════ */
 footer{
   border-top:1px solid var(--border);
-  padding:60px max(40px, calc((100vw - 1280px)/2 + 40px)) 32px;
+  padding:60px clamp(24px, calc((100vw - 1280px)/2 + 40px), 200px) 32px;
 }
 .foot-top{
   display:grid;grid-template-columns:2fr 1fr 1fr 1fr;
@@ -469,11 +567,21 @@ footer{
 
 /* ══════════════════════════════════════════════════════
    REVEAL ANIMATION
+   fallback @keyframes guarantees visibility if JS never fires
 ══════════════════════════════════════════════════════ */
-.rv{opacity:0;transform:translateY(24px);transition:opacity .65s ease,transform .65s ease}
-.rv.in{opacity:1;transform:none}
-.rv1{transition-delay:.1s}.rv2{transition-delay:.18s}.rv3{transition-delay:.26s}
-.rv4{transition-delay:.34s}.rv5{transition-delay:.42s}.rv6{transition-delay:.50s}
+@keyframes rv-show{to{opacity:1;transform:none}}
+.rv{
+  opacity:0;transform:translateY(24px);
+  transition:opacity .65s ease,transform .65s ease;
+  animation:rv-show .65s ease 1.2s forwards;
+}
+.rv.in{opacity:1;transform:none;animation:none}
+.rv1{transition-delay:.10s;animation-delay:.30s}
+.rv2{transition-delay:.18s;animation-delay:.38s}
+.rv3{transition-delay:.26s;animation-delay:.46s}
+.rv4{transition-delay:.34s;animation-delay:.54s}
+.rv5{transition-delay:.42s;animation-delay:.62s}
+.rv6{transition-delay:.50s;animation-delay:.70s}
 
 /* ══════════════════════════════════════════════════════
    RESPONSIVE
@@ -751,7 +859,7 @@ footer{
         <span>▶</span>
         <span data-en="Get it on Google Play" data-ro="Descarcă pe Google Play">Get it on Google Play</span>
       </a>
-      <a href="mailto:help@lxtech.ro" class="btn-line" data-en="Contact support" data-ro="Contactează suportul">Contact support</a>
+      <a href="/cdn-cgi/l/email-protection#375f525b47775b4f4352545f194558" class="btn-line" data-en="Contact support" data-ro="Contactează suportul">Contact support</a>
     </div>
   </div>
 </div>
@@ -779,7 +887,7 @@ footer{
     </div>
     <div class="foot-col">
       <h4 data-en="Contact" data-ro="Contact">Contact</h4>
-      <a href="mailto:help@lxtech.ro">help@lxtech.ro</a>
+      <a href="/cdn-cgi/l/email-protection#553d30392515392d2130363d7b273a"><span class="__cf_email__" data-cfemail="99f1fcf5e9d9f5e1edfcfaf1b7ebf6">[email&#160;protected]</span></a>
       <a href="https://www.metroubucuresti.ro">metroubucuresti.ro</a>
       <a href="https://play.google.com/store/apps/details?id=com.MetroBuc">Google Play</a>
     </div>
@@ -796,7 +904,7 @@ footer{
   </div>
 </footer>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 /* ── Lang ── */
 let lang = localStorage.getItem('lang') || 'en';
 function setLang(l) {
@@ -822,13 +930,4 @@ document.getElementById('hbg').addEventListener('click', () =>
 );
 
 /* ── Reveal ── */
-document.querySelectorAll('.rv').forEach(el => {
-  new IntersectionObserver(([e]) => { if(e.isIntersecting) e.target.classList.add('in'); },
-    {threshold:0.08}).observe(el);
-});
-
-/* ── Init ── */
-document.addEventListener('DOMContentLoaded', () => setLang(lang));
-</script>
-</body>
-</html>
+document.querySelectorAll('.rv
