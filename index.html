@@ -208,7 +208,10 @@ body{
 .cta-text h2{font-family:var(--serif);font-size:clamp(1.7rem,3vw,2.4rem);line-height:1.1;color:var(--white);margin-bottom:12px;}
 .cta-text p{color:rgba(255,255,255,.45);font-size:.95rem;max-width:420px}
 .cta-actions{display:flex;flex-direction:column;gap:10px;position:relative;z-index:1;flex-shrink:0}
-
+.ads-note-row{grid-column:1 / -1;border-top:1px solid var(--border);padding-top:24px;margin-top:8px;}
+.ads-note{font-size:.75rem;color:rgba(255,255,255,.25);line-height:1.6;}
+.ads-note a{color:rgba(78,205,196,.5);text-decoration:none;}
+.ads-note a:hover{color:var(--teal)}
 
 /* FOOTER */
 footer{border-top:1px solid var(--border);padding:60px clamp(24px,calc((100vw - 1280px)/2 + 40px),200px) 32px;}
@@ -221,7 +224,7 @@ footer{border-top:1px solid var(--border);padding:60px clamp(24px,calc((100vw - 
 .foot-col a:hover{color:var(--teal)}
 .foot-bottom{display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:12px;font-size:.75rem;color:rgba(255,255,255,.25);}
 .foot-legal{display:flex;flex-direction:column;gap:6px;}
-
+.foot-ads-note{font-size:.72rem;color:rgba(255,255,255,.2);line-height:1.5;max-width:520px;}
 .foot-dots{display:flex;gap:6px;align-items:center;padding-top:4px;}
 .fd{width:7px;height:7px;border-radius:50%}
 
@@ -278,6 +281,7 @@ footer{border-top:1px solid var(--border);padding:60px clamp(24px,calc((100vw - 
     <ul class="nav-links" id="nav-links">
       <li><a href="#features"     data-en="Features"     data-ro="Funcții">Features</a></li>
       <li><a href="#screenshots"  data-en="Screenshots"  data-ro="Capturi">Screenshots</a></li>
+      <li><a href="map.html"      data-en="Map"          data-ro="Hartă">Map</a></li>
       <li><a href="#download"     data-en="Download"     data-ro="Descarcă">Download</a></li>
       <li><a href="feedback.html" data-en="Contact"      data-ro="Contact">Contact</a></li>
     </ul>
@@ -297,6 +301,7 @@ footer{border-top:1px solid var(--border);padding:60px clamp(24px,calc((100vw - 
   <p class="mobile-menu-section">Navigate</p>
   <a href="#features"    onclick="closeMobileMenu()"><span class="mm-icon">✦</span> Features</a>
   <a href="#screenshots" onclick="closeMobileMenu()"><span class="mm-icon">📱</span> Screenshots</a>
+  <a href="map.html"><span class="mm-icon">🗺️</span> <span data-en="Metro Map" data-ro="Harta Metroului">Metro Map</span></a>
   <a href="#download"    onclick="closeMobileMenu()"><span class="mm-icon">▶</span> Download</a>
   <a href="feedback.html" onclick="closeMobileMenu()"><span class="mm-icon">✉</span> Contact Us</a>
   <p class="mobile-menu-section">Legal</p>
@@ -321,8 +326,8 @@ footer{border-top:1px solid var(--border);padding:60px clamp(24px,calc((100vw - 
       <span data-en="with Ease" data-ro="cu Ușurință">with Ease</span>
     </h1>
     <p class="hero-desc rv rv2"
-       data-en="Smart route planning across all 5 lines, GPS journey tracking, door-opening indicators, elevator &amp; wheelchair access info, interactive map and nearby places — all stored on your device. "
-       data-ro="Planificare inteligentă pe toate cele 5 linii, urmărire GPS, indicatori pentru uși, informații lifturi și accesibilitate, hartă interactivă și locuri din apropiere — totul stocat local.">
+       data-en="Smart route planning across all 5 lines, GPS journey tracking, door-opening indicators, elevator &amp; wheelchair access info, interactive map and nearby places — all stored on your device. No internet needed."
+       data-ro="Planificare inteligentă pe toate cele 5 linii, urmărire GPS, indicatori pentru uși, informații lifturi și accesibilitate, hartă interactivă și locuri din apropiere — totul stocat local. Fără internet.">
       Smart route planning across all 5 lines, GPS journey tracking, door-opening indicators, elevator &amp; wheelchair access info, interactive map and nearby places — all stored on your device. No internet needed.
     </p>
     <div class="hero-btns rv rv3">
@@ -330,7 +335,10 @@ footer{border-top:1px solid var(--border);padding:60px clamp(24px,calc((100vw - 
         <span>▶</span>
         <span data-en="FREE Download" data-ro="Descarcă Gratuit">FREE Download</span>
       </a>
-      <a href="#features" class="btn-line" data-en="Explore Features" data-ro="Vezi funcții">Explore Features</a>
+      <a href="map.html" class="btn-line">
+        <span>🗺️</span>
+        <span data-en="View Metro Map" data-ro="Vezi Harta">View Metro Map</span>
+      </a>
     </div>
     <div class="hero-stats rv rv4">
       <div class="hstat">
@@ -381,9 +389,9 @@ footer{border-top:1px solid var(--border);padding:60px clamp(24px,calc((100vw - 
       <em data-en="underground" data-ro="în subteran">underground</em>
     </h2>
     <p class="feat-subline rv rv2"
-       data-en="<strong>FREE</strong> to download, works fully <strong>OFFLINE</strong> — no accounts needed, no sign-up, no internet required."
-       data-ro="<strong>GRATUIT</strong> de descărcat, funcționează complet <strong>OFFLINE</strong> — fără conturi, fără înregistrare, fără să ai nevoie de internet.">
-      <strong>FREE</strong> to download, works fully <strong>OFFLINE</strong> — no accounts needed, no sign-up, no internet required.
+       data-en="&lt;strong&gt;FREE&lt;/strong&gt; to download, works fully &lt;strong&gt;OFFLINE&lt;/strong&gt; and built with &lt;strong&gt;PRIVACY&lt;/strong&gt; first in mind — no accounts needed, no tracking, and no personal data is ever collected by our servers. Crash reports are gathered &lt;em&gt;only&lt;/em&gt; with your explicit agreement and consent."
+       data-ro="&lt;strong&gt;GRATUIT&lt;/strong&gt; de descărcat, funcționează complet &lt;strong&gt;OFFLINE&lt;/strong&gt; și construit cu &lt;strong&gt;CONFIDENȚIALITATE&lt;/strong&gt; — fără conturi, fără urmărire, niciun fel de date personale nu sunt colectate de serverele noastre. Rapoartele de erori sunt colectate &lt;em&gt;doar&lt;/em&gt; cu acordul tău explicit.">
+      <strong>FREE</strong> to download, works fully <strong>OFFLINE</strong> and built with <strong>PRIVACY</strong> first in mind — no accounts needed, no tracking, and no personal data is ever collected by our servers. Crash reports are gathered <em>only</em> with your explicit agreement and consent.
     </p>
   </div>
   <div class="feat-grid">
@@ -439,7 +447,7 @@ footer{border-top:1px solid var(--border);padding:60px clamp(24px,calc((100vw - 
       <li data-en="GPS tracking step-by-step through your journey" data-ro="Urmărire GPS pas cu pas pe tot traseul">GPS tracking step-by-step through your journey</li>
       <li data-en="Know which door side to stand on at each station" data-ro="Știi pe ce parte a ușii să stai la fiecare stație">Know which door side to stand on at each station</li>
       <li data-en="Explore station entrances and nearby places" data-ro="Explorează intrări și locuri din apropierea stațiilor">Explore station entrances and nearby places</li>
-      <li data-en="Save favourite routes and personal station notes" data-ro="Salvează rute favorite și note personale">Save favourite routes and personal station notes</li>
+      <li data-en="Save favourite routes and personal station notes" data-ro="Salvează rute favorite și note personale">Save favourite routes și note personale</li>
       <li data-en="Elevator and wheelchair access info per station" data-ro="Info lifturi și acces cu scaunul cu rotile per stație">Elevator and wheelchair access info per station</li>
       <li data-en="Interactive map with nearby places and landmarks" data-ro="Hartă interactivă cu locuri și repere din apropiere">Interactive map with nearby places and landmarks</li>
       <li data-en="100% offline — no internet needed" data-ro="100% offline — fără internet, niciodată">100% offline — no internet needed</li>
@@ -463,60 +471,66 @@ footer{border-top:1px solid var(--border);padding:60px clamp(24px,calc((100vw - 
   </div>
 </section>
 
-<!-- CTA / DOWNLOAD -->
-<div class="cta-wrap" id="download">
-  <div class="cta-card rv">
+<!-- DOWNLOAD / CTA -->
+<section class="cta-wrap" id="download">
+  <div class="cta-card">
     <div class="cta-text">
-      <h2 data-en="Ready to navigate smarter?" data-ro="Gata să navighezi mai inteligent?">Ready to navigate smarter?</h2>
-      <p data-en="Download Metrou București for free. No account required. Works straight away, fully offline."
-         data-ro="Descarcă Metrou București gratuit. Fără cont. Funcționează imediat, complet offline.">
-        Download Metrou București for free. No account required. Works straight away, fully offline.
+      <h2 class="rv" data-en="Ready to ride smarter?" data-ro="Gata să călătorești mai inteligent?">Ready to ride smarter?</h2>
+      <p class="rv rv1"
+         data-en="Free on Android. No sign-up, no subscription, no data collected — just open and go."
+         data-ro="Gratuit pe Android. Fără înregistrare, fără abonament, fără date colectate — deschide și mergi.">
+        Free on Android. No sign-up, no subscription, no data collected — just open and go.
       </p>
     </div>
-    <div class="cta-actions">
-      <a href="https://play.google.com/store/apps/details?id=com.MetroBuc" class="btn-fill" target="_blank">
-        <span>▶</span>
-        <span data-en="FREE — Get it on Google Play" data-ro="GRATUIT — Descarcă pe Google Play">FREE — Get it on Google Play</span>
+    <div class="cta-actions rv rv2">
+      <a href="https://play.google.com/store/apps/details?id=com.MetroBuc" target="_blank" class="btn-fill">
+        &#9654;&nbsp;<span data-en="Get it on Google Play" data-ro="Obține pe Google Play">Get it on Google Play</span>
       </a>
-      <a href="mailto:help@lxtech.ro" class="btn-line" data-en="Contact support" data-ro="Contactează suportul">Contact support</a>
+      <a href="map.html" class="btn-line">
+        🗺️&nbsp;<span data-en="View Metro Map" data-ro="Vezi Harta Metroului">View Metro Map</span>
+      </a>
     </div>
-
+    <div class="ads-note-row rv rv3">
+      <p class="ads-note"
+         data-en="* This app is free and supported by ads managed by Google AdMob. Ads help keep Metrou București completely free for everyone. You can manage your ad preferences in your &lt;a href='https://myadcenter.google.com/' target='_blank'&gt;Google Account settings&lt;/a&gt;. We collect crash reports only with your explicit agreement and consent."
+         data-ro="* Această aplicație este gratuită și susținută de reclame gestionate de Google AdMob. Reclamele ajută ca Metrou București să rămână complet gratuit pentru toți. Îți poți gestiona preferințele de reclame din &lt;a href='https://myadcenter.google.com/' target='_blank'&gt;setările contului Google&lt;/a&gt;. Colectăm rapoarte de erori doar cu acordul tău explicit.">
+        * This app is free and supported by ads managed by Google AdMob. Ads help keep Metrou București completely free for everyone. You can manage your ad preferences in your <a href="https://myadcenter.google.com/" target="_blank">Google Account settings</a>. We collect crash reports only with your explicit agreement and consent.
+      </p>
+    </div>
   </div>
-</div>
+</section>
 
 <!-- FOOTER -->
 <footer>
   <div class="foot-top">
     <div>
-      <p class="foot-brand"><span class="foot-brand-dot"></span>Metrou București</p>
-      <p class="foot-desc" data-en="An unofficial, independently developed Android app for navigating Bucharest's metro system. Not affiliated with Metrorex S.A." data-ro="Aplicație Android independentă pentru navigarea prin metroul din București. Nu este afiliată cu Metrorex S.A.">
-        An unofficial, independently developed Android app for navigating Bucharest's metro system. Not affiliated with Metrorex S.A.
-      </p>
+      <div class="foot-brand"><div class="foot-brand-dot"></div>Metrou București</div>
+      <p class="foot-desc" data-en="The smart way to navigate Bucharest Metro. Free, offline, no data collected." data-ro="Modul inteligent de a naviga Metroul București. Gratuit, offline, fără date colectate.">The smart way to navigate Bucharest Metro. Free, offline, no data collected.</p>
     </div>
     <div class="foot-col">
       <h4 data-en="App" data-ro="Aplicație">App</h4>
       <a href="#features"    data-en="Features"    data-ro="Funcții">Features</a>
       <a href="#screenshots" data-en="Screenshots" data-ro="Capturi">Screenshots</a>
+      <a href="map.html"     data-en="Metro Map"   data-ro="Harta Metroului">Metro Map</a>
       <a href="#download"    data-en="Download"    data-ro="Descarcă">Download</a>
-      <a href="feedback.html" data-en="Contact"    data-ro="Contact">Contact</a>
+    </div>
+    <div class="foot-col">
+      <h4 data-en="Support" data-ro="Suport">Support</h4>
+      <a href="feedback.html" data-en="Contact"         data-ro="Contact">Contact</a>
+      <a href="feedback.html" data-en="Report a Bug"    data-ro="Raportează o eroare">Report a Bug</a>
+      <a href="feedback.html" data-en="Feature Request" data-ro="Cerere funcție">Feature Request</a>
     </div>
     <div class="foot-col">
       <h4 data-en="Legal" data-ro="Legal">Legal</h4>
-      <a href="https://lxtech.ro/metroubucuresti/metrou-bucuresti-terms.html"      data-en="Terms &amp; Conditions" data-ro="Termeni și condiții">Terms &amp; Conditions</a>
-      <a href="https://lxtech.ro/metroubucuresti/metrou-bucuresti-privacy.html"    data-en="Privacy Policy"        data-ro="Politică confidențialitate">Privacy Policy</a>
-      <a href="https://lxtech.ro/metroubucuresti/metrou-bucuresti-data-usage.html" data-en="Data Usage / Ads"      data-ro="Utilizare date / Reclame">Data Usage / Ads</a>
-    </div>
-    <div class="foot-col">
-      <h4 data-en="Contact" data-ro="Contact">Contact</h4>
-      <a href="mailto:help@lxtech.ro">help@lxtech.ro</a>
-      <a href="https://www.metroubucuresti.ro">metroubucuresti.ro</a>
-      <a href="https://play.google.com/store/apps/details?id=com.MetroBuc" target="_blank">Google Play</a>
+      <a href="https://lxtech.ro/metroubucuresti/metrou-bucuresti-terms.html"      target="_blank" data-en="Terms &amp; Conditions" data-ro="Termeni și condiții">Terms &amp; Conditions</a>
+      <a href="https://lxtech.ro/metroubucuresti/metrou-bucuresti-privacy.html"    target="_blank" data-en="Privacy Policy"        data-ro="Politica de confidențialitate">Privacy Policy</a>
+      <a href="https://lxtech.ro/metroubucuresti/metrou-bucuresti-data-usage.html" target="_blank" data-en="Data Usage"            data-ro="Utilizare date">Data Usage</a>
     </div>
   </div>
   <div class="foot-bottom">
     <div class="foot-legal">
-
-      <span data-en="© 2024–2026 Metrou București. All rights reserved." data-ro="© 2024–2026 Metrou București. Toate drepturile rezervate.">© 2024–2026 Metrou București. All rights reserved.</span>
+      <span data-en="© 2025 Metrou București. All rights reserved." data-ro="© 2025 Metrou București. Toate drepturile rezervate.">© 2025 Metrou București. All rights reserved.</span>
+      <span class="foot-ads-note" data-en="* Ads are managed by Google AdMob under a separate policy and keep the app free. Crash reports collected only with your consent." data-ro="* Reclamele sunt gestionate de Google AdMob sub o politică separată și mențin aplicația gratuită. Rapoartele de erori sunt colectate doar cu consimțământul tău.">* Ads are managed by Google AdMob under a separate policy and keep the app free. Crash reports collected only with your consent.</span>
     </div>
     <div class="foot-dots">
       <div class="fd" style="background:var(--m1)"></div>
@@ -529,61 +543,53 @@ footer{border-top:1px solid var(--border);padding:60px clamp(24px,calc((100vw - 
 </footer>
 
 <script>
-let lang = localStorage.getItem('lang') || 'en';
+/* ── Language ── */
+let lang = localStorage.getItem('mb-lang') || 'en';
 
 function setLang(l) {
   lang = l;
-  localStorage.setItem('lang', l);
+  localStorage.setItem('mb-lang', l);
+  document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('on', b.textContent.trim().toLowerCase() === l));
   document.querySelectorAll('[data-en]').forEach(el => {
-    const val = l === 'ro'
-      ? (el.getAttribute('data-ro') || el.getAttribute('data-en'))
-      : el.getAttribute('data-en');
-    if (el.classList.contains('feat-subline') || el.tagName === 'P' && el.querySelector('strong')) {
-      el.innerHTML = val;
-    } else {
-      el.textContent = val;
-    }
+    const val = el.getAttribute('data-' + l) || el.getAttribute('data-en');
+    if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') el.placeholder = val;
+    else el.innerHTML = val;
   });
-  document.querySelectorAll('.lang-btn').forEach(b =>
-    b.classList.toggle('on', b.textContent.trim() === l.toUpperCase())
-  );
 }
 
+/* ── Nav scroll ── */
 const nav = document.getElementById('nav');
-window.addEventListener('scroll', () => nav.classList.toggle('solid', scrollY > 60), {passive:true});
+window.addEventListener('scroll', () => nav.classList.toggle('solid', window.scrollY > 40), { passive: true });
 
-const hbg = document.getElementById('hbg');
-const mobileMenu = document.getElementById('mobile-menu');
+/* ── Hamburger ── */
+const hbg   = document.getElementById('hbg');
+const mmenu = document.getElementById('mobile-menu');
+hbg.addEventListener('click', () => {
+  hbg.classList.toggle('open');
+  mmenu.classList.toggle('open');
+});
 function closeMobileMenu() {
   hbg.classList.remove('open');
-  mobileMenu.classList.remove('open');
-  document.body.style.overflow = '';
+  mmenu.classList.remove('open');
 }
-hbg.addEventListener('click', () => {
-  const isOpen = mobileMenu.classList.toggle('open');
-  hbg.classList.toggle('open', isOpen);
-  document.body.style.overflow = isOpen ? 'hidden' : '';
-});
-document.addEventListener('keydown', e => { if (e.key === 'Escape') closeMobileMenu(); });
-document.addEventListener('click', e => {
-  if (mobileMenu.classList.contains('open') && !mobileMenu.contains(e.target) && !hbg.contains(e.target))
-    closeMobileMenu();
-});
 
+/* ── Feature accordion ── */
 document.querySelectorAll('.feat-item').forEach(item => {
   item.addEventListener('click', () => {
-    const wasActive = item.classList.contains('active');
-    document.querySelectorAll('.feat-item.active').forEach(i => i.classList.remove('active'));
-    if (!wasActive) item.classList.add('active');
+    const isActive = item.classList.contains('active');
+    document.querySelectorAll('.feat-item').forEach(i => i.classList.remove('active'));
+    if (!isActive) item.classList.add('active');
   });
 });
 
+/* ── Scroll reveal ── */
 const rvEls = document.querySelectorAll('.rv');
 const rvObs = new IntersectionObserver(entries => {
   entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); rvObs.unobserve(e.target); } });
-}, {threshold:0.12});
+}, { threshold: 0.12 });
 rvEls.forEach(el => rvObs.observe(el));
 
+/* ── Init lang ── */
 setLang(lang);
 </script>
 </body>
