@@ -14,25 +14,21 @@
     <style>
         :root {
             --ink: #0D0F1A; --ink-mid: #13152A; --ink-soft: #1C1F35;
-            --teal: #4ECDC4; --teal-dim: #2A9D96;
+            --teal: #4ECDC4;
             --white: #FFFFFF;
-            --mist: rgba(255,255,255,0.07); --border: rgba(255,255,255,0.08);
-            --m1: #FFD700; --m2: #4A90D9; --m3: #E53935; --m4: #43A047; --m5: #FB8C00;
+            --border: rgba(255,255,255,0.08);
+            --m1: #CC3333; --m2: #3366CC; --m3: #DDAA00; --m4: #2E8B57; --m5: #FF9831;
             --serif: 'DM Serif Display', Georgia, serif;
             --sans: 'DM Sans', system-ui, sans-serif;
         }
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
         html, body { height: 100%; font-size: 16px; }
-        body {
-            font-family: var(--sans); color: rgba(255,255,255,0.72);
-            overflow: hidden; background: var(--ink);
-        }
+        body { font-family: var(--sans); color: rgba(255,255,255,0.72); overflow: hidden; background: var(--ink); }
 
         .line-strip {
             position: fixed; top: 0; left: 0; width: 100%; height: 3px; z-index: 1000;
             background: linear-gradient(90deg, var(--m1) 0% 20%, var(--m3) 20% 40%, var(--m2) 40% 60%, var(--m4) 60% 80%, var(--m5) 80% 100%);
         }
-
         .nav {
             position: fixed; top: 3px; left: 0; width: 100%; z-index: 900;
             background: rgba(13,15,26,.95); backdrop-filter: blur(16px);
@@ -75,63 +71,61 @@
             cursor: pointer; transition: all .2s; user-select: none;
         }
         .legend-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
-        .legend-item.lp1 { background: rgba(255,215,0,.1); color: #FFD700; border: 1px solid rgba(255,215,0,.2); }
-        .legend-item.lp2 { background: rgba(74,144,217,.1); color: #6aaee8; border: 1px solid rgba(74,144,217,.2); }
-        .legend-item.lp3 { background: rgba(229,57,53,.1); color: #ef6c69; border: 1px solid rgba(229,57,53,.2); }
-        .legend-item.lp4 { background: rgba(67,160,71,.1); color: #66bb6a; border: 1px solid rgba(67,160,71,.2); }
-        .legend-item.lp5 { background: rgba(251,140,0,.1); color: #FFA726; border: 1px solid rgba(251,140,0,.2); }
-        .legend-item.off { opacity: .3; }
+        .legend-item.lp1 { background: rgba(204,51,51,.12);  color: #e07070; border: 1px solid rgba(204,51,51,.28); }
+        .legend-item.lp2 { background: rgba(51,102,204,.12); color: #6699ee; border: 1px solid rgba(51,102,204,.28); }
+        .legend-item.lp3 { background: rgba(221,170,0,.12);  color: #eedd44; border: 1px solid rgba(221,170,0,.28); }
+        .legend-item.lp4 { background: rgba(46,139,87,.14);  color: #55cc88; border: 1px solid rgba(46,139,87,.3); }
+        .legend-item.lp5 { background: rgba(255,152,49,.12); color: #ffbb66; border: 1px solid rgba(255,152,49,.28); }
+        .legend-item.off { opacity: .28; }
         .legend-item:hover { transform: translateY(-1px); }
-        .legend-sep { width: 1px; height: 18px; background: var(--border); margin: 0 4px; }
+        .legend-sep { width: 1px; height: 18px; background: var(--border); margin: 0 4px; flex-shrink: 0; }
+        .legend-info { font-size: .68rem; color: rgba(255,255,255,.2); display: flex; align-items: center; gap: 6px; }
+        .legend-info a { color: var(--teal); text-decoration: none; font-weight: 600; }
 
-        /* ── Search ─────────────────────────────────────────────────────────── */
-        .search-wrap {
-            position: relative; display: flex; align-items: center; margin-left: auto;
-        }
+        /* ── Search ───────────────────────────────────────────────────────── */
+        .search-wrap { position: relative; display: flex; align-items: center; margin-left: auto; flex-shrink: 0; }
         .search-input {
             background: var(--ink-soft); border: 1px solid var(--border);
             color: var(--white); font-family: var(--sans); font-size: .78rem;
-            padding: 6px 34px 6px 12px; border-radius: 8px; outline: none;
-            width: 220px; transition: border-color .2s, width .25s;
+            padding: 6px 32px 6px 12px; border-radius: 8px; outline: none;
+            width: 210px; transition: border-color .2s, width .25s;
         }
         .search-input::placeholder { color: rgba(255,255,255,.28); }
-        .search-input:focus { border-color: var(--teal); width: 260px; }
+        .search-input:focus { border-color: var(--teal); width: 252px; }
         .search-icon {
             position: absolute; right: 10px; top: 50%; transform: translateY(-50%);
-            color: rgba(255,255,255,.3); pointer-events: none; font-size: .85rem;
+            color: rgba(255,255,255,.3); pointer-events: none; font-size: .9rem; line-height: 1;
         }
         .search-clear {
-            position: absolute; right: 10px; top: 50%; transform: translateY(-50%);
-            color: rgba(255,255,255,.4); cursor: pointer; font-size: .78rem;
-            display: none; background: none; border: none; padding: 2px 4px;
-            border-radius: 3px; transition: color .15s;
+            position: absolute; right: 9px; top: 50%; transform: translateY(-50%);
+            color: rgba(255,255,255,.4); cursor: pointer; font-size: .72rem;
+            display: none; background: none; border: none; padding: 2px 4px; border-radius: 3px; transition: color .15s;
         }
         .search-clear:hover { color: var(--teal); }
         .search-dropdown {
             position: absolute; top: calc(100% + 6px); right: 0;
             background: var(--ink-mid); border: 1px solid var(--border);
-            border-radius: 10px; min-width: 280px; max-height: 280px;
+            border-radius: 10px; min-width: 290px; max-height: 300px;
             overflow-y: auto; z-index: 200;
-            box-shadow: 0 16px 40px rgba(0,0,0,.6);
+            box-shadow: 0 16px 40px rgba(0,0,0,.65);
             display: none;
         }
         .search-dropdown.open { display: block; }
         .search-result {
             display: flex; align-items: center; gap: 10px;
-            padding: 10px 14px; cursor: pointer; transition: background .15s;
+            padding: 9px 14px; cursor: pointer; transition: background .12s;
             border-bottom: 1px solid rgba(255,255,255,.04);
         }
         .search-result:last-child { border-bottom: none; }
-        .search-result:hover, .search-result.selected { background: rgba(78,205,196,.07); }
+        .search-result:hover, .search-result.sel { background: rgba(78,205,196,.07); }
         .sr-dots { display: flex; gap: 3px; flex-shrink: 0; }
         .sr-dot { width: 7px; height: 7px; border-radius: 50%; }
         .sr-name { font-size: .82rem; font-weight: 500; color: var(--white); flex: 1; }
         .sr-name em { font-style: normal; color: var(--teal); }
-        .sr-lines { font-size: .65rem; color: rgba(255,255,255,.35); }
-        .search-empty { padding: 18px 14px; font-size: .78rem; color: rgba(255,255,255,.3); text-align: center; }
-
-        .legend-info { font-size: .68rem; color: rgba(255,255,255,.2); display: flex; align-items: center; gap: 6px; }
-        .legend-info a { color: var(--teal); text-decoration: none; font-weight: 600; }
+        .sr-lines { font-size: .65rem; color: rgba(255,255,255,.32); flex-shrink: 0; }
+        .search-empty { padding: 16px 14px; font-size: .78rem; color: rgba(255,255,255,.3); text-align: center; }
+        .search-dropdown::-webkit-scrollbar { width: 4px; }
+        .search-dropdown::-webkit-scrollbar-thumb { background: rgba(255,255,255,.12); border-radius: 4px; }
 
         .map-wrap { flex: 1; position: relative; overflow: hidden; cursor: grab; }
         .map-wrap:active { cursor: grabbing; }
@@ -152,13 +146,6 @@
             font-size: .68rem; font-weight: 600; padding: 2px 7px; border-radius: 4px;
         }
         .tooltip-line-dot { width: 5px; height: 5px; border-radius: 50%; }
-
-        /* search pin pulse */
-        @keyframes pinPulse {
-            0%   { box-shadow: 0 0 0 0 rgba(78,205,196,.7); }
-            70%  { box-shadow: 0 0 0 14px rgba(78,205,196,0); }
-            100% { box-shadow: 0 0 0 0 rgba(78,205,196,0); }
-        }
 
         .map-footer {
             padding: 10px 40px; border-top: 1px solid var(--border);
@@ -182,7 +169,7 @@
             transition: all .15s; font-family: var(--sans); font-weight: 300;
         }
         .map-ctrl-btn:first-child { border-radius: 8px 8px 0 0; }
-        .map-ctrl-btn:last-child { border-radius: 0 0 8px 8px; }
+        .map-ctrl-btn:last-child  { border-radius: 0 0 8px 8px; }
         .map-ctrl-btn:hover { background: var(--ink-soft); color: var(--teal); }
         .map-ctrl-fit {
             width: 36px; height: 36px; border: 1px solid var(--border);
@@ -193,21 +180,16 @@
         }
         .map-ctrl-fit:hover { background: var(--ink-soft); color: var(--teal); }
 
-        /* Scrollbar for dropdown */
-        .search-dropdown::-webkit-scrollbar { width: 4px; }
-        .search-dropdown::-webkit-scrollbar-track { background: transparent; }
-        .search-dropdown::-webkit-scrollbar-thumb { background: rgba(255,255,255,.12); border-radius: 4px; }
-
         @media (max-width: 700px) {
             .nav-links { display: none !important; }
             .nav-inner { padding: 12px 20px; }
-            .legend-bar { padding: 8px 14px; gap: 5px; }
+            .legend-bar { padding: 8px 12px; gap: 5px; }
             .legend-item { padding: 4px 9px; font-size: .65rem; }
             .legend-info, .legend-sep { display: none; }
             .map-footer { padding: 8px 16px; }
-            .search-input { width: 150px; }
-            .search-input:focus { width: 180px; }
-            .search-dropdown { min-width: 220px; right: 0; }
+            .search-input { width: 135px; }
+            .search-input:focus { width: 172px; }
+            .search-dropdown { min-width: 225px; }
         }
     </style>
 </head>
@@ -229,23 +211,21 @@
 
     <div class="page">
         <div class="legend-bar">
-            <div class="legend-item lp1" data-line="M1" onclick="toggleLine('M1',this)"><div class="legend-dot" style="background:var(--m1)"></div>M1</div>
-            <div class="legend-item lp2" data-line="M2" onclick="toggleLine('M2',this)"><div class="legend-dot" style="background:var(--m2)"></div>M2</div>
-            <div class="legend-item lp3" data-line="M3" onclick="toggleLine('M3',this)"><div class="legend-dot" style="background:var(--m3)"></div>M3</div>
-            <div class="legend-item lp4" data-line="M4" onclick="toggleLine('M4',this)"><div class="legend-dot" style="background:var(--m4)"></div>M4</div>
-            <div class="legend-item lp5" data-line="M5" onclick="toggleLine('M5',this)"><div class="legend-dot" style="background:var(--m5)"></div>M5</div>
+            <div class="legend-item lp1" onclick="toggleLine('M1',this)"><div class="legend-dot" style="background:var(--m1)"></div>M1</div>
+            <div class="legend-item lp2" onclick="toggleLine('M2',this)"><div class="legend-dot" style="background:var(--m2)"></div>M2</div>
+            <div class="legend-item lp3" onclick="toggleLine('M3',this)"><div class="legend-dot" style="background:var(--m3)"></div>M3</div>
+            <div class="legend-item lp4" onclick="toggleLine('M4',this)"><div class="legend-dot" style="background:var(--m4)"></div>M4</div>
+            <div class="legend-item lp5" onclick="toggleLine('M5',this)"><div class="legend-dot" style="background:var(--m5)"></div>M5</div>
             <div class="legend-sep"></div>
             <div class="legend-info">
                 <span>Scroll to zoom · Drag to pan · Hover for info</span>
                 <span>·</span>
                 <a href="index.html#download">Get the full app →</a>
             </div>
-
-            <!-- Search -->
             <div class="search-wrap" id="searchWrap">
                 <input type="text" class="search-input" id="searchInput" placeholder="Search station…" autocomplete="off" autocorrect="off" spellcheck="false">
                 <span class="search-icon" id="searchIcon">⌕</span>
-                <button class="search-clear" id="searchClear" title="Clear search">✕</button>
+                <button class="search-clear" id="searchClear" title="Clear">✕</button>
                 <div class="search-dropdown" id="searchDropdown"></div>
             </div>
         </div>
@@ -272,570 +252,486 @@
     </div>
 
 <script>
-(function() {
-    "use strict";
+(function(){
+"use strict";
 
-    // ==========================================
-    // DATA  — verified GPS coordinates
-    // Source: OpenStreetMap / Metrorex official
-    // ==========================================
-    const COLORS = { M1:'#FFD700', M2:'#4A90D9', M3:'#E53935', M4:'#43A047', M5:'#FB8C00' };
+// =============================================================================
+// DATA — extracted directly from metro_stations.geojson + metro_lines.geojson
+//         These are the EXACT same coordinates the Android app uses.
+// =============================================================================
 
-    // ── M1 ─────────────────────────────────────────────────────────────────
-    // Pantelimon ↔ Dristor 1 (loop line)
-    // Order follows the physical track: eastern terminus → south-west arc →
-    // north arc → back south-east to close the loop.
-    const LINES = {
-        M1: [
-            {n:'Pantelimon',          lat:44.4285, lng:26.1524},
-            {n:'Republica',           lat:44.4268, lng:26.1362},
-            {n:'Costin Georgian',     lat:44.4267, lng:26.1276},
-            {n:'Titan',               lat:44.4238, lng:26.1203},
-            {n:'Nicolae Grigorescu',  lat:44.4185, lng:26.1133},
-            {n:'Piața Muncii',        lat:44.4148, lng:26.1080},
-            {n:'Piața Iancului',      lat:44.4188, lng:26.1291},
-            // corrected: Dristor 1 is south of P. Iancului, closes loop to Dristor 2
-            {n:'Dristor 1',           lat:44.4088, lng:26.1171},
-            {n:'Mihai Bravu',         lat:44.4028, lng:26.1060},
-            {n:'Timpuri Noi',         lat:44.4063, lng:26.0918},
-            {n:'Piața Unirii 1',      lat:44.4275, lng:26.1013},
-            {n:'Izvor',               lat:44.4319, lng:26.0903},
-            {n:'Eroilor 1',           lat:44.4358, lng:26.0784},
-            {n:'Grozăvești',          lat:44.4438, lng:26.0619},
-            {n:'Petrache Poenaru',    lat:44.4464, lng:26.0504},
-            {n:'Crângași',            lat:44.4488, lng:26.0424},
-            {n:'Basarab 1',           lat:44.4491, lng:26.0556},
-            {n:'Gara de Nord 1',      lat:44.4453, lng:26.0685},
-            {n:'Piața Victoriei 1',   lat:44.4527, lng:26.0853},
-            {n:'Ștefan cel Mare',     lat:44.4560, lng:26.1003},
-            {n:'Obor',                lat:44.4523, lng:26.1162},
-            // loop closes: Obor → Piața Iancului → Piața Muncii → Dristor 2
-            {n:'Dristor 2',           lat:44.4108, lng:26.1240}
-        ],
-        M2: [
-            {n:'Berceni',                  lat:44.3816, lng:26.1256},
-            {n:'Apărătorii Patriei',       lat:44.3912, lng:26.1215},
-            {n:'Piața Sudului',            lat:44.3993, lng:26.1174},
-            {n:'Constantin Brâncoveanu',   lat:44.4046, lng:26.1128},
-            {n:'Tineretului',              lat:44.4099, lng:26.1041},
-            {n:'Piața Unirii 2',           lat:44.4275, lng:26.1013},
-            {n:'Universitate',             lat:44.4352, lng:26.1028},
-            {n:'Piața Română',             lat:44.4413, lng:26.0967},
-            {n:'Piața Victoriei 2',        lat:44.4527, lng:26.0853},
-            {n:'Aviatorilor',              lat:44.4615, lng:26.0828},
-            {n:'Aurel Vlaicu',             lat:44.4699, lng:26.0893},
-            {n:'Pipera',                   lat:44.4832, lng:26.0970},
-            // extended to Tudor Arghezi (official M2 terminus)
-            {n:'Tudor Arghezi',            lat:44.3780, lng:26.1240}
-        ],
-        M3: [
-            // M3 western section: Anghel Saligny → Preciziei
-            // Shares track with M1 between Dristor 1 – Eroilor 1
-            {n:'Anghel Saligny',      lat:44.3998, lng:26.1322},
-            {n:'Dristor 1',           lat:44.4088, lng:26.1171},
-            {n:'Mihai Bravu',         lat:44.4028, lng:26.1060},
-            {n:'Timpuri Noi',         lat:44.4063, lng:26.0918},
-            {n:'Piața Unirii 1',      lat:44.4275, lng:26.1013},
-            {n:'Izvor',               lat:44.4319, lng:26.0903},
-            {n:'Eroilor 1',           lat:44.4358, lng:26.0784},
-            {n:'Politehnica',         lat:44.4406, lng:26.0553},
-            {n:'Lujerului',           lat:44.4363, lng:26.0373},
-            {n:'Gorjului',            lat:44.4296, lng:26.0238},
-            {n:'Păcii',               lat:44.4310, lng:26.0104},
-            {n:'Preciziei',           lat:44.4328, lng:25.9961}
-        ],
-        M4: [
-            {n:'Gara de Nord 2',  lat:44.4453, lng:26.0685},
-            {n:'1 Mai',           lat:44.4567, lng:26.0707},
-            {n:'Jiului',          lat:44.4636, lng:26.0682},
-            {n:'Parc Bazilescu',  lat:44.4718, lng:26.0658},
-            {n:'Laminorului',     lat:44.4793, lng:26.0640},
-            {n:'Străulești',      lat:44.4887, lng:26.0621}
-        ],
-        M5: [
-            // M5: Eroilor 2 → Drumul Taberei (2 termini after Romancierilor branch)
-            // Western branch: Romancierilor → Râul Doamnei
-            // Southern branch: Romancierilor → Valea Cascadelor
-            {n:'Eroilor 2',           lat:44.4358, lng:26.0784},
-            {n:'Academia Militară',   lat:44.4282, lng:26.0689},
-            {n:'Cotroceni',           lat:44.4361, lng:26.0572},
-            {n:'Hașdeu',              lat:44.4233, lng:26.0614},
-            {n:'Favorit',             lat:44.4180, lng:26.0560},
-            {n:'Orizont',             lat:44.4123, lng:26.0510},
-            {n:'Romancierilor',       lat:44.4270, lng:26.0410},
-            // Branch 1 → Valea Cascadelor (south)
-            {n:'Valea Cascadelor',    lat:44.4173, lng:26.0322},
-            // Branch 2 → Râul Doamnei (west)
-            {n:'Râul Doamnei',        lat:44.4238, lng:26.0274}
-        ]
-    };
+// Display colors (brightened from app originals for canvas readability)
+const COLORS = {
+    M1:'#CC3333', M2:'#3366CC', M3:'#DDAA00', M4:'#2E8B57', M5:'#FF9831'
+};
 
-    // ── M5 branch geometry — drawn as two separate paths from Romancierilor ──
-    // Defined as coordinate pairs to allow proper branch rendering
-    const M5_BRANCHES = {
-        main: [
-            // Eroilor 2 → Romancierilor (shared trunk)
-            {n:'Eroilor 2',         lat:44.4358, lng:26.0784},
-            {n:'Academia Militară', lat:44.4282, lng:26.0689},
-            {n:'Cotroceni',         lat:44.4361, lng:26.0572},
-            {n:'Hașdeu',            lat:44.4233, lng:26.0614},
-            {n:'Favorit',           lat:44.4180, lng:26.0560},
-            {n:'Orizont',           lat:44.4123, lng:26.0510},
-            {n:'Romancierilor',     lat:44.4270, lng:26.0410}
-        ],
-        branchValeaCascadelor: [
-            {n:'Romancierilor',     lat:44.4270, lng:26.0410},
-            {n:'Valea Cascadelor',  lat:44.4173, lng:26.0322}
-        ],
-        branchRaulDoamnei: [
-            {n:'Romancierilor',     lat:44.4270, lng:26.0410},
-            {n:'Râul Doamnei',      lat:44.4238, lng:26.0274}
-        ]
-    };
+// ── Line polylines: each inner array is one LineString segment from the GeoJSON.
+//    Points are [lat, lng] matching the source file exactly.
+const LINE_SEGMENTS = {
+    M1:[
+        // Eroilor 1 → Preciziei  (west arm)
+        [[44.435048,26.075653],[44.435276,26.055400],[44.434381,26.032585],[44.434211,26.021280],[44.433914,26.004127],[44.430581,25.990968]],
+        // Eroilor 1 → Anghel Saligny  (east arm)
+        [[44.435048,26.075653],[44.433058,26.089586],[44.427541,26.101922],[44.416959,26.113347],[44.411289,26.125886],[44.419368,26.140464],[44.413308,26.160902],[44.410552,26.173798],[44.407292,26.194405],[44.405386,26.208920]]
+    ],
+    M2:[
+        // Pipera → Tudor Arghezi
+        [[44.480613,26.116634],[44.479156,26.100232],[44.466031,26.086642],[44.452626,26.086432],[44.445357,26.097700],[44.435563,26.102468],[44.427759,26.104083],[44.415373,26.104511],[44.403785,26.096653],[44.398611,26.109128],[44.392454,26.122838],[44.379390,26.135068],[44.368822,26.143581],[44.361265,26.149282],[44.348041,26.159256]]
+    ],
+    M3:[
+        // Eroilor 1 → Dristor 2  (north loop via Gara de Nord / Obor)
+        [[44.435048,26.075653],[44.442735,26.060360],[44.445426,26.046552],[44.451913,26.047145],[44.450746,26.068372],[44.447235,26.076566],[44.451955,26.087077],[44.452933,26.104694],[44.449412,26.124610],[44.441695,26.132322],[44.431826,26.138676],[44.420478,26.139415]],
+        // Eroilor 1 → Republica  (east via Timpuri Noi / Dristor 1 / Titan)
+        [[44.435048,26.075653],[44.433058,26.089586],[44.427541,26.101922],[44.416959,26.113347],[44.411293,26.125885],[44.419368,26.140464],[44.413572,26.160606],[44.425792,26.162722],[44.435122,26.169127],[44.434421,26.185310]],
+        // Republica → Pantelimon  (short east stub)
+        [[44.434421,26.185310],[44.440525,26.192603]]
+    ],
+    M4:[
+        // Gara de Nord 2 → Straulesti
+        [[44.447349,26.073805],[44.450829,26.068478],[44.461762,26.057496],[44.470534,26.050627],[44.481550,26.041538],[44.486649,26.037568],[44.494320,26.031965],[44.501655,26.026241]]
+    ],
+    M5:[
+        // Raul Doamnei → Eroilor 2  (main trunk)
+        [[44.415240,26.024204],[44.419118,26.020287],[44.422988,26.024616],[44.422225,26.033088],[44.423064,26.041303],[44.424640,26.048364],[44.425874,26.055890],[44.428930,26.062876],[44.434840,26.073844]],
+        // Branch: Romancierilor → Valea Ialomitei
+        [[44.422988,26.024616],[44.421112,26.014442]]
+    ]
+};
 
-    // Transfer detection — strips trailing digits (e.g. "Eroilor 1" → "Eroilor")
-    function norm(name) { return name.replace(/\s*\d+$/, '').replace(/\s*\(.*\)/, '').trim(); }
-    function getLines(name) {
-        const k = norm(name);
-        const res = new Set();
-        for (const [ln, sts] of Object.entries(LINES)) {
-            for (const s of sts) { if (norm(s.n) === k) res.add(ln); }
+// Interchange walking corridors (dashed grey connectors between platform pairs)
+const TRANSFER_SEGS = [
+    [[44.434840,26.073844],[44.435048,26.075653]],  // Eroilor 2 ↔ Eroilor 1
+    [[44.420478,26.139415],[44.419368,26.140464]],  // Dristor 2 ↔ Dristor 1
+    [[44.450829,26.068478],[44.450746,26.068372]],  // Basarab 2 ↔ Basarab 1
+    [[44.427759,26.104083],[44.427541,26.101922]],  // Piata Unirii 2 ↔ Piata Unirii 1
+    [[44.452626,26.086432],[44.451955,26.087077]],  // Piata Victoriei 2 ↔ Piata Victoriei 1
+    [[44.447349,26.073805],[44.447235,26.076566]],  // Gara de Nord 2 ↔ Gara de Nord 1
+    [[44.413308,26.160902],[44.413572,26.160606]]   // Nicolae Grigorescu 2 ↔ 1
+];
+
+// All 64 Metrorex stations — coordinates from metro_stations.geojson,
+// line assignments derived from proximity to metro_lines.geojson segments.
+const STATIONS = [
+    {n:'1 Decembrie 1918',      lat:44.410552, lng:26.173798, lines:['M1']},
+    {n:'1 Mai',                  lat:44.470534, lng:26.050627, lines:['M4']},
+    {n:'Academia Militara',      lat:44.428930, lng:26.062876, lines:['M5']},
+    {n:'Anghel Saligny',         lat:44.405386, lng:26.208920, lines:['M1']},
+    {n:'Aparatorii Patriei',     lat:44.379390, lng:26.135068, lines:['M2']},
+    {n:'Aurel Vlaicu',           lat:44.479156, lng:26.100232, lines:['M2']},
+    {n:'Aviatorilor',            lat:44.466031, lng:26.086642, lines:['M2']},
+    {n:'Basarab 1',              lat:44.450746, lng:26.068372, lines:['M3','M4']},
+    {n:'Basarab 2',              lat:44.450829, lng:26.068478, lines:['M3','M4']},
+    {n:'Berceni',                lat:44.361265, lng:26.149282, lines:['M2']},
+    {n:'Constantin Brancoveanu', lat:44.398649, lng:26.109117, lines:['M2']},
+    {n:'Constantin Brancusi',    lat:44.419118, lng:26.020287, lines:['M5']},
+    {n:'Costin Georgian',        lat:44.435122, lng:26.169127, lines:['M3']},
+    {n:'Crangasi',               lat:44.451913, lng:26.047145, lines:['M3']},
+    {n:'Dimitrie Leonida',       lat:44.368822, lng:26.143581, lines:['M2']},
+    {n:'Dristor 1',              lat:44.419368, lng:26.140464, lines:['M1','M3']},
+    {n:'Dristor 2',              lat:44.420478, lng:26.139415, lines:['M3']},
+    {n:'Eroii Revolutiei',       lat:44.403785, lng:26.096653, lines:['M2']},
+    {n:'Eroilor 1',              lat:44.435048, lng:26.075653, lines:['M1','M3']},
+    {n:'Eroilor 2',              lat:44.434840, lng:26.073844, lines:['M5']},
+    {n:'Favorit',                lat:44.424640, lng:26.048364, lines:['M5']},
+    {n:'Gara de Nord 1',         lat:44.447235, lng:26.076566, lines:['M3']},
+    {n:'Gara de Nord 2',         lat:44.447349, lng:26.073805, lines:['M4']},
+    {n:'Gorjului',               lat:44.434211, lng:26.021280, lines:['M1']},
+    {n:'Grivita',                lat:44.461762, lng:26.057496, lines:['M4']},
+    {n:'Grozavesti',             lat:44.442735, lng:26.060360, lines:['M3']},
+    {n:'Izvor',                  lat:44.433058, lng:26.089586, lines:['M1','M3']},
+    {n:'Jiului',                 lat:44.481550, lng:26.041538, lines:['M4']},
+    {n:'Laminorului',            lat:44.494338, lng:26.031954, lines:['M4']},
+    {n:'Lujerului',              lat:44.434381, lng:26.032585, lines:['M1']},
+    {n:'Mihai Bravu',            lat:44.411289, lng:26.125886, lines:['M1','M3']},
+    {n:'Nicolae Grigorescu 1',   lat:44.413572, lng:26.160606, lines:['M1','M3']},
+    {n:'Nicolae Grigorescu 2',   lat:44.413308, lng:26.160902, lines:['M1','M3']},
+    {n:'Nicolae Teclu',          lat:44.407292, lng:26.194405, lines:['M1']},
+    {n:'Obor',                   lat:44.449412, lng:26.124610, lines:['M3']},
+    {n:'Orizont',                lat:44.425874, lng:26.055890, lines:['M5']},
+    {n:'Pacii',                  lat:44.433914, lng:26.004127, lines:['M1']},
+    {n:'Pantelimon',             lat:44.440525, lng:26.192603, lines:['M3']},
+    {n:'Parc Bazilescu',         lat:44.486649, lng:26.037568, lines:['M4']},
+    {n:'Parc Drumul Taberei',    lat:44.422225, lng:26.033088, lines:['M5']},
+    {n:'Petrache Poenaru',       lat:44.445426, lng:26.046552, lines:['M3']},
+    {n:'Piata Iancului',         lat:44.441695, lng:26.132322, lines:['M3']},
+    {n:'Piata Muncii',           lat:44.431826, lng:26.138676, lines:['M3']},
+    {n:'Piata Romana',           lat:44.445357, lng:26.097700, lines:['M2']},
+    {n:'Piata Sudului',          lat:44.392454, lng:26.122838, lines:['M2']},
+    {n:'Piata Unirii 1',         lat:44.427541, lng:26.101922, lines:['M1','M3']},
+    {n:'Piata Unirii 2',         lat:44.427759, lng:26.104083, lines:['M2']},
+    {n:'Piata Victoriei 1',      lat:44.451955, lng:26.087077, lines:['M2','M3']},
+    {n:'Piata Victoriei 2',      lat:44.452626, lng:26.086432, lines:['M2','M3']},
+    {n:'Pipera',                 lat:44.480613, lng:26.116635, lines:['M2']},
+    {n:'Politehnica',            lat:44.435276, lng:26.055400, lines:['M1']},
+    {n:'Preciziei',              lat:44.430581, lng:25.990968, lines:['M1']},
+    {n:'Raul Doamnei',           lat:44.415240, lng:26.024204, lines:['M5']},
+    {n:'Republica',              lat:44.434421, lng:26.185310, lines:['M3']},
+    {n:'Romancierilor',          lat:44.422988, lng:26.024616, lines:['M5']},
+    {n:'Stefan cel Mare',        lat:44.452933, lng:26.104694, lines:['M3']},
+    {n:'Straulesti',             lat:44.501655, lng:26.026241, lines:['M4']},
+    {n:'Timpuri Noi',            lat:44.416959, lng:26.113347, lines:['M1','M3']},
+    {n:'Tineretului',            lat:44.415373, lng:26.104511, lines:['M2']},
+    {n:'Titan',                  lat:44.425792, lng:26.162722, lines:['M3']},
+    {n:'Tudor Arghezi',          lat:44.348041, lng:26.159256, lines:['M2']},
+    {n:'Tudor Vladimirescu',     lat:44.423064, lng:26.041303, lines:['M5']},
+    {n:'Universitate',           lat:44.435563, lng:26.102468, lines:['M2']},
+    {n:'Valea Ialomitei',        lat:44.421112, lng:26.014442, lines:['M5']}
+];
+
+// =============================================================================
+// MAP ENGINE
+// =============================================================================
+const canvas = document.getElementById('mapCanvas');
+const ctx    = canvas.getContext('2d');
+const wrap   = document.getElementById('mapWrap');
+const ttEl   = document.getElementById('tooltip');
+const ttName = document.getElementById('ttName');
+const ttLines= document.getElementById('ttLines');
+
+let W=0, H=0;
+let cLat=44.435, cLng=26.095, zoom=13;
+const ZMIN=11, ZMAX=18;
+let dragging=false, dsx,dsy,dsLat,dsLng;
+let hovered=null, pinnedStation=null, pinAnim=0;
+const vis={M1:true,M2:true,M3:true,M4:true,M5:true};
+const tiles={};
+const TS=256;
+
+// Mercator helpers
+function lng2x(lng,z){ return ((lng+180)/360)*(1<<z)*TS; }
+function lat2y(lat,z){
+    const r=lat*Math.PI/180;
+    return ((1-Math.log(Math.tan(r)+1/Math.cos(r))/Math.PI)/2)*(1<<z)*TS;
+}
+function geo2s(lat,lng){
+    const z=Math.round(zoom);
+    return [lng2x(lng,z)-lng2x(cLng,z)+W/2, lat2y(lat,z)-lat2y(cLat,z)+H/2];
+}
+
+// Tile cache
+function tileUrl(tx,ty,tz){
+    return 'https://'+['a','b','c'][(tx+ty)%3]+'.tile.openstreetmap.org/'+tz+'/'+tx+'/'+ty+'.png';
+}
+function loadTile(tx,ty,tz){
+    const k=tz+'/'+tx+'/'+ty;
+    if(tiles[k]) return tiles[k];
+    const img=new Image(); img.crossOrigin='anonymous';
+    img.onload=()=>{tiles[k].ok=true;render();};
+    img.onerror=()=>{tiles[k].err=true;};
+    img.src=tileUrl(tx,ty,tz);
+    return (tiles[k]={img,ok:false,err:false});
+}
+
+// Draw one polyline segment: glow + solid pass
+function polyline(pts, color, w){
+    if(pts.length<2) return;
+    ctx.beginPath();
+    pts.forEach((p,i)=>i?ctx.lineTo(p[0],p[1]):ctx.moveTo(p[0],p[1]));
+    ctx.strokeStyle=color+'55'; ctx.lineWidth=w+7; ctx.lineCap='round'; ctx.lineJoin='round'; ctx.stroke();
+    ctx.beginPath();
+    pts.forEach((p,i)=>i?ctx.lineTo(p[0],p[1]):ctx.moveTo(p[0],p[1]));
+    ctx.strokeStyle=color; ctx.lineWidth=w; ctx.lineCap='round'; ctx.lineJoin='round'; ctx.stroke();
+}
+
+// Draw one station dot + label
+function drawStation(s, isH, isPin){
+    const [x,y]=geo2s(s.lat,s.lng);
+    const multi=s.lines.length>1;
+    const r=multi?6:4.5;
+    const rd=(isH||isPin)?r+2.5:r;
+
+    // Animated pulse ring when pin-selected
+    if(isPin && pinAnim>0){
+        const prog=pinAnim/60;
+        const rp=(1-prog)*24+rd+4;
+        ctx.beginPath(); ctx.arc(x,y,rp,0,Math.PI*2);
+        ctx.strokeStyle='rgba(78,205,196,'+(prog*.85)+')';
+        ctx.lineWidth=2.5; ctx.stroke();
+        pinAnim--;
+        if(pinAnim>0) requestAnimationFrame(render);
+    }
+
+    // Dark outer ring
+    ctx.beginPath(); ctx.arc(x,y,rd+2,0,Math.PI*2);
+    ctx.fillStyle='#0D0F1A'; ctx.fill();
+
+    // Soft halo
+    if(isH||isPin||multi){
+        ctx.beginPath(); ctx.arc(x,y,rd+9,0,Math.PI*2);
+        ctx.fillStyle=isPin?'rgba(78,205,196,.20)':multi?'rgba(255,255,255,.09)':COLORS[s.lines[0]]+'20';
+        ctx.fill();
+    }
+
+    // Dot fill
+    ctx.beginPath(); ctx.arc(x,y,rd,0,Math.PI*2);
+    ctx.fillStyle=isPin?'#4ECDC4':multi?'#FFFFFF':COLORS[s.lines[0]]; ctx.fill();
+
+    // Label pill
+    const fs=(isH||isPin)?12:10;
+    ctx.font=((isH||isPin)?'600 ':'500 ')+fs+'px "DM Sans",sans-serif';
+    ctx.textAlign='left'; ctx.textBaseline='middle';
+    const m=ctx.measureText(s.n);
+    const lx=x+rd+7, ly=y, p=3;
+    const bx=lx-p, by=ly-fs/2-p, bw=m.width+p*2, bh=fs+p*2, br=4;
+    ctx.fillStyle='rgba(10,12,28,0.82)';
+    ctx.beginPath();
+    ctx.moveTo(bx+br,by); ctx.lineTo(bx+bw-br,by);
+    ctx.quadraticCurveTo(bx+bw,by,bx+bw,by+br);
+    ctx.lineTo(bx+bw,by+bh-br);
+    ctx.quadraticCurveTo(bx+bw,by+bh,bx+bw-br,by+bh);
+    ctx.lineTo(bx+br,by+bh);
+    ctx.quadraticCurveTo(bx,by+bh,bx,by+bh-br);
+    ctx.lineTo(bx,by+br);
+    ctx.quadraticCurveTo(bx,by,bx+br,by);
+    ctx.closePath(); ctx.fill();
+    ctx.fillStyle=(isH||isPin)?'#FFFFFF':'rgba(255,255,255,0.80)';
+    ctx.fillText(s.n,lx,ly);
+}
+
+// Main render loop
+function render(){
+    W=wrap.clientWidth; H=wrap.clientHeight;
+    const dpr=devicePixelRatio||1;
+    canvas.width=W*dpr; canvas.height=H*dpr;
+    canvas.style.width=W+'px'; canvas.style.height=H+'px';
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+
+    ctx.fillStyle='#2a2d3e'; ctx.fillRect(0,0,W,H);
+
+    // OSM tiles
+    const z=Math.round(zoom);
+    const cx=lng2x(cLng,z), cy=lat2y(cLat,z);
+    const ox=W/2-cx, oy=H/2-cy;
+    const txMin=Math.floor((cx-W/2)/TS), txMax=Math.floor((cx+W/2)/TS);
+    const tyMin=Math.floor((cy-H/2)/TS), tyMax=Math.floor((cy+H/2)/TS);
+    for(let tx=txMin;tx<=txMax;tx++)
+        for(let ty=tyMin;ty<=tyMax;ty++){
+            const t=loadTile(tx,ty,z);
+            if(t.ok) ctx.drawImage(t.img,tx*TS+ox,ty*TS+oy,TS,TS);
         }
-        return [...res];
-    }
 
-    // Flat deduplicated station list for search
-    function allStations() {
-        const map = new Map();
-        for (const [ln, sts] of Object.entries(LINES)) {
-            for (const s of sts) {
-                const k = s.n;
-                if (!map.has(k)) map.set(k, { ...s, lines: [] });
-                const entry = map.get(k);
-                if (!entry.lines.includes(ln)) entry.lines.push(ln);
-            }
-        }
-        return [...map.values()].sort((a, b) => a.n.localeCompare(b.n, 'ro'));
-    }
-    const ALL_STATIONS = allStations();
+    // Dark wash
+    ctx.fillStyle='rgba(10,12,28,0.52)'; ctx.fillRect(0,0,W,H);
 
-    // ==========================================
-    // MAP ENGINE
-    // ==========================================
-    const canvas = document.getElementById('mapCanvas');
-    const ctx = canvas.getContext('2d');
-    const wrap = document.getElementById('mapWrap');
-    const ttEl = document.getElementById('tooltip');
-    const ttName = document.getElementById('ttName');
-    const ttLines = document.getElementById('ttLines');
-
-    let W = 0, H = 0;
-    let cLat = 44.435, cLng = 26.075, zoom = 14;
-    const ZMIN = 11, ZMAX = 18;
-    let dragging = false, dsx, dsy, dsLat, dsLng;
-    let hovered = null;
-    let pinnedStation = null; // highlighted from search
-    let pinPulse = 0;         // animation counter for pin ring
-    const vis = { M1:true, M2:true, M3:true, M4:true, M5:true };
-    const tiles = {};
-    const TS = 256;
-
-    // Projection
-    function lng2x(lng, z) { return ((lng+180)/360) * (1<<z) * TS; }
-    function lat2y(lat, z) {
-        const r = lat * Math.PI/180;
-        return ((1 - Math.log(Math.tan(r)+1/Math.cos(r))/Math.PI)/2) * (1<<z) * TS;
-    }
-
-    function geo2s(lat, lng) {
-        const z = Math.round(zoom);
-        return [lng2x(lng,z)-lng2x(cLng,z)+W/2, lat2y(lat,z)-lat2y(cLat,z)+H/2];
-    }
-
-    // Tiles
-    function tileUrl(x,y,z) {
-        const s = ['a','b','c'][(x+y)%3];
-        return 'https://'+s+'.tile.openstreetmap.org/'+z+'/'+x+'/'+y+'.png';
-    }
-    function loadTile(tx,ty,tz) {
-        const k = tz+'/'+tx+'/'+ty;
-        if (tiles[k]) return tiles[k];
-        const img = new Image(); img.crossOrigin='anonymous';
-        img.onload = () => { tiles[k].ok=true; render(); };
-        img.onerror = () => { tiles[k].err=true; };
-        img.src = tileUrl(tx,ty,tz);
-        tiles[k] = {img, ok:false, err:false};
-        return tiles[k];
-    }
-
-    // ==========================================
-    // RENDER
-    // ==========================================
-    function render() {
-        W = wrap.clientWidth; H = wrap.clientHeight;
-        const dpr = devicePixelRatio||1;
-        canvas.width = W*dpr; canvas.height = H*dpr;
-        canvas.style.width = W+'px'; canvas.style.height = H+'px';
-        ctx.setTransform(dpr,0,0,dpr,0,0);
-
-        ctx.fillStyle = '#2a2d3e'; ctx.fillRect(0,0,W,H);
-
-        // OSM tiles
-        const z = Math.round(zoom);
-        const cx = lng2x(cLng,z), cy = lat2y(cLat,z);
-        const ox = W/2 - cx, oy = H/2 - cy;
-        const txMin = Math.floor((cx-W/2)/TS), txMax = Math.floor((cx+W/2)/TS);
-        const tyMin = Math.floor((cy-H/2)/TS), tyMax = Math.floor((cy+H/2)/TS);
-        for (let tx=txMin; tx<=txMax; tx++) {
-            for (let ty=tyMin; ty<=tyMax; ty++) {
-                const t = loadTile(tx,ty,z);
-                if (t.ok) ctx.drawImage(t.img, tx*TS+ox, ty*TS+oy, TS, TS);
-            }
-        }
-
-        // Dark overlay
-        ctx.fillStyle = 'rgba(10,12,28,0.52)';
-        ctx.fillRect(0,0,W,H);
-
-        // Metro lines
-        for (const [ln, sts] of Object.entries(LINES)) {
-            if (!vis[ln]) continue;
-            if (ln === 'M5') continue; // M5 drawn with branches below
-            const c = COLORS[ln];
-            const pts = sts.map(s => geo2s(s.lat, s.lng));
-            drawLine(pts, c);
-        }
-
-        // M5 branches
-        if (vis['M5']) {
-            const c = COLORS['M5'];
-            drawLine(M5_BRANCHES.main.map(s => geo2s(s.lat, s.lng)), c);
-            drawLine(M5_BRANCHES.branchValeaCascadelor.map(s => geo2s(s.lat, s.lng)), c);
-            drawLine(M5_BRANCHES.branchRaulDoamnei.map(s => geo2s(s.lat, s.lng)), c);
-        }
-
-        // Stations (deduplicated)
-        const drawn = new Map();
-        for (const [ln, sts] of Object.entries(LINES)) {
-            if (!vis[ln]) continue;
-            for (const s of sts) {
-                const k = norm(s.n);
-                if (!drawn.has(k)) drawn.set(k, { ...s, lines: getLines(s.n) });
-            }
-        }
-
-        drawn.forEach(s => {
-            const [x,y] = geo2s(s.lat, s.lng);
-            const transfer = s.lines.length > 1;
-            const isH = hovered && norm(hovered.n) === norm(s.n);
-            const isPin = pinnedStation && norm(pinnedStation.n) === norm(s.n);
-            const r = transfer ? 6 : 4.5;
-            const rd = (isH || isPin) ? r+2 : r;
-
-            // Pin pulse ring
-            if (isPin && pinPulse > 0) {
-                const alpha = pinPulse / 60;
-                const rp = (60 - pinPulse) / 60 * 22 + rd + 2;
-                ctx.beginPath(); ctx.arc(x,y,rp,0,Math.PI*2);
-                ctx.strokeStyle = 'rgba(78,205,196,' + (alpha * .8) + ')';
-                ctx.lineWidth = 2; ctx.stroke();
-                pinPulse--;
-                if (pinPulse > 0) requestAnimationFrame(render);
-            }
-
-            // Outer ring
-            ctx.beginPath(); ctx.arc(x,y,rd+2,0,Math.PI*2);
-            ctx.fillStyle='#0D0F1A'; ctx.fill();
-
-            // Glow ring
-            if (isH || isPin || transfer) {
-                ctx.beginPath(); ctx.arc(x,y,rd+7,0,Math.PI*2);
-                ctx.fillStyle = isPin ? 'rgba(78,205,196,0.25)'
-                    : transfer ? 'rgba(255,255,255,0.12)' : COLORS[s.lines[0]]+'25';
-                ctx.fill();
-            }
-
-            // Dot fill
-            ctx.beginPath(); ctx.arc(x,y,rd,0,Math.PI*2);
-            ctx.fillStyle = isPin ? '#4ECDC4' : transfer ? '#FFFFFF' : COLORS[s.lines[0]]; ctx.fill();
-
-            // Station label
-            const fs = (isH || isPin) ? 12 : 10;
-            ctx.font = ((isH || isPin) ? '600 ' : '500 ') + fs + 'px "DM Sans",sans-serif';
-            ctx.textAlign = 'left'; ctx.textBaseline = 'middle';
-            const txt = s.n;
-            const m = ctx.measureText(txt);
-            const lx = x + rd + 7, ly = y;
-            const p = 3;
-            ctx.fillStyle = 'rgba(10,12,28,0.78)';
-            const bx = lx-p, by = ly-fs/2-p, bw = m.width+p*2, bh = fs+p*2, br = 4;
-            ctx.beginPath();
-            ctx.moveTo(bx+br, by); ctx.lineTo(bx+bw-br, by);
-            ctx.quadraticCurveTo(bx+bw, by, bx+bw, by+br);
-            ctx.lineTo(bx+bw, by+bh-br);
-            ctx.quadraticCurveTo(bx+bw, by+bh, bx+bw-br, by+bh);
-            ctx.lineTo(bx+br, by+bh);
-            ctx.quadraticCurveTo(bx, by+bh, bx, by+bh-br);
-            ctx.lineTo(bx, by+br);
-            ctx.quadraticCurveTo(bx, by, bx+br, by);
-            ctx.closePath(); ctx.fill();
-            ctx.fillStyle = (isH || isPin) ? '#FFFFFF' : 'rgba(255,255,255,0.75)';
-            ctx.fillText(txt, lx, ly);
-        });
-    }
-
-    function drawLine(pts, color) {
+    // Transfer connectors (dashed grey)
+    ctx.save();
+    ctx.setLineDash([5,5]);
+    for(const seg of TRANSFER_SEGS){
+        const pts=seg.map(c=>geo2s(c[0],c[1]));
         ctx.beginPath();
-        pts.forEach((p,i) => i ? ctx.lineTo(p[0],p[1]) : ctx.moveTo(p[0],p[1]));
-        ctx.strokeStyle = color+'40'; ctx.lineWidth=10; ctx.lineCap='round'; ctx.lineJoin='round'; ctx.stroke();
-        ctx.beginPath();
-        pts.forEach((p,i) => i ? ctx.lineTo(p[0],p[1]) : ctx.moveTo(p[0],p[1]));
-        ctx.strokeStyle = color; ctx.lineWidth=3.5; ctx.lineCap='round'; ctx.lineJoin='round'; ctx.stroke();
+        pts.forEach((p,i)=>i?ctx.lineTo(p[0],p[1]):ctx.moveTo(p[0],p[1]));
+        ctx.strokeStyle='rgba(200,210,230,0.30)'; ctx.lineWidth=3; ctx.lineCap='round'; ctx.stroke();
+    }
+    ctx.setLineDash([]);
+    ctx.restore();
+
+    // Metro lines (each segment)
+    for(const [ln,segs] of Object.entries(LINE_SEGMENTS)){
+        if(!vis[ln]) continue;
+        for(const seg of segs)
+            polyline(seg.map(c=>geo2s(c[0],c[1])), COLORS[ln], 4);
     }
 
-    // ==========================================
-    // SEARCH
-    // ==========================================
-    const searchInput = document.getElementById('searchInput');
-    const searchDropdown = document.getElementById('searchDropdown');
-    const searchClear = document.getElementById('searchClear');
-    const searchIcon = document.getElementById('searchIcon');
-
-    let searchResults = [];
-    let selectedIdx = -1;
-
-    function diacriticFold(s) {
-        return s.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+    // Stations
+    for(const s of STATIONS){
+        if(!s.lines.some(l=>vis[l])) continue;
+        drawStation(s, hovered&&hovered.n===s.n, pinnedStation&&pinnedStation.n===s.n);
     }
+}
 
-    function highlightMatch(text, query) {
-        if (!query) return text;
-        const fi = diacriticFold(text), fq = diacriticFold(query);
-        const idx = fi.indexOf(fq);
-        if (idx === -1) return text;
-        return text.slice(0,idx) + '<em>' + text.slice(idx, idx+query.length) + '</em>' + text.slice(idx+query.length);
+// =============================================================================
+// SEARCH
+// =============================================================================
+const searchInput    = document.getElementById('searchInput');
+const searchDropdown = document.getElementById('searchDropdown');
+const searchClear    = document.getElementById('searchClear');
+const searchIcon     = document.getElementById('searchIcon');
+let results=[], selIdx=-1;
+
+function fold(s){ return s.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase(); }
+
+function highlight(text,q){
+    const fi=fold(text), fq=fold(q);
+    const i=fi.indexOf(fq);
+    if(i<0) return text;
+    return text.slice(0,i)+'<em>'+text.slice(i,i+q.length)+'</em>'+text.slice(i+q.length);
+}
+
+function doSearch(q){
+    if(!q.trim()){closeDropdown();return;}
+    const fq=fold(q.trim());
+    results=STATIONS.filter(s=>fold(s.n).includes(fq));
+    selIdx=results.length?0:-1;
+    renderDrop(q.trim());
+}
+
+function renderDrop(q){
+    searchDropdown.innerHTML='';
+    if(!results.length){
+        searchDropdown.innerHTML='<div class="search-empty">No stations found</div>';
+        searchDropdown.classList.add('open'); return;
     }
-
-    function doSearch(q) {
-        if (!q.trim()) { closeDropdown(); return; }
-        const fq = diacriticFold(q.trim());
-        searchResults = ALL_STATIONS.filter(s => diacriticFold(s.n).includes(fq));
-        selectedIdx = searchResults.length > 0 ? 0 : -1;
-        renderDropdown(q.trim());
-    }
-
-    function renderDropdown(q) {
-        searchDropdown.innerHTML = '';
-        if (searchResults.length === 0) {
-            searchDropdown.innerHTML = '<div class="search-empty">No stations found</div>';
-            searchDropdown.classList.add('open');
-            return;
-        }
-        searchResults.forEach((s, i) => {
-            const div = document.createElement('div');
-            div.className = 'search-result' + (i === selectedIdx ? ' selected' : '');
-            div.dataset.idx = i;
-
-            const dots = s.lines.map(ln =>
-                '<span class="sr-dot" style="background:'+COLORS[ln]+'"></span>'
-            ).join('');
-            const linesLabel = s.lines.join(' · ');
-
-            div.innerHTML =
-                '<span class="sr-dots">' + dots + '</span>' +
-                '<span class="sr-name">' + highlightMatch(s.n, q) + '</span>' +
-                '<span class="sr-lines">' + linesLabel + '</span>';
-
-            div.addEventListener('mousedown', e => {
-                e.preventDefault();
-                selectStation(i);
-            });
-            searchDropdown.appendChild(div);
-        });
-        searchDropdown.classList.add('open');
-    }
-
-    function selectStation(idx) {
-        if (idx < 0 || idx >= searchResults.length) return;
-        const s = searchResults[idx];
-        pinnedStation = s;
-        cLat = s.lat; cLng = s.lng;
-        zoom = Math.min(ZMAX, Math.max(zoom, 15));
-        pinPulse = 60;
-        render();
-        closeDropdown();
-        searchInput.value = s.n;
-        searchInput.blur();
-    }
-
-    function closeDropdown() {
-        searchDropdown.classList.remove('open');
-        searchDropdown.innerHTML = '';
-        searchResults = [];
-        selectedIdx = -1;
-    }
-
-    searchInput.addEventListener('input', e => {
-        const v = e.target.value;
-        searchClear.style.display = v ? 'block' : 'none';
-        searchIcon.style.display = v ? 'none' : 'block';
-        if (!v) { pinnedStation = null; render(); closeDropdown(); return; }
-        doSearch(v);
+    results.forEach((s,i)=>{
+        const div=document.createElement('div');
+        div.className='search-result'+(i===selIdx?' sel':'');
+        const dots=s.lines.map(l=>'<span class="sr-dot" style="background:'+COLORS[l]+'"></span>').join('');
+        div.innerHTML='<span class="sr-dots">'+dots+'</span>'+
+            '<span class="sr-name">'+highlight(s.n,q)+'</span>'+
+            '<span class="sr-lines">'+s.lines.join(' · ')+'</span>';
+        div.addEventListener('mousedown',e=>{e.preventDefault();pickStation(i);});
+        searchDropdown.appendChild(div);
     });
+    searchDropdown.classList.add('open');
+}
 
-    searchInput.addEventListener('keydown', e => {
-        if (!searchDropdown.classList.contains('open')) return;
-        if (e.key === 'ArrowDown') {
-            e.preventDefault();
-            selectedIdx = Math.min(selectedIdx+1, searchResults.length-1);
-            updateSelectedItem();
-        } else if (e.key === 'ArrowUp') {
-            e.preventDefault();
-            selectedIdx = Math.max(selectedIdx-1, 0);
-            updateSelectedItem();
-        } else if (e.key === 'Enter') {
-            e.preventDefault();
-            if (selectedIdx >= 0) selectStation(selectedIdx);
-        } else if (e.key === 'Escape') {
-            closeDropdown();
-            searchInput.blur();
-        }
-    });
+function pickStation(idx){
+    if(idx<0||idx>=results.length) return;
+    const s=results[idx];
+    pinnedStation=s; cLat=s.lat; cLng=s.lng;
+    zoom=Math.min(ZMAX,Math.max(zoom,15.5));
+    pinAnim=60; render();
+    closeDropdown();
+    searchInput.value=s.n;
+    searchInput.blur();
+}
 
-    function updateSelectedItem() {
-        const items = searchDropdown.querySelectorAll('.search-result');
-        items.forEach((el, i) => el.classList.toggle('selected', i === selectedIdx));
-        items[selectedIdx]?.scrollIntoView({ block: 'nearest' });
+function closeDropdown(){
+    searchDropdown.classList.remove('open');
+    searchDropdown.innerHTML='';
+    results=[]; selIdx=-1;
+}
+
+function updateSel(){
+    searchDropdown.querySelectorAll('.search-result').forEach((el,i)=>el.classList.toggle('sel',i===selIdx));
+    searchDropdown.querySelectorAll('.search-result')[selIdx]?.scrollIntoView({block:'nearest'});
+}
+
+searchInput.addEventListener('input',e=>{
+    const v=e.target.value;
+    searchClear.style.display=v?'block':'none';
+    searchIcon.style.display=v?'none':'block';
+    if(!v){pinnedStation=null;render();closeDropdown();return;}
+    doSearch(v);
+});
+searchInput.addEventListener('keydown',e=>{
+    if(!searchDropdown.classList.contains('open')) return;
+    if(e.key==='ArrowDown'){e.preventDefault();selIdx=Math.min(selIdx+1,results.length-1);updateSel();}
+    else if(e.key==='ArrowUp'){e.preventDefault();selIdx=Math.max(0,selIdx-1);updateSel();}
+    else if(e.key==='Enter'){e.preventDefault();if(selIdx>=0)pickStation(selIdx);}
+    else if(e.key==='Escape'){closeDropdown();searchInput.blur();}
+});
+searchClear.addEventListener('click',()=>{
+    searchInput.value='';
+    searchClear.style.display='none'; searchIcon.style.display='block';
+    pinnedStation=null; closeDropdown(); render(); searchInput.focus();
+});
+document.addEventListener('mousedown',e=>{
+    if(!document.getElementById('searchWrap').contains(e.target)) closeDropdown();
+});
+
+// =============================================================================
+// INTERACTIONS
+// =============================================================================
+window.addEventListener('resize',render);
+
+// Mouse drag
+wrap.addEventListener('mousedown',e=>{dragging=true;dsx=e.clientX;dsy=e.clientY;dsLat=cLat;dsLng=cLng;});
+window.addEventListener('mousemove',e=>{
+    if(!dragging) return;
+    const sc=(1<<Math.round(zoom))*TS;
+    cLng=dsLng-(e.clientX-dsx)/sc*360;
+    cLat=dsLat+(e.clientY-dsy)/sc*360*Math.cos(dsLat*Math.PI/180);
+    render();
+});
+window.addEventListener('mouseup',()=>{dragging=false;});
+
+// Touch drag
+let tsx,tsy,tsLat,tsLng;
+wrap.addEventListener('touchstart',e=>{
+    if(e.touches.length!==1)return;
+    tsx=e.touches[0].clientX;tsy=e.touches[0].clientY;tsLat=cLat;tsLng=cLng;
+},{passive:true});
+wrap.addEventListener('touchmove',e=>{
+    if(e.touches.length!==1)return;
+    const sc=(1<<Math.round(zoom))*TS;
+    cLng=tsLng-(e.touches[0].clientX-tsx)/sc*360;
+    cLat=tsLat+(e.touches[0].clientY-tsy)/sc*360*Math.cos(tsLat*Math.PI/180);
+    render();
+},{passive:true});
+
+// Scroll zoom
+wrap.addEventListener('wheel',e=>{
+    e.preventDefault();
+    zoom=Math.max(ZMIN,Math.min(ZMAX,zoom+(e.deltaY>0?-.4:.4)));
+    render();
+},{passive:false});
+
+window.zoomMap=function(d){zoom=Math.max(ZMIN,Math.min(ZMAX,zoom+d*.6));render();};
+
+// Hover & tooltip
+function nearest(mx,my){
+    let best=null,bd=Infinity;
+    for(const s of STATIONS){
+        if(!s.lines.some(l=>vis[l])) continue;
+        const [sx,sy]=geo2s(s.lat,s.lng);
+        const d=Math.hypot(mx-sx,my-sy);
+        if(d<22&&d<bd){bd=d;best=s;}
     }
-
-    searchClear.addEventListener('click', () => {
-        searchInput.value = '';
-        searchClear.style.display = 'none';
-        searchIcon.style.display = 'block';
-        pinnedStation = null;
-        closeDropdown();
-        render();
-        searchInput.focus();
-    });
-
-    // Close dropdown when clicking outside
-    document.addEventListener('mousedown', e => {
-        if (!document.getElementById('searchWrap').contains(e.target)) {
-            closeDropdown();
-        }
-    });
-
-    // ==========================================
-    // INTERACTIONS
-    // ==========================================
-    window.addEventListener('resize', render);
-
-    // Mouse drag
-    wrap.addEventListener('mousedown', e => {
-        dragging=true; dsx=e.clientX; dsy=e.clientY; dsLat=cLat; dsLng=cLng;
-    });
-    window.addEventListener('mousemove', e => {
-        if (!dragging) return;
-        const sc = (1<<Math.round(zoom))*TS;
-        cLng = dsLng - (e.clientX-dsx)/sc*360;
-        cLat = dsLat + (e.clientY-dsy)/sc*360*Math.cos(dsLat*Math.PI/180);
-        render();
-    });
-    window.addEventListener('mouseup', () => { dragging=false; });
-
-    // Touch
-    let tsx,tsy,tsLat,tsLng;
-    wrap.addEventListener('touchstart', e => {
-        if (e.touches.length!==1) return;
-        tsx=e.touches[0].clientX; tsy=e.touches[0].clientY; tsLat=cLat; tsLng=cLng;
-    },{passive:true});
-    wrap.addEventListener('touchmove', e => {
-        if (e.touches.length!==1) return;
-        const sc = (1<<Math.round(zoom))*TS;
-        cLng = tsLng - (e.touches[0].clientX-tsx)/sc*360;
-        cLat = tsLat + (e.touches[0].clientY-tsy)/sc*360*Math.cos(tsLat*Math.PI/180);
-        render();
-    },{passive:true});
-
-    // Wheel zoom
-    wrap.addEventListener('wheel', e => {
-        e.preventDefault();
-        zoom = Math.max(ZMIN, Math.min(ZMAX, zoom + (e.deltaY>0?-.4:.4)));
-        render();
-    },{passive:false});
-
-    window.zoomMap = function(d) {
-        zoom = Math.max(ZMIN, Math.min(ZMAX, zoom+d*.6)); render();
-    };
-
-    // Hover
-    function nearest(mx, my) {
-        let best=null, bd=Infinity;
-        for (const [ln, sts] of Object.entries(LINES)) {
-            if (!vis[ln]) continue;
-            for (const s of sts) {
-                const [sx,sy] = geo2s(s.lat, s.lng);
-                const d = Math.hypot(mx-sx,my-sy);
-                if (d<20 && d<bd) { bd=d; best=s; }
-            }
-        }
-        return best;
-    }
-    wrap.addEventListener('mousemove', e => {
-        if (dragging) { ttEl.classList.remove('show'); return; }
-        const r = wrap.getBoundingClientRect();
-        const mx = e.clientX-r.left, my = e.clientY-r.top;
-        const s = nearest(mx, my);
-        if (s) {
-            hovered = s;
-            ttName.textContent = s.n;
-            const lines = getLines(s.n);
-            ttLines.innerHTML = lines.map(ln =>
-                '<span class="tooltip-line" style="background:'+COLORS[ln]+'22;color:'+COLORS[ln]+';border:1px solid '+COLORS[ln]+'44">'+
-                '<span class="tooltip-line-dot" style="background:'+COLORS[ln]+'"></span>'+ln+'</span>'
-            ).join('');
-            let tx = mx+16, ty = my-20;
-            if (tx+170>W) tx=mx-170;
-            if (ty<10) ty=my+20;
-            ttEl.style.left=tx+'px'; ttEl.style.top=ty+'px';
-            ttEl.classList.add('show');
-            wrap.style.cursor='pointer';
-        } else {
-            if (hovered) { hovered=null; }
-            ttEl.classList.remove('show');
-            wrap.style.cursor='grab';
-        }
-        render();
-    });
-    wrap.addEventListener('mouseleave', () => {
+    return best;
+}
+wrap.addEventListener('mousemove',e=>{
+    if(dragging){ttEl.classList.remove('show');return;}
+    const r=wrap.getBoundingClientRect();
+    const mx=e.clientX-r.left, my=e.clientY-r.top;
+    const s=nearest(mx,my);
+    if(s){
+        hovered=s;
+        ttName.textContent=s.n;
+        ttLines.innerHTML=s.lines.map(ln=>
+            '<span class="tooltip-line" style="background:'+COLORS[ln]+'22;color:'+COLORS[ln]+';border:1px solid '+COLORS[ln]+'55">'+
+            '<span class="tooltip-line-dot" style="background:'+COLORS[ln]+'"></span>'+ln+'</span>'
+        ).join('');
+        let tx=mx+16,ty=my-20;
+        if(tx+180>W) tx=mx-188; if(ty<8) ty=my+22;
+        ttEl.style.left=tx+'px'; ttEl.style.top=ty+'px';
+        ttEl.classList.add('show');
+        wrap.style.cursor='pointer';
+    } else {
+        if(hovered) hovered=null;
         ttEl.classList.remove('show');
-        if (hovered) { hovered=null; render(); }
-    });
+        wrap.style.cursor='grab';
+    }
+    render();
+});
+wrap.addEventListener('mouseleave',()=>{
+    ttEl.classList.remove('show');
+    if(hovered){hovered=null;render();}
+});
 
-    // Toggle line
-    window.toggleLine = function(name, el) {
-        vis[name] = !vis[name];
-        el.classList.toggle('off', !vis[name]);
-        render();
-    };
+// Line toggle
+window.toggleLine=function(name,el){
+    vis[name]=!vis[name];
+    el.classList.toggle('off',!vis[name]);
+    render();
+};
 
-    // Fit all
-    window.fitAll = function() {
-        let a=90,b=-90,c=180,d=-180;
-        for (const [ln,sts] of Object.entries(LINES)) {
-            if (!vis[ln]) continue;
-            for (const s of sts) { a=Math.min(a,s.lat); b=Math.max(b,s.lat); c=Math.min(c,s.lng); d=Math.max(d,s.lng); }
-        }
-        if (a>b) return;
-        cLat=(a+b)/2; cLng=(c+d)/2;
-        const zLat=Math.log2(360/(b-a)*H/TS)-1;
-        const zLng=Math.log2(360/(d-c)*W/TS)-1;
-        zoom = Math.max(ZMIN, Math.min(ZMAX, Math.min(zLat,zLng)-.3));
-        render();
-    };
+// Fit-all
+window.fitAll=function(){
+    let a=90,b=-90,c=180,d=-180;
+    for(const s of STATIONS){
+        if(!s.lines.some(l=>vis[l])) continue;
+        a=Math.min(a,s.lat);b=Math.max(b,s.lat);
+        c=Math.min(c,s.lng);d=Math.max(d,s.lng);
+    }
+    if(a>b) return;
+    cLat=(a+b)/2; cLng=(c+d)/2;
+    const zLat=Math.log2(360/(b-a)*H/TS)-1;
+    const zLng=Math.log2(360/(d-c)*W/TS)-1;
+    zoom=Math.max(ZMIN,Math.min(ZMAX,Math.min(zLat,zLng)-.3));
+    render();
+};
 
-    // Init
-    setTimeout(fitAll, 80);
+setTimeout(fitAll,80);
 })();
 </script>
 </body>
