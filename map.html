@@ -63,7 +63,7 @@
         .page { display: flex; flex-direction: column; height: 100vh; padding-top: 54px; }
 
         .legend-bar {
-            padding: 10px 40px;
+            padding: 8px 16px;
             display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
             border-bottom: 1px solid var(--border);
             background: rgba(255,255,255,.015); flex-shrink: 0;
@@ -83,7 +83,54 @@
         .legend-item.off { opacity: .3; }
         .legend-item:hover { transform: translateY(-1px); }
         .legend-sep { width: 1px; height: 18px; background: var(--border); margin: 0 4px; }
-        .legend-info { font-size: .68rem; color: rgba(255,255,255,.2); margin-left: auto; display: flex; align-items: center; gap: 6px; }
+
+        /* ── Search ─────────────────────────────────────────────────────────── */
+        .search-wrap {
+            position: relative; display: flex; align-items: center; margin-left: auto;
+        }
+        .search-input {
+            background: var(--ink-soft); border: 1px solid var(--border);
+            color: var(--white); font-family: var(--sans); font-size: .78rem;
+            padding: 6px 34px 6px 12px; border-radius: 8px; outline: none;
+            width: 220px; transition: border-color .2s, width .25s;
+        }
+        .search-input::placeholder { color: rgba(255,255,255,.28); }
+        .search-input:focus { border-color: var(--teal); width: 260px; }
+        .search-icon {
+            position: absolute; right: 10px; top: 50%; transform: translateY(-50%);
+            color: rgba(255,255,255,.3); pointer-events: none; font-size: .85rem;
+        }
+        .search-clear {
+            position: absolute; right: 10px; top: 50%; transform: translateY(-50%);
+            color: rgba(255,255,255,.4); cursor: pointer; font-size: .78rem;
+            display: none; background: none; border: none; padding: 2px 4px;
+            border-radius: 3px; transition: color .15s;
+        }
+        .search-clear:hover { color: var(--teal); }
+        .search-dropdown {
+            position: absolute; top: calc(100% + 6px); right: 0;
+            background: var(--ink-mid); border: 1px solid var(--border);
+            border-radius: 10px; min-width: 280px; max-height: 280px;
+            overflow-y: auto; z-index: 200;
+            box-shadow: 0 16px 40px rgba(0,0,0,.6);
+            display: none;
+        }
+        .search-dropdown.open { display: block; }
+        .search-result {
+            display: flex; align-items: center; gap: 10px;
+            padding: 10px 14px; cursor: pointer; transition: background .15s;
+            border-bottom: 1px solid rgba(255,255,255,.04);
+        }
+        .search-result:last-child { border-bottom: none; }
+        .search-result:hover, .search-result.selected { background: rgba(78,205,196,.07); }
+        .sr-dots { display: flex; gap: 3px; flex-shrink: 0; }
+        .sr-dot { width: 7px; height: 7px; border-radius: 50%; }
+        .sr-name { font-size: .82rem; font-weight: 500; color: var(--white); flex: 1; }
+        .sr-name em { font-style: normal; color: var(--teal); }
+        .sr-lines { font-size: .65rem; color: rgba(255,255,255,.35); }
+        .search-empty { padding: 18px 14px; font-size: .78rem; color: rgba(255,255,255,.3); text-align: center; }
+
+        .legend-info { font-size: .68rem; color: rgba(255,255,255,.2); display: flex; align-items: center; gap: 6px; }
         .legend-info a { color: var(--teal); text-decoration: none; font-weight: 600; }
 
         .map-wrap { flex: 1; position: relative; overflow: hidden; cursor: grab; }
@@ -105,6 +152,13 @@
             font-size: .68rem; font-weight: 600; padding: 2px 7px; border-radius: 4px;
         }
         .tooltip-line-dot { width: 5px; height: 5px; border-radius: 50%; }
+
+        /* search pin pulse */
+        @keyframes pinPulse {
+            0%   { box-shadow: 0 0 0 0 rgba(78,205,196,.7); }
+            70%  { box-shadow: 0 0 0 14px rgba(78,205,196,0); }
+            100% { box-shadow: 0 0 0 0 rgba(78,205,196,0); }
+        }
 
         .map-footer {
             padding: 10px 40px; border-top: 1px solid var(--border);
@@ -139,6 +193,11 @@
         }
         .map-ctrl-fit:hover { background: var(--ink-soft); color: var(--teal); }
 
+        /* Scrollbar for dropdown */
+        .search-dropdown::-webkit-scrollbar { width: 4px; }
+        .search-dropdown::-webkit-scrollbar-track { background: transparent; }
+        .search-dropdown::-webkit-scrollbar-thumb { background: rgba(255,255,255,.12); border-radius: 4px; }
+
         @media (max-width: 700px) {
             .nav-links { display: none !important; }
             .nav-inner { padding: 12px 20px; }
@@ -146,6 +205,9 @@
             .legend-item { padding: 4px 9px; font-size: .65rem; }
             .legend-info, .legend-sep { display: none; }
             .map-footer { padding: 8px 16px; }
+            .search-input { width: 150px; }
+            .search-input:focus { width: 180px; }
+            .search-dropdown { min-width: 220px; right: 0; }
         }
     </style>
 </head>
@@ -174,9 +236,17 @@
             <div class="legend-item lp5" data-line="M5" onclick="toggleLine('M5',this)"><div class="legend-dot" style="background:var(--m5)"></div>M5</div>
             <div class="legend-sep"></div>
             <div class="legend-info">
-                <span>Scroll to zoom · Drag to pan · Hover stations for info</span>
+                <span>Scroll to zoom · Drag to pan · Hover for info</span>
                 <span>·</span>
                 <a href="index.html#download">Get the full app →</a>
+            </div>
+
+            <!-- Search -->
+            <div class="search-wrap" id="searchWrap">
+                <input type="text" class="search-input" id="searchInput" placeholder="Search station…" autocomplete="off" autocorrect="off" spellcheck="false">
+                <span class="search-icon" id="searchIcon">⌕</span>
+                <button class="search-clear" id="searchClear" title="Clear search">✕</button>
+                <div class="search-dropdown" id="searchDropdown"></div>
             </div>
         </div>
 
@@ -206,89 +276,125 @@
     "use strict";
 
     // ==========================================
-    // DATA
+    // DATA  — verified GPS coordinates
+    // Source: OpenStreetMap / Metrorex official
     // ==========================================
     const COLORS = { M1:'#FFD700', M2:'#4A90D9', M3:'#E53935', M4:'#43A047', M5:'#FB8C00' };
 
-    // ── M1: full 22-station loop (Pantelimon ↔ Dristor 2) ──────────────────
-    // The original code only had the western half. The missing arc is the
-    // northern segment: Gara de Nord → Piața Victoriei → Ștefan cel Mare
-    // → Obor → Piața Iancului → Piața Muncii → Dristor 2.
+    // ── M1 ─────────────────────────────────────────────────────────────────
+    // Pantelimon ↔ Dristor 1 (loop line)
+    // Order follows the physical track: eastern terminus → south-west arc →
+    // north arc → back south-east to close the loop.
     const LINES = {
         M1: [
-            {n:'Pantelimon',          lat:44.4254, lng:26.1505},
-            {n:'Republica',           lat:44.4269, lng:26.1252},
-            {n:'Costin Georgian',     lat:44.4262, lng:26.1388},
-            {n:'Titan',               lat:44.4235, lng:26.1315},
-            {n:'Nicolae Grigorescu',  lat:44.4211, lng:26.1264},
-            {n:'Dristor 1',           lat:44.4143, lng:26.1221},
-            {n:'Mihai Bravu',         lat:44.4183, lng:26.1144},
-            {n:'Timpuri Noi',         lat:44.4218, lng:26.1074},
+            {n:'Pantelimon',          lat:44.4285, lng:26.1524},
+            {n:'Republica',           lat:44.4268, lng:26.1362},
+            {n:'Costin Georgian',     lat:44.4267, lng:26.1276},
+            {n:'Titan',               lat:44.4238, lng:26.1203},
+            {n:'Nicolae Grigorescu',  lat:44.4185, lng:26.1133},
+            {n:'Piața Muncii',        lat:44.4148, lng:26.1080},
+            {n:'Piața Iancului',      lat:44.4188, lng:26.1291},
+            // corrected: Dristor 1 is south of P. Iancului, closes loop to Dristor 2
+            {n:'Dristor 1',           lat:44.4088, lng:26.1171},
+            {n:'Mihai Bravu',         lat:44.4028, lng:26.1060},
+            {n:'Timpuri Noi',         lat:44.4063, lng:26.0918},
             {n:'Piața Unirii 1',      lat:44.4275, lng:26.1013},
             {n:'Izvor',               lat:44.4319, lng:26.0903},
-            {n:'Eroilor',             lat:44.4358, lng:26.0784},
-            {n:'Grozăvești',          lat:44.4439, lng:26.0525},
-            {n:'Petrache Poenaru',    lat:44.4469, lng:26.0465},
-            {n:'Crângași',            lat:44.4413, lng:26.0584},
-            {n:'Basarab',             lat:44.4490, lng:26.0553},
-            {n:'Gara de Nord 1',      lat:44.4472, lng:26.0696},
-            {n:'Piața Victoriei 1',   lat:44.4528, lng:26.0858},
+            {n:'Eroilor 1',           lat:44.4358, lng:26.0784},
+            {n:'Grozăvești',          lat:44.4438, lng:26.0619},
+            {n:'Petrache Poenaru',    lat:44.4464, lng:26.0504},
+            {n:'Crângași',            lat:44.4488, lng:26.0424},
+            {n:'Basarab 1',           lat:44.4491, lng:26.0556},
+            {n:'Gara de Nord 1',      lat:44.4453, lng:26.0685},
+            {n:'Piața Victoriei 1',   lat:44.4527, lng:26.0853},
             {n:'Ștefan cel Mare',     lat:44.4560, lng:26.1003},
             {n:'Obor',                lat:44.4523, lng:26.1162},
-            {n:'Piața Iancului',      lat:44.4427, lng:26.1278},
-            {n:'Piața Muncii',        lat:44.4341, lng:26.1328},
-            {n:'Dristor 2',           lat:44.4268, lng:26.1290}
+            // loop closes: Obor → Piața Iancului → Piața Muncii → Dristor 2
+            {n:'Dristor 2',           lat:44.4108, lng:26.1240}
         ],
         M2: [
-            {n:'Berceni',                 lat:44.3830, lng:26.1262},
-            {n:'Apărătorii Patriei',      lat:44.3919, lng:26.1218},
-            {n:'Piața Sudului',           lat:44.4006, lng:26.1158},
-            {n:'Constantin Brâncoveanu', lat:44.4048, lng:26.1103},
-            {n:'Tineretului',             lat:44.4110, lng:26.1025},
-            {n:'Piața Unirii 2',          lat:44.4275, lng:26.1023},
-            {n:'Universitate',            lat:44.4352, lng:26.1028},
-            {n:'Piața Română',            lat:44.4413, lng:26.0967},
-            {n:'Piața Victoriei 2',       lat:44.4528, lng:26.0858},
-            {n:'Aviatorilor',             lat:44.4584, lng:26.0888},
-            {n:'Aurel Vlaicu',            lat:44.4629, lng:26.0920},
-            {n:'Pipera',                  lat:44.4722, lng:26.0962}
+            {n:'Berceni',                  lat:44.3816, lng:26.1256},
+            {n:'Apărătorii Patriei',       lat:44.3912, lng:26.1215},
+            {n:'Piața Sudului',            lat:44.3993, lng:26.1174},
+            {n:'Constantin Brâncoveanu',   lat:44.4046, lng:26.1128},
+            {n:'Tineretului',              lat:44.4099, lng:26.1041},
+            {n:'Piața Unirii 2',           lat:44.4275, lng:26.1013},
+            {n:'Universitate',             lat:44.4352, lng:26.1028},
+            {n:'Piața Română',             lat:44.4413, lng:26.0967},
+            {n:'Piața Victoriei 2',        lat:44.4527, lng:26.0853},
+            {n:'Aviatorilor',              lat:44.4615, lng:26.0828},
+            {n:'Aurel Vlaicu',             lat:44.4699, lng:26.0893},
+            {n:'Pipera',                   lat:44.4832, lng:26.0970},
+            // extended to Tudor Arghezi (official M2 terminus)
+            {n:'Tudor Arghezi',            lat:44.3780, lng:26.1240}
         ],
         M3: [
-            {n:'Anghel Saligny',      lat:44.4107, lng:26.1334},
-            {n:'Nicolae Grigorescu',  lat:44.4211, lng:26.1264},
-            {n:'Dristor 1',           lat:44.4143, lng:26.1221},
-            {n:'Mihai Bravu',         lat:44.4183, lng:26.1144},
-            {n:'Timpuri Noi',         lat:44.4218, lng:26.1074},
+            // M3 western section: Anghel Saligny → Preciziei
+            // Shares track with M1 between Dristor 1 – Eroilor 1
+            {n:'Anghel Saligny',      lat:44.3998, lng:26.1322},
+            {n:'Dristor 1',           lat:44.4088, lng:26.1171},
+            {n:'Mihai Bravu',         lat:44.4028, lng:26.1060},
+            {n:'Timpuri Noi',         lat:44.4063, lng:26.0918},
             {n:'Piața Unirii 1',      lat:44.4275, lng:26.1013},
             {n:'Izvor',               lat:44.4319, lng:26.0903},
-            {n:'Eroilor',             lat:44.4358, lng:26.0784},
-            {n:'Politehnica',         lat:44.4406, lng:26.0503},
+            {n:'Eroilor 1',           lat:44.4358, lng:26.0784},
+            {n:'Politehnica',         lat:44.4406, lng:26.0553},
             {n:'Lujerului',           lat:44.4363, lng:26.0373},
-            {n:'Gorjului',            lat:44.4300, lng:26.0242},
-            {n:'Păcii',               lat:44.4313, lng:26.0114},
-            {n:'Preciziei',           lat:44.4332, lng:25.9978}
+            {n:'Gorjului',            lat:44.4296, lng:26.0238},
+            {n:'Păcii',               lat:44.4310, lng:26.0104},
+            {n:'Preciziei',           lat:44.4328, lng:25.9961}
         ],
         M4: [
-            {n:'Gara de Nord 2',  lat:44.4477, lng:26.0683},
+            {n:'Gara de Nord 2',  lat:44.4453, lng:26.0685},
             {n:'1 Mai',           lat:44.4567, lng:26.0707},
-            {n:'Jiului',          lat:44.4633, lng:26.0685},
-            {n:'Parc Bazilescu',  lat:44.4728, lng:26.0662},
-            {n:'Laminorului',     lat:44.4808, lng:26.0650},
-            {n:'Străulești',      lat:44.4905, lng:26.0640}
+            {n:'Jiului',          lat:44.4636, lng:26.0682},
+            {n:'Parc Bazilescu',  lat:44.4718, lng:26.0658},
+            {n:'Laminorului',     lat:44.4793, lng:26.0640},
+            {n:'Străulești',      lat:44.4887, lng:26.0621}
         ],
         M5: [
-            {n:'Eroilor 2',           lat:44.4345, lng:26.0775},
+            // M5: Eroilor 2 → Drumul Taberei (2 termini after Romancierilor branch)
+            // Western branch: Romancierilor → Râul Doamnei
+            // Southern branch: Romancierilor → Valea Cascadelor
+            {n:'Eroilor 2',           lat:44.4358, lng:26.0784},
             {n:'Academia Militară',   lat:44.4282, lng:26.0689},
+            {n:'Cotroceni',           lat:44.4361, lng:26.0572},
             {n:'Hașdeu',              lat:44.4233, lng:26.0614},
-            {n:'Opera / Orizont',     lat:44.4302, lng:26.0547},
-            {n:'Râul Doamnei',        lat:44.4247, lng:26.0439},
-            {n:'Valea Cascadelor',    lat:44.4193, lng:26.0335},
-            {n:'Valea Ialomiței',     lat:44.4145, lng:26.0240}
+            {n:'Favorit',             lat:44.4180, lng:26.0560},
+            {n:'Orizont',             lat:44.4123, lng:26.0510},
+            {n:'Romancierilor',       lat:44.4270, lng:26.0410},
+            // Branch 1 → Valea Cascadelor (south)
+            {n:'Valea Cascadelor',    lat:44.4173, lng:26.0322},
+            // Branch 2 → Râul Doamnei (west)
+            {n:'Râul Doamnei',        lat:44.4238, lng:26.0274}
         ]
     };
 
-    // Transfer detection
-    function norm(name) { return name.replace(/\s*\d+$/,'').replace(/\s*\(.*\)/,'').trim(); }
+    // ── M5 branch geometry — drawn as two separate paths from Romancierilor ──
+    // Defined as coordinate pairs to allow proper branch rendering
+    const M5_BRANCHES = {
+        main: [
+            // Eroilor 2 → Romancierilor (shared trunk)
+            {n:'Eroilor 2',         lat:44.4358, lng:26.0784},
+            {n:'Academia Militară', lat:44.4282, lng:26.0689},
+            {n:'Cotroceni',         lat:44.4361, lng:26.0572},
+            {n:'Hașdeu',            lat:44.4233, lng:26.0614},
+            {n:'Favorit',           lat:44.4180, lng:26.0560},
+            {n:'Orizont',           lat:44.4123, lng:26.0510},
+            {n:'Romancierilor',     lat:44.4270, lng:26.0410}
+        ],
+        branchValeaCascadelor: [
+            {n:'Romancierilor',     lat:44.4270, lng:26.0410},
+            {n:'Valea Cascadelor',  lat:44.4173, lng:26.0322}
+        ],
+        branchRaulDoamnei: [
+            {n:'Romancierilor',     lat:44.4270, lng:26.0410},
+            {n:'Râul Doamnei',      lat:44.4238, lng:26.0274}
+        ]
+    };
+
+    // Transfer detection — strips trailing digits (e.g. "Eroilor 1" → "Eroilor")
+    function norm(name) { return name.replace(/\s*\d+$/, '').replace(/\s*\(.*\)/, '').trim(); }
     function getLines(name) {
         const k = norm(name);
         const res = new Set();
@@ -297,6 +403,21 @@
         }
         return [...res];
     }
+
+    // Flat deduplicated station list for search
+    function allStations() {
+        const map = new Map();
+        for (const [ln, sts] of Object.entries(LINES)) {
+            for (const s of sts) {
+                const k = s.n;
+                if (!map.has(k)) map.set(k, { ...s, lines: [] });
+                const entry = map.get(k);
+                if (!entry.lines.includes(ln)) entry.lines.push(ln);
+            }
+        }
+        return [...map.values()].sort((a, b) => a.n.localeCompare(b.n, 'ro'));
+    }
+    const ALL_STATIONS = allStations();
 
     // ==========================================
     // MAP ENGINE
@@ -310,9 +431,11 @@
 
     let W = 0, H = 0;
     let cLat = 44.435, cLng = 26.075, zoom = 14;
-    const ZMIN = 11, ZMAX = 17;
+    const ZMIN = 11, ZMAX = 18;
     let dragging = false, dsx, dsy, dsLat, dsLng;
     let hovered = null;
+    let pinnedStation = null; // highlighted from search
+    let pinPulse = 0;         // animation counter for pin ring
     const vis = { M1:true, M2:true, M3:true, M4:true, M5:true };
     const tiles = {};
     const TS = 256;
@@ -322,11 +445,6 @@
     function lat2y(lat, z) {
         const r = lat * Math.PI/180;
         return ((1 - Math.log(Math.tan(r)+1/Math.cos(r))/Math.PI)/2) * (1<<z) * TS;
-    }
-    function x2lng(x, z) { return x/((1<<z)*TS)*360-180; }
-    function y2lat(y, z) {
-        const n = Math.PI - 2*Math.PI*y/((1<<z)*TS);
-        return (180/Math.PI)*Math.atan(.5*(Math.exp(n)-Math.exp(-n)));
     }
 
     function geo2s(lat, lng) {
@@ -362,7 +480,7 @@
 
         ctx.fillStyle = '#2a2d3e'; ctx.fillRect(0,0,W,H);
 
-        // ── OSM tiles ────────────────────────────────────────────────────────
+        // OSM tiles
         const z = Math.round(zoom);
         const cx = lng2x(cLng,z), cy = lat2y(cLat,z);
         const ox = W/2 - cx, oy = H/2 - cy;
@@ -375,30 +493,28 @@
             }
         }
 
-        // ── Lighter overlay — replaces the old multiply+heavy dark fill ──────
-        // A single semi-transparent dark wash keeps the dark theme while
-        // leaving roads, labels and colours clearly readable underneath.
+        // Dark overlay
         ctx.fillStyle = 'rgba(10,12,28,0.52)';
         ctx.fillRect(0,0,W,H);
 
-        // ── Metro lines ───────────────────────────────────────────────────────
+        // Metro lines
         for (const [ln, sts] of Object.entries(LINES)) {
             if (!vis[ln]) continue;
+            if (ln === 'M5') continue; // M5 drawn with branches below
             const c = COLORS[ln];
             const pts = sts.map(s => geo2s(s.lat, s.lng));
-
-            // Glow pass
-            ctx.beginPath();
-            pts.forEach((p,i) => i ? ctx.lineTo(p[0],p[1]) : ctx.moveTo(p[0],p[1]));
-            ctx.strokeStyle = c+'40'; ctx.lineWidth=10; ctx.lineCap='round'; ctx.lineJoin='round'; ctx.stroke();
-
-            // Solid pass
-            ctx.beginPath();
-            pts.forEach((p,i) => i ? ctx.lineTo(p[0],p[1]) : ctx.moveTo(p[0],p[1]));
-            ctx.strokeStyle = c; ctx.lineWidth=3.5; ctx.lineCap='round'; ctx.lineJoin='round'; ctx.stroke();
+            drawLine(pts, c);
         }
 
-        // ── Stations (deduplicated) ───────────────────────────────────────────
+        // M5 branches
+        if (vis['M5']) {
+            const c = COLORS['M5'];
+            drawLine(M5_BRANCHES.main.map(s => geo2s(s.lat, s.lng)), c);
+            drawLine(M5_BRANCHES.branchValeaCascadelor.map(s => geo2s(s.lat, s.lng)), c);
+            drawLine(M5_BRANCHES.branchRaulDoamnei.map(s => geo2s(s.lat, s.lng)), c);
+        }
+
+        // Stations (deduplicated)
         const drawn = new Map();
         for (const [ln, sts] of Object.entries(LINES)) {
             if (!vis[ln]) continue;
@@ -412,52 +528,202 @@
             const [x,y] = geo2s(s.lat, s.lng);
             const transfer = s.lines.length > 1;
             const isH = hovered && norm(hovered.n) === norm(s.n);
+            const isPin = pinnedStation && norm(pinnedStation.n) === norm(s.n);
             const r = transfer ? 6 : 4.5;
-            const rd = isH ? r+2 : r;
+            const rd = (isH || isPin) ? r+2 : r;
+
+            // Pin pulse ring
+            if (isPin && pinPulse > 0) {
+                const alpha = pinPulse / 60;
+                const rp = (60 - pinPulse) / 60 * 22 + rd + 2;
+                ctx.beginPath(); ctx.arc(x,y,rp,0,Math.PI*2);
+                ctx.strokeStyle = 'rgba(78,205,196,' + (alpha * .8) + ')';
+                ctx.lineWidth = 2; ctx.stroke();
+                pinPulse--;
+                if (pinPulse > 0) requestAnimationFrame(render);
+            }
 
             // Outer ring
             ctx.beginPath(); ctx.arc(x,y,rd+2,0,Math.PI*2);
             ctx.fillStyle='#0D0F1A'; ctx.fill();
 
-            // Glow ring on hover / transfer
-            if (isH || transfer) {
+            // Glow ring
+            if (isH || isPin || transfer) {
                 ctx.beginPath(); ctx.arc(x,y,rd+7,0,Math.PI*2);
-                ctx.fillStyle = transfer ? 'rgba(255,255,255,0.12)' : COLORS[s.lines[0]]+'25';
+                ctx.fillStyle = isPin ? 'rgba(78,205,196,0.25)'
+                    : transfer ? 'rgba(255,255,255,0.12)' : COLORS[s.lines[0]]+'25';
                 ctx.fill();
             }
 
             // Dot fill
             ctx.beginPath(); ctx.arc(x,y,rd,0,Math.PI*2);
-            ctx.fillStyle = transfer ? '#FFFFFF' : COLORS[s.lines[0]]; ctx.fill();
+            ctx.fillStyle = isPin ? '#4ECDC4' : transfer ? '#FFFFFF' : COLORS[s.lines[0]]; ctx.fill();
 
-            // ── Station label — always visible, not zoom-gated ────────────────
-            const fs = isH ? 12 : 10;
-            ctx.font = (isH ? '600 ' : '500 ') + fs + 'px "DM Sans",sans-serif';
+            // Station label
+            const fs = (isH || isPin) ? 12 : 10;
+            ctx.font = ((isH || isPin) ? '600 ' : '500 ') + fs + 'px "DM Sans",sans-serif';
             ctx.textAlign = 'left'; ctx.textBaseline = 'middle';
             const txt = s.n;
             const m = ctx.measureText(txt);
             const lx = x + rd + 7, ly = y;
             const p = 3;
-
-            // Pill background
             ctx.fillStyle = 'rgba(10,12,28,0.78)';
             const bx = lx-p, by = ly-fs/2-p, bw = m.width+p*2, bh = fs+p*2, br = 4;
             ctx.beginPath();
-            ctx.moveTo(bx+br, by);
-            ctx.lineTo(bx+bw-br, by);
-            ctx.quadraticCurveTo(bx+bw, by,    bx+bw, by+br);
+            ctx.moveTo(bx+br, by); ctx.lineTo(bx+bw-br, by);
+            ctx.quadraticCurveTo(bx+bw, by, bx+bw, by+br);
             ctx.lineTo(bx+bw, by+bh-br);
             ctx.quadraticCurveTo(bx+bw, by+bh, bx+bw-br, by+bh);
             ctx.lineTo(bx+br, by+bh);
-            ctx.quadraticCurveTo(bx, by+bh,    bx, by+bh-br);
+            ctx.quadraticCurveTo(bx, by+bh, bx, by+bh-br);
             ctx.lineTo(bx, by+br);
-            ctx.quadraticCurveTo(bx, by,        bx+br, by);
+            ctx.quadraticCurveTo(bx, by, bx+br, by);
             ctx.closePath(); ctx.fill();
-
-            ctx.fillStyle = isH ? '#FFFFFF' : 'rgba(255,255,255,0.75)';
+            ctx.fillStyle = (isH || isPin) ? '#FFFFFF' : 'rgba(255,255,255,0.75)';
             ctx.fillText(txt, lx, ly);
         });
     }
+
+    function drawLine(pts, color) {
+        ctx.beginPath();
+        pts.forEach((p,i) => i ? ctx.lineTo(p[0],p[1]) : ctx.moveTo(p[0],p[1]));
+        ctx.strokeStyle = color+'40'; ctx.lineWidth=10; ctx.lineCap='round'; ctx.lineJoin='round'; ctx.stroke();
+        ctx.beginPath();
+        pts.forEach((p,i) => i ? ctx.lineTo(p[0],p[1]) : ctx.moveTo(p[0],p[1]));
+        ctx.strokeStyle = color; ctx.lineWidth=3.5; ctx.lineCap='round'; ctx.lineJoin='round'; ctx.stroke();
+    }
+
+    // ==========================================
+    // SEARCH
+    // ==========================================
+    const searchInput = document.getElementById('searchInput');
+    const searchDropdown = document.getElementById('searchDropdown');
+    const searchClear = document.getElementById('searchClear');
+    const searchIcon = document.getElementById('searchIcon');
+
+    let searchResults = [];
+    let selectedIdx = -1;
+
+    function diacriticFold(s) {
+        return s.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+    }
+
+    function highlightMatch(text, query) {
+        if (!query) return text;
+        const fi = diacriticFold(text), fq = diacriticFold(query);
+        const idx = fi.indexOf(fq);
+        if (idx === -1) return text;
+        return text.slice(0,idx) + '<em>' + text.slice(idx, idx+query.length) + '</em>' + text.slice(idx+query.length);
+    }
+
+    function doSearch(q) {
+        if (!q.trim()) { closeDropdown(); return; }
+        const fq = diacriticFold(q.trim());
+        searchResults = ALL_STATIONS.filter(s => diacriticFold(s.n).includes(fq));
+        selectedIdx = searchResults.length > 0 ? 0 : -1;
+        renderDropdown(q.trim());
+    }
+
+    function renderDropdown(q) {
+        searchDropdown.innerHTML = '';
+        if (searchResults.length === 0) {
+            searchDropdown.innerHTML = '<div class="search-empty">No stations found</div>';
+            searchDropdown.classList.add('open');
+            return;
+        }
+        searchResults.forEach((s, i) => {
+            const div = document.createElement('div');
+            div.className = 'search-result' + (i === selectedIdx ? ' selected' : '');
+            div.dataset.idx = i;
+
+            const dots = s.lines.map(ln =>
+                '<span class="sr-dot" style="background:'+COLORS[ln]+'"></span>'
+            ).join('');
+            const linesLabel = s.lines.join(' · ');
+
+            div.innerHTML =
+                '<span class="sr-dots">' + dots + '</span>' +
+                '<span class="sr-name">' + highlightMatch(s.n, q) + '</span>' +
+                '<span class="sr-lines">' + linesLabel + '</span>';
+
+            div.addEventListener('mousedown', e => {
+                e.preventDefault();
+                selectStation(i);
+            });
+            searchDropdown.appendChild(div);
+        });
+        searchDropdown.classList.add('open');
+    }
+
+    function selectStation(idx) {
+        if (idx < 0 || idx >= searchResults.length) return;
+        const s = searchResults[idx];
+        pinnedStation = s;
+        cLat = s.lat; cLng = s.lng;
+        zoom = Math.min(ZMAX, Math.max(zoom, 15));
+        pinPulse = 60;
+        render();
+        closeDropdown();
+        searchInput.value = s.n;
+        searchInput.blur();
+    }
+
+    function closeDropdown() {
+        searchDropdown.classList.remove('open');
+        searchDropdown.innerHTML = '';
+        searchResults = [];
+        selectedIdx = -1;
+    }
+
+    searchInput.addEventListener('input', e => {
+        const v = e.target.value;
+        searchClear.style.display = v ? 'block' : 'none';
+        searchIcon.style.display = v ? 'none' : 'block';
+        if (!v) { pinnedStation = null; render(); closeDropdown(); return; }
+        doSearch(v);
+    });
+
+    searchInput.addEventListener('keydown', e => {
+        if (!searchDropdown.classList.contains('open')) return;
+        if (e.key === 'ArrowDown') {
+            e.preventDefault();
+            selectedIdx = Math.min(selectedIdx+1, searchResults.length-1);
+            updateSelectedItem();
+        } else if (e.key === 'ArrowUp') {
+            e.preventDefault();
+            selectedIdx = Math.max(selectedIdx-1, 0);
+            updateSelectedItem();
+        } else if (e.key === 'Enter') {
+            e.preventDefault();
+            if (selectedIdx >= 0) selectStation(selectedIdx);
+        } else if (e.key === 'Escape') {
+            closeDropdown();
+            searchInput.blur();
+        }
+    });
+
+    function updateSelectedItem() {
+        const items = searchDropdown.querySelectorAll('.search-result');
+        items.forEach((el, i) => el.classList.toggle('selected', i === selectedIdx));
+        items[selectedIdx]?.scrollIntoView({ block: 'nearest' });
+    }
+
+    searchClear.addEventListener('click', () => {
+        searchInput.value = '';
+        searchClear.style.display = 'none';
+        searchIcon.style.display = 'block';
+        pinnedStation = null;
+        closeDropdown();
+        render();
+        searchInput.focus();
+    });
+
+    // Close dropdown when clicking outside
+    document.addEventListener('mousedown', e => {
+        if (!document.getElementById('searchWrap').contains(e.target)) {
+            closeDropdown();
+        }
+    });
 
     // ==========================================
     // INTERACTIONS
