@@ -14,8 +14,9 @@
     <style>
         :root {
             --ink: #0D0F1A; --ink-mid: #13152A; --ink-soft: #1C1F35;
-            --teal: #4ECDC4;
+            --teal: #4ECDC4; --teal-dim: #2A9D96;
             --white: #FFFFFF;
+            --mist: rgba(255,255,255,0.07);
             --border: rgba(255,255,255,0.08);
             --m1: #CC3333; --m2: #3366CC; --m3: #DDAA00; --m4: #2E8B57; --m5: #FF9831;
             --serif: 'DM Serif Display', Georgia, serif;
@@ -25,10 +26,13 @@
         html, body { height: 100%; font-size: 16px; }
         body { font-family: var(--sans); color: rgba(255,255,255,0.72); overflow: hidden; background: var(--ink); }
 
+        /* LINE STRIP */
         .line-strip {
             position: fixed; top: 0; left: 0; width: 100%; height: 3px; z-index: 1000;
             background: linear-gradient(90deg, var(--m1) 0% 20%, var(--m3) 20% 40%, var(--m2) 40% 60%, var(--m4) 60% 80%, var(--m5) 80% 100%);
         }
+
+        /* NAV */
         .nav {
             position: fixed; top: 3px; left: 0; width: 100%; z-index: 900;
             background: rgba(13,15,26,.95); backdrop-filter: blur(16px);
@@ -49,15 +53,67 @@
             color: rgba(255,255,255,.5); text-decoration: none; transition: color .2s;
         }
         .nav-links a:hover, .nav-links a.active { color: var(--teal); }
+        .nav-end { display: flex; align-items: center; gap: 10px; }
+        .lang-btn {
+            background: none; border: 1px solid var(--border); border-radius: 6px;
+            padding: 5px 12px; font-family: var(--sans); font-size: .75rem; font-weight: 600;
+            letter-spacing: .08em; color: rgba(255,255,255,.4); cursor: pointer; transition: all .2s;
+        }
+        .lang-btn.on, .lang-btn:hover { border-color: var(--teal); color: var(--teal); }
         .nav-dl {
             text-decoration: none; background: var(--teal); color: var(--ink);
             font-weight: 700; font-size: .8rem; padding: 8px 20px; border-radius: 8px;
-            transition: opacity .2s; white-space: nowrap;
+            transition: opacity .2s, transform .2s; white-space: nowrap;
         }
-        .nav-dl:hover { opacity: .88; }
+        .nav-dl:hover { opacity: .88; transform: translateY(-1px); }
+        .hamburger {
+            display: none; background: none; border: none; cursor: pointer;
+            padding: 4px; flex-direction: column; gap: 5px; z-index: 10;
+        }
+        .hamburger span { display: block; width: 20px; height: 2px; background: var(--white); border-radius: 1px; transition: .3s; }
+        .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+        .hamburger.open span:nth-child(2) { opacity: 0; }
+        .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
+        /* MOBILE MENU */
+        .mobile-menu {
+            display: none; position: fixed; top: 3px; left: 0; right: 0; z-index: 899;
+            background: rgba(13,15,26,.98); backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border); padding: 70px 32px 28px;
+            flex-direction: column; gap: 0;
+        }
+        .mobile-menu.open { display: flex; }
+        .mobile-menu-section {
+            font-size: .65rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase;
+            color: rgba(255,255,255,.25); padding: 20px 0 8px;
+            border-top: 1px solid var(--border); margin-top: 8px;
+        }
+        .mobile-menu-section:first-child { border-top: none; margin-top: 0; padding-top: 0; }
+        .mobile-menu a {
+            display: flex; align-items: center; gap: 10px; font-size: .95rem; font-weight: 500;
+            color: rgba(255,255,255,.65); text-decoration: none; padding: 11px 0;
+            border-bottom: 1px solid rgba(255,255,255,.04); transition: color .2s;
+        }
+        .mobile-menu a:last-of-type { border-bottom: none; }
+        .mobile-menu a:hover { color: var(--teal); }
+        .mobile-menu a.active { color: var(--teal); }
+        .mobile-menu a .mm-icon {
+            width: 32px; height: 32px; border-radius: 7px;
+            background: var(--mist); border: 1px solid var(--border);
+            display: flex; align-items: center; justify-content: center;
+            font-size: .85rem; flex-shrink: 0;
+        }
+        .mobile-menu-dl {
+            margin-top: 20px; display: flex; background: var(--teal); color: var(--ink);
+            font-weight: 700; font-size: .92rem; padding: 13px 20px; border-radius: 8px;
+            text-decoration: none; justify-content: center; transition: opacity .2s;
+        }
+        .mobile-menu-dl:hover { opacity: .88; color: var(--ink); }
+
+        /* PAGE LAYOUT */
         .page { display: flex; flex-direction: column; height: 100vh; padding-top: 54px; }
 
+        /* LEGEND BAR */
         .legend-bar {
             padding: 8px 16px;
             display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
@@ -82,7 +138,7 @@
         .legend-info { font-size: .68rem; color: rgba(255,255,255,.2); display: flex; align-items: center; gap: 6px; }
         .legend-info a { color: var(--teal); text-decoration: none; font-weight: 600; }
 
-        /* ── Search ───────────────────────────────────────────────────────── */
+        /* SEARCH */
         .search-wrap { position: relative; display: flex; align-items: center; margin-left: auto; flex-shrink: 0; }
         .search-input {
             background: var(--ink-soft); border: 1px solid var(--border);
@@ -127,10 +183,12 @@
         .search-dropdown::-webkit-scrollbar { width: 4px; }
         .search-dropdown::-webkit-scrollbar-thumb { background: rgba(255,255,255,.12); border-radius: 4px; }
 
+        /* MAP */
         .map-wrap { flex: 1; position: relative; overflow: hidden; cursor: grab; }
         .map-wrap:active { cursor: grabbing; }
         .map-wrap canvas { display: block; }
 
+        /* TOOLTIP */
         .tooltip {
             position: absolute; z-index: 50; pointer-events: none;
             background: var(--ink-mid); border: 1px solid var(--border);
@@ -147,6 +205,7 @@
         }
         .tooltip-line-dot { width: 5px; height: 5px; border-radius: 50%; }
 
+        /* MAP FOOTER */
         .map-footer {
             padding: 10px 40px; border-top: 1px solid var(--border);
             background: var(--ink); display: flex; align-items: center;
@@ -160,6 +219,7 @@
         .map-footer-right { font-size: .68rem; color: rgba(255,255,255,.2); }
         .map-footer-right a { color: rgba(78,205,196,.5); text-decoration: none; }
 
+        /* MAP CONTROLS */
         .map-controls { position: absolute; bottom: 20px; right: 20px; z-index: 40; display: flex; flex-direction: column; gap: 2px; }
         .map-ctrl-btn {
             width: 36px; height: 36px; border: 1px solid var(--border);
@@ -180,8 +240,10 @@
         }
         .map-ctrl-fit:hover { background: var(--ink-soft); color: var(--teal); }
 
+        /* RESPONSIVE */
         @media (max-width: 700px) {
-            .nav-links { display: none !important; }
+            .nav-links, .lang-toggle { display: none !important; }
+            .hamburger { display: flex; }
             .nav-inner { padding: 12px 20px; }
             .legend-bar { padding: 8px 12px; gap: 5px; }
             .legend-item { padding: 4px 9px; font-size: .65rem; }
@@ -194,123 +256,163 @@
     </style>
 </head>
 <body>
-    <div class="line-strip"></div>
-    <nav class="nav">
-        <div class="nav-inner">
-            <a href="index.html" class="nav-brand"><div class="nav-brand-dot"></div>Metrou București</a>
-            <ul class="nav-links">
-                <li><a href="index.html#features">Features</a></li>
-                <li><a href="map.html" class="active">Metro Map</a></li>
-                <li><a href="index.html#screenshots">Screenshots</a></li>
-                <li><a href="index.html#download">Download</a></li>
-                <li><a href="feedback.html">Contact</a></li>
-            </ul>
-            <a href="index.html#download" class="nav-dl">Free — Get the App</a>
-        </div>
-    </nav>
 
-    <div class="page">
-        <div class="legend-bar">
-            <div class="legend-item lp1" onclick="toggleLine('M1',this)"><div class="legend-dot" style="background:var(--m1)"></div>M1</div>
-            <div class="legend-item lp2" onclick="toggleLine('M2',this)"><div class="legend-dot" style="background:var(--m2)"></div>M2</div>
-            <div class="legend-item lp3" onclick="toggleLine('M3',this)"><div class="legend-dot" style="background:var(--m3)"></div>M3</div>
-            <div class="legend-item lp4" onclick="toggleLine('M4',this)"><div class="legend-dot" style="background:var(--m4)"></div>M4</div>
-            <div class="legend-item lp5" onclick="toggleLine('M5',this)"><div class="legend-dot" style="background:var(--m5)"></div>M5</div>
-            <div class="legend-sep"></div>
-            <div class="legend-info">
-                <span>Scroll to zoom · Drag to pan · Hover for info</span>
-                <span>·</span>
-                <a href="index.html#download">Get the full app →</a>
-            </div>
-            <div class="search-wrap" id="searchWrap">
-                <input type="text" class="search-input" id="searchInput" placeholder="Search station…" autocomplete="off" autocorrect="off" spellcheck="false">
-                <span class="search-icon" id="searchIcon">⌕</span>
-                <button class="search-clear" id="searchClear" title="Clear">✕</button>
-                <div class="search-dropdown" id="searchDropdown"></div>
-            </div>
-        </div>
+<div class="line-strip"></div>
 
-        <div class="map-wrap" id="mapWrap">
-            <canvas id="mapCanvas"></canvas>
-            <div class="tooltip" id="tooltip">
-                <div class="tooltip-name" id="ttName"></div>
-                <div class="tooltip-lines" id="ttLines"></div>
+<!-- NAV -->
+<nav class="nav" id="nav">
+    <div class="nav-inner">
+        <a href="index.html" class="nav-brand"><div class="nav-brand-dot"></div>Metrou București</a>
+        <ul class="nav-links" id="nav-links">
+            <li><a href="index.html#features">Features</a></li>
+            <li><a href="index.html#screenshots">Screenshots</a></li>
+            <li><a href="map.html" class="active">Map</a></li>
+            <li><a href="index.html#download">Download</a></li>
+            <li><a href="feedback.html">Contact</a></li>
+        </ul>
+        <div class="nav-end">
+            <div class="lang-toggle" style="display:flex;gap:4px">
+                <button class="lang-btn on" onclick="setLang('en')">EN</button>
+                <button class="lang-btn"    onclick="setLang('ro')">RO</button>
             </div>
-            <div class="map-controls">
-                <button class="map-ctrl-btn" onclick="zoomMap(1)">+</button>
-                <button class="map-ctrl-btn" onclick="zoomMap(-1)">−</button>
-                <button class="map-ctrl-fit" onclick="fitAll()" title="Fit all lines">⊡</button>
-            </div>
+            <a href="index.html#download" class="nav-dl" data-en="Free — Get the App" data-ro="Gratuit — Descarcă">Free — Get the App</a>
+            <button class="hamburger" id="hbg" aria-label="Menu"><span></span><span></span><span></span></button>
         </div>
+    </div>
+</nav>
 
-        <div class="map-footer">
-            <a href="index.html" class="foot-brand-sm"><span class="foot-dot-sm"></span>Metrou București — Interactive Metro Map</a>
-            <div class="map-footer-right">
-                © 2024–2026 Metrou București · Map © <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors
-            </div>
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobile-menu">
+    <p class="mobile-menu-section">Navigate</p>
+    <a href="index.html#features"    onclick="closeMobileMenu()"><span class="mm-icon">✦</span> Features</a>
+    <a href="index.html#screenshots" onclick="closeMobileMenu()"><span class="mm-icon">📱</span> Screenshots</a>
+    <a href="map.html" class="active"><span class="mm-icon">🗺️</span> Map</a>
+    <a href="index.html#download"    onclick="closeMobileMenu()"><span class="mm-icon">▶</span> Download</a>
+    <a href="feedback.html"          onclick="closeMobileMenu()"><span class="mm-icon">✉</span> Contact Us</a>
+    <p class="mobile-menu-section">Legal</p>
+    <a href="https://lxtech.ro/metroubucuresti/metrou-bucuresti-terms.html"      target="_blank"><span class="mm-icon">📄</span> Terms &amp; Conditions</a>
+    <a href="https://lxtech.ro/metroubucuresti/metrou-bucuresti-privacy.html"    target="_blank"><span class="mm-icon">🔒</span> Privacy Policy</a>
+    <a href="https://lxtech.ro/metroubucuresti/metrou-bucuresti-data-usage.html" target="_blank"><span class="mm-icon">📊</span> Data Usage</a>
+    <p class="mobile-menu-section">Support</p>
+    <a href="feedback.html" onclick="closeMobileMenu()"><span class="mm-icon">✉</span> Contact me</a>
+    <a href="feedback.html" onclick="closeMobileMenu()"><span class="mm-icon">🐛</span> Report a bug</a>
+    <a href="feedback.html" onclick="closeMobileMenu()"><span class="mm-icon">💡</span> Request a feature</a>
+    <a href="https://play.google.com/store/apps/details?id=com.MetroBuc" class="mobile-menu-dl" target="_blank">&#9654;&nbsp; Get it on Google Play — FREE</a>
+</div>
+
+<div class="page">
+    <div class="legend-bar">
+        <div class="legend-item lp1" onclick="toggleLine('M1',this)"><div class="legend-dot" style="background:var(--m1)"></div>M1</div>
+        <div class="legend-item lp2" onclick="toggleLine('M2',this)"><div class="legend-dot" style="background:var(--m2)"></div>M2</div>
+        <div class="legend-item lp3" onclick="toggleLine('M3',this)"><div class="legend-dot" style="background:var(--m3)"></div>M3</div>
+        <div class="legend-item lp4" onclick="toggleLine('M4',this)"><div class="legend-dot" style="background:var(--m4)"></div>M4</div>
+        <div class="legend-item lp5" onclick="toggleLine('M5',this)"><div class="legend-dot" style="background:var(--m5)"></div>M5</div>
+        <div class="legend-sep"></div>
+        <div class="legend-info">
+            <span>Scroll to zoom · Drag to pan · Hover for info</span>
+            <span>·</span>
+            <a href="index.html#download">Get the full app →</a>
+        </div>
+        <div class="search-wrap" id="searchWrap">
+            <input type="text" class="search-input" id="searchInput" placeholder="Search station…" autocomplete="off" autocorrect="off" spellcheck="false">
+            <span class="search-icon" id="searchIcon">⌕</span>
+            <button class="search-clear" id="searchClear" title="Clear">✕</button>
+            <div class="search-dropdown" id="searchDropdown"></div>
         </div>
     </div>
 
+    <div class="map-wrap" id="mapWrap">
+        <canvas id="mapCanvas"></canvas>
+        <div class="tooltip" id="tooltip">
+            <div class="tooltip-name" id="ttName"></div>
+            <div class="tooltip-lines" id="ttLines"></div>
+        </div>
+        <div class="map-controls">
+            <button class="map-ctrl-btn" onclick="zoomMap(1)">+</button>
+            <button class="map-ctrl-btn" onclick="zoomMap(-1)">−</button>
+            <button class="map-ctrl-fit" onclick="fitAll()" title="Fit all lines">⊡</button>
+        </div>
+    </div>
+
+    <div class="map-footer">
+        <a href="index.html" class="foot-brand-sm"><span class="foot-dot-sm"></span>Metrou București — Interactive Metro Map</a>
+        <div class="map-footer-right">
+            © 2024–2026 Metrou București · Map © <a href="https://www.openstreetmap.org/copyright" target="_blank">OpenStreetMap</a> contributors
+        </div>
+    </div>
+</div>
+
 <script>
+/* ── Language toggle (mirrors index.html) ── */
+let lang = localStorage.getItem('mb-lang') || 'en';
+function setLang(l) {
+    lang = l;
+    localStorage.setItem('mb-lang', l);
+    document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('on', b.textContent.trim().toLowerCase() === l));
+    document.querySelectorAll('[data-en]').forEach(el => {
+        const val = el.getAttribute('data-' + l) || el.getAttribute('data-en');
+        if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') el.placeholder = val;
+        else el.innerHTML = val;
+    });
+}
+
+/* ── Hamburger ── */
+const hbg   = document.getElementById('hbg');
+const mmenu = document.getElementById('mobile-menu');
+hbg.addEventListener('click', () => {
+    hbg.classList.toggle('open');
+    mmenu.classList.toggle('open');
+});
+function closeMobileMenu() {
+    hbg.classList.remove('open');
+    mmenu.classList.remove('open');
+}
+
+/* ── Init lang ── */
+setLang(lang);
+
+// =============================================================================
+// MAP ENGINE
+// =============================================================================
 (function(){
 "use strict";
 
-// =============================================================================
-// DATA — extracted directly from metro_stations.geojson + metro_lines.geojson
-//         These are the EXACT same coordinates the Android app uses.
-// =============================================================================
-
-// Display colors (brightened from app originals for canvas readability)
 const COLORS = {
     M1:'#CC3333', M2:'#3366CC', M3:'#DDAA00', M4:'#2E8B57', M5:'#FF9831'
 };
 
-// ── Line polylines: each inner array is one LineString segment from the GeoJSON.
-//    Points are [lat, lng] matching the source file exactly.
 const LINE_SEGMENTS = {
     M1:[
-        // Eroilor 1 → Preciziei  (west arm)
         [[44.435048,26.075653],[44.435276,26.055400],[44.434381,26.032585],[44.434211,26.021280],[44.433914,26.004127],[44.430581,25.990968]],
-        // Eroilor 1 → Anghel Saligny  (east arm)
         [[44.435048,26.075653],[44.433058,26.089586],[44.427541,26.101922],[44.416959,26.113347],[44.411289,26.125886],[44.419368,26.140464],[44.413308,26.160902],[44.410552,26.173798],[44.407292,26.194405],[44.405386,26.208920]]
     ],
     M2:[
-        // Pipera → Tudor Arghezi
         [[44.480613,26.116634],[44.479156,26.100232],[44.466031,26.086642],[44.452626,26.086432],[44.445357,26.097700],[44.435563,26.102468],[44.427759,26.104083],[44.415373,26.104511],[44.403785,26.096653],[44.398611,26.109128],[44.392454,26.122838],[44.379390,26.135068],[44.368822,26.143581],[44.361265,26.149282],[44.348041,26.159256]]
     ],
     M3:[
-        // Eroilor 1 → Dristor 2  (north loop via Gara de Nord / Obor)
         [[44.435048,26.075653],[44.442735,26.060360],[44.445426,26.046552],[44.451913,26.047145],[44.450746,26.068372],[44.447235,26.076566],[44.451955,26.087077],[44.452933,26.104694],[44.449412,26.124610],[44.441695,26.132322],[44.431826,26.138676],[44.420478,26.139415]],
-        // Eroilor 1 → Republica  (east via Timpuri Noi / Dristor 1 / Titan)
         [[44.435048,26.075653],[44.433058,26.089586],[44.427541,26.101922],[44.416959,26.113347],[44.411293,26.125885],[44.419368,26.140464],[44.413572,26.160606],[44.425792,26.162722],[44.435122,26.169127],[44.434421,26.185310]],
-        // Republica → Pantelimon  (short east stub)
         [[44.434421,26.185310],[44.440525,26.192603]]
     ],
     M4:[
-        // Gara de Nord 2 → Straulesti
         [[44.447349,26.073805],[44.450829,26.068478],[44.461762,26.057496],[44.470534,26.050627],[44.481550,26.041538],[44.486649,26.037568],[44.494320,26.031965],[44.501655,26.026241]]
     ],
     M5:[
-        // Raul Doamnei → Eroilor 2  (main trunk)
         [[44.415240,26.024204],[44.419118,26.020287],[44.422988,26.024616],[44.422225,26.033088],[44.423064,26.041303],[44.424640,26.048364],[44.425874,26.055890],[44.428930,26.062876],[44.434840,26.073844]],
-        // Branch: Romancierilor → Valea Ialomitei
         [[44.422988,26.024616],[44.421112,26.014442]]
     ]
 };
 
-// Interchange walking corridors (dashed grey connectors between platform pairs)
 const TRANSFER_SEGS = [
-    [[44.434840,26.073844],[44.435048,26.075653]],  // Eroilor 2 ↔ Eroilor 1
-    [[44.420478,26.139415],[44.419368,26.140464]],  // Dristor 2 ↔ Dristor 1
-    [[44.450829,26.068478],[44.450746,26.068372]],  // Basarab 2 ↔ Basarab 1
-    [[44.427759,26.104083],[44.427541,26.101922]],  // Piata Unirii 2 ↔ Piata Unirii 1
-    [[44.452626,26.086432],[44.451955,26.087077]],  // Piata Victoriei 2 ↔ Piata Victoriei 1
-    [[44.447349,26.073805],[44.447235,26.076566]],  // Gara de Nord 2 ↔ Gara de Nord 1
-    [[44.413308,26.160902],[44.413572,26.160606]]   // Nicolae Grigorescu 2 ↔ 1
+    [[44.434840,26.073844],[44.435048,26.075653]],
+    [[44.420478,26.139415],[44.419368,26.140464]],
+    [[44.450829,26.068478],[44.450746,26.068372]],
+    [[44.427759,26.104083],[44.427541,26.101922]],
+    [[44.452626,26.086432],[44.451955,26.087077]],
+    [[44.447349,26.073805],[44.447235,26.076566]],
+    [[44.413308,26.160902],[44.413572,26.160606]]
 ];
 
-// All 64 Metrorex stations — coordinates from metro_stations.geojson,
-// line assignments derived from proximity to metro_lines.geojson segments.
 const STATIONS = [
     {n:'1 Decembrie 1918',      lat:44.410552, lng:26.173798, lines:['M1']},
     {n:'1 Mai',                  lat:44.470534, lng:26.050627, lines:['M4']},
@@ -378,9 +480,6 @@ const STATIONS = [
     {n:'Valea Ialomitei',        lat:44.421112, lng:26.014442, lines:['M5']}
 ];
 
-// =============================================================================
-// MAP ENGINE
-// =============================================================================
 const canvas = document.getElementById('mapCanvas');
 const ctx    = canvas.getContext('2d');
 const wrap   = document.getElementById('mapWrap');
@@ -397,7 +496,6 @@ const vis={M1:true,M2:true,M3:true,M4:true,M5:true};
 const tiles={};
 const TS=256;
 
-// Mercator helpers
 function lng2x(lng,z){ return ((lng+180)/360)*(1<<z)*TS; }
 function lat2y(lat,z){
     const r=lat*Math.PI/180;
@@ -408,7 +506,6 @@ function geo2s(lat,lng){
     return [lng2x(lng,z)-lng2x(cLng,z)+W/2, lat2y(lat,z)-lat2y(cLat,z)+H/2];
 }
 
-// Tile cache
 function tileUrl(tx,ty,tz){
     return 'https://'+['a','b','c'][(tx+ty)%3]+'.tile.openstreetmap.org/'+tz+'/'+tx+'/'+ty+'.png';
 }
@@ -422,7 +519,6 @@ function loadTile(tx,ty,tz){
     return (tiles[k]={img,ok:false,err:false});
 }
 
-// Draw one polyline segment: glow + solid pass
 function polyline(pts, color, w){
     if(pts.length<2) return;
     ctx.beginPath();
@@ -433,14 +529,12 @@ function polyline(pts, color, w){
     ctx.strokeStyle=color; ctx.lineWidth=w; ctx.lineCap='round'; ctx.lineJoin='round'; ctx.stroke();
 }
 
-// Draw one station dot + label
 function drawStation(s, isH, isPin){
     const [x,y]=geo2s(s.lat,s.lng);
     const multi=s.lines.length>1;
     const r=multi?6:4.5;
     const rd=(isH||isPin)?r+2.5:r;
 
-    // Animated pulse ring when pin-selected
     if(isPin && pinAnim>0){
         const prog=pinAnim/60;
         const rp=(1-prog)*24+rd+4;
@@ -451,22 +545,18 @@ function drawStation(s, isH, isPin){
         if(pinAnim>0) requestAnimationFrame(render);
     }
 
-    // Dark outer ring
     ctx.beginPath(); ctx.arc(x,y,rd+2,0,Math.PI*2);
     ctx.fillStyle='#0D0F1A'; ctx.fill();
 
-    // Soft halo
     if(isH||isPin||multi){
         ctx.beginPath(); ctx.arc(x,y,rd+9,0,Math.PI*2);
         ctx.fillStyle=isPin?'rgba(78,205,196,.20)':multi?'rgba(255,255,255,.09)':COLORS[s.lines[0]]+'20';
         ctx.fill();
     }
 
-    // Dot fill
     ctx.beginPath(); ctx.arc(x,y,rd,0,Math.PI*2);
     ctx.fillStyle=isPin?'#4ECDC4':multi?'#FFFFFF':COLORS[s.lines[0]]; ctx.fill();
 
-    // Label pill
     const fs=(isH||isPin)?12:10;
     ctx.font=((isH||isPin)?'600 ':'500 ')+fs+'px "DM Sans",sans-serif';
     ctx.textAlign='left'; ctx.textBaseline='middle';
@@ -488,7 +578,6 @@ function drawStation(s, isH, isPin){
     ctx.fillText(s.n,lx,ly);
 }
 
-// Main render loop
 function render(){
     W=wrap.clientWidth; H=wrap.clientHeight;
     const dpr=devicePixelRatio||1;
@@ -498,7 +587,6 @@ function render(){
 
     ctx.fillStyle='#2a2d3e'; ctx.fillRect(0,0,W,H);
 
-    // OSM tiles
     const z=Math.round(zoom);
     const cx=lng2x(cLng,z), cy=lat2y(cLat,z);
     const ox=W/2-cx, oy=H/2-cy;
@@ -510,10 +598,8 @@ function render(){
             if(t.ok) ctx.drawImage(t.img,tx*TS+ox,ty*TS+oy,TS,TS);
         }
 
-    // Dark wash
     ctx.fillStyle='rgba(10,12,28,0.52)'; ctx.fillRect(0,0,W,H);
 
-    // Transfer connectors (dashed grey)
     ctx.save();
     ctx.setLineDash([5,5]);
     for(const seg of TRANSFER_SEGS){
@@ -525,14 +611,12 @@ function render(){
     ctx.setLineDash([]);
     ctx.restore();
 
-    // Metro lines (each segment)
     for(const [ln,segs] of Object.entries(LINE_SEGMENTS)){
         if(!vis[ln]) continue;
         for(const seg of segs)
             polyline(seg.map(c=>geo2s(c[0],c[1])), COLORS[ln], 4);
     }
 
-    // Stations
     for(const s of STATIONS){
         if(!s.lines.some(l=>vis[l])) continue;
         drawStation(s, hovered&&hovered.n===s.n, pinnedStation&&pinnedStation.n===s.n);
@@ -548,7 +632,7 @@ const searchClear    = document.getElementById('searchClear');
 const searchIcon     = document.getElementById('searchIcon');
 let results=[], selIdx=-1;
 
-function fold(s){ return s.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase(); }
+function fold(s){ return s.normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase(); }
 
 function highlight(text,q){
     const fi=fold(text), fq=fold(q);
@@ -634,7 +718,6 @@ document.addEventListener('mousedown',e=>{
 // =============================================================================
 window.addEventListener('resize',render);
 
-// Mouse drag
 wrap.addEventListener('mousedown',e=>{dragging=true;dsx=e.clientX;dsy=e.clientY;dsLat=cLat;dsLng=cLng;});
 window.addEventListener('mousemove',e=>{
     if(!dragging) return;
@@ -645,7 +728,6 @@ window.addEventListener('mousemove',e=>{
 });
 window.addEventListener('mouseup',()=>{dragging=false;});
 
-// Touch drag
 let tsx,tsy,tsLat,tsLng;
 wrap.addEventListener('touchstart',e=>{
     if(e.touches.length!==1)return;
@@ -659,7 +741,6 @@ wrap.addEventListener('touchmove',e=>{
     render();
 },{passive:true});
 
-// Scroll zoom
 wrap.addEventListener('wheel',e=>{
     e.preventDefault();
     zoom=Math.max(ZMIN,Math.min(ZMAX,zoom+(e.deltaY>0?-.4:.4)));
@@ -668,7 +749,6 @@ wrap.addEventListener('wheel',e=>{
 
 window.zoomMap=function(d){zoom=Math.max(ZMIN,Math.min(ZMAX,zoom+d*.6));render();};
 
-// Hover & tooltip
 function nearest(mx,my){
     let best=null,bd=Infinity;
     for(const s of STATIONS){
@@ -708,14 +788,12 @@ wrap.addEventListener('mouseleave',()=>{
     if(hovered){hovered=null;render();}
 });
 
-// Line toggle
 window.toggleLine=function(name,el){
     vis[name]=!vis[name];
     el.classList.toggle('off',!vis[name]);
     render();
 };
 
-// Fit-all
 window.fitAll=function(){
     let a=90,b=-90,c=180,d=-180;
     for(const s of STATIONS){
