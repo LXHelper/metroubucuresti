@@ -10,7 +10,7 @@
 <title>Metrou București — Navigate Bucharest Metro | Free Android App</title>
 <meta name="description" content="The smart Bucharest metro app. Plan routes across M1–M5, GPS journey tracking, door-opening indicators, station details, offline timetables. Free on Android.">
 <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
-<meta name="author" content="LUXTECH INNOVATION SRL">
+<meta name="author" content="Metrou București">
 <meta name="theme-color" content="#0D0F1A">
 <link rel="canonical" href="https://www.metroubucuresti.ro/">
 
@@ -83,16 +83,16 @@
     "inLanguage": ["en", "ro", "fr", "it", "de", "es"],
     "publisher": {
       "@type": "Organization",
-      "name": "LUXTECH INNOVATION SRL",
-      "url": "https://lxtech.ro",
+      "name": "Metrou București",
+      "url": "https://www.metroubucuresti.ro",
       "email": "help@lxtech.ro"
     }
   },
   {
     "@context": "https://schema.org",
     "@type": "Organization",
-    "name": "LUXTECH INNOVATION SRL",
-    "url": "https://lxtech.ro",
+    "name": "Metrou București",
+    "url": "https://www.metroubucuresti.ro",
     "email": "help@lxtech.ro",
     "sameAs": [
       "https://play.google.com/store/apps/details?id=com.MetroBuc"
@@ -219,8 +219,59 @@ body{
   white-space:nowrap;
 }
 .nav-dl:hover{opacity:.88;transform:translateY(-1px)}
-.hamburger{display:none;background:none;border:none;cursor:pointer;padding:4px;flex-direction:column;gap:5px}
+.hamburger{display:flex;background:none;border:none;cursor:pointer;padding:4px;flex-direction:column;gap:5px;z-index:10}
 .hamburger span{display:block;width:20px;height:2px;background:var(--white);border-radius:1px;transition:.3s}
+.hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.hamburger.open span:nth-child(2){opacity:0}
+.hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+/* ── MOBILE DROPDOWN MENU ── */
+.mobile-menu{
+  display:none;
+  position:fixed;top:3px;left:0;right:0;z-index:899;
+  background:rgba(13,15,26,.98);
+  backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--border);
+  padding:70px 32px 28px;
+  flex-direction:column;
+  gap:0;
+}
+.mobile-menu.open{display:flex}
+.mobile-menu-section{
+  font-size:.65rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+  color:rgba(255,255,255,.25);
+  padding:20px 0 8px;
+  border-top:1px solid var(--border);
+  margin-top:8px;
+}
+.mobile-menu-section:first-child{border-top:none;margin-top:0;padding-top:0}
+.mobile-menu a{
+  display:flex;align-items:center;gap:10px;
+  font-size:.95rem;font-weight:500;
+  color:rgba(255,255,255,.65);
+  text-decoration:none;
+  padding:11px 0;
+  border-bottom:1px solid rgba(255,255,255,.04);
+  transition:color .2s;
+}
+.mobile-menu a:last-of-type{border-bottom:none}
+.mobile-menu a:hover{color:var(--teal)}
+.mobile-menu a .mm-icon{
+  width:32px;height:32px;border-radius:7px;
+  background:var(--mist);border:1px solid var(--border);
+  display:flex;align-items:center;justify-content:center;
+  font-size:.85rem;flex-shrink:0;
+}
+.mobile-menu-dl{
+  margin-top:20px;
+  display:flex;
+  background:var(--teal);color:var(--ink);
+  font-weight:700;font-size:.92rem;
+  padding:13px 20px;border-radius:8px;
+  text-decoration:none;
+  justify-content:center;
+  transition:opacity .2s;
+}
+.mobile-menu-dl:hover{opacity:.88;color:var(--ink)}
 
 /* ══════════════════════════════════════════════════════
    HERO
@@ -657,6 +708,27 @@ footer{
   </div>
 </nav>
 
+<!-- ── Mobile Menu ───────────────────────────────────────── -->
+<div class="mobile-menu" id="mobile-menu">
+
+  <p class="mobile-menu-section">Navigate</p>
+  <a href="#features"    onclick="closeMobileMenu()"><span class="mm-icon">✦</span> Features</a>
+  <a href="#screenshots" onclick="closeMobileMenu()"><span class="mm-icon">📱</span> Screenshots</a>
+  <a href="#download"    onclick="closeMobileMenu()"><span class="mm-icon">▶</span> Download</a>
+
+  <p class="mobile-menu-section">Legal</p>
+  <a href="https://lxtech.ro/metroubucuresti/metrou-bucuresti-terms.html"      target="_blank"><span class="mm-icon">📄</span> Terms &amp; Conditions</a>
+  <a href="https://lxtech.ro/metroubucuresti/metrou-bucuresti-privacy.html"    target="_blank"><span class="mm-icon">🔒</span> Privacy Policy</a>
+  <a href="https://lxtech.ro/metroubucuresti/metrou-bucuresti-data-usage.html" target="_blank"><span class="mm-icon">📊</span> Data Usage</a>
+
+  <p class="mobile-menu-section">Support</p>
+  <a href="feedback.html"><span class="mm-icon">✉</span> Contact me</a>
+  <a href="feedback.html"><span class="mm-icon">🐛</span> Report a bug</a>
+  <a href="feedback.html"><span class="mm-icon">💡</span> Request a feature</a>
+
+  <a href="https://play.google.com/store/apps/details?id=com.MetroBuc" class="mobile-menu-dl" target="_blank">&#9654; &nbsp;Get it on Google Play</a>
+</div>
+
 <!-- ── Hero ──────────────────────────────────────────────────── -->
 <section class="hero" id="top">
   <div class="hero-mesh"></div>
@@ -668,9 +740,9 @@ footer{
       <span data-en="with Ease" data-ro="cu Ușurință">with Ease</span>
     </h1>
     <p class="hero-desc rv rv2"
-       data-en="Smart route planning across all 5 lines, GPS journey tracking, door-opening indicators, station details and more — everything stored on your device, works fully offline."
-       data-ro="Planificare inteligentă pe toate cele 5 linii, urmărire GPS, indicatori pentru uși, detalii stații și multe altele — totul stocat local, funcționează complet offline.">
-      Smart route planning across all 5 lines, GPS journey tracking, door-opening indicators, station details and more — everything stored on your device, works fully offline.
+       data-en="Smart route planning across all 5 lines, GPS journey tracking, door-opening indicators, elevator &amp; wheelchair access info, interactive map and nearby places — all stored on your device. No internet needed, ever."
+       data-ro="Planificare inteligentă pe toate cele 5 linii, urmărire GPS, indicatori pentru uși, informații lifturi și accesibilitate, hartă interactivă și locuri din apropiere — totul stocat local. Fără internet, niciodată.">
+      Smart route planning across all 5 lines, GPS journey tracking, door-opening indicators, elevator &amp; wheelchair access info, interactive map and nearby places — all stored on your device. No internet needed, ever.
     </p>
     <div class="hero-btns rv rv3">
       <a href="#download" class="btn-fill">
@@ -697,8 +769,8 @@ footer{
       <div class="hstat">
         <div class="hstat-icon">📵</div>
         <div class="hstat-text">
-          <strong data-en="Fully Offline" data-ro="Complet Offline">Fully Offline</strong>
-          <span data-en="No internet needed" data-ro="Fără internet">No internet needed</span>
+          <strong data-en="100% Offline" data-ro="100% Offline">100% Offline</strong>
+          <span data-en="Zero data, always works" data-ro="Zero date, mereu funcționează">Zero data, always works</span>
         </div>
       </div>
     </div>
@@ -764,9 +836,9 @@ footer{
 
     <div class="feat-item rv rv1">
       <span class="feat-num">04</span>
-      <span class="feat-emoji">🏢</span>
-      <p class="feat-name" data-en="Station Details" data-ro="Detalii stații">Station Details</p>
-      <p class="feat-copy" data-en="Explore entrances, transport connections, nearby places and points of interest for every station on the network." data-ro="Explorează intrări, conexiuni de transport, locuri din apropiere și puncte de interes pentru fiecare stație.">Explore entrances, transport connections, nearby places and points of interest for every station on the network.</p>
+      <span class="feat-emoji">♿</span>
+      <p class="feat-name" data-en="Accessibility & Station Info" data-ro="Accesibilitate și info stație">Accessibility & Station Info</p>
+      <p class="feat-copy" data-en="See elevator availability and wheelchair-accessible entrances at every station. Includes bathroom locations, transport connections, and nearby places — all at a glance." data-ro="Vezi disponibilitatea lifturilor și intrările accesibile cu scaunul cu rotile la fiecare stație. Include locații toalete, conexiuni transport și locuri din apropiere.">See elevator availability and wheelchair-accessible entrances at every station. Includes bathroom locations, transport connections, and nearby places — all at a glance.</p>
     </div>
 
     <div class="feat-item rv rv2">
@@ -786,8 +858,8 @@ footer{
     <div class="feat-item rv rv1">
       <span class="feat-num">07</span>
       <span class="feat-emoji">🗺️</span>
-      <p class="feat-name" data-en="Interactive Maps" data-ro="Hărți interactive">Interactive Maps</p>
-      <p class="feat-copy" data-en="Zoomable SVG metro map plus an OpenStreetMap view with station markers, entrance locations, and nearby POI overlays." data-ro="Hartă metrou SVG zoomabilă plus vedere OpenStreetMap cu markere de stații, intrări și suprapuneri POI.">Zoomable SVG metro map plus an OpenStreetMap view with station markers, entrance locations, and nearby POI overlays.</p>
+      <p class="feat-name" data-en="Interactive Map & Nearby Places" data-ro="Hartă interactivă și locuri apropiate">Interactive Map & Nearby Places</p>
+      <p class="feat-copy" data-en="Zoomable metro map with live station markers, entrance pins, elevator locations, and nearby restaurants, parks and landmarks — all overlaid on an interactive OpenStreetMap." data-ro="Hartă metrou zoomabilă cu markere de stații, intrări, lifturi și locuri din apropiere (restaurante, parcuri, repere) — totul pe o hartă OpenStreetMap interactivă.">Zoomable metro map with live station markers, entrance pins, elevator locations, and nearby restaurants, parks and landmarks — all overlaid on an interactive OpenStreetMap.</p>
     </div>
 
     <div class="feat-item rv rv2">
@@ -800,8 +872,8 @@ footer{
     <div class="feat-item rv rv3">
       <span class="feat-num">09</span>
       <span class="feat-emoji">📵</span>
-      <p class="feat-name" data-en="Works Fully Offline" data-ro="Funcționează offline">Works Fully Offline</p>
-      <p class="feat-copy" data-en="All route planning, timetables, station data, and journey tracking work without any internet — perfect underground." data-ro="Toate rutele, orarele, datele stațiilor și urmărirea funcționează fără internet — perfect sub pământ.">All route planning, timetables, station data, and journey tracking work without any internet — perfect underground.</p>
+      <p class="feat-name" data-en="100% Offline — Always" data-ro="100% Offline — Mereu">100% Offline — Always</p>
+      <p class="feat-copy" data-en="No internet required. Ever. Routes, timetables, maps, accessibility info and tracking all work underground without a single byte of mobile data." data-ro="Fără internet. Niciodată. Rute, orare, hărți, informații accesibilitate și urmărire — toate funcționează sub pământ fără niciun byte de date mobile.">No internet required. Ever. Routes, timetables, maps, accessibility info and tracking all work underground without a single byte of mobile data.</p>
     </div>
 
   </div>
@@ -821,7 +893,9 @@ footer{
       <li data-en="Know which door side to stand on at each station" data-ro="Știi pe ce parte a ușii să stai la fiecare stație">Know which door side to stand on at each station</li>
       <li data-en="Explore station entrances and nearby places" data-ro="Explorează intrări și locuri din apropierea stațiilor">Explore station entrances and nearby places</li>
       <li data-en="Save favourite routes and personal station notes" data-ro="Salvează rute favorite și note personale">Save favourite routes and personal station notes</li>
-      <li data-en="Everything works fully offline" data-ro="Totul funcționează complet offline">Everything works fully offline</li>
+      <li data-en="Elevator and wheelchair access info per station" data-ro="Info lifturi și acces cu scaunul cu rotile per stație">Elevator and wheelchair access info per station</li>
+      <li data-en="Interactive map with nearby places and landmarks" data-ro="Hartă interactivă cu locuri și repere din apropiere">Interactive map with nearby places and landmarks</li>
+      <li data-en="100% offline — no internet needed, ever" data-ro="100% offline — fără internet, niciodată">100% offline — no internet needed, ever</li>
     </ul>
     <a href="#download" class="btn-fill rv rv3" style="align-self:flex-start"
        data-en="Download the app →" data-ro="Descarcă aplicația →">Download the app →</a>
@@ -893,7 +967,7 @@ footer{
     </div>
   </div>
   <div class="foot-bottom">
-    <span data-en="© 2024–2026 LUXTECH INNOVATION SRL. All rights reserved." data-ro="© 2024–2026 LUXTECH INNOVATION SRL. Toate drepturile rezervate.">© 2024–2026 LUXTECH INNOVATION SRL. All rights reserved.</span>
+    <span data-en="© 2024–2026 Metrou București. All rights reserved." data-ro="© 2024–2026 Metrou București. Toate drepturile rezervate.">© 2024–2026 Metrou București. All rights reserved.</span>
     <div class="foot-dots">
       <div class="fd" style="background:var(--m1)"></div>
       <div class="fd" style="background:var(--m2)"></div>
@@ -925,9 +999,32 @@ const nav = document.getElementById('nav');
 window.addEventListener('scroll', () => nav.classList.toggle('solid', scrollY > 60), {passive:true});
 
 /* ── Hamburger ── */
-document.getElementById('hbg').addEventListener('click', () =>
-  document.getElementById('nav-links').classList.toggle('open')
-);
+const hbg        = document.getElementById('hbg');
+const mobileMenu = document.getElementById('mobile-menu');
+
+function closeMobileMenu() {
+  hbg.classList.remove('open');
+  mobileMenu.classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+hbg.addEventListener('click', () => {
+  const isOpen = mobileMenu.classList.toggle('open');
+  hbg.classList.toggle('open', isOpen);
+  document.body.style.overflow = isOpen ? 'hidden' : '';
+});
+
+// Close on Escape key
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeMobileMenu(); });
+
+// Close when clicking outside the menu
+document.addEventListener('click', e => {
+  if (mobileMenu.classList.contains('open') &&
+      !mobileMenu.contains(e.target) &&
+      !hbg.contains(e.target)) {
+    closeMobileMenu();
+  }
+});
 
 /* ── Reveal ── */
 document.querySelectorAll('.rv
