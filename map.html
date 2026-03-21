@@ -209,44 +209,81 @@
     // DATA
     // ==========================================
     const COLORS = { M1:'#FFD700', M2:'#4A90D9', M3:'#E53935', M4:'#43A047', M5:'#FB8C00' };
+
+    // ── M1: full 22-station loop (Pantelimon ↔ Dristor 2) ──────────────────
+    // The original code only had the western half. The missing arc is the
+    // northern segment: Gara de Nord → Piața Victoriei → Ștefan cel Mare
+    // → Obor → Piața Iancului → Piața Muncii → Dristor 2.
     const LINES = {
         M1: [
-            {n:'Pantelimon',lat:44.4254,lng:26.1505},{n:'Costin Georgian',lat:44.4262,lng:26.1388},
-            {n:'Republica',lat:44.4269,lng:26.1252},{n:'Nicolae Grigorescu',lat:44.4211,lng:26.1264},
-            {n:'Nicolae Teclu',lat:44.4164,lng:26.1245},{n:'Dristor 1',lat:44.4143,lng:26.1221},
-            {n:'Mihai Bravu',lat:44.4183,lng:26.1144},{n:'Timpuri Noi',lat:44.4218,lng:26.1074},
-            {n:'Piața Unirii 1',lat:44.4275,lng:26.1013},{n:'Izvor',lat:44.4319,lng:26.0903},
-            {n:'Eroilor',lat:44.4358,lng:26.0784},{n:'Crângași',lat:44.4413,lng:26.0584},
-            {n:'Grozăvești',lat:44.4439,lng:26.0525},{n:'Petrache Poenaru',lat:44.4469,lng:26.0465},
-            {n:'Basarab',lat:44.4490,lng:26.0553},{n:'Gara de Nord',lat:44.4472,lng:26.0696}
+            {n:'Pantelimon',          lat:44.4254, lng:26.1505},
+            {n:'Republica',           lat:44.4269, lng:26.1252},
+            {n:'Costin Georgian',     lat:44.4262, lng:26.1388},
+            {n:'Titan',               lat:44.4235, lng:26.1315},
+            {n:'Nicolae Grigorescu',  lat:44.4211, lng:26.1264},
+            {n:'Dristor 1',           lat:44.4143, lng:26.1221},
+            {n:'Mihai Bravu',         lat:44.4183, lng:26.1144},
+            {n:'Timpuri Noi',         lat:44.4218, lng:26.1074},
+            {n:'Piața Unirii 1',      lat:44.4275, lng:26.1013},
+            {n:'Izvor',               lat:44.4319, lng:26.0903},
+            {n:'Eroilor',             lat:44.4358, lng:26.0784},
+            {n:'Grozăvești',          lat:44.4439, lng:26.0525},
+            {n:'Petrache Poenaru',    lat:44.4469, lng:26.0465},
+            {n:'Crângași',            lat:44.4413, lng:26.0584},
+            {n:'Basarab',             lat:44.4490, lng:26.0553},
+            {n:'Gara de Nord 1',      lat:44.4472, lng:26.0696},
+            {n:'Piața Victoriei 1',   lat:44.4528, lng:26.0858},
+            {n:'Ștefan cel Mare',     lat:44.4560, lng:26.1003},
+            {n:'Obor',                lat:44.4523, lng:26.1162},
+            {n:'Piața Iancului',      lat:44.4427, lng:26.1278},
+            {n:'Piața Muncii',        lat:44.4341, lng:26.1328},
+            {n:'Dristor 2',           lat:44.4268, lng:26.1290}
         ],
         M2: [
-            {n:'Berceni',lat:44.3830,lng:26.1262},{n:'Aparatorii Patriei',lat:44.3919,lng:26.1218},
-            {n:'Piata Sudului',lat:44.4006,lng:26.1158},{n:'Constantin Brâncoveanu',lat:44.4048,lng:26.1103},
-            {n:'Tineretului',lat:44.4110,lng:26.1025},{n:'Piata Unirii 2',lat:44.4275,lng:26.1023},
-            {n:'Universitate',lat:44.4352,lng:26.1028},{n:'Piata Romana',lat:44.4413,lng:26.0967},
-            {n:'Piata Victoriei',lat:44.4528,lng:26.0858},{n:'Aviatorilor',lat:44.4584,lng:26.0888},
-            {n:'Aurel Vlaicu',lat:44.4629,lng:26.0920},{n:'Pipera',lat:44.4722,lng:26.0962}
+            {n:'Berceni',                 lat:44.3830, lng:26.1262},
+            {n:'Apărătorii Patriei',      lat:44.3919, lng:26.1218},
+            {n:'Piața Sudului',           lat:44.4006, lng:26.1158},
+            {n:'Constantin Brâncoveanu', lat:44.4048, lng:26.1103},
+            {n:'Tineretului',             lat:44.4110, lng:26.1025},
+            {n:'Piața Unirii 2',          lat:44.4275, lng:26.1023},
+            {n:'Universitate',            lat:44.4352, lng:26.1028},
+            {n:'Piața Română',            lat:44.4413, lng:26.0967},
+            {n:'Piața Victoriei 2',       lat:44.4528, lng:26.0858},
+            {n:'Aviatorilor',             lat:44.4584, lng:26.0888},
+            {n:'Aurel Vlaicu',            lat:44.4629, lng:26.0920},
+            {n:'Pipera',                  lat:44.4722, lng:26.0962}
         ],
         M3: [
-            {n:'Anghel Saligny',lat:44.4107,lng:26.1334},{n:'Nicolae Grigorescu',lat:44.4211,lng:26.1264},
-            {n:'Dristor 1',lat:44.4143,lng:26.1221},{n:'Mihai Bravu',lat:44.4183,lng:26.1144},
-            {n:'Timpuri Noi',lat:44.4218,lng:26.1074},{n:'Piața Unirii 1',lat:44.4275,lng:26.1013},
-            {n:'Izvor',lat:44.4319,lng:26.0903},{n:'Eroilor',lat:44.4358,lng:26.0784},
-            {n:'Politehnica',lat:44.4406,lng:26.0503},{n:'Lujerului',lat:44.4363,lng:26.0373},
-            {n:'Gorjului',lat:44.4300,lng:26.0242},{n:'Păcii',lat:44.4313,lng:26.0114},
-            {n:'Preciziei',lat:44.4332,lng:25.9978}
+            {n:'Anghel Saligny',      lat:44.4107, lng:26.1334},
+            {n:'Nicolae Grigorescu',  lat:44.4211, lng:26.1264},
+            {n:'Dristor 1',           lat:44.4143, lng:26.1221},
+            {n:'Mihai Bravu',         lat:44.4183, lng:26.1144},
+            {n:'Timpuri Noi',         lat:44.4218, lng:26.1074},
+            {n:'Piața Unirii 1',      lat:44.4275, lng:26.1013},
+            {n:'Izvor',               lat:44.4319, lng:26.0903},
+            {n:'Eroilor',             lat:44.4358, lng:26.0784},
+            {n:'Politehnica',         lat:44.4406, lng:26.0503},
+            {n:'Lujerului',           lat:44.4363, lng:26.0373},
+            {n:'Gorjului',            lat:44.4300, lng:26.0242},
+            {n:'Păcii',               lat:44.4313, lng:26.0114},
+            {n:'Preciziei',           lat:44.4332, lng:25.9978}
         ],
         M4: [
-            {n:'Gara de Nord 2',lat:44.4477,lng:26.0683},{n:'1 Mai',lat:44.4567,lng:26.0707},
-            {n:'Jiului',lat:44.4633,lng:26.0685},{n:'Parc Bazilescu',lat:44.4728,lng:26.0662},
-            {n:'Laminorului',lat:44.4808,lng:26.0650},{n:'Străulești',lat:44.4905,lng:26.0640}
+            {n:'Gara de Nord 2',  lat:44.4477, lng:26.0683},
+            {n:'1 Mai',           lat:44.4567, lng:26.0707},
+            {n:'Jiului',          lat:44.4633, lng:26.0685},
+            {n:'Parc Bazilescu',  lat:44.4728, lng:26.0662},
+            {n:'Laminorului',     lat:44.4808, lng:26.0650},
+            {n:'Străulești',      lat:44.4905, lng:26.0640}
         ],
         M5: [
-            {n:'Eroilor 2',lat:44.4345,lng:26.0775},{n:'Academia Militară',lat:44.4282,lng:26.0689},
-            {n:'Hasdeu',lat:44.4233,lng:26.0614},{n:'Opera / Orizont',lat:44.4302,lng:26.0547},
-            {n:'Râul Doamnei',lat:44.4247,lng:26.0439},{n:'Valea Cascadelor',lat:44.4193,lng:26.0335},
-            {n:'Valea Ialomiței',lat:44.4145,lng:26.0240}
+            {n:'Eroilor 2',           lat:44.4345, lng:26.0775},
+            {n:'Academia Militară',   lat:44.4282, lng:26.0689},
+            {n:'Hașdeu',              lat:44.4233, lng:26.0614},
+            {n:'Opera / Orizont',     lat:44.4302, lng:26.0547},
+            {n:'Râul Doamnei',        lat:44.4247, lng:26.0439},
+            {n:'Valea Cascadelor',    lat:44.4193, lng:26.0335},
+            {n:'Valea Ialomiței',     lat:44.4145, lng:26.0240}
         ]
     };
 
@@ -323,9 +360,9 @@
         canvas.style.width = W+'px'; canvas.style.height = H+'px';
         ctx.setTransform(dpr,0,0,dpr,0,0);
 
-        ctx.fillStyle = '#080a14'; ctx.fillRect(0,0,W,H);
+        ctx.fillStyle = '#2a2d3e'; ctx.fillRect(0,0,W,H);
 
-        // Tiles
+        // ── OSM tiles ────────────────────────────────────────────────────────
         const z = Math.round(zoom);
         const cx = lng2x(cLng,z), cy = lat2y(cLat,z);
         const ox = W/2 - cx, oy = H/2 - cy;
@@ -338,30 +375,30 @@
             }
         }
 
-        // Dark overlay
-        ctx.globalCompositeOperation = 'multiply';
-        ctx.fillStyle = '#1a1d35'; ctx.fillRect(0,0,W,H);
-        ctx.globalCompositeOperation = 'source-over';
-        ctx.fillStyle = 'rgba(13,15,26,0.4)'; ctx.fillRect(0,0,W,H);
+        // ── Lighter overlay — replaces the old multiply+heavy dark fill ──────
+        // A single semi-transparent dark wash keeps the dark theme while
+        // leaving roads, labels and colours clearly readable underneath.
+        ctx.fillStyle = 'rgba(10,12,28,0.52)';
+        ctx.fillRect(0,0,W,H);
 
-        // Lines
+        // ── Metro lines ───────────────────────────────────────────────────────
         for (const [ln, sts] of Object.entries(LINES)) {
             if (!vis[ln]) continue;
             const c = COLORS[ln];
             const pts = sts.map(s => geo2s(s.lat, s.lng));
 
-            // Glow
+            // Glow pass
             ctx.beginPath();
-            pts.forEach((p,i) => i?ctx.lineTo(p[0],p[1]):ctx.moveTo(p[0],p[1]));
-            ctx.strokeStyle = c+'30'; ctx.lineWidth=10; ctx.lineCap='round'; ctx.lineJoin='round'; ctx.stroke();
+            pts.forEach((p,i) => i ? ctx.lineTo(p[0],p[1]) : ctx.moveTo(p[0],p[1]));
+            ctx.strokeStyle = c+'40'; ctx.lineWidth=10; ctx.lineCap='round'; ctx.lineJoin='round'; ctx.stroke();
 
-            // Solid
+            // Solid pass
             ctx.beginPath();
-            pts.forEach((p,i) => i?ctx.lineTo(p[0],p[1]):ctx.moveTo(p[0],p[1]));
-            ctx.strokeStyle = c; ctx.lineWidth=3.5; ctx.stroke();
+            pts.forEach((p,i) => i ? ctx.lineTo(p[0],p[1]) : ctx.moveTo(p[0],p[1]));
+            ctx.strokeStyle = c; ctx.lineWidth=3.5; ctx.lineCap='round'; ctx.lineJoin='round'; ctx.stroke();
         }
 
-        // Stations (deduplicated)
+        // ── Stations (deduplicated) ───────────────────────────────────────────
         const drawn = new Map();
         for (const [ln, sts] of Object.entries(LINES)) {
             if (!vis[ln]) continue;
@@ -378,48 +415,47 @@
             const r = transfer ? 6 : 4.5;
             const rd = isH ? r+2 : r;
 
-            // Border
+            // Outer ring
             ctx.beginPath(); ctx.arc(x,y,rd+2,0,Math.PI*2);
             ctx.fillStyle='#0D0F1A'; ctx.fill();
 
-            // Glow on hover/transfer
+            // Glow ring on hover / transfer
             if (isH || transfer) {
                 ctx.beginPath(); ctx.arc(x,y,rd+7,0,Math.PI*2);
-                ctx.fillStyle = transfer ? 'rgba(255,255,255,0.1)' : COLORS[s.lines[0]]+'20';
+                ctx.fillStyle = transfer ? 'rgba(255,255,255,0.12)' : COLORS[s.lines[0]]+'25';
                 ctx.fill();
             }
 
-            // Dot
+            // Dot fill
             ctx.beginPath(); ctx.arc(x,y,rd,0,Math.PI*2);
             ctx.fillStyle = transfer ? '#FFFFFF' : COLORS[s.lines[0]]; ctx.fill();
 
-            // Labels
-            if (zoom >= 13.5) {
-                const fs = isH ? 12 : 10;
-                ctx.font = (isH?'600 ':'500 ')+fs+'px "DM Sans",sans-serif';
-                ctx.textAlign='left'; ctx.textBaseline='middle';
-                const txt = s.n;
-                const m = ctx.measureText(txt);
-                const tx = x+rd+7, ty2 = y;
-                const p = 3;
+            // ── Station label — always visible, not zoom-gated ────────────────
+            const fs = isH ? 12 : 10;
+            ctx.font = (isH ? '600 ' : '500 ') + fs + 'px "DM Sans",sans-serif';
+            ctx.textAlign = 'left'; ctx.textBaseline = 'middle';
+            const txt = s.n;
+            const m = ctx.measureText(txt);
+            const lx = x + rd + 7, ly = y;
+            const p = 3;
 
-                // Background pill
-                ctx.fillStyle = 'rgba(13,15,26,0.82)';
-                const bx=tx-p, by2=ty2-fs/2-p, bw=m.width+p*2, bh=fs+p*2, br=4;
-                ctx.beginPath();
-                ctx.moveTo(bx+br,by2); ctx.lineTo(bx+bw-br,by2);
-                ctx.quadraticCurveTo(bx+bw,by2,bx+bw,by2+br);
-                ctx.lineTo(bx+bw,by2+bh-br);
-                ctx.quadraticCurveTo(bx+bw,by2+bh,bx+bw-br,by2+bh);
-                ctx.lineTo(bx+br,by2+bh);
-                ctx.quadraticCurveTo(bx,by2+bh,bx,by2+bh-br);
-                ctx.lineTo(bx,by2+br);
-                ctx.quadraticCurveTo(bx,by2,bx+br,by2);
-                ctx.fill();
+            // Pill background
+            ctx.fillStyle = 'rgba(10,12,28,0.78)';
+            const bx = lx-p, by = ly-fs/2-p, bw = m.width+p*2, bh = fs+p*2, br = 4;
+            ctx.beginPath();
+            ctx.moveTo(bx+br, by);
+            ctx.lineTo(bx+bw-br, by);
+            ctx.quadraticCurveTo(bx+bw, by,    bx+bw, by+br);
+            ctx.lineTo(bx+bw, by+bh-br);
+            ctx.quadraticCurveTo(bx+bw, by+bh, bx+bw-br, by+bh);
+            ctx.lineTo(bx+br, by+bh);
+            ctx.quadraticCurveTo(bx, by+bh,    bx, by+bh-br);
+            ctx.lineTo(bx, by+br);
+            ctx.quadraticCurveTo(bx, by,        bx+br, by);
+            ctx.closePath(); ctx.fill();
 
-                ctx.fillStyle = isH ? '#fff' : 'rgba(255,255,255,0.6)';
-                ctx.fillText(txt, tx, ty2);
-            }
+            ctx.fillStyle = isH ? '#FFFFFF' : 'rgba(255,255,255,0.75)';
+            ctx.fillText(txt, lx, ly);
         });
     }
 
@@ -510,7 +546,7 @@
         if (hovered) { hovered=null; render(); }
     });
 
-    // Toggle
+    // Toggle line
     window.toggleLine = function(name, el) {
         vis[name] = !vis[name];
         el.classList.toggle('off', !vis[name]);
