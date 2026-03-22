@@ -184,7 +184,7 @@
         .search-dropdown::-webkit-scrollbar-thumb { background: rgba(255,255,255,.12); border-radius: 4px; }
 
         /* MAP */
-        .map-wrap { flex: 1; position: relative; overflow: hidden; cursor: grab; }
+        .map-wrap { flex: 1; position: relative; overflow: hidden; cursor: grab; touch-action: none; }
         .map-wrap:active { cursor: grabbing; }
         .map-wrap canvas { display: block; }
 
@@ -309,7 +309,7 @@
         <div class="legend-item lp5" onclick="toggleLine('M5',this)"><div class="legend-dot" style="background:var(--m5)"></div>M5</div>
         <div class="legend-sep"></div>
         <div class="legend-info">
-            <span>Scroll to zoom · Drag to pan · Hover for info</span>
+            <span>Scroll to zoom · Drag to pan · Pinch to zoom on mobile</span>
             <span>·</span>
             <a href="index.html#download">Get the full app →</a>
         </div>
@@ -343,7 +343,7 @@
 </div>
 
 <script>
-/* ── Language toggle (mirrors index.html) ── */
+/* ── Language toggle ── */
 let lang = localStorage.getItem('mb-lang') || 'en';
 function setLang(l) {
     lang = l;
@@ -714,11 +714,13 @@ document.addEventListener('mousedown',e=>{
 });
 
 // =============================================================================
-// INTERACTIONS
+// INTERACTIONS — mouse drag
 // =============================================================================
-window.addEventListener('resize',render);
+window.addEventListener('resize', render);
 
-wrap.addEventListener('mousedown',e=>{dragging=true;dsx=e.clientX;dsy=e.clientY;dsLat=cLat;dsLng=cLng;});
+wrap.addEventListener('mousedown',e=>{
+    dragging=true; dsx=e.clientX; dsy=e.clientY; dsLat=cLat; dsLng=cLng;
+});
 window.addEventListener('mousemove',e=>{
     if(!dragging) return;
     const sc=(1<<Math.round(zoom))*TS;
@@ -726,29 +728,131 @@ window.addEventListener('mousemove',e=>{
     cLat=dsLat+(e.clientY-dsy)/sc*360*Math.cos(dsLat*Math.PI/180);
     render();
 });
-window.addEventListener('mouseup',()=>{dragging=false;});
+window.addEventListener('mouseup',()=>{ dragging=false; });
 
-let tsx,tsy,tsLat,tsLng;
-wrap.addEventListener('touchstart',e=>{
-    if(e.touches.length!==1)return;
-    tsx=e.touches[0].clientX;tsy=e.touches[0].clientY;tsLat=cLat;tsLng=cLng;
-},{passive:true});
-wrap.addEventListener('touchmove',e=>{
-    if(e.touches.length!==1)return;
-    const sc=(1<<Math.round(zoom))*TS;
-    cLng=tsLng-(e.touches[0].clientX-tsx)/sc*360;
-    cLat=tsLat+(e.touches[0].clientY-tsy)/sc*360*Math.cos(tsLat*Math.PI/180);
-    render();
-},{passive:true});
-
+// Scroll zoom
 wrap.addEventListener('wheel',e=>{
     e.preventDefault();
     zoom=Math.max(ZMIN,Math.min(ZMAX,zoom+(e.deltaY>0?-.4:.4)));
     render();
 },{passive:false});
 
-window.zoomMap=function(d){zoom=Math.max(ZMIN,Math.min(ZMAX,zoom+d*.6));render();};
+window.zoomMap=function(d){ zoom=Math.max(ZMIN,Math.min(ZMAX,zoom+d*.6)); render(); };
 
+// =============================================================================
+// TOUCH — single-finger pan + two-finger pinch-to-zoom
+// =============================================================================
+let activeTouches = {};   // track all active touch points
+let lastPinchDist = null; // distance between two fingers at last frame
+let pinchMidLat   = null; // geo-coords of pinch midpoint (held fixed)
+let pinchMidLng   = null;
+let isSingleDrag  = false;
+let tsx, tsy, tsLat, tsLng;
+
+function touchDist(a, b){
+    return Math.hypot(a.clientX - b.clientX, a.clientY - b.clientY);
+}
+function touchMid(a, b){
+    return { x: (a.clientX + b.clientX) / 2, y: (a.clientY + b.clientY) / 2 };
+}
+// Convert a canvas pixel (x,y) to geographic coords given current view
+function screenToGeo(sx, sy){
+    const sc = (1 << Math.round(zoom)) * TS;
+    const lng = cLng + (sx - W / 2) / sc * 360;
+    const lat = cLat - (sy - H / 2) / sc * 360 * Math.cos(cLat * Math.PI / 180);
+    return { lat, lng };
+}
+
+wrap.addEventListener('touchstart', e => {
+    e.preventDefault();
+    for (const t of e.changedTouches) activeTouches[t.identifier] = t;
+
+    const ids = Object.keys(activeTouches);
+    if (ids.length === 1) {
+        // Single finger — start pan
+        isSingleDrag = true;
+        const t = activeTouches[ids[0]];
+        tsx = t.clientX; tsy = t.clientY; tsLat = cLat; tsLng = cLng;
+    } else if (ids.length === 2) {
+        // Two fingers — start pinch
+        isSingleDrag = false;
+        const [a, b] = [activeTouches[ids[0]], activeTouches[ids[1]]];
+        lastPinchDist = touchDist(a, b);
+        const rect = wrap.getBoundingClientRect();
+        const mid  = touchMid(a, b);
+        const geo  = screenToGeo(mid.x - rect.left, mid.y - rect.top);
+        pinchMidLat = geo.lat;
+        pinchMidLng = geo.lng;
+    }
+}, { passive: false });
+
+wrap.addEventListener('touchmove', e => {
+    e.preventDefault();
+    for (const t of e.changedTouches) activeTouches[t.identifier] = t;
+
+    const ids = Object.keys(activeTouches);
+
+    if (ids.length === 1 && isSingleDrag) {
+        // Single-finger pan
+        const t = activeTouches[ids[0]];
+        const sc = (1 << Math.round(zoom)) * TS;
+        cLng = tsLng - (t.clientX - tsx) / sc * 360;
+        cLat = tsLat + (t.clientY - tsy) / sc * 360 * Math.cos(tsLat * Math.PI / 180);
+        render();
+
+    } else if (ids.length >= 2) {
+        // Two-finger pinch-zoom, anchored at midpoint
+        isSingleDrag = false;
+        const [a, b] = [activeTouches[ids[0]], activeTouches[ids[1]]];
+        const newDist = touchDist(a, b);
+
+        if (lastPinchDist && newDist > 0) {
+            const delta = Math.log2(newDist / lastPinchDist);
+            zoom = Math.max(ZMIN, Math.min(ZMAX, zoom + delta));
+
+            // After zoom, re-anchor the pinch midpoint so it stays under fingers
+            const rect = wrap.getBoundingClientRect();
+            const mid  = touchMid(a, b);
+            const mx   = mid.x - rect.left;
+            const my   = mid.y - rect.top;
+            const sc   = (1 << Math.round(zoom)) * TS;
+
+            // Reposition cLat/cLng so pinchMid stays at screen position (mx, my)
+            cLng = pinchMidLng - (mx - W / 2) / sc * 360;
+            cLat = pinchMidLat + (my - H / 2) / sc * 360 * Math.cos(pinchMidLat * Math.PI / 180);
+
+            render();
+        }
+        lastPinchDist = newDist;
+    }
+}, { passive: false });
+
+wrap.addEventListener('touchend', e => {
+    for (const t of e.changedTouches) delete activeTouches[t.identifier];
+
+    const ids = Object.keys(activeTouches);
+    lastPinchDist = null;
+    pinchMidLat = null;
+    pinchMidLng = null;
+
+    if (ids.length === 1) {
+        // One finger lifted — resume single pan from current position
+        isSingleDrag = true;
+        const t = activeTouches[ids[0]];
+        tsx = t.clientX; tsy = t.clientY; tsLat = cLat; tsLng = cLng;
+    } else if (ids.length === 0) {
+        isSingleDrag = false;
+    }
+}, { passive: true });
+
+wrap.addEventListener('touchcancel', e => {
+    for (const t of e.changedTouches) delete activeTouches[t.identifier];
+    lastPinchDist = null; isSingleDrag = false;
+}, { passive: true });
+
+// =============================================================================
+// HOVER & TOOLTIP (mouse only)
+// =============================================================================
 function nearest(mx,my){
     let best=null,bd=Infinity;
     for(const s of STATIONS){
@@ -809,7 +913,7 @@ window.fitAll=function(){
     render();
 };
 
-setTimeout(fitAll,80);
+setTimeout(fitAll, 80);
 })();
 </script>
 </body>
