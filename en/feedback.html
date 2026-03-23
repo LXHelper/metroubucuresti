@@ -106,6 +106,8 @@ function setLang(l) {
     if (!val) return;
     if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
       el.placeholder = val;
+    } else if (el.tagName === 'H1' || el.tagName === 'BUTTON') {
+      el.innerHTML = val;
     } else {
       el.textContent = val;
     }
