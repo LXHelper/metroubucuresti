@@ -259,7 +259,9 @@
             clip: rect(0,0,0,0); white-space: nowrap; pointer-events: none;
         }
         @media (max-width: 700px) {
-            .nav-links, .lang-toggle { display: none !important; }
+            .nav-links { display: none !important; }
+            .lang-toggle { display: flex !important; }
+            .lang-btn { padding: 4px 9px !important; font-size: .7rem !important; }
             .hamburger { display: flex; }
             .nav-inner { padding: 12px 20px; }
             .legend-bar { padding: 8px 12px; gap: 5px; }
