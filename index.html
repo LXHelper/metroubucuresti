@@ -335,11 +335,6 @@ body{
 .map-preview-header h2 em{font-style:italic;color:var(--teal)}
 .map-preview-desc{margin-top:12px;font-size:.92rem;color:rgba(255,255,255,.42);max-width:520px;line-height:1.65}
 .map-preview-cta{display:flex;gap:10px;flex-wrap:wrap;flex-shrink:0;}
-.map-frame-wrap{position:relative;height:520px;border-top:1px solid var(--border);overflow:hidden;}
-.map-frame-wrap iframe{width:100%;height:100%;border:none;display:block;}
-.map-overlay-badge{position:absolute;bottom:20px;left:50%;transform:translateX(-50%);background:rgba(13,15,26,.92);backdrop-filter:blur(12px);border:1px solid var(--border);border-radius:12px;padding:10px 22px;display:flex;align-items:center;gap:10px;font-size:.8rem;color:rgba(255,255,255,.55);white-space:nowrap;z-index:10;}
-.map-overlay-badge a{color:var(--teal);text-decoration:none;font-weight:600;}
-.map-overlay-badge a:hover{opacity:.8}
 .map-line-badges{display:flex;gap:6px;padding:16px clamp(24px,calc((100vw - 1280px)/2 + 40px),200px);border-top:1px solid var(--border);border-bottom:1px solid var(--border);background:rgba(255,255,255,.015);flex-wrap:wrap;}
 .mlbadge{display:inline-flex;align-items:center;gap:5px;padding:4px 12px;border-radius:999px;font-size:.7rem;font-weight:600;white-space:nowrap;}
 .mlb1{background:rgba(204,51,51,.12);color:#e07070;border:1px solid rgba(204,51,51,.28);}
@@ -348,11 +343,26 @@ body{
 .mlb4{background:rgba(46,139,87,.14);color:#55cc88;border:1px solid rgba(46,139,87,.3);}
 .mlb5{background:rgba(255,152,49,.12);color:#ffbb66;border:1px solid rgba(255,152,49,.28);}
 .mlbadge-dot{width:5px;height:5px;border-radius:50%;}
+/* SVG/image map preview */
+.map-svg-wrap{display:block;position:relative;border-top:1px solid var(--border);overflow:hidden;cursor:pointer;text-decoration:none;line-height:0;}
+.map-preview-img{width:100%;height:auto;display:block;max-height:500px;object-fit:cover;object-position:center center;transition:transform .5s ease,filter .5s ease;filter:brightness(0.88);}
+.map-svg-wrap:hover .map-preview-img{transform:scale(1.02);filter:brightness(1.0);}
+/* Bottom fade */
+.map-img-fade{position:absolute;bottom:0;left:0;right:0;height:160px;background:linear-gradient(to bottom,transparent,rgba(13,15,26,0.95));pointer-events:none;}
+/* Always-visible CTA at bottom */
+.map-img-cta{position:absolute;bottom:28px;left:50%;transform:translateX(-50%);z-index:5;pointer-events:none;}
+.map-img-cta-btn{display:inline-flex;align-items:center;gap:8px;background:var(--teal);color:var(--ink);font-family:var(--sans);font-size:.9rem;font-weight:700;padding:13px 30px;border-radius:8px;box-shadow:0 8px 32px rgba(78,205,196,.4),0 2px 8px rgba(0,0,0,.4);white-space:nowrap;transition:transform .2s ease,box-shadow .2s ease;}
+.map-svg-wrap:hover .map-img-cta-btn{transform:translateY(-2px);box-shadow:0 12px 40px rgba(78,205,196,.55),0 4px 12px rgba(0,0,0,.4);}
+/* Hover overlay text */
+.map-svg-hover{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(13,15,26,0);transition:background .3s ease;pointer-events:none;}
+.map-svg-hover span{background:rgba(13,15,26,.85);color:var(--teal);font-family:var(--sans);font-size:.82rem;font-weight:600;padding:8px 20px;border-radius:6px;border:1px solid rgba(78,205,196,.3);opacity:0;transform:translateY(-6px);transition:opacity .3s ease,transform .3s ease;margin-bottom:90px;}
+.map-svg-wrap:hover .map-svg-hover{background:rgba(13,15,26,.15);}
+.map-svg-wrap:hover .map-svg-hover span{opacity:1;transform:translateY(0);}
 @media(max-width:700px){
-  .map-frame-wrap{height:360px;}
-  .map-overlay-badge{font-size:.72rem;padding:8px 14px;}
   .map-preview-header{padding:48px 24px 28px;}
   .map-line-badges{padding:12px 24px;}
+  .map-preview-img{max-height:260px;}
+  .map-img-cta-btn{font-size:.8rem;padding:11px 22px;}
 }
 
 /* FAQ SECTION */
@@ -475,6 +485,42 @@ footer{border-top:1px solid var(--border);padding:60px clamp(24px,calc((100vw - 
   .faq-section{padding:60px 24px}
 }
 </style>
+<!-- Global functions defined early so inline onclick handlers always find them -->
+<script>
+var lang = localStorage.getItem('lang') || 'ro';
+
+function setLang(l) {
+  lang = l;
+  localStorage.setItem('lang', l);
+  document.querySelectorAll('[data-en]').forEach(function(el) {
+    var val = l === 'ro'
+      ? (el.getAttribute('data-ro') || el.getAttribute('data-en'))
+      : el.getAttribute('data-en');
+    if (!val) return;
+    if (el.classList.contains('feat-subline') ||
+        el.classList.contains('faq-a') ||
+        (el.tagName === 'P' && el.querySelector('strong'))) {
+      el.innerHTML = val;
+    } else {
+      el.textContent = val;
+    }
+  });
+  document.querySelectorAll('.lang-btn').forEach(function(b) {
+    b.classList.toggle('on', b.textContent.trim() === l.toUpperCase());
+  });
+}
+
+function closeMobileMenu() {
+  var hbg = document.getElementById('hbg');
+  var mm  = document.getElementById('mobile-menu');
+  if (hbg) hbg.classList.remove('open');
+  if (mm)  mm.classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+// Apply saved language as soon as DOM is ready
+document.addEventListener('DOMContentLoaded', function() { setLang(lang); });
+</script>
 </head>
 <body>
 
@@ -722,20 +768,27 @@ footer{border-top:1px solid var(--border);padding:60px clamp(24px,calc((100vw - 
     <div class="mlbadge mlb5"><div class="mlbadge-dot" style="background:#FF9831"></div>M5 — Eroilor–Râul Doamnei/Valea Cascadelor</div>
   </div>
 
-  <!-- Embedded interactive map -->
-  <div class="map-frame-wrap">
-    <iframe
-      src="map.html"
-      title="Harta interactivă a metroului din București — toate liniile M1, M2, M3, M4, M5"
-      loading="lazy"
-      allow="fullscreen"
-      aria-label="Harta metrou București interactivă">
-    </iframe>
-    <div class="map-overlay-badge">
-      🗺️ <span data-en="Scroll &amp; drag to explore · Click lines to filter · " data-ro="Scroll &amp; trage pentru explorare · Click pe linii pentru filtrare · ">Scroll &amp; trage pentru explorare · Click pe linii pentru filtrare · </span>
-      <a href="map.html" target="_blank" rel="noopener" data-en="Open full screen →" data-ro="Deschide ecran complet →">Deschide ecran complet →</a>
+  <!-- Map Screenshot Preview — click opens map.html -->
+  <a href="map.html" class="map-svg-wrap" aria-label="Deschide harta interactivă a metroului din București">
+    <img
+      class="map-preview-img"
+      src="https://lxtech.ro/metroubucuresti/images/metro-map-preview.png"
+      alt="Harta interactivă a metroului din București — toate liniile M1, M2, M3, M4, M5"
+      width="1920" height="500"
+      loading="lazy">
+    <!-- Bottom fade + CTA -->
+    <div class="map-img-fade"></div>
+    <div class="map-img-cta">
+      <span class="map-img-cta-btn">
+        <span>⛶</span>
+        <span data-en="Open Interactive Map" data-ro="Deschide Harta Completă">Deschide Harta Completă</span>
+      </span>
     </div>
-  </div>
+    <!-- Hover overlay -->
+    <div class="map-svg-hover">
+      <span data-en="Open interactive map →" data-ro="Deschide harta interactivă →">Deschide harta interactivă →</span>
+    </div>
+  </a>
 </section>
 
 <!-- CLOSED BETA SECTION -->
@@ -896,56 +949,47 @@ footer{border-top:1px solid var(--border);padding:60px clamp(24px,calc((100vw - 
   </div>
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-let lang = localStorage.getItem('lang') || 'ro';
+<script>
+(function() {
+  var nav = document.getElementById('nav');
+  window.addEventListener('scroll', function() {
+    nav.classList.toggle('solid', window.scrollY > 60);
+  }, {passive: true});
 
-function setLang(l) {
-  lang = l;
-  localStorage.setItem('lang', l);
-  document.querySelectorAll('[data-en]').forEach(el => {
-    const val = l === 'ro'
-      ? (el.getAttribute('data-ro') || el.getAttribute('data-en'))
-      : el.getAttribute('data-en');
-    if (el.classList.contains('feat-subline') || (el.tagName === 'P' && el.querySelector('strong'))) {
-      el.innerHTML = val;
-    } else if (el.classList.contains('faq-a')) {
-      el.innerHTML = val;
-    } else {
-      el.textContent = val;
-    }
+  var hbg = document.getElementById('hbg');
+  var mobileMenu = document.getElementById('mobile-menu');
+  hbg.addEventListener('click', function() {
+    var isOpen = mobileMenu.classList.toggle('open');
+    hbg.classList.toggle('open', isOpen);
+    document.body.style.overflow = isOpen ? 'hidden' : '';
   });
-  document.querySelectorAll('.lang-btn').forEach(b =>
-    b.classList.toggle('on', b.textContent.trim() === l.toUpperCase())
-  );
-}
-
-const nav = document.getElementById('nav');
-window.addEventListener('scroll', () => nav.classList.toggle('solid', scrollY > 60), {passive:true});
-
-const hbg = document.getElementById('hbg');
-const mobileMenu = document.getElementById('mobile-menu');
-function closeMobileMenu() {
-  hbg.classList.remove('open');
-  mobileMenu.classList.remove('open');
-  document.body.style.overflow = '';
-}
-hbg.addEventListener('click', () => {
-  const isOpen = mobileMenu.classList.toggle('open');
-  hbg.classList.toggle('open', isOpen);
-  document.body.style.overflow = isOpen ? 'hidden' : '';
-});
-document.addEventListener('keydown', e => { if (e.key === 'Escape') closeMobileMenu(); });
-document.addEventListener('click', e => {
-  if (mobileMenu.classList.contains('open') && !mobileMenu.contains(e.target) && !hbg.contains(e.target))
-    closeMobileMenu();
-});
-
-document.querySelectorAll('.feat-item').forEach(item => {
-  item.addEventListener('click', () => {
-    const wasActive = item.classList.contains('active');
-    document.querySelectorAll('.feat-item.active').forEach(i => i.classList.remove('active'));
-    if (!wasActive) item.classList.add('active');
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closeMobileMenu();
   });
-});
+  document.addEventListener('click', function(e) {
+    if (mobileMenu.classList.contains('open') &&
+        !mobileMenu.contains(e.target) && !hbg.contains(e.target))
+      closeMobileMenu();
+  });
 
-const rvEls = document.querySelectorAll('.rv')
+  document.querySelectorAll('.feat-item').forEach(function(item) {
+    item.addEventListener('click', function() {
+      var wasActive = item.classList.contains('active');
+      document.querySelectorAll('.feat-item.active').forEach(function(i) {
+        i.classList.remove('active');
+      });
+      if (!wasActive) item.classList.add('active');
+    });
+  });
+
+  var rvEls = document.querySelectorAll('.rv');
+  var rvObs = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) {
+      if (e.isIntersecting) { e.target.classList.add('in'); rvObs.unobserve(e.target); }
+    });
+  }, {threshold: 0.12});
+  rvEls.forEach(function(el) { rvObs.observe(el); });
+})();
+</script>
+</body>
+</html>
