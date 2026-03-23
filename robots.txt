@@ -1,3 +1,8 @@
 User-agent: *
 Allow: /
+
+# Sitemaps
 Sitemap: https://www.metroubucuresti.ro/sitemap.xml
+
+# Crawl-delay hint for polite bots
+Crawl-delay: 10
