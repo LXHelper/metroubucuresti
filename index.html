@@ -403,6 +403,46 @@ footer{border-top:1px solid var(--border);padding:60px clamp(24px,calc((100vw - 
 .rv5{transition-delay:.42s;animation-delay:.62s}
 .rv6{transition-delay:.50s;animation-delay:.70s}
 
+/* ═══ CLOSED BETA BANNER ═══ */
+.beta-banner{background:linear-gradient(135deg,rgba(78,205,196,.10) 0%,rgba(74,144,217,.08) 100%);border-top:1px solid rgba(78,205,196,.18);border-bottom:1px solid rgba(78,205,196,.18);padding:14px 40px;display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap;text-align:center;}
+.beta-pill{display:inline-flex;align-items:center;gap:6px;background:rgba(78,205,196,.15);border:1px solid rgba(78,205,196,.35);border-radius:4px;padding:3px 10px;font-size:.65rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--teal);white-space:nowrap;flex-shrink:0;}
+.beta-pill::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--teal);animation:pulse 2s infinite}
+.beta-banner-text{font-size:.82rem;color:rgba(255,255,255,.5);}
+.beta-banner-text a{color:var(--teal);text-decoration:none;font-weight:600;}
+.beta-banner-text a:hover{opacity:.8}
+
+/* ═══ CLOSED BETA SECTION ═══ */
+.beta-section{padding:80px clamp(24px,calc((100vw - 1280px)/2 + 40px),200px);border-top:1px solid var(--border);}
+.beta-card{display:grid;grid-template-columns:1fr 1fr;gap:0;background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:24px;overflow:hidden;position:relative;}
+.beta-card::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 55% 70% at 0% 50%,rgba(78,205,196,.07) 0%,transparent 60%);pointer-events:none;}
+.beta-card-left{padding:56px 52px;position:relative;z-index:1;border-right:1px solid var(--border);}
+.beta-card-right{padding:56px 52px;position:relative;z-index:1;display:flex;flex-direction:column;justify-content:center;gap:20px;background:rgba(78,205,196,.025);}
+.beta-eyebrow{display:inline-flex;align-items:center;gap:7px;font-size:.65rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--teal);margin-bottom:18px;}
+.beta-eyebrow::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--teal);animation:pulse 2s infinite}
+.beta-card-left h2{font-family:var(--serif);font-size:clamp(1.7rem,2.8vw,2.4rem);line-height:1.1;letter-spacing:-.02em;color:var(--white);margin-bottom:16px;}
+.beta-card-left h2 em{font-style:italic;color:var(--teal)}
+.beta-card-left p{font-size:.92rem;color:rgba(255,255,255,.45);line-height:1.75;margin-bottom:28px;}
+.beta-card-left p strong{color:rgba(255,255,255,.75);font-weight:600;}
+.beta-join-btn{display:inline-flex;align-items:center;gap:8px;background:var(--teal);color:var(--ink);font-family:var(--sans);font-size:.88rem;font-weight:700;padding:12px 26px;border-radius:8px;text-decoration:none;transition:opacity .2s,transform .2s;align-self:flex-start;}
+.beta-join-btn:hover{opacity:.88;transform:translateY(-2px)}
+.beta-stat{display:flex;flex-direction:column;gap:3px;padding:18px 20px;background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:12px;}
+.beta-stat-val{font-family:var(--serif);font-size:1.6rem;color:var(--white);line-height:1}
+.beta-stat-val em{font-style:italic;color:var(--teal)}
+.beta-stat-label{font-size:.75rem;color:rgba(255,255,255,.38);line-height:1.4}
+.beta-perks{list-style:none;margin-top:4px;display:flex;flex-direction:column;gap:10px;}
+.beta-perks li{display:flex;align-items:flex-start;gap:10px;font-size:.85rem;color:rgba(255,255,255,.5);line-height:1.5;}
+.beta-perks li::before{content:'✦';color:var(--teal);font-size:.7rem;margin-top:3px;flex-shrink:0;}
+@media(max-width:900px){
+  .beta-card{grid-template-columns:1fr;}
+  .beta-card-left{border-right:none;border-bottom:1px solid var(--border);padding:40px 36px;}
+  .beta-card-right{padding:36px 36px;}
+}
+@media(max-width:700px){
+  .beta-section{padding:60px 24px;}
+  .beta-card-left,.beta-card-right{padding:32px 24px;}
+  .beta-banner{padding:12px 24px;}
+}
+
 /* RESPONSIVE */
 @media(max-width:1000px){
   .hero{grid-template-columns:1fr;padding:100px 0 60px}
@@ -535,11 +575,21 @@ footer{border-top:1px solid var(--border);padding:60px clamp(24px,calc((100vw - 
 
 <!-- LINES BAR -->
 <div class="lines-bar" aria-label="Linii metrou București">
-  <div class="lpill lp1"><div class="lpill-dot" style="background:var(--m1)"></div>M1 — Dristor–Pantelimon</div>
+  <div class="lpill lp1"><div class="lpill-dot" style="background:var(--m1)"></div>M1 — Dristor–Pantelimon / Preciziei</div>
   <div class="lpill lp2"><div class="lpill-dot" style="background:var(--m2)"></div>M2 — Tudor Arghezi–Pipera</div>
-  <div class="lpill lp3"><div class="lpill-dot" style="background:var(--m3)"></div>M3 — Anghel Saligny–Preciziei</div>
-  <div class="lpill lp4"><div class="lpill-dot" style="background:var(--m4)"></div>M4 — Gara de Nord–Străulești</div>
-  <div class="lpill lp5"><div class="lpill-dot" style="background:var(--m5)"></div>M5 — Eroilor–Valea Cascadelor–Râul Doamnei</div>
+  <div class="lpill lp3"><div class="lpill-dot" style="background:var(--m3)"></div>M3 — Preciziei–Pantelimon</div>
+  <div class="lpill lp4"><div class="lpill-dot" style="background:var(--m4)"></div>M4 — Gara de Nord–Straulești</div>
+  <div class="lpill lp5"><div class="lpill-dot" style="background:var(--m5)"></div>M5 — Eroilor–Râul Doamnei / Valea Cascadelor</div>
+</div>
+
+<!-- CLOSED BETA BANNER -->
+<div class="beta-banner">
+  <div class="beta-pill">Beta închisă</div>
+  <p class="beta-banner-text"
+     data-en="Metrou București is currently in <strong>closed beta</strong>. Want early access? <a href='feedback.html'>Join the beta →</a>"
+     data-ro="Metrou București este momentan în <strong>beta închisă</strong>. Vrei acces timpuriu? <a href='feedback.html'>Alătură-te beta →</a>">
+    Metrou București este momentan în <strong>beta închisă</strong>. Vrei acces timpuriu? <a href="feedback.html">Alătură-te beta →</a>
+  </p>
 </div>
 
 <!-- FEATURES -->
@@ -688,6 +738,43 @@ footer{border-top:1px solid var(--border);padding:60px clamp(24px,calc((100vw - 
   </div>
 </section>
 
+<!-- CLOSED BETA SECTION -->
+<section class="beta-section" id="beta" aria-labelledby="beta-heading">
+  <div class="beta-card rv">
+    <div class="beta-card-left">
+      <p class="beta-eyebrow" data-en="Closed Beta" data-ro="Beta Închisă">Beta Închisă</p>
+      <h2 id="beta-heading">
+        <span data-en="Help us build" data-ro="Ajută-ne să construim">Ajută-ne să construim</span><br>
+        <em data-en="the app you need" data-ro="aplicația de care ai nevoie">aplicația de care ai nevoie</em>
+      </h2>
+      <p data-en="Metrou București is currently in <strong>closed beta</strong>. Your feedback shapes every feature — routes, timetables, accessibility info, and more. By joining, you're not just testing an app — you're helping build something that thousands of daily commuters will rely on."
+         data-ro="Metrou București este momentan în <strong>beta închisă</strong>. Feedback-ul tău modelează fiecare funcție — rute, orare, informații de accesibilitate și altele. Alăturându-te, nu testezi doar o aplicație — ajuți la construirea a ceva de care mii de navetisti vor depinde zilnic.">
+        Metrou București este momentan în <strong>beta închisă</strong>. Feedback-ul tău modelează fiecare funcție — rute, orare, informații de accesibilitate și altele. Alăturându-te, nu testezi doar o aplicație — ajuți la construirea a ceva de care mii de navetisti vor depinde zilnic.
+      </p>
+      <a href="feedback.html" class="beta-join-btn">
+        <span>✦</span>
+        <span data-en="Request beta access →" data-ro="Solicită acces beta →">Solicită acces beta →</span>
+      </a>
+    </div>
+    <div class="beta-card-right">
+      <div class="beta-stat">
+        <div class="beta-stat-val">M1 <em>→</em> M5</div>
+        <div class="beta-stat-label" data-en="All 5 lines covered — routes, timetables, entrances, accessibility" data-ro="Toate cele 5 linii acoperite — rute, orare, intrări, accesibilitate">Toate cele 5 linii acoperite — rute, orare, intrări, accesibilitate</div>
+      </div>
+      <ul class="beta-perks">
+        <li data-en="Early access to new features before public release" data-ro="Acces timpuriu la funcții noi înainte de lansarea publică">Acces timpuriu la funcții noi înainte de lansarea publică</li>
+        <li data-en="Your feedback directly influences what gets built next" data-ro="Feedback-ul tău influențează direct ce se construiește în continuare">Feedback-ul tău influențează direct ce se construiește în continuare</li>
+        <li data-en="Help shape a navigation tool for thousands of daily commuters" data-ro="Ajută la modelarea unui instrument de navigare pentru mii de navetisti zilnici">Ajută la modelarea unui instrument de navigare pentru mii de navetisti zilnici</li>
+        <li data-en="Direct line to the developer — your voice matters here" data-ro="Contact direct cu dezvoltatorul — vocea ta contează">Contact direct cu dezvoltatorul — vocea ta contează</li>
+      </ul>
+      <a href="feedback.html" class="btn-line" style="align-self:flex-start;margin-top:4px;">
+        <span>✉</span>
+        <span data-en="Contact us to join" data-ro="Contactează-ne pentru a te alătura">Contactează-ne pentru a te alătura</span>
+      </a>
+    </div>
+  </div>
+</section>
+
 <!-- FAQ SECTION -->
 <section class="faq-section" id="faq" aria-labelledby="faq-heading">
   <p class="faq-eyebrow rv" data-en="Questions" data-ro="Întrebări frecvente">Întrebări frecvente</p>
@@ -746,17 +833,20 @@ footer{border-top:1px solid var(--border);padding:60px clamp(24px,calc((100vw - 
   <div class="cta-card rv">
     <div class="cta-text">
       <h2 data-en="Ready to navigate smarter?" data-ro="Gata să navighezi mai inteligent?">Gata să navighezi mai inteligent?</h2>
-      <p data-en="Download Metrou București for free. No account required. Works straight away, fully offline."
-         data-ro="Descarcă Metrou București gratuit. Fără cont necesar. Funcționează imediat, complet offline.">
-        Descarcă Metrou București gratuit. Fără cont necesar. Funcționează imediat, complet offline.
+      <p data-en="Metrou București is in closed beta — request access and be among the first to experience it. Your support helps build an app that works for you and thousands of fellow commuters."
+         data-ro="Metrou București este în beta închisă — solicită acces și fii printre primii care o testează. Sprijinul tău ajută la construirea unei aplicații care funcționează pentru tine și mii de alți navetisti.">
+        Metrou București este în beta închisă — solicită acces și fii printre primii care o testează. Sprijinul tău ajută la construirea unei aplicații care funcționează pentru tine și mii de alți navetisti.
       </p>
     </div>
     <div class="cta-actions">
-      <a href="https://play.google.com/store/apps/details?id=com.MetroBuc" class="btn-fill" target="_blank" rel="noopener">
-        <span>▶</span>
-        <span data-en="FREE — Get it on Google Play" data-ro="GRATUIT — Descarcă pe Google Play">GRATUIT — Descarcă pe Google Play</span>
+      <a href="feedback.html" class="btn-fill">
+        <span>✦</span>
+        <span data-en="Request Beta Access" data-ro="Solicită Acces Beta">Solicită Acces Beta</span>
       </a>
-      <a href="mailto:help@lxtech.ro" class="btn-line" data-en="Contact support" data-ro="Contactează suportul">Contactează suportul</a>
+      <a href="https://play.google.com/store/apps/details?id=com.MetroBuc" class="btn-line" target="_blank" rel="noopener">
+        <span>▶</span>
+        <span data-en="View on Google Play" data-ro="Vezi pe Google Play">Vezi pe Google Play</span>
+      </a>
     </div>
   </div>
 </div>
@@ -776,6 +866,7 @@ footer{border-top:1px solid var(--border);padding:60px clamp(24px,calc((100vw - 
       <a href="#screenshots" data-en="Screenshots" data-ro="Capturi">Capturi</a>
       <a href="#map-preview" data-en="Metro Map"   data-ro="Harta Metroului">Harta Metroului</a>
       <a href="map.html"     data-en="Full Map Page" data-ro="Pagina Hartă">Pagina Hartă</a>
+      <a href="#beta"        data-en="Join Beta"   data-ro="Alătură-te Beta">Alătură-te Beta</a>
       <a href="#download"    data-en="Download"    data-ro="Descarcă">Descarcă</a>
     </div>
     <div class="foot-col">
@@ -786,7 +877,7 @@ footer{border-top:1px solid var(--border);padding:60px clamp(24px,calc((100vw - 
     </div>
     <div class="foot-col">
       <h4 data-en="Contact" data-ro="Contact">Contact</h4>
-      <a href="mailto:help@lxtech.ro">help@lxtech.ro</a>
+      <a href="/cdn-cgi/l/email-protection#94fcf1f8e4d4f8ece0f1f7fcbae6fb"><span class="__cf_email__" data-cfemail="f199949d81b19d8985949299df839e">[email&#160;protected]</span></a>
       <a href="https://www.metroubucuresti.ro">metroubucuresti.ro</a>
       <a href="https://play.google.com/store/apps/details?id=com.MetroBuc" target="_blank" rel="noopener">Google Play</a>
     </div>
@@ -805,7 +896,7 @@ footer{border-top:1px solid var(--border);padding:60px clamp(24px,calc((100vw - 
   </div>
 </footer>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 let lang = localStorage.getItem('lang') || 'ro';
 
 function setLang(l) {
@@ -857,13 +948,4 @@ document.querySelectorAll('.feat-item').forEach(item => {
   });
 });
 
-const rvEls = document.querySelectorAll('.rv');
-const rvObs = new IntersectionObserver(entries => {
-  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); rvObs.unobserve(e.target); } });
-}, {threshold:0.12});
-rvEls.forEach(el => rvObs.observe(el));
-
-setLang(lang);
-</script>
-</body>
-</html>
+const rvEls = document.querySelectorAll('.rv')
