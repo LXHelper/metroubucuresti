@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="ro">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Feedback — Metrou București</title>
-<meta name="description" content="Trimite-ne feedback, raportează un bug sau solicită o funcție nouă pentru aplicația Metrou București.">
+<title>Feedback — Bucharest Metro</title>
+<meta name="description" content="Contact us, report a bug or request a feature for the Bucharest Metro app.">
 <meta name="robots" content="noindex, follow">
-<link rel="canonical" href="https://metroubucuresti.ro/feedback.html">
+<link rel="canonical" href="https://metroubucuresti.ro/en/feedback.html">
 <link rel="alternate" hreflang="ro"        href="https://metroubucuresti.ro/feedback.html">
 <link rel="alternate" hreflang="en"        href="https://metroubucuresti.ro/en/feedback.html">
 <link rel="alternate" hreflang="x-default" href="https://metroubucuresti.ro/feedback.html">
@@ -93,10 +93,10 @@ select option{background:var(--ink-mid);color:var(--white)}
 </style>
 
 <script>
-var lang = 'ro';
+var lang = 'en';
 
 function setLang(l) {
-  if (l === 'en') { window.location.href = '/en/feedback.html'; return; }
+  if (l === 'ro') { window.location.href = '/feedback.html'; return; }
   lang = l;
   localStorage.setItem('lang', l);
   document.querySelectorAll('[data-en]').forEach(function(el) {
@@ -106,6 +106,8 @@ function setLang(l) {
     if (!val) return;
     if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
       el.placeholder = val;
+    } else if (el.tagName === 'H1' || el.tagName === 'BUTTON') {
+      el.innerHTML = val;
     } else {
       el.textContent = val;
     }
@@ -123,7 +125,7 @@ function setLang(l) {
 
 function closeMobileMenu() {}
 
-document.addEventListener('DOMContentLoaded', function() { setLang('ro'); });
+document.addEventListener('DOMContentLoaded', function() { setLang('en'); });
 </script>
 </head>
 <body>
@@ -132,15 +134,15 @@ document.addEventListener('DOMContentLoaded', function() { setLang('ro'); });
 
 <nav class="nav">
   <div class="nav-inner">
-    <a href="/" class="nav-brand">
+    <a href="/en/" class="nav-brand">
       <div class="nav-brand-dot"></div>
-      Metrou București
+      Bucharest Metro
     </a>
     <div class="nav-end">
-      <a href="/" class="nav-back" data-en="← Back" data-ro="← Înapoi">← Înapoi</a>
+      <a href="/en/" class="nav-back" data-en="← Back" data-ro="← Înapoi">← Back</a>
       <div class="lang-toggle">
-        <button class="lang-btn on" onclick="setLang('ro')">RO</button>
-        <button class="lang-btn" onclick="setLang('en')">EN</button>
+        <button class="lang-btn" onclick="setLang('ro')">RO</button>
+        <button class="lang-btn on" onclick="setLang('en')">EN</button>
       </div>
     </div>
   </div>
@@ -149,10 +151,10 @@ document.addEventListener('DOMContentLoaded', function() { setLang('ro'); });
 <main class="page">
 
   <div class="page-header">
-    <p class="page-eyebrow" data-en="Get in touch" data-ro="Contactează-ne">Contactează-ne</p>
-    <h1 data-en="We&apos;d love to hear from <em>you</em>" data-ro="Ne-ar plăcea să <em>te auzim</em>">Ne-ar plăcea să <em>te auzim</em></h1>
+    <p class="page-eyebrow" data-en="Get in touch" data-ro="Contactează-ne">Get in touch</p>
+    <h1 data-en="We&apos;d love to hear from <em>you</em>" data-ro="Ne-ar plăcea să <em>te auzim</em>">We&apos;d love to hear from <em>you</em></h1>
     <p data-en="We read every message and get back to you as soon as possible."
-       data-ro="Citim fiecare mesaj și îți răspundem cât mai curând posibil.">Citim fiecare mesaj și îți răspundem cât mai curând posibil.</p>
+       data-ro="Citim fiecare mesaj și îți răspundem cât mai curând posibil.">We read every message and get back to you as soon as possible.</p>
   </div>
 
   <div class="form-card">
@@ -160,50 +162,50 @@ document.addEventListener('DOMContentLoaded', function() { setLang('ro'); });
       <input type="hidden" name="_subject" value="Feedback — Metrou București">
 
       <div class="form-group">
-        <label for="f-email" data-en="Email address" data-ro="Adresă email">Adresă email</label>
+        <label for="f-email" data-en="Email address" data-ro="Adresă email">Email address</label>
         <input type="email" id="f-email" name="email"
-               placeholder="adresa@exemplu.com"
+               placeholder="you@example.com"
                data-en="you@example.com" data-ro="adresa@exemplu.com"
                autocomplete="email">
-        <p class="field-error" id="err-email" data-en="Please enter a valid email address." data-ro="Introduceți o adresă de email validă.">Introduceți o adresă de email validă.</p>
+        <p class="field-error" id="err-email" data-en="Please enter a valid email address." data-ro="Introduceți o adresă de email validă.">Please enter a valid email address.</p>
       </div>
 
       <div class="form-group">
-        <label for="f-type" data-en="Feedback type" data-ro="Tip feedback">Tip feedback</label>
+        <label for="f-type" data-en="Feedback type" data-ro="Tip feedback">Feedback type</label>
         <select id="f-type" name="feedback_type">
-          <option value="" disabled selected data-en="Select one…" data-ro="Selectează…">Selectează…</option>
-          <option value="contact" data-en="Contact the developer" data-ro="Contactează dezvoltatorul">Contactează dezvoltatorul</option>
-          <option value="bug" data-en="Report a bug" data-ro="Raportează un bug">Raportează un bug</option>
-          <option value="feature" data-en="Request a feature" data-ro="Sugerează o funcție">Sugerează o funcție</option>
-          <option value="beta" data-en="Request beta access" data-ro="Solicită acces beta">Solicită acces beta</option>
+          <option value="" disabled selected data-en="Select one…" data-ro="Selectează…">Select one…</option>
+          <option value="contact" data-en="Contact the developer" data-ro="Contactează dezvoltatorul">Contact the developer</option>
+          <option value="bug" data-en="Report a bug" data-ro="Raportează un bug">Report a bug</option>
+          <option value="feature" data-en="Request a feature" data-ro="Sugerează o funcție">Request a feature</option>
+          <option value="beta" data-en="Request beta access" data-ro="Solicită acces beta">Request beta access</option>
         </select>
-        <p class="field-error" id="err-type" data-en="Please select a feedback type." data-ro="Selectați un tip de feedback.">Selectați un tip de feedback.</p>
+        <p class="field-error" id="err-type" data-en="Please select a feedback type." data-ro="Selectați un tip de feedback.">Please select a feedback type.</p>
       </div>
 
       <div class="form-group">
-        <label for="f-message" data-en="Message" data-ro="Mesaj">Mesaj</label>
+        <label for="f-message" data-en="Message" data-ro="Mesaj">Message</label>
         <textarea id="f-message" name="message"
-                  placeholder="Scrie mesajul tău aici…"
+                  placeholder="Write your message here…"
                   data-en="Write your message here…" data-ro="Scrie mesajul tău aici…"></textarea>
-        <p class="field-error" id="err-message" data-en="Please enter a message." data-ro="Introduceți un mesaj.">Introduceți un mesaj.</p>
+        <p class="field-error" id="err-message" data-en="Please enter a message." data-ro="Introduceți un mesaj.">Please enter a message.</p>
       </div>
 
       <button type="submit" class="btn-submit" id="btn-submit"
-              data-en="Send message" data-ro="Trimite mesaj">Trimite mesaj</button>
+              data-en="Send message" data-ro="Trimite mesaj">Send message</button>
     </form>
   </div>
 
   <footer class="page-footer">
     <span>© 2024–2026 Metrou București</span><br>
-    <a href="https://lxtech.ro/metroubucuresti/metrou-bucuresti-terms.html" data-en="Terms" data-ro="Termeni">Termeni</a>
-    <a href="https://lxtech.ro/metroubucuresti/metrou-bucuresti-privacy.html" data-en="Privacy" data-ro="Confidențialitate">Confidențialitate</a>
-    <a href="https://lxtech.ro/metroubucuresti/metrou-bucuresti-data-usage.html" data-en="Data Usage" data-ro="Utilizare date">Utilizare date</a>
+    <a href="https://lxtech.ro/metroubucuresti/metrou-bucuresti-terms.html" data-en="Terms" data-ro="Termeni">Terms</a>
+    <a href="https://lxtech.ro/metroubucuresti/metrou-bucuresti-privacy.html" data-en="Privacy" data-ro="Confidențialitate">Privacy</a>
+    <a href="https://lxtech.ro/metroubucuresti/metrou-bucuresti-data-usage.html" data-en="Data Usage" data-ro="Utilizare date">Data Usage</a>
   </footer>
 
 </main>
 
 <div class="toast" id="toast">
-  <span class="toast-icon">✓</span> <span id="toast-msg">Mesajul tău a fost trimis. Mulțumim!</span>
+  <span class="toast-icon">✓</span> <span id="toast-msg">Your message has been submitted. Thank you!</span>
 </div>
 
 <script>
