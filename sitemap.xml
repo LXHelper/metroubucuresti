@@ -1,9 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+
   <url>
     <loc>https://www.metroubucuresti.ro/</loc>
-    <lastmod>2026-03-19</lastmod>
+    <lastmod>2026-03-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://www.metroubucuresti.ro/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.metroubucuresti.ro/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.metroubucuresti.ro/"/>
   </url>
+
+  <url>
+    <loc>https://www.metroubucuresti.ro/map.html</loc>
+    <lastmod>2026-03-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://www.metroubucuresti.ro/map.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.metroubucuresti.ro/map.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.metroubucuresti.ro/map.html"/>
+  </url>
+
+  <url>
+    <loc>https://lxtech.ro/metroubucuresti/metrou-bucuresti-terms.html</loc>
+    <lastmod>2026-03-23</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+
+  <url>
+    <loc>https://lxtech.ro/metroubucuresti/metrou-bucuresti-privacy.html</loc>
+    <lastmod>2026-03-23</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+
+  <url>
+    <loc>https://lxtech.ro/metroubucuresti/metrou-bucuresti-data-usage.html</loc>
+    <lastmod>2026-03-23</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+
 </urlset>
