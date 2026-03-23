@@ -19,7 +19,7 @@
     <!-- ═══ CANONICAL + HREFLANG — non-www ═══ -->
     <link rel="canonical" href="https://metroubucuresti.ro/map.html">
     <link rel="alternate" hreflang="ro"        href="https://metroubucuresti.ro/map.html">
-    <link rel="alternate" hreflang="en"        href="https://metroubucuresti.ro/map.html">
+    <link rel="alternate" hreflang="en"        href="https://metroubucuresti.ro/en/map.html">
     <link rel="alternate" hreflang="x-default" href="https://metroubucuresti.ro/map.html">
 
     <!-- ═══ OPEN GRAPH ═══ -->
@@ -336,7 +336,9 @@
             clip: rect(0,0,0,0); white-space: nowrap; pointer-events: none;
         }
         @media (max-width: 700px) {
-            .nav-links, .lang-toggle { display: none !important; }
+            .nav-links { display: none !important; }
+            .lang-toggle { display: flex !important; }
+            .lang-btn { padding: 4px 9px !important; font-size: .7rem !important; }
             .hamburger { display: flex; }
             .nav-inner { padding: 12px 20px; }
             .legend-bar { padding: 8px 12px; gap: 5px; }
@@ -349,33 +351,38 @@
         }
     </style>
 
-    <!-- setLang and closeMobileMenu defined early so inline onclick always works -->
-    <script>
-    var lang = localStorage.getItem('mb-lang') || 'ro';
+    <!-- setLang and closeMobileMenu defined before body so inline onclick always works -->
+<script>
+var lang = 'ro';
 
-    function setLang(l) {
-        lang = l;
-        localStorage.setItem('mb-lang', l);
-        document.querySelectorAll('.lang-btn').forEach(function(b) {
-            b.classList.toggle('on', b.textContent.trim().toLowerCase() === l);
-        });
-        document.querySelectorAll('[data-en]').forEach(function(el) {
-            var val = el.getAttribute('data-' + l) || el.getAttribute('data-en');
-            if (!val) return;
-            if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') el.placeholder = val;
-            else el.innerHTML = val;
-        });
+function setLang(l) {
+  if (l === 'en') { window.location.href = '/en/map.html'; return; }
+  lang = l;
+  localStorage.setItem('lang', l);
+  document.querySelectorAll('[data-en]').forEach(function(el) {
+    var val = el.getAttribute('data-ro') || el.getAttribute('data-en');
+    if (!val) return;
+    if (el.tagName === 'P' && el.querySelector('strong')) {
+      el.innerHTML = val;
+    } else {
+      el.textContent = val;
     }
+  });
+  document.querySelectorAll('.lang-btn').forEach(function(b) {
+    b.classList.toggle('on', b.textContent.trim() === l.toUpperCase());
+  });
+}
 
-    function closeMobileMenu() {
-        var hbg = document.getElementById('hbg');
-        var mm  = document.getElementById('mobile-menu');
-        if (hbg) hbg.classList.remove('open');
-        if (mm)  mm.classList.remove('open');
-    }
+function closeMobileMenu() {
+  var hbg = document.getElementById('hbg');
+  var mm  = document.getElementById('mobile-menu');
+  if (hbg) hbg.classList.remove('open');
+  if (mm)  mm.classList.remove('open');
+  document.body.style.overflow = '';
+}
 
-    document.addEventListener('DOMContentLoaded', function() { setLang(lang); });
-    </script>
+document.addEventListener('DOMContentLoaded', function() { setLang('ro'); });
+</script>
 </head>
 <body>
 
