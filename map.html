@@ -16,18 +16,18 @@
     <meta name="geo.position" content="44.435;26.095">
     <meta name="ICBM" content="44.435, 26.095">
 
-    <!-- ═══ CANONICAL + HREFLANG ═══ -->
-    <link rel="canonical" href="https://www.metroubucuresti.ro/map.html">
-    <link rel="alternate" hreflang="ro" href="https://www.metroubucuresti.ro/map.html">
-    <link rel="alternate" hreflang="en" href="https://www.metroubucuresti.ro/map.html">
-    <link rel="alternate" hreflang="x-default" href="https://www.metroubucuresti.ro/map.html">
+    <!-- ═══ CANONICAL + HREFLANG — non-www ═══ -->
+    <link rel="canonical" href="https://metroubucuresti.ro/map.html">
+    <link rel="alternate" hreflang="ro"        href="https://metroubucuresti.ro/map.html">
+    <link rel="alternate" hreflang="en"        href="https://metroubucuresti.ro/map.html">
+    <link rel="alternate" hreflang="x-default" href="https://metroubucuresti.ro/map.html">
 
     <!-- ═══ OPEN GRAPH ═══ -->
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="Metrou București">
     <meta property="og:locale" content="ro_RO">
     <meta property="og:locale:alternate" content="en_US">
-    <meta property="og:url" content="https://www.metroubucuresti.ro/map.html">
+    <meta property="og:url" content="https://metroubucuresti.ro/map.html">
     <meta property="og:title" content="Harta Metrou București — Toate Liniile M1–M5">
     <meta property="og:description" content="Harta interactivă a rețelei de metrou din București. Toate cele 5 linii: M1 (roșu), M2 (albastru), M3 (galben), M4 (verde), M5 (portocaliu). Caută orice stație instant.">
     <meta property="og:image" content="https://lxtech.ro/metroubucuresti/images/splash-screen.png">
@@ -50,18 +50,18 @@
         "@type": "WebPage",
         "name": "Harta Metrou București — Toate Liniile M1–M5",
         "description": "Harta interactivă a rețelei de metrou din București. Toate cele 5 linii de metrou: M1, M2, M3, M4, M5. Caută stații, zoom și pan.",
-        "url": "https://www.metroubucuresti.ro/map.html",
+        "url": "https://metroubucuresti.ro/map.html",
         "inLanguage": ["ro", "en"],
         "isPartOf": {
           "@type": "WebSite",
           "name": "Metrou București",
-          "url": "https://www.metroubucuresti.ro"
+          "url": "https://metroubucuresti.ro"
         },
         "breadcrumb": {
           "@type": "BreadcrumbList",
           "itemListElement": [
-            {"@type":"ListItem","position":1,"name":"Metrou București","item":"https://www.metroubucuresti.ro/"},
-            {"@type":"ListItem","position":2,"name":"Harta Metrou","item":"https://www.metroubucuresti.ro/map.html"}
+            {"@type":"ListItem","position":1,"name":"Metrou București","item":"https://metroubucuresti.ro/"},
+            {"@type":"ListItem","position":2,"name":"Harta Metrou","item":"https://metroubucuresti.ro/map.html"}
           ]
         }
       },
@@ -70,7 +70,7 @@
         "@type": "Map",
         "name": "Harta Rețelei de Metrou din București",
         "description": "Harta interactivă cu toate cele 5 linii de metrou din București: M1 Dristor–Pantelimon–Preciziei, M2 Tudor Arghezi–Pipera, M3, M4, M5 Eroilor–Râul Doamnei/Valea Cascadelor.",
-        "url": "https://www.metroubucuresti.ro/map.html",
+        "url": "https://metroubucuresti.ro/map.html",
         "mapType": "https://schema.org/TransitMap",
         "about": {
           "@type": "Place",
@@ -112,7 +112,7 @@
             "name": "Unde pot vedea harta metroului din București?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Harta interactivă a metroului din București cu toate liniile M1–M5 este disponibilă la https://www.metroubucuresti.ro/map.html. Poți aplica zoom, pan și căuta orice stație."
+              "text": "Harta interactivă a metroului din București cu toate liniile M1–M5 este disponibilă la https://metroubucuresti.ro/map.html. Poți aplica zoom, pan și căuta orice stație."
             }
           }
         ]
@@ -145,13 +145,10 @@
         html, body { height: 100%; font-size: 16px; }
         body { font-family: var(--sans); color: rgba(255,255,255,0.72); overflow: hidden; background: var(--ink); }
 
-        /* LINE STRIP */
         .line-strip {
             position: fixed; top: 0; left: 0; width: 100%; height: 3px; z-index: 1000;
             background: linear-gradient(90deg, var(--m1) 0% 20%, var(--m3) 20% 40%, var(--m2) 40% 60%, var(--m4) 60% 80%, var(--m5) 80% 100%);
         }
-
-        /* NAV */
         .nav {
             position: fixed; top: 3px; left: 0; width: 100%; z-index: 900;
             background: rgba(13,15,26,.95); backdrop-filter: blur(16px);
@@ -193,8 +190,6 @@
         .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
         .hamburger.open span:nth-child(2) { opacity: 0; }
         .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
-
-        /* MOBILE MENU */
         .mobile-menu {
             display: none; position: fixed; top: 3px; left: 0; right: 0; z-index: 899;
             background: rgba(13,15,26,.98); backdrop-filter: blur(20px);
@@ -214,8 +209,7 @@
             border-bottom: 1px solid rgba(255,255,255,.04); transition: color .2s;
         }
         .mobile-menu a:last-of-type { border-bottom: none; }
-        .mobile-menu a:hover { color: var(--teal); }
-        .mobile-menu a.active { color: var(--teal); }
+        .mobile-menu a:hover, .mobile-menu a.active { color: var(--teal); }
         .mobile-menu a .mm-icon {
             width: 32px; height: 32px; border-radius: 7px;
             background: var(--mist); border: 1px solid var(--border);
@@ -228,20 +222,13 @@
             text-decoration: none; justify-content: center; transition: opacity .2s;
         }
         .mobile-menu-dl:hover { opacity: .88; color: var(--ink); }
-
-        /* PAGE LAYOUT */
         .page { display: flex; flex-direction: column; height: 100vh; padding-top: 54px; }
-
-        /* LEGEND BAR */
         .legend-bar {
-            padding: 8px 16px;
-            display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
-            border-bottom: 1px solid var(--border);
-            background: rgba(255,255,255,.015); flex-shrink: 0;
+            padding: 8px 16px; display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+            border-bottom: 1px solid var(--border); background: rgba(255,255,255,.015); flex-shrink: 0;
         }
         .legend-item {
-            display: inline-flex; align-items: center; gap: 6px;
-            padding: 5px 13px; border-radius: 999px;
+            display: inline-flex; align-items: center; gap: 6px; padding: 5px 13px; border-radius: 999px;
             font-size: .72rem; font-weight: 600; letter-spacing: .03em;
             cursor: pointer; transition: all .2s; user-select: none;
         }
@@ -256,8 +243,6 @@
         .legend-sep { width: 1px; height: 18px; background: var(--border); margin: 0 4px; flex-shrink: 0; }
         .legend-info { font-size: .68rem; color: rgba(255,255,255,.2); display: flex; align-items: center; gap: 6px; }
         .legend-info a { color: var(--teal); text-decoration: none; font-weight: 600; }
-
-        /* SEARCH */
         .search-wrap { position: relative; display: flex; align-items: center; margin-left: auto; flex-shrink: 0; }
         .search-input {
             background: var(--ink-soft); border: 1px solid var(--border);
@@ -281,15 +266,12 @@
             position: absolute; top: calc(100% + 6px); right: 0;
             background: var(--ink-mid); border: 1px solid var(--border);
             border-radius: 10px; min-width: 290px; max-height: 300px;
-            overflow-y: auto; z-index: 200;
-            box-shadow: 0 16px 40px rgba(0,0,0,.65);
-            display: none;
+            overflow-y: auto; z-index: 200; box-shadow: 0 16px 40px rgba(0,0,0,.65); display: none;
         }
         .search-dropdown.open { display: block; }
         .search-result {
-            display: flex; align-items: center; gap: 10px;
-            padding: 9px 14px; cursor: pointer; transition: background .12s;
-            border-bottom: 1px solid rgba(255,255,255,.04);
+            display: flex; align-items: center; gap: 10px; padding: 9px 14px; cursor: pointer;
+            transition: background .12s; border-bottom: 1px solid rgba(255,255,255,.04);
         }
         .search-result:last-child { border-bottom: none; }
         .search-result:hover, .search-result.sel { background: rgba(78,205,196,.07); }
@@ -301,18 +283,13 @@
         .search-empty { padding: 16px 14px; font-size: .78rem; color: rgba(255,255,255,.3); text-align: center; }
         .search-dropdown::-webkit-scrollbar { width: 4px; }
         .search-dropdown::-webkit-scrollbar-thumb { background: rgba(255,255,255,.12); border-radius: 4px; }
-
-        /* MAP */
         .map-wrap { flex: 1; position: relative; overflow: hidden; cursor: grab; touch-action: none; }
         .map-wrap:active { cursor: grabbing; }
         .map-wrap canvas { display: block; }
-
-        /* TOOLTIP */
         .tooltip {
             position: absolute; z-index: 50; pointer-events: none;
             background: var(--ink-mid); border: 1px solid var(--border);
-            border-radius: 10px; padding: 10px 14px;
-            box-shadow: 0 10px 30px rgba(0,0,0,.5);
+            border-radius: 10px; padding: 10px 14px; box-shadow: 0 10px 30px rgba(0,0,0,.5);
             font-family: var(--sans); opacity: 0; transition: opacity .15s;
         }
         .tooltip.show { opacity: 1; }
@@ -323,8 +300,6 @@
             font-size: .68rem; font-weight: 600; padding: 2px 7px; border-radius: 4px;
         }
         .tooltip-line-dot { width: 5px; height: 5px; border-radius: 50%; }
-
-        /* MAP FOOTER */
         .map-footer {
             padding: 10px 40px; border-top: 1px solid var(--border);
             background: var(--ink); display: flex; align-items: center;
@@ -337,8 +312,6 @@
         .foot-dot-sm { width: 5px; height: 5px; border-radius: 50%; background: var(--teal); box-shadow: 0 0 4px var(--teal); }
         .map-footer-right { font-size: .68rem; color: rgba(255,255,255,.2); }
         .map-footer-right a { color: rgba(78,205,196,.5); text-decoration: none; }
-
-        /* MAP CONTROLS */
         .map-controls { position: absolute; bottom: 20px; right: 20px; z-index: 40; display: flex; flex-direction: column; gap: 2px; }
         .map-ctrl-btn {
             width: 36px; height: 36px; border: 1px solid var(--border);
@@ -358,14 +331,10 @@
             margin-top: 8px; transition: all .15s;
         }
         .map-ctrl-fit:hover { background: var(--ink-soft); color: var(--teal); }
-
-        /* SEO CONTENT — visually hidden but crawlable */
         .seo-content {
             position: absolute; width: 1px; height: 1px; overflow: hidden;
             clip: rect(0,0,0,0); white-space: nowrap; pointer-events: none;
         }
-
-        /* RESPONSIVE */
         @media (max-width: 700px) {
             .nav-links, .lang-toggle { display: none !important; }
             .hamburger { display: flex; }
@@ -379,6 +348,34 @@
             .search-dropdown { min-width: 225px; }
         }
     </style>
+
+    <!-- setLang and closeMobileMenu defined early so inline onclick always works -->
+    <script>
+    var lang = localStorage.getItem('mb-lang') || 'ro';
+
+    function setLang(l) {
+        lang = l;
+        localStorage.setItem('mb-lang', l);
+        document.querySelectorAll('.lang-btn').forEach(function(b) {
+            b.classList.toggle('on', b.textContent.trim().toLowerCase() === l);
+        });
+        document.querySelectorAll('[data-en]').forEach(function(el) {
+            var val = el.getAttribute('data-' + l) || el.getAttribute('data-en');
+            if (!val) return;
+            if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') el.placeholder = val;
+            else el.innerHTML = val;
+        });
+    }
+
+    function closeMobileMenu() {
+        var hbg = document.getElementById('hbg');
+        var mm  = document.getElementById('mobile-menu');
+        if (hbg) hbg.classList.remove('open');
+        if (mm)  mm.classList.remove('open');
+    }
+
+    document.addEventListener('DOMContentLoaded', function() { setLang(lang); });
+    </script>
 </head>
 <body>
 
@@ -416,19 +413,18 @@
 
 <div class="line-strip"></div>
 
-<!-- NAV -->
 <nav class="nav" id="nav" aria-label="Navigare principală">
     <div class="nav-inner">
         <a href="index.html" class="nav-brand"><div class="nav-brand-dot"></div>Metrou București</a>
         <ul class="nav-links" id="nav-links">
-            <li><a href="index.html#features" data-en="Features" data-ro="Funcții">Features</a></li>
-            <li><a href="index.html#screenshots" data-en="Screenshots" data-ro="Capturi">Screenshots</a></li>
-            <li><a href="map.html" class="active" data-en="Metro Map" data-ro="Harta Metrou">Metro Map</a></li>
-            <li><a href="index.html#download" data-en="Download" data-ro="Descarcă">Download</a></li>
+            <li><a href="index.html#features"    data-en="Features"    data-ro="Funcții">Funcții</a></li>
+            <li><a href="index.html#screenshots" data-en="Screenshots" data-ro="Capturi">Capturi</a></li>
+            <li><a href="map.html" class="active" data-en="Metro Map"  data-ro="Harta Metrou">Harta Metrou</a></li>
+            <li><a href="index.html#download"    data-en="Download"    data-ro="Descarcă">Descarcă</a></li>
         </ul>
         <div class="nav-end">
             <div class="lang-toggle" style="display:flex;gap:4px">
-                <button class="lang-btn" onclick="setLang('en')">EN</button>
+                <button class="lang-btn"    onclick="setLang('en')">EN</button>
                 <button class="lang-btn on" onclick="setLang('ro')">RO</button>
             </div>
             <a href="index.html#download" class="nav-dl" data-en="Free — Get the App" data-ro="Gratuit — Descarcă">Gratuit — Descarcă</a>
@@ -437,7 +433,6 @@
     </div>
 </nav>
 
-<!-- MOBILE MENU -->
 <div class="mobile-menu" id="mobile-menu" role="dialog" aria-label="Meniu mobil">
     <p class="mobile-menu-section" data-en="Navigate" data-ro="Navigare">Navigare</p>
     <a href="index.html#features"    onclick="closeMobileMenu()"><span class="mm-icon">✦</span> <span data-en="Features" data-ro="Funcții">Funcții</span></a>
@@ -457,7 +452,7 @@
         <div class="legend-item lp2" onclick="toggleLine('M2',this)" role="button" aria-pressed="true" title="Linia M2 — Tudor Arghezi–Pipera"><div class="legend-dot" style="background:var(--m2)"></div>M2</div>
         <div class="legend-item lp3" onclick="toggleLine('M3',this)" role="button" aria-pressed="true" title="Linia M3 — Preciziei–Pantelimon"><div class="legend-dot" style="background:var(--m3)"></div>M3</div>
         <div class="legend-item lp4" onclick="toggleLine('M4',this)" role="button" aria-pressed="true" title="Linia M4 — Gara de Nord–Straulești"><div class="legend-dot" style="background:var(--m4)"></div>M4</div>
-        <div class="legend-item lp5" onclick="toggleLine('M5',this)" role="button" aria-pressed="true" title="Linia M5 — Eroilor–Râul Doamnei/Valea Cascadelor"><div class="legend-dot" style="background:var(--m5)"></div>M5</div>
+        <div class="legend-item lp5" onclick="toggleLine('M5',this)" role="button" aria-pressed="true" title="Linia M5 — Eroilor–Râul Doamnei / Valea Cascadelor"><div class="legend-dot" style="background:var(--m5)"></div>M5</div>
         <div class="legend-sep"></div>
         <div class="legend-info">
             <span data-en="Scroll to zoom · Drag to pan · Pinch to zoom on mobile" data-ro="Scroll pentru zoom · Trage pentru a mișca · Pinch pe mobil">Scroll pentru zoom · Trage pentru a mișca · Pinch pe mobil</span>
@@ -479,9 +474,9 @@
             <div class="tooltip-lines" id="ttLines"></div>
         </div>
         <div class="map-controls" aria-label="Controale hartă">
-            <button class="map-ctrl-btn" onclick="zoomMap(1)" aria-label="Zoom in">+</button>
+            <button class="map-ctrl-btn" onclick="zoomMap(1)"  aria-label="Zoom in">+</button>
             <button class="map-ctrl-btn" onclick="zoomMap(-1)" aria-label="Zoom out">−</button>
-            <button class="map-ctrl-fit" onclick="fitAll()" title="Potrivește toate liniile" aria-label="Potrivește toate liniile pe ecran">⊡</button>
+            <button class="map-ctrl-fit" onclick="fitAll()"    title="Potrivește toate liniile" aria-label="Potrivește toate liniile pe ecran">⊡</button>
         </div>
     </div>
 
@@ -494,60 +489,36 @@
 </div>
 
 <script>
-/* ── Language toggle ── */
-let lang = localStorage.getItem('mb-lang') || 'ro';
-function setLang(l) {
-    lang = l;
-    localStorage.setItem('mb-lang', l);
-    document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('on', b.textContent.trim().toLowerCase() === l));
-    document.querySelectorAll('[data-en]').forEach(el => {
-        const val = el.getAttribute('data-' + l) || el.getAttribute('data-en');
-        if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') el.placeholder = val;
-        else el.innerHTML = val;
-    });
-}
-
 /* ── Hamburger ── */
-const hbg   = document.getElementById('hbg');
-const mmenu = document.getElementById('mobile-menu');
-hbg.addEventListener('click', () => {
-    hbg.classList.toggle('open');
-    mmenu.classList.toggle('open');
-});
-function closeMobileMenu() {
-    hbg.classList.remove('open');
-    mmenu.classList.remove('open');
-}
-
-/* ── Init lang ── */
-setLang(lang);
+(function() {
+    var hbg   = document.getElementById('hbg');
+    var mmenu = document.getElementById('mobile-menu');
+    hbg.addEventListener('click', function() {
+        hbg.classList.toggle('open');
+        mmenu.classList.toggle('open');
+    });
+})();
 
 // =============================================================================
 // MAP ENGINE
 // =============================================================================
 (function(){
-"use strict";
+'use strict';
 
-const COLORS = {
-    M1:'#CC3333', M2:'#3366CC', M3:'#DDAA00', M4:'#2E8B57', M5:'#FF9831'
-};
+const COLORS = { M1:'#CC3333', M2:'#3366CC', M3:'#DDAA00', M4:'#2E8B57', M5:'#FF9831' };
 
 const LINE_SEGMENTS = {
     M1:[
         [[44.435048,26.075653],[44.435276,26.055400],[44.434381,26.032585],[44.434211,26.021280],[44.433914,26.004127],[44.430581,25.990968]],
         [[44.435048,26.075653],[44.433058,26.089586],[44.427541,26.101922],[44.416959,26.113347],[44.411289,26.125886],[44.419368,26.140464],[44.413308,26.160902],[44.410552,26.173798],[44.407292,26.194405],[44.405386,26.208920]]
     ],
-    M2:[
-        [[44.480613,26.116634],[44.479156,26.100232],[44.466031,26.086642],[44.452626,26.086432],[44.445357,26.097700],[44.435563,26.102468],[44.427759,26.104083],[44.415373,26.104511],[44.403785,26.096653],[44.398611,26.109128],[44.392454,26.122838],[44.379390,26.135068],[44.368822,26.143581],[44.361265,26.149282],[44.348041,26.159256]]
-    ],
+    M2:[[[44.480613,26.116634],[44.479156,26.100232],[44.466031,26.086642],[44.452626,26.086432],[44.445357,26.097700],[44.435563,26.102468],[44.427759,26.104083],[44.415373,26.104511],[44.403785,26.096653],[44.398611,26.109128],[44.392454,26.122838],[44.379390,26.135068],[44.368822,26.143581],[44.361265,26.149282],[44.348041,26.159256]]],
     M3:[
         [[44.435048,26.075653],[44.442735,26.060360],[44.445426,26.046552],[44.451913,26.047145],[44.450746,26.068372],[44.447235,26.076566],[44.451955,26.087077],[44.452933,26.104694],[44.449412,26.124610],[44.441695,26.132322],[44.431826,26.138676],[44.420478,26.139415]],
         [[44.435048,26.075653],[44.433058,26.089586],[44.427541,26.101922],[44.416959,26.113347],[44.411293,26.125885],[44.419368,26.140464],[44.413572,26.160606],[44.425792,26.162722],[44.435122,26.169127],[44.434421,26.185310]],
         [[44.434421,26.185310],[44.440525,26.192603]]
     ],
-    M4:[
-        [[44.447349,26.073805],[44.450829,26.068478],[44.461762,26.057496],[44.470534,26.050627],[44.481550,26.041538],[44.486649,26.037568],[44.494320,26.031965],[44.501655,26.026241]]
-    ],
+    M4:[[[44.447349,26.073805],[44.450829,26.068478],[44.461762,26.057496],[44.470534,26.050627],[44.481550,26.041538],[44.486649,26.037568],[44.494320,26.031965],[44.501655,26.026241]]],
     M5:[
         [[44.415240,26.024204],[44.419118,26.020287],[44.422988,26.024616],[44.422225,26.033088],[44.423064,26.041303],[44.424640,26.048364],[44.425874,26.055890],[44.428930,26.062876],[44.434840,26.073844]],
         [[44.422988,26.024616],[44.421112,26.014442]]
@@ -656,10 +627,7 @@ function geo2s(lat,lng){
     const z=Math.round(zoom);
     return [lng2x(lng,z)-lng2x(cLng,z)+W/2, lat2y(lat,z)-lat2y(cLat,z)+H/2];
 }
-
-function tileUrl(tx,ty,tz){
-    return 'https://'+['a','b','c'][(tx+ty)%3]+'.tile.openstreetmap.org/'+tz+'/'+tx+'/'+ty+'.png';
-}
+function tileUrl(tx,ty,tz){ return 'https://'+['a','b','c'][(tx+ty)%3]+'.tile.openstreetmap.org/'+tz+'/'+tx+'/'+ty+'.png'; }
 function loadTile(tx,ty,tz){
     const k=tz+'/'+tx+'/'+ty;
     if(tiles[k]) return tiles[k];
@@ -669,24 +637,19 @@ function loadTile(tx,ty,tz){
     img.src=tileUrl(tx,ty,tz);
     return (tiles[k]={img,ok:false,err:false});
 }
-
-function polyline(pts, color, w){
+function polyline(pts,color,w){
     if(pts.length<2) return;
-    ctx.beginPath();
-    pts.forEach((p,i)=>i?ctx.lineTo(p[0],p[1]):ctx.moveTo(p[0],p[1]));
+    ctx.beginPath(); pts.forEach((p,i)=>i?ctx.lineTo(p[0],p[1]):ctx.moveTo(p[0],p[1]));
     ctx.strokeStyle=color+'55'; ctx.lineWidth=w+7; ctx.lineCap='round'; ctx.lineJoin='round'; ctx.stroke();
-    ctx.beginPath();
-    pts.forEach((p,i)=>i?ctx.lineTo(p[0],p[1]):ctx.moveTo(p[0],p[1]));
+    ctx.beginPath(); pts.forEach((p,i)=>i?ctx.lineTo(p[0],p[1]):ctx.moveTo(p[0],p[1]));
     ctx.strokeStyle=color; ctx.lineWidth=w; ctx.lineCap='round'; ctx.lineJoin='round'; ctx.stroke();
 }
-
-function drawStation(s, isH, isPin){
+function drawStation(s,isH,isPin){
     const [x,y]=geo2s(s.lat,s.lng);
     const multi=s.lines.length>1;
     const r=multi?6:4.5;
     const rd=(isH||isPin)?r+2.5:r;
-
-    if(isPin && pinAnim>0){
+    if(isPin&&pinAnim>0){
         const prog=pinAnim/60;
         const rp=(1-prog)*24+rd+4;
         ctx.beginPath(); ctx.arc(x,y,rp,0,Math.PI*2);
@@ -695,25 +658,19 @@ function drawStation(s, isH, isPin){
         pinAnim--;
         if(pinAnim>0) requestAnimationFrame(render);
     }
-
-    ctx.beginPath(); ctx.arc(x,y,rd+2,0,Math.PI*2);
-    ctx.fillStyle='#0D0F1A'; ctx.fill();
-
+    ctx.beginPath(); ctx.arc(x,y,rd+2,0,Math.PI*2); ctx.fillStyle='#0D0F1A'; ctx.fill();
     if(isH||isPin||multi){
         ctx.beginPath(); ctx.arc(x,y,rd+9,0,Math.PI*2);
-        ctx.fillStyle=isPin?'rgba(78,205,196,.20)':multi?'rgba(255,255,255,.09)':COLORS[s.lines[0]]+'20';
-        ctx.fill();
+        ctx.fillStyle=isPin?'rgba(78,205,196,.20)':multi?'rgba(255,255,255,.09)':COLORS[s.lines[0]]+'20'; ctx.fill();
     }
-
     ctx.beginPath(); ctx.arc(x,y,rd,0,Math.PI*2);
     ctx.fillStyle=isPin?'#4ECDC4':multi?'#FFFFFF':COLORS[s.lines[0]]; ctx.fill();
-
     const fs=(isH||isPin)?12:10;
     ctx.font=((isH||isPin)?'600 ':'500 ')+fs+'px "DM Sans",sans-serif';
     ctx.textAlign='left'; ctx.textBaseline='middle';
     const m=ctx.measureText(s.n);
-    const lx=x+rd+7, ly=y, p=3;
-    const bx=lx-p, by=ly-fs/2-p, bw=m.width+p*2, bh=fs+p*2, br=4;
+    const lx=x+rd+7,ly=y,p=3;
+    const bx=lx-p,by=ly-fs/2-p,bw=m.width+p*2,bh=fs+p*2,br=4;
     ctx.fillStyle='rgba(10,12,28,0.82)';
     ctx.beginPath();
     ctx.moveTo(bx+br,by); ctx.lineTo(bx+bw-br,by);
@@ -728,16 +685,13 @@ function drawStation(s, isH, isPin){
     ctx.fillStyle=(isH||isPin)?'#FFFFFF':'rgba(255,255,255,0.80)';
     ctx.fillText(s.n,lx,ly);
 }
-
 function render(){
     W=wrap.clientWidth; H=wrap.clientHeight;
     const dpr=devicePixelRatio||1;
     canvas.width=W*dpr; canvas.height=H*dpr;
     canvas.style.width=W+'px'; canvas.style.height=H+'px';
     ctx.setTransform(dpr,0,0,dpr,0,0);
-
     ctx.fillStyle='#2a2d3e'; ctx.fillRect(0,0,W,H);
-
     const z=Math.round(zoom);
     const cx=lng2x(cLng,z), cy=lat2y(cLat,z);
     const ox=W/2-cx, oy=H/2-cy;
@@ -748,50 +702,37 @@ function render(){
             const t=loadTile(tx,ty,z);
             if(t.ok) ctx.drawImage(t.img,tx*TS+ox,ty*TS+oy,TS,TS);
         }
-
     ctx.fillStyle='rgba(10,12,28,0.52)'; ctx.fillRect(0,0,W,H);
-
-    ctx.save();
-    ctx.setLineDash([5,5]);
+    ctx.save(); ctx.setLineDash([5,5]);
     for(const seg of TRANSFER_SEGS){
         const pts=seg.map(c=>geo2s(c[0],c[1]));
-        ctx.beginPath();
-        pts.forEach((p,i)=>i?ctx.lineTo(p[0],p[1]):ctx.moveTo(p[0],p[1]));
+        ctx.beginPath(); pts.forEach((p,i)=>i?ctx.lineTo(p[0],p[1]):ctx.moveTo(p[0],p[1]));
         ctx.strokeStyle='rgba(200,210,230,0.30)'; ctx.lineWidth=3; ctx.lineCap='round'; ctx.stroke();
     }
-    ctx.setLineDash([]);
-    ctx.restore();
-
+    ctx.setLineDash([]); ctx.restore();
     for(const [ln,segs] of Object.entries(LINE_SEGMENTS)){
         if(!vis[ln]) continue;
-        for(const seg of segs)
-            polyline(seg.map(c=>geo2s(c[0],c[1])), COLORS[ln], 4);
+        for(const seg of segs) polyline(seg.map(c=>geo2s(c[0],c[1])),COLORS[ln],4);
     }
-
     for(const s of STATIONS){
         if(!s.lines.some(l=>vis[l])) continue;
-        drawStation(s, hovered&&hovered.n===s.n, pinnedStation&&pinnedStation.n===s.n);
+        drawStation(s,hovered&&hovered.n===s.n,pinnedStation&&pinnedStation.n===s.n);
     }
 }
 
-// =============================================================================
 // SEARCH
-// =============================================================================
 const searchInput    = document.getElementById('searchInput');
 const searchDropdown = document.getElementById('searchDropdown');
 const searchClear    = document.getElementById('searchClear');
 const searchIcon     = document.getElementById('searchIcon');
 let results=[], selIdx=-1;
-
 function fold(s){ return s.normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase(); }
-
 function highlight(text,q){
-    const fi=fold(text), fq=fold(q);
+    const fi=fold(text),fq=fold(q);
     const i=fi.indexOf(fq);
     if(i<0) return text;
     return text.slice(0,i)+'<em>'+text.slice(i,i+q.length)+'</em>'+text.slice(i+q.length);
 }
-
 function doSearch(q){
     if(!q.trim()){closeDropdown();return;}
     const fq=fold(q.trim());
@@ -799,7 +740,6 @@ function doSearch(q){
     selIdx=results.length?0:-1;
     renderDrop(q.trim());
 }
-
 function renderDrop(q){
     searchDropdown.innerHTML='';
     if(!results.length){
@@ -811,37 +751,28 @@ function renderDrop(q){
         div.className='search-result'+(i===selIdx?' sel':'');
         div.setAttribute('role','option');
         const dots=s.lines.map(l=>'<span class="sr-dot" style="background:'+COLORS[l]+'"></span>').join('');
-        div.innerHTML='<span class="sr-dots">'+dots+'</span>'+
-            '<span class="sr-name">'+highlight(s.n,q)+'</span>'+
-            '<span class="sr-lines">'+s.lines.join(' · ')+'</span>';
+        div.innerHTML='<span class="sr-dots">'+dots+'</span><span class="sr-name">'+highlight(s.n,q)+'</span><span class="sr-lines">'+s.lines.join(' · ')+'</span>';
         div.addEventListener('mousedown',e=>{e.preventDefault();pickStation(i);});
         searchDropdown.appendChild(div);
     });
     searchDropdown.classList.add('open');
 }
-
 function pickStation(idx){
     if(idx<0||idx>=results.length) return;
     const s=results[idx];
     pinnedStation=s; cLat=s.lat; cLng=s.lng;
     zoom=Math.min(ZMAX,Math.max(zoom,15.5));
-    pinAnim=60; render();
-    closeDropdown();
-    searchInput.value=s.n;
-    searchInput.blur();
+    pinAnim=60; render(); closeDropdown();
+    searchInput.value=s.n; searchInput.blur();
 }
-
 function closeDropdown(){
-    searchDropdown.classList.remove('open');
-    searchDropdown.innerHTML='';
+    searchDropdown.classList.remove('open'); searchDropdown.innerHTML='';
     results=[]; selIdx=-1;
 }
-
 function updateSel(){
     searchDropdown.querySelectorAll('.search-result').forEach((el,i)=>el.classList.toggle('sel',i===selIdx));
     searchDropdown.querySelectorAll('.search-result')[selIdx]?.scrollIntoView({block:'nearest'});
 }
-
 searchInput.addEventListener('input',e=>{
     const v=e.target.value;
     searchClear.style.display=v?'block':'none';
@@ -857,22 +788,16 @@ searchInput.addEventListener('keydown',e=>{
     else if(e.key==='Escape'){closeDropdown();searchInput.blur();}
 });
 searchClear.addEventListener('click',()=>{
-    searchInput.value='';
-    searchClear.style.display='none'; searchIcon.style.display='block';
+    searchInput.value=''; searchClear.style.display='none'; searchIcon.style.display='block';
     pinnedStation=null; closeDropdown(); render(); searchInput.focus();
 });
 document.addEventListener('mousedown',e=>{
     if(!document.getElementById('searchWrap').contains(e.target)) closeDropdown();
 });
 
-// =============================================================================
-// INTERACTIONS — mouse drag
-// =============================================================================
+// MOUSE DRAG
 window.addEventListener('resize', render);
-
-wrap.addEventListener('mousedown',e=>{
-    dragging=true; dsx=e.clientX; dsy=e.clientY; dsLat=cLat; dsLng=cLng;
-});
+wrap.addEventListener('mousedown',e=>{ dragging=true; dsx=e.clientX; dsy=e.clientY; dsLat=cLat; dsLng=cLng; });
 window.addEventListener('mousemove',e=>{
     if(!dragging) return;
     const sc=(1<<Math.round(zoom))*TS;
@@ -881,110 +806,76 @@ window.addEventListener('mousemove',e=>{
     render();
 });
 window.addEventListener('mouseup',()=>{ dragging=false; });
-
-// Scroll zoom
 wrap.addEventListener('wheel',e=>{
     e.preventDefault();
     zoom=Math.max(ZMIN,Math.min(ZMAX,zoom+(e.deltaY>0?-.4:.4)));
     render();
 },{passive:false});
-
 window.zoomMap=function(d){ zoom=Math.max(ZMIN,Math.min(ZMAX,zoom+d*.6)); render(); };
 
-// =============================================================================
-// TOUCH — single-finger pan + two-finger pinch-to-zoom
-// =============================================================================
-let activeTouches = {};
-let lastPinchDist = null;
-let pinchMidLat   = null;
-let pinchMidLng   = null;
-let isSingleDrag  = false;
-let tsx, tsy, tsLat, tsLng;
-
-function touchDist(a, b){
-    return Math.hypot(a.clientX - b.clientX, a.clientY - b.clientY);
+// TOUCH
+let activeTouches={}, lastPinchDist=null, pinchMidLat=null, pinchMidLng=null, isSingleDrag=false, tsx, tsy, tsLat, tsLng;
+function touchDist(a,b){ return Math.hypot(a.clientX-b.clientX,a.clientY-b.clientY); }
+function touchMid(a,b){ return {x:(a.clientX+b.clientX)/2,y:(a.clientY+b.clientY)/2}; }
+function screenToGeo(sx,sy){
+    const sc=(1<<Math.round(zoom))*TS;
+    return {lat:cLat-(sy-H/2)/sc*360*Math.cos(cLat*Math.PI/180), lng:cLng+(sx-W/2)/sc*360};
 }
-function touchMid(a, b){
-    return { x: (a.clientX + b.clientX) / 2, y: (a.clientY + b.clientY) / 2 };
-}
-function screenToGeo(sx, sy){
-    const sc = (1 << Math.round(zoom)) * TS;
-    const lng = cLng + (sx - W / 2) / sc * 360;
-    const lat = cLat - (sy - H / 2) / sc * 360 * Math.cos(cLat * Math.PI / 180);
-    return { lat, lng };
-}
-
-wrap.addEventListener('touchstart', e => {
+wrap.addEventListener('touchstart',e=>{
     e.preventDefault();
-    for (const t of e.changedTouches) activeTouches[t.identifier] = t;
-    const ids = Object.keys(activeTouches);
-    if (ids.length === 1) {
-        isSingleDrag = true;
-        const t = activeTouches[ids[0]];
-        tsx = t.clientX; tsy = t.clientY; tsLat = cLat; tsLng = cLng;
-    } else if (ids.length === 2) {
-        isSingleDrag = false;
-        const [a, b] = [activeTouches[ids[0]], activeTouches[ids[1]]];
-        lastPinchDist = touchDist(a, b);
-        const rect = wrap.getBoundingClientRect();
-        const mid  = touchMid(a, b);
-        const geo  = screenToGeo(mid.x - rect.left, mid.y - rect.top);
-        pinchMidLat = geo.lat;
-        pinchMidLng = geo.lng;
+    for(const t of e.changedTouches) activeTouches[t.identifier]=t;
+    const ids=Object.keys(activeTouches);
+    if(ids.length===1){
+        isSingleDrag=true; const t=activeTouches[ids[0]];
+        tsx=t.clientX; tsy=t.clientY; tsLat=cLat; tsLng=cLng;
+    } else if(ids.length===2){
+        isSingleDrag=false;
+        const [a,b]=[activeTouches[ids[0]],activeTouches[ids[1]]];
+        lastPinchDist=touchDist(a,b);
+        const rect=wrap.getBoundingClientRect(); const mid=touchMid(a,b);
+        const geo=screenToGeo(mid.x-rect.left,mid.y-rect.top);
+        pinchMidLat=geo.lat; pinchMidLng=geo.lng;
     }
-}, { passive: false });
-
-wrap.addEventListener('touchmove', e => {
+},{passive:false});
+wrap.addEventListener('touchmove',e=>{
     e.preventDefault();
-    for (const t of e.changedTouches) activeTouches[t.identifier] = t;
-    const ids = Object.keys(activeTouches);
-    if (ids.length === 1 && isSingleDrag) {
-        const t = activeTouches[ids[0]];
-        const sc = (1 << Math.round(zoom)) * TS;
-        cLng = tsLng - (t.clientX - tsx) / sc * 360;
-        cLat = tsLat + (t.clientY - tsy) / sc * 360 * Math.cos(tsLat * Math.PI / 180);
+    for(const t of e.changedTouches) activeTouches[t.identifier]=t;
+    const ids=Object.keys(activeTouches);
+    if(ids.length===1&&isSingleDrag){
+        const t=activeTouches[ids[0]]; const sc=(1<<Math.round(zoom))*TS;
+        cLng=tsLng-(t.clientX-tsx)/sc*360;
+        cLat=tsLat+(t.clientY-tsy)/sc*360*Math.cos(tsLat*Math.PI/180);
         render();
-    } else if (ids.length >= 2) {
-        isSingleDrag = false;
-        const [a, b] = [activeTouches[ids[0]], activeTouches[ids[1]]];
-        const newDist = touchDist(a, b);
-        if (lastPinchDist && newDist > 0) {
-            const delta = Math.log2(newDist / lastPinchDist);
-            zoom = Math.max(ZMIN, Math.min(ZMAX, zoom + delta));
-            const rect = wrap.getBoundingClientRect();
-            const mid  = touchMid(a, b);
-            const mx   = mid.x - rect.left;
-            const my   = mid.y - rect.top;
-            const sc   = (1 << Math.round(zoom)) * TS;
-            cLng = pinchMidLng - (mx - W / 2) / sc * 360;
-            cLat = pinchMidLat + (my - H / 2) / sc * 360 * Math.cos(pinchMidLat * Math.PI / 180);
+    } else if(ids.length>=2){
+        isSingleDrag=false;
+        const [a,b]=[activeTouches[ids[0]],activeTouches[ids[1]]];
+        const newDist=touchDist(a,b);
+        if(lastPinchDist&&newDist>0){
+            const delta=Math.log2(newDist/lastPinchDist);
+            zoom=Math.max(ZMIN,Math.min(ZMAX,zoom+delta));
+            const rect=wrap.getBoundingClientRect(); const mid=touchMid(a,b);
+            const mx=mid.x-rect.left, my=mid.y-rect.top;
+            const sc=(1<<Math.round(zoom))*TS;
+            cLng=pinchMidLng-(mx-W/2)/sc*360;
+            cLat=pinchMidLat+(my-H/2)/sc*360*Math.cos(pinchMidLat*Math.PI/180);
             render();
         }
-        lastPinchDist = newDist;
+        lastPinchDist=newDist;
     }
-}, { passive: false });
+},{passive:false});
+wrap.addEventListener('touchend',e=>{
+    for(const t of e.changedTouches) delete activeTouches[t.identifier];
+    const ids=Object.keys(activeTouches);
+    lastPinchDist=null; pinchMidLat=null; pinchMidLng=null;
+    if(ids.length===1){ isSingleDrag=true; const t=activeTouches[ids[0]]; tsx=t.clientX; tsy=t.clientY; tsLat=cLat; tsLng=cLng; }
+    else if(ids.length===0) isSingleDrag=false;
+},{passive:true});
+wrap.addEventListener('touchcancel',e=>{
+    for(const t of e.changedTouches) delete activeTouches[t.identifier];
+    lastPinchDist=null; isSingleDrag=false;
+},{passive:true});
 
-wrap.addEventListener('touchend', e => {
-    for (const t of e.changedTouches) delete activeTouches[t.identifier];
-    const ids = Object.keys(activeTouches);
-    lastPinchDist = null; pinchMidLat = null; pinchMidLng = null;
-    if (ids.length === 1) {
-        isSingleDrag = true;
-        const t = activeTouches[ids[0]];
-        tsx = t.clientX; tsy = t.clientY; tsLat = cLat; tsLng = cLng;
-    } else if (ids.length === 0) {
-        isSingleDrag = false;
-    }
-}, { passive: true });
-
-wrap.addEventListener('touchcancel', e => {
-    for (const t of e.changedTouches) delete activeTouches[t.identifier];
-    lastPinchDist = null; isSingleDrag = false;
-}, { passive: true });
-
-// =============================================================================
-// HOVER & TOOLTIP (mouse only)
-// =============================================================================
+// HOVER & TOOLTIP
 function nearest(mx,my){
     let best=null,bd=Infinity;
     for(const s of STATIONS){
@@ -1001,41 +892,26 @@ wrap.addEventListener('mousemove',e=>{
     const mx=e.clientX-r.left, my=e.clientY-r.top;
     const s=nearest(mx,my);
     if(s){
-        hovered=s;
-        ttName.textContent=s.n;
-        ttLines.innerHTML=s.lines.map(ln=>
-            '<span class="tooltip-line" style="background:'+COLORS[ln]+'22;color:'+COLORS[ln]+';border:1px solid '+COLORS[ln]+'55">'+
-            '<span class="tooltip-line-dot" style="background:'+COLORS[ln]+'"></span>'+ln+'</span>'
-        ).join('');
+        hovered=s; ttName.textContent=s.n;
+        ttLines.innerHTML=s.lines.map(ln=>'<span class="tooltip-line" style="background:'+COLORS[ln]+'22;color:'+COLORS[ln]+';border:1px solid '+COLORS[ln]+'55"><span class="tooltip-line-dot" style="background:'+COLORS[ln]+'"></span>'+ln+'</span>').join('');
         let tx=mx+16,ty=my-20;
         if(tx+180>W) tx=mx-188; if(ty<8) ty=my+22;
         ttEl.style.left=tx+'px'; ttEl.style.top=ty+'px';
-        ttEl.classList.add('show');
-        wrap.style.cursor='pointer';
+        ttEl.classList.add('show'); wrap.style.cursor='pointer';
     } else {
         if(hovered) hovered=null;
-        ttEl.classList.remove('show');
-        wrap.style.cursor='grab';
+        ttEl.classList.remove('show'); wrap.style.cursor='grab';
     }
     render();
 });
-wrap.addEventListener('mouseleave',()=>{
-    ttEl.classList.remove('show');
-    if(hovered){hovered=null;render();}
-});
+wrap.addEventListener('mouseleave',()=>{ ttEl.classList.remove('show'); if(hovered){hovered=null;render();} });
 
-window.toggleLine=function(name,el){
-    vis[name]=!vis[name];
-    el.classList.toggle('off',!vis[name]);
-    render();
-};
-
+window.toggleLine=function(name,el){ vis[name]=!vis[name]; el.classList.toggle('off',!vis[name]); render(); };
 window.fitAll=function(){
     let a=90,b=-90,c=180,d=-180;
     for(const s of STATIONS){
         if(!s.lines.some(l=>vis[l])) continue;
-        a=Math.min(a,s.lat);b=Math.max(b,s.lat);
-        c=Math.min(c,s.lng);d=Math.max(d,s.lng);
+        a=Math.min(a,s.lat);b=Math.max(b,s.lat);c=Math.min(c,s.lng);d=Math.max(d,s.lng);
     }
     if(a>b) return;
     cLat=(a+b)/2; cLng=(c+d)/2;
