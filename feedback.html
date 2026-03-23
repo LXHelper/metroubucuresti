@@ -1,12 +1,15 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ro">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Feedback — Metrou București</title>
-<meta name="description" content="Contact us, report a bug, or request a feature for the Metrou București app.">
+<meta name="description" content="Trimite-ne feedback, raportează un bug sau solicită o funcție nouă pentru aplicația Metrou București. Contact us, report a bug or request a feature.">
 <meta name="robots" content="noindex, follow">
-<link rel="canonical" href="https://www.metroubucuresti.ro/feedback.html">
+<link rel="canonical" href="https://metroubucuresti.ro/feedback.html">
+<link rel="alternate" hreflang="ro"        href="https://metroubucuresti.ro/feedback.html">
+<link rel="alternate" hreflang="en"        href="https://metroubucuresti.ro/feedback.html">
+<link rel="alternate" hreflang="x-default" href="https://metroubucuresti.ro/feedback.html">
 <link rel="icon" type="image/png" sizes="32x32" href="https://lxtech.ro/metroubucuresti/images/favicon-32x32.png">
 <meta name="theme-color" content="#0D0F1A">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -186,6 +189,36 @@ select option{background:var(--ink-mid);color:var(--white)}
   .toast{white-space:normal;text-align:center;width:calc(100% - 40px)}
 }
 </style>
+
+<script>
+var lang = localStorage.getItem('lang') || 'ro';
+
+function setLang(l) {
+  lang = l;
+  localStorage.setItem('lang', l);
+  document.querySelectorAll('[data-en]').forEach(function(el) {
+    var val = l === 'ro'
+      ? (el.getAttribute('data-ro') || el.getAttribute('data-en'))
+      : el.getAttribute('data-en');
+    if (!val) return;
+    if (el.tagName === 'P' && el.querySelector('strong')) {
+      el.innerHTML = val;
+    } else if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+      el.placeholder = val;
+    } else {
+      el.textContent = val;
+    }
+  });
+  document.querySelectorAll('.lang-btn').forEach(function(b) {
+    b.classList.toggle('on', b.textContent.trim() === l.toUpperCase());
+  });
+  document.documentElement.lang = l === 'ro' ? 'ro' : 'en';
+}
+
+function closeMobileMenu() {}
+
+document.addEventListener('DOMContentLoaded', function() { setLang(lang); });
+</script>
 </head>
 <body>
 
@@ -193,11 +226,16 @@ select option{background:var(--ink-mid);color:var(--white)}
 
 <nav class="nav">
   <div class="nav-inner">
-    <a href="index.html" class="nav-brand">
+    <a href="/" class="nav-brand">
       <div class="nav-brand-dot"></div>
       Metrou București
     </a>
     <a href="index.html" class="nav-back">← Back</a>
+  </div>
+
+  <div style="display:flex;gap:4px;margin-left:auto;">
+    <button class="lang-btn on" onclick="setLang('ro')">RO</button>
+    <button class="lang-btn"    onclick="setLang('en')">EN</button>
   </div>
 </nav>
 
@@ -206,7 +244,7 @@ select option{background:var(--ink-mid);color:var(--white)}
   <div class="page-header">
     <p class="page-eyebrow">Get in touch</p>
     <h1>We'd love to <em>hear from you</em></h1>
-    <p>We read every message and get back to you as soon as possible.</p>
+    <p data-en="We read every message and get back to you as soon as possible." data-ro="Citim fiecare mesaj și îți răspundem cât mai curând posibil.">Citim fiecare mesaj și îți răspundem cât mai curând posibil.</p>
   </div>
 
   <div class="form-card">
@@ -216,7 +254,7 @@ select option{background:var(--ink-mid);color:var(--white)}
       <div class="form-group">
         <label for="f-email">Your email</label>
         <input type="email" id="f-email" name="email" placeholder="you@example.com" autocomplete="email">
-        <p class="field-error" id="err-email">Please enter a valid email address.</p>
+        <p class="field-error" id="err-email">" data-en="Please enter a valid email address." data-ro="Introduceți o adresă de email validă.">Introduceți o adresă de email validă.</p>
       </div>
 
       <div class="form-group">
@@ -227,13 +265,13 @@ select option{background:var(--ink-mid);color:var(--white)}
           <option value="bug">Report a bug</option>
           <option value="feature">Request a feature</option>
         </select>
-        <p class="field-error" id="err-type">Please select a feedback type.</p>
+        <p class="field-error" id="err-type">" data-en="Please select a feedback type." data-ro="Selectați un tip de feedback.">Selectați un tip de feedback.</p>
       </div>
 
       <div class="form-group">
-        <label for="f-message">Message</label>
+        <label for="f-message" data-en="Message" data-ro="Mesaj">Mesaj</label>
         <textarea id="f-message" name="message" placeholder="Write your message here…"></textarea>
-        <p class="field-error" id="err-message">Please enter a message.</p>
+        <p class="field-error" id="err-message">" data-en="Please enter a message." data-ro="Introduceți un mesaj.">Introduceți un mesaj.</p>
       </div>
 
       <button type="submit" class="btn-submit" id="btn-submit">Send feedback</button>
