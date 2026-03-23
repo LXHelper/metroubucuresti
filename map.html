@@ -1,16 +1,135 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ro">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Metro Map — Metrou București</title>
-    <meta name="description" content="Interactive map of Bucharest's metro network. All 5 lines — M1 through M5 — displayed on OpenStreetMap.">
+
+    <!-- ═══ PRIMARY SEO ═══ -->
+    <title>Harta Metrou București — Toate Liniile M1–M5 | Metrou București</title>
+    <meta name="description" content="Harta interactivă a metroului din București. Toate cele 5 linii: M1, M2, M3, M4, M5. Caută stații, zoom și pan. Interactive Bucharest metro map — all lines M1 to M5.">
+    <meta name="keywords" content="harta metrou bucuresti, harta metrorex, harta metro bucuresti, harta metrou, metrou bucuresti harta, metrorex harta, bucharest metro map, bucharest subway map, bucharest underground map, harta bucuresti metrou, metro bucuresti, metrorex map, harta statie metrou, linii metrou bucuresti, M1 M2 M3 M4 M5 bucuresti">
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+    <meta name="author" content="Metrou București">
     <meta name="theme-color" content="#0D0F1A">
+    <meta name="geo.region" content="RO-B">
+    <meta name="geo.placename" content="București, România">
+    <meta name="geo.position" content="44.435;26.095">
+    <meta name="ICBM" content="44.435, 26.095">
+
+    <!-- ═══ CANONICAL + HREFLANG ═══ -->
     <link rel="canonical" href="https://www.metroubucuresti.ro/map.html">
+    <link rel="alternate" hreflang="ro" href="https://www.metroubucuresti.ro/map.html">
+    <link rel="alternate" hreflang="en" href="https://www.metroubucuresti.ro/map.html">
+    <link rel="alternate" hreflang="x-default" href="https://www.metroubucuresti.ro/map.html">
+
+    <!-- ═══ OPEN GRAPH ═══ -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Metrou București">
+    <meta property="og:locale" content="ro_RO">
+    <meta property="og:locale:alternate" content="en_US">
+    <meta property="og:url" content="https://www.metroubucuresti.ro/map.html">
+    <meta property="og:title" content="Harta Metrou București — Toate Liniile M1–M5">
+    <meta property="og:description" content="Harta interactivă a rețelei de metrou din București. Toate cele 5 linii: M1 (roșu), M2 (albastru), M3 (galben), M4 (verde), M5 (portocaliu). Caută orice stație instant.">
+    <meta property="og:image" content="https://lxtech.ro/metroubucuresti/images/splash-screen.png">
+    <meta property="og:image:width" content="1080">
+    <meta property="og:image:height" content="1920">
+    <meta property="og:image:alt" content="Harta interactivă a metroului din București cu toate liniile M1–M5">
+
+    <!-- ═══ TWITTER CARD ═══ -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Harta Metrou București — M1, M2, M3, M4, M5">
+    <meta name="twitter:description" content="Harta interactivă gratuită a metroului din București. Toate cele 5 linii, căutare stații, zoom și pan.">
+    <meta name="twitter:image" content="https://lxtech.ro/metroubucuresti/images/splash-screen.png">
+    <meta name="twitter:image:alt" content="Harta metrou București">
+
+    <!-- ═══ STRUCTURED DATA ═══ -->
+    <script type="application/ld+json">
+    [
+      {
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "name": "Harta Metrou București — Toate Liniile M1–M5",
+        "description": "Harta interactivă a rețelei de metrou din București. Toate cele 5 linii de metrou: M1, M2, M3, M4, M5. Caută stații, zoom și pan.",
+        "url": "https://www.metroubucuresti.ro/map.html",
+        "inLanguage": ["ro", "en"],
+        "isPartOf": {
+          "@type": "WebSite",
+          "name": "Metrou București",
+          "url": "https://www.metroubucuresti.ro"
+        },
+        "breadcrumb": {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {"@type":"ListItem","position":1,"name":"Metrou București","item":"https://www.metroubucuresti.ro/"},
+            {"@type":"ListItem","position":2,"name":"Harta Metrou","item":"https://www.metroubucuresti.ro/map.html"}
+          ]
+        }
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "Map",
+        "name": "Harta Rețelei de Metrou din București",
+        "description": "Harta interactivă cu toate cele 5 linii de metrou din București: M1 Dristor–Pantelimon–Preciziei, M2 Tudor Arghezi–Pipera, M3, M4, M5 Eroilor–Râul Doamnei/Valea Cascadelor.",
+        "url": "https://www.metroubucuresti.ro/map.html",
+        "mapType": "https://schema.org/TransitMap",
+        "about": {
+          "@type": "Place",
+          "name": "București",
+          "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": 44.435,
+            "longitude": 26.095
+          },
+          "address": {
+            "@type": "PostalAddress",
+            "addressCountry": "RO",
+            "addressLocality": "București"
+          }
+        }
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Câte linii de metrou are Bucureștiul?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Bucureștiul are 5 linii de metrou active: M1, M2, M3, M4 și M5, operate de Metrorex S.A. Rețeaua acoperă aproximativ 78 km și 63 de stații."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How many metro lines does Bucharest have?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Bucharest has 5 active metro lines: M1, M2, M3, M4 and M5, operated by Metrorex S.A. The network covers approximately 78 km and 63 stations."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Unde pot vedea harta metroului din București?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Harta interactivă a metroului din București cu toate liniile M1–M5 este disponibilă la https://www.metroubucuresti.ro/map.html. Poți aplica zoom, pan și căuta orice stație."
+            }
+          }
+        ]
+      }
+    ]
+    </script>
+
+    <!-- ═══ FAVICONS ═══ -->
     <link rel="icon" type="image/png" sizes="32x32" href="https://lxtech.ro/metroubucuresti/images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://lxtech.ro/metroubucuresti/images/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="https://lxtech.ro/metroubucuresti/images/apple-touch-icon.png">
+
+    <!-- ═══ FONTS ═══ -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet">
+
     <style>
         :root {
             --ink: #0D0F1A; --ink-mid: #13152A; --ink-soft: #1C1F35;
@@ -240,6 +359,12 @@
         }
         .map-ctrl-fit:hover { background: var(--ink-soft); color: var(--teal); }
 
+        /* SEO CONTENT — visually hidden but crawlable */
+        .seo-content {
+            position: absolute; width: 1px; height: 1px; overflow: hidden;
+            clip: rect(0,0,0,0); white-space: nowrap; pointer-events: none;
+        }
+
         /* RESPONSIVE */
         @media (max-width: 700px) {
             .nav-links, .lang-toggle { display: none !important; }
@@ -257,94 +382,120 @@
 </head>
 <body>
 
+<!-- SEO: Hidden rich text content for crawlers -->
+<div class="seo-content" aria-hidden="true">
+  <h1>Harta Metrou București — Toate Liniile M1, M2, M3, M4, M5</h1>
+  <p>Harta interactivă a rețelei de metrou din București (Metrorex). Vizualizează toate cele 5 linii de metrou: M1 (roșu, Dristor–Pantelimon–Preciziei), M2 (albastru, Tudor Arghezi–Pipera), M3 (galben, Preciziei–Pantelimon), M4 (verde, Gara de Nord–Straulești), M5 (portocaliu, Eroilor–Râul Doamnei/Valea Cascadelor). Bucharest metro map, subway map București, harta metrorex, metrou harta, underground map Bucharest.</p>
+  <nav aria-label="Stații metrou București">
+    <h2>Stații de Metrou București</h2>
+    <ul>
+      <li>1 Decembrie 1918 — M1</li><li>1 Mai — M4</li><li>Academia Militara — M5</li>
+      <li>Anghel Saligny — M1</li><li>Aparatorii Patriei — M2</li><li>Aurel Vlaicu — M2</li>
+      <li>Aviatorilor — M2</li><li>Basarab — M3, M4</li><li>Berceni — M2</li>
+      <li>Constantin Brancoveanu — M2</li><li>Constantin Brancusi — M5</li>
+      <li>Costin Georgian — M3</li><li>Crangasi — M3</li><li>Dimitrie Leonida — M2</li>
+      <li>Dristor — M1, M3</li><li>Eroii Revolutiei — M2</li><li>Eroilor — M1, M3, M5</li>
+      <li>Favorit — M5</li><li>Gara de Nord — M3, M4</li><li>Gorjului — M1</li>
+      <li>Grivita — M4</li><li>Grozavesti — M3</li><li>Izvor — M1, M3</li>
+      <li>Jiului — M4</li><li>Laminorului — M4</li><li>Lujerului — M1</li>
+      <li>Mihai Bravu — M1, M3</li><li>Nicolae Grigorescu — M1, M3</li>
+      <li>Nicolae Teclu — M1</li><li>Obor — M3</li><li>Orizont — M5</li>
+      <li>Pacii — M1</li><li>Pantelimon — M3</li><li>Parc Bazilescu — M4</li>
+      <li>Parc Drumul Taberei — M5</li><li>Petrache Poenaru — M3</li>
+      <li>Piata Iancului — M3</li><li>Piata Muncii — M3</li><li>Piata Romana — M2</li>
+      <li>Piata Sudului — M2</li><li>Piata Unirii — M1, M2, M3</li>
+      <li>Piata Victoriei — M2, M3</li><li>Pipera — M2</li><li>Politehnica — M1</li>
+      <li>Preciziei — M1</li><li>Raul Doamnei — M5</li><li>Republica — M3</li>
+      <li>Romancierilor — M5</li><li>Stefan cel Mare — M3</li><li>Straulesti — M4</li>
+      <li>Timpuri Noi — M1, M3</li><li>Tineretului — M2</li><li>Titan — M3</li>
+      <li>Tudor Arghezi — M2</li><li>Tudor Vladimirescu — M5</li><li>Universitate — M2</li>
+      <li>Valea Ialomitei — M5</li>
+    </ul>
+  </nav>
+</div>
+
 <div class="line-strip"></div>
 
 <!-- NAV -->
-<nav class="nav" id="nav">
+<nav class="nav" id="nav" aria-label="Navigare principală">
     <div class="nav-inner">
         <a href="index.html" class="nav-brand"><div class="nav-brand-dot"></div>Metrou București</a>
         <ul class="nav-links" id="nav-links">
-            <li><a href="index.html#features">Features</a></li>
-            <li><a href="index.html#screenshots">Screenshots</a></li>
-            <li><a href="map.html" class="active">Map</a></li>
-            <li><a href="index.html#download">Download</a></li>
-            <li><a href="feedback.html">Contact</a></li>
+            <li><a href="index.html#features" data-en="Features" data-ro="Funcții">Features</a></li>
+            <li><a href="index.html#screenshots" data-en="Screenshots" data-ro="Capturi">Screenshots</a></li>
+            <li><a href="map.html" class="active" data-en="Metro Map" data-ro="Harta Metrou">Metro Map</a></li>
+            <li><a href="index.html#download" data-en="Download" data-ro="Descarcă">Download</a></li>
         </ul>
         <div class="nav-end">
             <div class="lang-toggle" style="display:flex;gap:4px">
-                <button class="lang-btn on" onclick="setLang('en')">EN</button>
-                <button class="lang-btn"    onclick="setLang('ro')">RO</button>
+                <button class="lang-btn" onclick="setLang('en')">EN</button>
+                <button class="lang-btn on" onclick="setLang('ro')">RO</button>
             </div>
-            <a href="index.html#download" class="nav-dl" data-en="Free — Get the App" data-ro="Gratuit — Descarcă">Free — Get the App</a>
-            <button class="hamburger" id="hbg" aria-label="Menu"><span></span><span></span><span></span></button>
+            <a href="index.html#download" class="nav-dl" data-en="Free — Get the App" data-ro="Gratuit — Descarcă">Gratuit — Descarcă</a>
+            <button class="hamburger" id="hbg" aria-label="Meniu"><span></span><span></span><span></span></button>
         </div>
     </div>
 </nav>
 
 <!-- MOBILE MENU -->
-<div class="mobile-menu" id="mobile-menu">
-    <p class="mobile-menu-section">Navigate</p>
-    <a href="index.html#features"    onclick="closeMobileMenu()"><span class="mm-icon">✦</span> Features</a>
-    <a href="index.html#screenshots" onclick="closeMobileMenu()"><span class="mm-icon">📱</span> Screenshots</a>
-    <a href="map.html" class="active"><span class="mm-icon">🗺️</span> Map</a>
-    <a href="index.html#download"    onclick="closeMobileMenu()"><span class="mm-icon">▶</span> Download</a>
-    <a href="feedback.html"          onclick="closeMobileMenu()"><span class="mm-icon">✉</span> Contact Us</a>
-    <p class="mobile-menu-section">Legal</p>
-    <a href="https://lxtech.ro/metroubucuresti/metrou-bucuresti-terms.html"      target="_blank"><span class="mm-icon">📄</span> Terms &amp; Conditions</a>
-    <a href="https://lxtech.ro/metroubucuresti/metrou-bucuresti-privacy.html"    target="_blank"><span class="mm-icon">🔒</span> Privacy Policy</a>
-    <a href="https://lxtech.ro/metroubucuresti/metrou-bucuresti-data-usage.html" target="_blank"><span class="mm-icon">📊</span> Data Usage</a>
-    <p class="mobile-menu-section">Support</p>
-    <a href="feedback.html" onclick="closeMobileMenu()"><span class="mm-icon">✉</span> Contact me</a>
-    <a href="feedback.html" onclick="closeMobileMenu()"><span class="mm-icon">🐛</span> Report a bug</a>
-    <a href="feedback.html" onclick="closeMobileMenu()"><span class="mm-icon">💡</span> Request a feature</a>
-    <a href="https://play.google.com/store/apps/details?id=com.MetroBuc" class="mobile-menu-dl" target="_blank">&#9654;&nbsp; Get it on Google Play — FREE</a>
+<div class="mobile-menu" id="mobile-menu" role="dialog" aria-label="Meniu mobil">
+    <p class="mobile-menu-section" data-en="Navigate" data-ro="Navigare">Navigare</p>
+    <a href="index.html#features"    onclick="closeMobileMenu()"><span class="mm-icon">✦</span> <span data-en="Features" data-ro="Funcții">Funcții</span></a>
+    <a href="index.html#screenshots" onclick="closeMobileMenu()"><span class="mm-icon">📱</span> <span data-en="Screenshots" data-ro="Capturi">Capturi</span></a>
+    <a href="map.html" class="active"><span class="mm-icon">🗺️</span> <span data-en="Metro Map" data-ro="Harta Metrou">Harta Metrou</span></a>
+    <a href="index.html#download"    onclick="closeMobileMenu()"><span class="mm-icon">▶</span> <span data-en="Download" data-ro="Descarcă">Descarcă</span></a>
+    <p class="mobile-menu-section" data-en="Legal" data-ro="Legal">Legal</p>
+    <a href="https://lxtech.ro/metroubucuresti/metrou-bucuresti-terms.html"      target="_blank"><span class="mm-icon">📄</span> <span data-en="Terms &amp; Conditions" data-ro="Termeni și condiții">Termeni și condiții</span></a>
+    <a href="https://lxtech.ro/metroubucuresti/metrou-bucuresti-privacy.html"    target="_blank"><span class="mm-icon">🔒</span> <span data-en="Privacy Policy" data-ro="Politică confidențialitate">Politică confidențialitate</span></a>
+    <a href="https://lxtech.ro/metroubucuresti/metrou-bucuresti-data-usage.html" target="_blank"><span class="mm-icon">📊</span> <span data-en="Data Usage" data-ro="Utilizare date">Utilizare date</span></a>
+    <a href="https://play.google.com/store/apps/details?id=com.MetroBuc" class="mobile-menu-dl" target="_blank">&#9654;&nbsp; <span data-en="Get it on Google Play — FREE" data-ro="Descarcă pe Google Play — GRATUIT">Descarcă pe Google Play — GRATUIT</span></a>
 </div>
 
 <div class="page">
-    <div class="legend-bar">
-        <div class="legend-item lp1" onclick="toggleLine('M1',this)"><div class="legend-dot" style="background:var(--m1)"></div>M1</div>
-        <div class="legend-item lp2" onclick="toggleLine('M2',this)"><div class="legend-dot" style="background:var(--m2)"></div>M2</div>
-        <div class="legend-item lp3" onclick="toggleLine('M3',this)"><div class="legend-dot" style="background:var(--m3)"></div>M3</div>
-        <div class="legend-item lp4" onclick="toggleLine('M4',this)"><div class="legend-dot" style="background:var(--m4)"></div>M4</div>
-        <div class="legend-item lp5" onclick="toggleLine('M5',this)"><div class="legend-dot" style="background:var(--m5)"></div>M5</div>
+    <div class="legend-bar" role="toolbar" aria-label="Filtre linii metrou">
+        <div class="legend-item lp1" onclick="toggleLine('M1',this)" role="button" aria-pressed="true" title="Linia M1 — Dristor–Pantelimon / Preciziei"><div class="legend-dot" style="background:var(--m1)"></div>M1</div>
+        <div class="legend-item lp2" onclick="toggleLine('M2',this)" role="button" aria-pressed="true" title="Linia M2 — Tudor Arghezi–Pipera"><div class="legend-dot" style="background:var(--m2)"></div>M2</div>
+        <div class="legend-item lp3" onclick="toggleLine('M3',this)" role="button" aria-pressed="true" title="Linia M3 — Preciziei–Pantelimon"><div class="legend-dot" style="background:var(--m3)"></div>M3</div>
+        <div class="legend-item lp4" onclick="toggleLine('M4',this)" role="button" aria-pressed="true" title="Linia M4 — Gara de Nord–Straulești"><div class="legend-dot" style="background:var(--m4)"></div>M4</div>
+        <div class="legend-item lp5" onclick="toggleLine('M5',this)" role="button" aria-pressed="true" title="Linia M5 — Eroilor–Râul Doamnei/Valea Cascadelor"><div class="legend-dot" style="background:var(--m5)"></div>M5</div>
         <div class="legend-sep"></div>
         <div class="legend-info">
-            <span>Scroll to zoom · Drag to pan · Pinch to zoom on mobile</span>
+            <span data-en="Scroll to zoom · Drag to pan · Pinch to zoom on mobile" data-ro="Scroll pentru zoom · Trage pentru a mișca · Pinch pe mobil">Scroll pentru zoom · Trage pentru a mișca · Pinch pe mobil</span>
             <span>·</span>
-            <a href="index.html#download">Get the full app →</a>
+            <a href="index.html#download" data-en="Get the full app →" data-ro="Descarcă aplicația →">Descarcă aplicația →</a>
         </div>
         <div class="search-wrap" id="searchWrap">
-            <input type="text" class="search-input" id="searchInput" placeholder="Search station…" autocomplete="off" autocorrect="off" spellcheck="false">
+            <input type="text" class="search-input" id="searchInput" placeholder="Caută stație…" autocomplete="off" autocorrect="off" spellcheck="false" aria-label="Caută stație de metrou" data-en="Search station…" data-ro="Caută stație…">
             <span class="search-icon" id="searchIcon">⌕</span>
-            <button class="search-clear" id="searchClear" title="Clear">✕</button>
-            <div class="search-dropdown" id="searchDropdown"></div>
+            <button class="search-clear" id="searchClear" title="Șterge" aria-label="Șterge căutarea">✕</button>
+            <div class="search-dropdown" id="searchDropdown" role="listbox" aria-label="Rezultate căutare stații"></div>
         </div>
     </div>
 
-    <div class="map-wrap" id="mapWrap">
-        <canvas id="mapCanvas"></canvas>
-        <div class="tooltip" id="tooltip">
+    <div class="map-wrap" id="mapWrap" role="application" aria-label="Harta interactivă metrou București">
+        <canvas id="mapCanvas" aria-hidden="true"></canvas>
+        <div class="tooltip" id="tooltip" role="tooltip">
             <div class="tooltip-name" id="ttName"></div>
             <div class="tooltip-lines" id="ttLines"></div>
         </div>
-        <div class="map-controls">
-            <button class="map-ctrl-btn" onclick="zoomMap(1)">+</button>
-            <button class="map-ctrl-btn" onclick="zoomMap(-1)">−</button>
-            <button class="map-ctrl-fit" onclick="fitAll()" title="Fit all lines">⊡</button>
+        <div class="map-controls" aria-label="Controale hartă">
+            <button class="map-ctrl-btn" onclick="zoomMap(1)" aria-label="Zoom in">+</button>
+            <button class="map-ctrl-btn" onclick="zoomMap(-1)" aria-label="Zoom out">−</button>
+            <button class="map-ctrl-fit" onclick="fitAll()" title="Potrivește toate liniile" aria-label="Potrivește toate liniile pe ecran">⊡</button>
         </div>
     </div>
 
-    <div class="map-footer">
-        <a href="index.html" class="foot-brand-sm"><span class="foot-dot-sm"></span>Metrou București — Interactive Metro Map</a>
+    <footer class="map-footer">
+        <a href="index.html" class="foot-brand-sm"><span class="foot-dot-sm"></span>Metrou București — Harta Interactivă a Metroului</a>
         <div class="map-footer-right">
-            © 2024–2026 Metrou București · Map © <a href="https://www.openstreetmap.org/copyright" target="_blank">OpenStreetMap</a> contributors
+            © 2024–2026 Metrou București · Hartă © <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a> contributors
         </div>
-    </div>
+    </footer>
 </div>
 
 <script>
 /* ── Language toggle ── */
-let lang = localStorage.getItem('mb-lang') || 'en';
+let lang = localStorage.getItem('mb-lang') || 'ro';
 function setLang(l) {
     lang = l;
     localStorage.setItem('mb-lang', l);
@@ -652,12 +803,13 @@ function doSearch(q){
 function renderDrop(q){
     searchDropdown.innerHTML='';
     if(!results.length){
-        searchDropdown.innerHTML='<div class="search-empty">No stations found</div>';
+        searchDropdown.innerHTML='<div class="search-empty">Nicio stație găsită</div>';
         searchDropdown.classList.add('open'); return;
     }
     results.forEach((s,i)=>{
         const div=document.createElement('div');
         div.className='search-result'+(i===selIdx?' sel':'');
+        div.setAttribute('role','option');
         const dots=s.lines.map(l=>'<span class="sr-dot" style="background:'+COLORS[l]+'"></span>').join('');
         div.innerHTML='<span class="sr-dots">'+dots+'</span>'+
             '<span class="sr-name">'+highlight(s.n,q)+'</span>'+
@@ -742,9 +894,9 @@ window.zoomMap=function(d){ zoom=Math.max(ZMIN,Math.min(ZMAX,zoom+d*.6)); render
 // =============================================================================
 // TOUCH — single-finger pan + two-finger pinch-to-zoom
 // =============================================================================
-let activeTouches = {};   // track all active touch points
-let lastPinchDist = null; // distance between two fingers at last frame
-let pinchMidLat   = null; // geo-coords of pinch midpoint (held fixed)
+let activeTouches = {};
+let lastPinchDist = null;
+let pinchMidLat   = null;
 let pinchMidLng   = null;
 let isSingleDrag  = false;
 let tsx, tsy, tsLat, tsLng;
@@ -755,7 +907,6 @@ function touchDist(a, b){
 function touchMid(a, b){
     return { x: (a.clientX + b.clientX) / 2, y: (a.clientY + b.clientY) / 2 };
 }
-// Convert a canvas pixel (x,y) to geographic coords given current view
 function screenToGeo(sx, sy){
     const sc = (1 << Math.round(zoom)) * TS;
     const lng = cLng + (sx - W / 2) / sc * 360;
@@ -766,15 +917,12 @@ function screenToGeo(sx, sy){
 wrap.addEventListener('touchstart', e => {
     e.preventDefault();
     for (const t of e.changedTouches) activeTouches[t.identifier] = t;
-
     const ids = Object.keys(activeTouches);
     if (ids.length === 1) {
-        // Single finger — start pan
         isSingleDrag = true;
         const t = activeTouches[ids[0]];
         tsx = t.clientX; tsy = t.clientY; tsLat = cLat; tsLng = cLng;
     } else if (ids.length === 2) {
-        // Two fingers — start pinch
         isSingleDrag = false;
         const [a, b] = [activeTouches[ids[0]], activeTouches[ids[1]]];
         lastPinchDist = touchDist(a, b);
@@ -789,38 +937,27 @@ wrap.addEventListener('touchstart', e => {
 wrap.addEventListener('touchmove', e => {
     e.preventDefault();
     for (const t of e.changedTouches) activeTouches[t.identifier] = t;
-
     const ids = Object.keys(activeTouches);
-
     if (ids.length === 1 && isSingleDrag) {
-        // Single-finger pan
         const t = activeTouches[ids[0]];
         const sc = (1 << Math.round(zoom)) * TS;
         cLng = tsLng - (t.clientX - tsx) / sc * 360;
         cLat = tsLat + (t.clientY - tsy) / sc * 360 * Math.cos(tsLat * Math.PI / 180);
         render();
-
     } else if (ids.length >= 2) {
-        // Two-finger pinch-zoom, anchored at midpoint
         isSingleDrag = false;
         const [a, b] = [activeTouches[ids[0]], activeTouches[ids[1]]];
         const newDist = touchDist(a, b);
-
         if (lastPinchDist && newDist > 0) {
             const delta = Math.log2(newDist / lastPinchDist);
             zoom = Math.max(ZMIN, Math.min(ZMAX, zoom + delta));
-
-            // After zoom, re-anchor the pinch midpoint so it stays under fingers
             const rect = wrap.getBoundingClientRect();
             const mid  = touchMid(a, b);
             const mx   = mid.x - rect.left;
             const my   = mid.y - rect.top;
             const sc   = (1 << Math.round(zoom)) * TS;
-
-            // Reposition cLat/cLng so pinchMid stays at screen position (mx, my)
             cLng = pinchMidLng - (mx - W / 2) / sc * 360;
             cLat = pinchMidLat + (my - H / 2) / sc * 360 * Math.cos(pinchMidLat * Math.PI / 180);
-
             render();
         }
         lastPinchDist = newDist;
@@ -829,14 +966,9 @@ wrap.addEventListener('touchmove', e => {
 
 wrap.addEventListener('touchend', e => {
     for (const t of e.changedTouches) delete activeTouches[t.identifier];
-
     const ids = Object.keys(activeTouches);
-    lastPinchDist = null;
-    pinchMidLat = null;
-    pinchMidLng = null;
-
+    lastPinchDist = null; pinchMidLat = null; pinchMidLng = null;
     if (ids.length === 1) {
-        // One finger lifted — resume single pan from current position
         isSingleDrag = true;
         const t = activeTouches[ids[0]];
         tsx = t.clientX; tsy = t.clientY; tsLat = cLat; tsLng = cLng;
