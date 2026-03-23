@@ -1,1 +1,711 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<!-- ═══ PRIMARY SEO ═══ -->
+<title>Bucharest Metro Map — All Lines M1–M5 | MetroBuc App</title>
+<meta name="description" content="Bucharest metro map — free Android app for Bucharest subway navigation. Route planning across all M1–M5 Metrorex lines, GPS tracking, door indicators, offline timetables. Interactive underground map.">
+<meta name="keywords" content="bucharest metro map, bucharest subway map, bucharest underground map, bucharest map, metrorex map, bucharest metro app, metro bucharest, subway bucharest, M1 M2 M3 M4 M5 bucharest, metrorex bucharest, bucharest transit app, bucharest metro lines">
+<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+<meta name="author" content="Metrou București">
+<meta name="theme-color" content="#0D0F1A">
+<meta name="geo.region" content="RO-B">
+<meta name="geo.placename" content="Bucharest, Romania">
+<meta name="geo.position" content="44.435;26.095">
+<meta name="ICBM" content="44.435, 26.095">
+<meta name="google-play-app" content="app-id=com.MetroBuc">
+
+<!-- ═══ CANONICAL + HREFLANG ═══ -->
+<link rel="canonical" href="https://metroubucuresti.ro/en/">
+<link rel="alternate" hreflang="ro"        href="https://metroubucuresti.ro/">
+<link rel="alternate" hreflang="en"        href="https://metroubucuresti.ro/en/">
+<link rel="alternate" hreflang="x-default" href="https://metroubucuresti.ro/">
+
+<!-- ═══ OPEN GRAPH ═══ -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Bucharest Metro">
+<meta property="og:locale" content="en_US">
+<meta property="og:locale:alternate" content="ro_RO">
+<meta property="og:url" content="https://metroubucuresti.ro/en/">
+<meta property="og:title" content="Bucharest Metro Map — All Lines M1–M5 | Free App">
+<meta property="og:description" content="Free Android app for Bucharest metro navigation. Interactive subway map, route planner across all M1–M5 Metrorex lines, GPS tracking, offline timetables.">
+<meta property="og:image" content="https://lxtech.ro/metroubucuresti/images/splash-screen.png">
+<meta property="og:image:width" content="1080">
+<meta property="og:image:height" content="1920">
+<meta property="og:image:alt" content="Bucharest Metro Map — Android App M1–M5">
+
+<!-- ═══ TWITTER CARD ═══ -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Bucharest Metro Map — M1, M2, M3, M4, M5">
+<meta name="twitter:description" content="Free interactive Bucharest metro map. All 5 Metrorex lines, station search, GPS tracking. 100% offline Android app.">
+<meta name="twitter:image" content="https://lxtech.ro/metroubucuresti/images/splash-screen.png">
+<meta name="twitter:image:alt" content="Bucharest Metro Map">
+
+<!-- ═══ STRUCTURED DATA ═══ -->
+<script type="application/ld+json">
+[
+  {
+    "@context":"https://schema.org",
+    "@type":"MobileApplication",
+    "name":"Bucharest Metro — MetroBuc",
+    "alternateName":["MetroBuc","Bucharest Metro App","Bucharest Subway Map","Bucharest Underground Map"],
+    "description":"Free Android app for Bucharest metro navigation. Route planning across all 5 Metrorex lines M1–M5, GPS tracking, door-side indicators, offline timetables, interactive map, accessibility info.",
+    "url":"https://metroubucuresti.ro/en/",
+    "applicationCategory":"TravelApplication",
+    "operatingSystem":"ANDROID",
+    "offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},
+    "installUrl":"https://play.google.com/store/apps/details?id=com.MetroBuc",
+    "screenshot":"https://lxtech.ro/metroubucuresti/images/splash-screen.png",
+    "inLanguage":["ro","en","fr","it","de","es"],
+    "publisher":{"@type":"Organization","name":"Metrou București","url":"https://metroubucuresti.ro","email":"help@lxtech.ro"}
+  },
+  {
+    "@context":"https://schema.org",
+    "@type":"WebSite",
+    "name":"Bucharest Metro — Metro Map & Navigation App",
+    "url":"https://metroubucuresti.ro/en/",
+    "inLanguage":"en",
+    "description":"Interactive Bucharest metro map and free Android app for navigating all M1–M5 Metrorex lines.",
+    "potentialAction":{"@type":"SearchAction","target":"https://metroubucuresti.ro/en/map.html?q={search_term_string}","query-input":"required name=search_term_string"}
+  },
+  {
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity":[
+      {"@type":"Question","name":"Where can I find the Bucharest metro map?","acceptedAnswer":{"@type":"Answer","text":"The interactive Bucharest metro map with all 5 lines (M1–M5) is available for free at metroubucuresti.ro/en/map.html. You can zoom, search any station and filter lines individually."}},
+      {"@type":"Question","name":"How many metro lines does Bucharest have?","acceptedAnswer":{"@type":"Answer","text":"Bucharest has 5 active metro lines operated by Metrorex S.A.: M1 (gold), M2 (blue), M3 (red), M4 (green) and M5 (orange), covering approximately 78 km across 63 stations."}},
+      {"@type":"Question","name":"Is the Bucharest metro app free?","acceptedAnswer":{"@type":"Answer","text":"Yes, completely free to download and use on Android. Works 100% offline — no internet needed for routes, timetables or GPS tracking."}},
+      {"@type":"Question","name":"Does the Bucharest metro app work without internet?","acceptedAnswer":{"@type":"Answer","text":"Yes — 100% offline. Route planning, timetables, GPS tracking, accessibility info and station details all work underground without any mobile data."}},
+      {"@type":"Question","name":"What metro lines does the app cover?","acceptedAnswer":{"@type":"Answer","text":"All 5 active Bucharest metro lines: M1 (Dristor–Pantelimon/Preciziei), M2 (Tudor Arghezi–Pipera), M3 (Preciziei–Pantelimon), M4 (Gara de Nord–Straulești), M5 (Eroilor–Râul Doamnei/Valea Cascadelor)."}}
+    ]
+  },
+  {
+    "@context":"https://schema.org",
+    "@type":"BreadcrumbList",
+    "itemListElement":[
+      {"@type":"ListItem","position":1,"name":"Bucharest Metro","item":"https://metroubucuresti.ro/en/"},
+      {"@type":"ListItem","position":2,"name":"Metro Map","item":"https://metroubucuresti.ro/en/map.html"}
+    ]
+  }
+]
+</script>
+
+<style>
+:root{
+  --ink:#0D0F1A;--ink-mid:#13152A;--ink-soft:#1C1F35;
+  --teal:#4ECDC4;--teal-dim:#2A9D96;--teal-glow:rgba(78,205,196,0.15);
+  --white:#FFFFFF;--chalk:#F2F4F8;
+  --mist:rgba(255,255,255,0.07);--border:rgba(255,255,255,0.08);
+  --m1:#FFD700;--m2:#4A90D9;--m3:#E53935;--m4:#43A047;--m5:#FB8C00;
+  --serif:'DM Serif Display',Georgia,serif;
+  --sans:'DM Sans',system-ui,sans-serif;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;font-size:16px}
+body{font-family:var(--sans);color:rgba(255,255,255,0.72);overflow-x:hidden;line-height:1.65;background-color:var(--ink);background-image:radial-gradient(ellipse 65% 55% at 10% 10%,rgba(74,144,217,.07) 0%,transparent 60%),radial-gradient(ellipse 55% 50% at 90% 90%,rgba(78,205,196,.07) 0%,transparent 60%),linear-gradient(rgba(255,255,255,.032) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.032) 1px,transparent 1px);background-size:100% 100%,100% 100%,64px 64px,64px 64px;background-attachment:fixed;}
+::-webkit-scrollbar{width:4px}::-webkit-scrollbar-track{background:var(--ink)}::-webkit-scrollbar-thumb{background:var(--teal-dim);border-radius:2px}
+.line-strip{position:fixed;top:0;left:0;width:100%;height:3px;z-index:1000;background:linear-gradient(90deg,var(--m1) 0% 20%,var(--m3) 20% 40%,var(--m2) 40% 60%,var(--m4) 60% 80%,var(--m5) 80% 100%);}
+.nav{position:fixed;top:3px;left:0;width:100%;z-index:900;transition:background .3s,backdrop-filter .3s;}
+.nav.solid{background:rgba(13,15,26,.95);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);}
+.nav-inner{max-width:1280px;margin:0 auto;padding:18px 40px;display:flex;align-items:center;justify-content:space-between;gap:24px;}
+.nav-brand{display:flex;align-items:center;gap:10px;text-decoration:none;font-family:var(--serif);font-size:1.15rem;color:var(--white);white-space:nowrap;}
+.nav-brand-dot{width:10px;height:10px;border-radius:50%;background:var(--teal);flex-shrink:0;box-shadow:0 0 8px var(--teal);}
+.nav-links{display:flex;list-style:none;gap:36px}
+.nav-links a{font-size:.82rem;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:rgba(255,255,255,.5);text-decoration:none;transition:color .2s;}
+.nav-links a:hover{color:var(--teal)}
+.nav-end{display:flex;align-items:center;gap:10px}
+.lang-btn{background:none;border:1px solid var(--border);border-radius:6px;padding:5px 12px;font-family:var(--sans);font-size:.75rem;font-weight:600;letter-spacing:.08em;color:rgba(255,255,255,.4);cursor:pointer;transition:all .2s;}
+.lang-btn.on,.lang-btn:hover{border-color:var(--teal);color:var(--teal)}
+.nav-dl{text-decoration:none;background:var(--teal);color:var(--ink);font-weight:700;font-size:.82rem;letter-spacing:.04em;padding:9px 22px;border-radius:8px;transition:opacity .2s,transform .2s;white-space:nowrap;}
+.nav-dl:hover{opacity:.88;transform:translateY(-1px)}
+.hamburger{display:none;background:none;border:none;cursor:pointer;padding:4px;flex-direction:column;gap:5px;z-index:10;}
+.hamburger span{display:block;width:20px;height:2px;background:var(--white);border-radius:1px;transition:.3s}
+.hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.hamburger.open span:nth-child(2){opacity:0}
+.hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+.mobile-menu{display:none;position:fixed;top:3px;left:0;right:0;z-index:899;background:rgba(13,15,26,.98);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:70px 32px 28px;flex-direction:column;gap:0;}
+.mobile-menu.open{display:flex}
+.mobile-menu-section{font-size:.65rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.25);padding:20px 0 8px;border-top:1px solid var(--border);margin-top:8px;}
+.mobile-menu-section:first-child{border-top:none;margin-top:0;padding-top:0}
+.mobile-menu a{display:flex;align-items:center;gap:10px;font-size:.95rem;font-weight:500;color:rgba(255,255,255,.65);text-decoration:none;padding:11px 0;border-bottom:1px solid rgba(255,255,255,.04);transition:color .2s;}
+.mobile-menu a:last-of-type{border-bottom:none}
+.mobile-menu a:hover{color:var(--teal)}
+.mobile-menu a .mm-icon{width:32px;height:32px;border-radius:7px;background:var(--mist);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:.85rem;flex-shrink:0;}
+.mobile-menu-dl{margin-top:20px;display:flex;background:var(--teal);color:var(--ink);font-weight:700;font-size:.92rem;padding:13px 20px;border-radius:8px;text-decoration:none;justify-content:center;transition:opacity .2s;}
+.mobile-menu-dl:hover{opacity:.88;color:var(--ink)}
+.hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;align-items:center;position:relative;overflow:hidden;padding:120px 0 80px;}
+.hero-mesh{position:absolute;inset:0;z-index:0;pointer-events:none;background:radial-gradient(ellipse 70% 60% at 70% 40%,rgba(78,205,196,.10) 0%,transparent 65%),radial-gradient(ellipse 50% 50% at 20% 80%,rgba(74,144,217,.08) 0%,transparent 60%);}
+.hero-left{position:relative;z-index:1;padding:0 48px 0 clamp(24px,calc((100vw - 1280px)/2 + 40px),200px);}
+.hero-tag{display:inline-flex;align-items:center;gap:8px;border:1px solid rgba(78,205,196,.25);border-radius:4px;padding:5px 12px;margin-bottom:28px;font-size:.7rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--teal);}
+.hero-tag::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--teal);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(1.4)}}
+.hero h1{font-family:var(--serif);font-size:clamp(3rem,5.5vw,5rem);line-height:.97;letter-spacing:-.02em;color:var(--white);margin-bottom:28px;}
+.hero h1 em{font-style:italic;color:var(--teal);display:block;}
+.hero-desc{font-size:1rem;line-height:1.75;color:rgba(255,255,255,.5);max-width:420px;margin-bottom:36px;}
+.hero-btns{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:52px}
+.btn-fill{display:inline-flex;align-items:center;gap:8px;background:var(--teal);color:var(--ink);font-family:var(--sans);font-size:.88rem;font-weight:700;padding:13px 26px;border-radius:8px;text-decoration:none;transition:opacity .2s,transform .2s;box-shadow:0 0 28px rgba(78,205,196,.25);}
+.btn-fill:hover{opacity:.88;transform:translateY(-2px)}
+.btn-line{display:inline-flex;align-items:center;gap:8px;border:1.5px solid var(--border);color:rgba(255,255,255,.65);font-family:var(--sans);font-size:.88rem;font-weight:500;padding:13px 26px;border-radius:8px;text-decoration:none;transition:border-color .2s,color .2s;}
+.btn-line:hover{border-color:rgba(78,205,196,.5);color:var(--white)}
+.hero-stats{display:flex;gap:28px;flex-wrap:wrap}
+.hstat{display:flex;align-items:center;gap:10px}
+.hstat-icon{width:34px;height:34px;border-radius:8px;background:var(--mist);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:.95rem;flex-shrink:0;}
+.hstat-text{font-size:.82rem;color:rgba(255,255,255,.4);line-height:1.25}
+.hstat-text strong{display:block;color:var(--white);font-weight:600;font-size:.88rem}
+.hero-right{position:relative;z-index:1;display:flex;justify-content:center;align-items:center;padding-right:clamp(24px,calc((100vw - 1280px)/2 + 40px),200px);}
+.phone-scene{position:relative;width:280px}
+.phone-glow{position:absolute;inset:-60px;z-index:0;background:radial-gradient(circle,rgba(78,205,196,.18) 0%,transparent 65%);pointer-events:none;}
+.phone-frame{position:relative;z-index:1;width:280px;border-radius:42px;overflow:hidden;box-shadow:0 0 0 1.5px rgba(78,205,196,.25),0 40px 100px rgba(0,0,0,.6),0 10px 30px rgba(0,0,0,.4);transform:perspective(1400px) rotateY(-10deg) rotateX(4deg);transition:transform .5s ease;}
+.phone-frame:hover{transform:perspective(1400px) rotateY(-5deg) rotateX(2deg) scale(1.02)}
+.phone-frame img{width:100%;display:block}
+.phone-fallback{width:100%;min-height:560px;background:var(--ink-mid);background-image:linear-gradient(rgba(78,205,196,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(78,205,196,.04) 1px,transparent 1px);background-size:24px 24px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;}
+.phone-fallback span{font-size:2.5rem}.phone-fallback p{font-family:var(--serif);font-size:1rem;color:var(--teal);opacity:.6}
+.badge{position:absolute;z-index:2;border-radius:8px;padding:7px 13px;font-family:var(--sans);font-weight:700;font-size:.78rem;box-shadow:0 6px 20px rgba(0,0,0,.35);animation:fbadge 4s ease-in-out infinite;white-space:nowrap;}
+@keyframes fbadge{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
+.b1{background:var(--m1);color:var(--ink);top:8%;right:-28px;animation-delay:0s}
+.b2{background:var(--m2);color:#fff;top:26%;left:-36px;animation-delay:1.2s}
+.b3{background:var(--m3);color:#fff;top:42%;right:-36px;animation-delay:.6s}
+.b4{background:var(--m4);color:#fff;top:58%;left:-24px;animation-delay:1.8s}
+.b5{background:var(--m5);color:var(--ink);top:74%;right:-30px;animation-delay:2.4s}
+.lines-bar{border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:16px 40px;display:flex;justify-content:center;align-items:center;gap:10px;flex-wrap:wrap;}
+.lpill{display:inline-flex;align-items:center;gap:7px;padding:7px 16px;border-radius:999px;font-family:var(--sans);font-size:.76rem;font-weight:600;letter-spacing:.03em;}
+.lpill-dot{width:8px;height:8px;border-radius:50%;opacity:.8}
+.lp1{background:rgba(255,215,0,.1);color:#FFD700;border:1px solid rgba(255,215,0,.2)}
+.lp2{background:rgba(74,144,217,.1);color:#6aaee8;border:1px solid rgba(74,144,217,.2)}
+.lp3{background:rgba(229,57,53,.1);color:#ef6c69;border:1px solid rgba(229,57,53,.2)}
+.lp4{background:rgba(67,160,71,.1);color:#66bb6a;border:1px solid rgba(67,160,71,.2)}
+.lp5{background:rgba(251,140,0,.1);color:#FFA726;border:1px solid rgba(251,140,0,.2)}
+.features{padding:120px clamp(24px,calc((100vw - 1280px)/2 + 40px),200px);}
+.feat-header{margin-bottom:56px}
+.feat-eyebrow{font-size:.7rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--teal);margin-bottom:14px;}
+.feat-header h2{font-family:var(--serif);font-size:clamp(2.2rem,4vw,3.4rem);line-height:1.05;letter-spacing:-.02em;color:var(--white);}
+.feat-header h2 em{font-style:italic;color:var(--teal)}
+.feat-subline{margin-top:18px;font-size:1rem;line-height:1.75;color:rgba(255,255,255,.45);max-width:640px;}
+.feat-subline strong{color:var(--white);font-weight:800;letter-spacing:.03em;}
+.feat-subline em{font-style:italic;color:var(--teal);}
+.feat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:20px;overflow:hidden;}
+.feat-item{background:rgba(255,255,255,.04);transition:background .2s;position:relative;cursor:pointer;user-select:none;}
+.feat-item:hover{background:rgba(255,255,255,.07)}
+.feat-item.active{background:rgba(78,205,196,.06);}
+.feat-item-header{display:flex;align-items:center;gap:10px;padding:20px 22px;}
+.feat-emoji{font-size:1.25rem;flex-shrink:0;line-height:1}
+.feat-name{font-family:var(--sans);font-size:.88rem;font-weight:600;color:var(--white);line-height:1.3;flex:1;margin:0;}
+.feat-chevron{width:16px;height:16px;flex-shrink:0;display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.25);transition:transform .32s cubic-bezier(.4,0,.2,1),color .25s;}
+.feat-chevron svg{width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.feat-item.active .feat-chevron{transform:rotate(180deg);color:var(--teal)}
+.feat-body{max-height:0;overflow:hidden;transition:max-height .38s cubic-bezier(.4,0,.2,1),padding .38s cubic-bezier(.4,0,.2,1);padding:0 22px;}
+.feat-item.active .feat-body{max-height:220px;padding:0 22px 20px;}
+.feat-copy{font-size:.85rem;color:rgba(255,255,255,.48);line-height:1.7;border-top:1px solid rgba(255,255,255,.06);padding-top:12px;}
+@media(max-width:900px){.feat-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.feat-grid{grid-template-columns:1fr}}
+.shots{display:grid;grid-template-columns:1fr 1fr;min-height:680px;border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
+.shots-left{padding:80px clamp(24px,calc((100vw - 1280px)/2 + 40px),200px);display:flex;flex-direction:column;justify-content:center;border-right:1px solid var(--border);}
+.shots-eyebrow{font-size:.7rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--teal);margin-bottom:16px;}
+.shots-left h2{font-family:var(--serif);font-size:clamp(1.9rem,3vw,2.8rem);line-height:1.1;letter-spacing:-.02em;color:var(--white);margin-bottom:28px;}
+.shots-left h2 em{font-style:italic;color:var(--teal)}
+.shots-list{list-style:none;margin-bottom:36px}
+.shots-list li{display:flex;align-items:flex-start;gap:12px;padding:11px 0;border-bottom:1px solid var(--border);font-size:.9rem;color:rgba(255,255,255,.55);}
+.shots-list li:last-child{border-bottom:none}
+.shots-list li::before{content:'';width:18px;height:18px;flex-shrink:0;margin-top:2px;border-radius:4px;background:rgba(78,205,196,.10);border:1px solid rgba(78,205,196,.25);background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10'%3E%3Cpath d='M2 5.5l2 2 4-4' stroke='%234ECDC4' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");background-size:12px;background-repeat:no-repeat;background-position:center;}
+.shots-right{display:flex;align-items:center;justify-content:center;gap:14px;padding:60px 40px;position:relative;overflow:hidden;}
+.shots-right::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 50%,rgba(78,205,196,.07) 0%,transparent 70%);}
+.ss{border-radius:24px;overflow:hidden;flex-shrink:0;box-shadow:0 20px 60px rgba(0,0,0,.5);transition:transform .3s;position:relative;z-index:1;}
+.ss:hover{transform:translateY(-8px) scale(1.02)}
+.ss img{width:100%;display:block}
+.ss.tall{width:155px}.ss.short{width:135px;margin-bottom:28px}
+.ss-ph{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;padding:20px;background:var(--ink-mid);background-image:linear-gradient(rgba(78,205,196,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(78,205,196,.04) 1px,transparent 1px);background-size:18px 18px;border:1px solid rgba(78,205,196,.1);}
+.ss.tall .ss-ph{min-height:300px}.ss.short .ss-ph{min-height:260px}
+.ss-ph span{font-size:1.8rem}.ss-ph p{font-size:.68rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:rgba(78,205,196,.4);text-align:center}
+.map-preview{border-top:1px solid var(--border);}
+.map-preview-header{padding:72px clamp(24px,calc((100vw - 1280px)/2 + 40px),200px) 40px;display:flex;align-items:flex-end;justify-content:space-between;gap:32px;flex-wrap:wrap;}
+.map-preview-eyebrow{font-size:.7rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--teal);margin-bottom:14px;}
+.map-preview-header h2{font-family:var(--serif);font-size:clamp(2rem,3.5vw,3rem);line-height:1.05;letter-spacing:-.02em;color:var(--white);}
+.map-preview-header h2 em{font-style:italic;color:var(--teal)}
+.map-preview-desc{margin-top:12px;font-size:.92rem;color:rgba(255,255,255,.42);max-width:520px;line-height:1.65}
+.map-preview-cta{display:flex;gap:10px;flex-wrap:wrap;flex-shrink:0;}
+.map-line-badges{display:flex;gap:6px;padding:16px clamp(24px,calc((100vw - 1280px)/2 + 40px),200px);border-top:1px solid var(--border);border-bottom:1px solid var(--border);background:rgba(255,255,255,.015);flex-wrap:wrap;}
+.mlbadge{display:inline-flex;align-items:center;gap:5px;padding:4px 12px;border-radius:999px;font-size:.7rem;font-weight:600;white-space:nowrap;}
+.mlb1{background:rgba(204,51,51,.12);color:#e07070;border:1px solid rgba(204,51,51,.28);}
+.mlb2{background:rgba(51,102,204,.12);color:#6699ee;border:1px solid rgba(51,102,204,.28);}
+.mlb3{background:rgba(221,170,0,.12);color:#eedd44;border:1px solid rgba(221,170,0,.28);}
+.mlb4{background:rgba(46,139,87,.14);color:#55cc88;border:1px solid rgba(46,139,87,.3);}
+.mlb5{background:rgba(255,152,49,.12);color:#ffbb66;border:1px solid rgba(255,152,49,.28);}
+.mlbadge-dot{width:5px;height:5px;border-radius:50%;}
+.map-svg-wrap{display:block;position:relative;border-top:1px solid var(--border);overflow:hidden;cursor:pointer;text-decoration:none;line-height:0;}
+.map-preview-img{width:100%;height:auto;display:block;max-height:500px;object-fit:cover;object-position:center center;transition:transform .5s ease,filter .5s ease;filter:brightness(0.88);}
+.map-svg-wrap:hover .map-preview-img{transform:scale(1.02);filter:brightness(1.0);}
+.map-img-fade{position:absolute;bottom:0;left:0;right:0;height:160px;background:linear-gradient(to bottom,transparent,rgba(13,15,26,0.95));pointer-events:none;}
+.map-img-cta{position:absolute;bottom:28px;left:50%;transform:translateX(-50%);z-index:5;pointer-events:none;}
+.map-img-cta-btn{display:inline-flex;align-items:center;gap:8px;background:var(--teal);color:var(--ink);font-family:var(--sans);font-size:.9rem;font-weight:700;padding:13px 30px;border-radius:8px;box-shadow:0 8px 32px rgba(78,205,196,.4),0 2px 8px rgba(0,0,0,.4);white-space:nowrap;transition:transform .2s ease,box-shadow .2s ease;}
+.map-svg-wrap:hover .map-img-cta-btn{transform:translateY(-2px);box-shadow:0 12px 40px rgba(78,205,196,.55),0 4px 12px rgba(0,0,0,.4);}
+.map-svg-hover{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(13,15,26,0);transition:background .3s ease;pointer-events:none;}
+.map-svg-hover span{background:rgba(13,15,26,.85);color:var(--teal);font-family:var(--sans);font-size:.82rem;font-weight:600;padding:8px 20px;border-radius:6px;border:1px solid rgba(78,205,196,.3);opacity:0;transform:translateY(-6px);transition:opacity .3s ease,transform .3s ease;margin-bottom:90px;}
+.map-svg-wrap:hover .map-svg-hover{background:rgba(13,15,26,.15);}
+.map-svg-wrap:hover .map-svg-hover span{opacity:1;transform:translateY(0);}
+.beta-banner{background:linear-gradient(135deg,rgba(78,205,196,.10) 0%,rgba(74,144,217,.08) 100%);border-top:1px solid rgba(78,205,196,.18);border-bottom:1px solid rgba(78,205,196,.18);padding:14px 40px;display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap;text-align:center;}
+.beta-pill{display:inline-flex;align-items:center;gap:6px;background:rgba(78,205,196,.15);border:1px solid rgba(78,205,196,.35);border-radius:4px;padding:3px 10px;font-size:.65rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--teal);white-space:nowrap;flex-shrink:0;}
+.beta-pill::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--teal);animation:pulse 2s infinite}
+.beta-banner-text{font-size:.82rem;color:rgba(255,255,255,.5);}
+.beta-banner-text a{color:var(--teal);text-decoration:none;font-weight:600;}
+.beta-banner-text a:hover{opacity:.8}
+.beta-section{padding:80px clamp(24px,calc((100vw - 1280px)/2 + 40px),200px);border-top:1px solid var(--border);}
+.beta-card{display:grid;grid-template-columns:1fr 1fr;gap:0;background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:24px;overflow:hidden;position:relative;}
+.beta-card::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 55% 70% at 0% 50%,rgba(78,205,196,.07) 0%,transparent 60%);pointer-events:none;}
+.beta-card-left{padding:56px 52px;position:relative;z-index:1;border-right:1px solid var(--border);}
+.beta-card-right{padding:56px 52px;position:relative;z-index:1;display:flex;flex-direction:column;justify-content:center;gap:20px;background:rgba(78,205,196,.025);}
+.beta-eyebrow{display:inline-flex;align-items:center;gap:7px;font-size:.65rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--teal);margin-bottom:18px;}
+.beta-eyebrow::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--teal);animation:pulse 2s infinite}
+.beta-card-left h2{font-family:var(--serif);font-size:clamp(1.7rem,2.8vw,2.4rem);line-height:1.1;letter-spacing:-.02em;color:var(--white);margin-bottom:16px;}
+.beta-card-left h2 em{font-style:italic;color:var(--teal)}
+.beta-card-left p{font-size:.92rem;color:rgba(255,255,255,.45);line-height:1.75;margin-bottom:28px;}
+.beta-card-left p strong{color:rgba(255,255,255,.75);font-weight:600;}
+.beta-join-btn{display:inline-flex;align-items:center;gap:8px;background:var(--teal);color:var(--ink);font-family:var(--sans);font-size:.88rem;font-weight:700;padding:12px 26px;border-radius:8px;text-decoration:none;transition:opacity .2s,transform .2s;align-self:flex-start;}
+.beta-join-btn:hover{opacity:.88;transform:translateY(-2px)}
+.beta-stat{display:flex;flex-direction:column;gap:3px;padding:18px 20px;background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:12px;}
+.beta-stat-val{font-family:var(--serif);font-size:1.6rem;color:var(--white);line-height:1}
+.beta-stat-val em{font-style:italic;color:var(--teal)}
+.beta-stat-label{font-size:.75rem;color:rgba(255,255,255,.38);line-height:1.4}
+.beta-perks{list-style:none;margin-top:4px;display:flex;flex-direction:column;gap:10px;}
+.beta-perks li{display:flex;align-items:flex-start;gap:10px;font-size:.85rem;color:rgba(255,255,255,.5);line-height:1.5;}
+.beta-perks li::before{content:'✦';color:var(--teal);font-size:.7rem;margin-top:3px;flex-shrink:0;}
+.faq-section{padding:80px clamp(24px,calc((100vw - 1280px)/2 + 40px),200px);}
+.faq-eyebrow{font-size:.7rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--teal);margin-bottom:14px;}
+.faq-section h2{font-family:var(--serif);font-size:clamp(1.8rem,3vw,2.6rem);line-height:1.1;letter-spacing:-.02em;color:var(--white);margin-bottom:40px;}
+.faq-section h2 em{font-style:italic;color:var(--teal)}
+.faq-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+.faq-item{background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:14px;padding:24px 28px;}
+.faq-q{font-weight:600;color:var(--white);font-size:.95rem;margin-bottom:10px;}
+.faq-a{font-size:.88rem;color:rgba(255,255,255,.45);line-height:1.7;}
+.faq-a a{color:var(--teal);text-decoration:none;}
+.faq-a a:hover{opacity:.8}
+@media(max-width:760px){.faq-grid{grid-template-columns:1fr}}
+.cta-wrap{padding:100px clamp(24px,calc((100vw - 1280px)/2 + 40px),200px)}
+.cta-card{background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:24px;padding:72px 80px;display:grid;grid-template-columns:1fr auto;gap:48px;align-items:center;position:relative;overflow:hidden;}
+.cta-card::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 80% at 0% 50%,rgba(78,205,196,.09) 0%,transparent 60%),radial-gradient(ellipse 40% 60% at 100% 50%,rgba(74,144,217,.06) 0%,transparent 60%);pointer-events:none;}
+.cta-card::after{content:'';position:absolute;left:0;top:0;bottom:0;width:4px;background:linear-gradient(180deg,var(--m1) 0%,var(--m3) 25%,var(--m2) 50%,var(--m4) 75%,var(--m5) 100%);}
+.cta-text{position:relative;z-index:1}
+.cta-text h2{font-family:var(--serif);font-size:clamp(1.7rem,3vw,2.4rem);line-height:1.1;color:var(--white);margin-bottom:12px;}
+.cta-text p{color:rgba(255,255,255,.45);font-size:.95rem;max-width:420px}
+.cta-actions{display:flex;flex-direction:column;gap:10px;position:relative;z-index:1;flex-shrink:0}
+footer{border-top:1px solid var(--border);padding:60px clamp(24px,calc((100vw - 1280px)/2 + 40px),200px) 32px;}
+.foot-top{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px;padding-bottom:48px;border-bottom:1px solid var(--border);margin-bottom:28px;}
+.foot-brand{font-family:var(--serif);font-size:1.1rem;color:var(--white);margin-bottom:12px;display:flex;align-items:center;gap:8px;}
+.foot-brand-dot{width:8px;height:8px;border-radius:50%;background:var(--teal);box-shadow:0 0 6px var(--teal)}
+.foot-desc{font-size:.83rem;line-height:1.65;color:rgba(255,255,255,.35);max-width:260px}
+.foot-col h4{font-size:.7rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.25);margin-bottom:16px;}
+.foot-col a{display:block;font-size:.85rem;color:rgba(255,255,255,.45);text-decoration:none;margin-bottom:9px;transition:color .2s;}
+.foot-col a:hover{color:var(--teal)}
+.foot-bottom{display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:12px;font-size:.75rem;color:rgba(255,255,255,.25);}
+.foot-legal{display:flex;flex-direction:column;gap:6px;}
+.foot-dots{display:flex;gap:6px;align-items:center;padding-top:4px;}
+.fd{width:7px;height:7px;border-radius:50%}
+@keyframes rv-show{to{opacity:1;transform:none}}
+.rv{opacity:0;transform:translateY(24px);transition:opacity .65s ease,transform .65s ease;animation:rv-show .65s ease 1.2s forwards;}
+.rv.in{opacity:1;transform:none;animation:none}
+.rv1{transition-delay:.10s;animation-delay:.30s}.rv2{transition-delay:.18s;animation-delay:.38s}.rv3{transition-delay:.26s;animation-delay:.46s}.rv4{transition-delay:.34s;animation-delay:.54s}.rv5{transition-delay:.42s;animation-delay:.62s}.rv6{transition-delay:.50s;animation-delay:.70s}
+@media(max-width:1000px){
+  .hero{grid-template-columns:1fr;padding:100px 0 60px}.hero-left{padding:0 32px;text-align:center}.hero-desc{margin:0 auto 36px}.hero-btns{justify-content:center}.hero-stats{justify-content:center}.hero-right{padding:40px 32px;justify-content:center}.phone-scene{width:220px}.phone-frame{width:220px}.b1,.b3,.b5{right:-12px}.b2,.b4{left:-12px}
+  .shots{grid-template-columns:1fr}.shots-left{padding:60px 32px;border-right:none;border-bottom:1px solid var(--border)}.shots-right{padding:60px 32px;min-height:360px}
+  .cta-card{grid-template-columns:1fr;padding:48px 40px;text-align:center}.cta-actions{align-items:center}.cta-text p{margin:0 auto}
+  .foot-top{grid-template-columns:1fr 1fr;gap:32px}
+  .map-preview-header{flex-direction:column;align-items:flex-start;}
+  .beta-card{grid-template-columns:1fr;}.beta-card-left{border-right:none;border-bottom:1px solid var(--border);padding:40px 36px;}.beta-card-right{padding:36px 36px;}
+}
+@media(max-width:700px){
+  .nav-links,.lang-toggle{display:none!important}.hamburger{display:flex}
+  .features{padding:80px 24px}.cta-wrap{padding:60px 24px}.footer{padding:48px 24px 24px}
+  .foot-top{grid-template-columns:1fr}.ss.tall{width:130px}.ss.short{width:115px}
+  .nav-inner{padding:14px 24px}.lines-bar{padding:14px 24px}.faq-section{padding:60px 24px}
+  .beta-section{padding:60px 24px;}.beta-card-left,.beta-card-right{padding:32px 24px;}.beta-banner{padding:12px 24px;}
+  .map-preview-header{padding:48px 24px 28px;}.map-line-badges{padding:12px 24px;}
+  .map-preview-img{max-height:260px;}.map-img-cta-btn{font-size:.8rem;padding:11px 22px;}
+}
+</style>
+
+<!-- setLang and closeMobileMenu defined before body so inline onclick always works -->
+<script>
+var lang = 'en';
+
+function setLang(l) {
+  if (l === 'ro') { window.location.href = '/'; return; }
+  lang = l;
+  localStorage.setItem('lang', l);
+  document.querySelectorAll('[data-en]').forEach(function(el) {
+    var val = el.getAttribute('data-en');
+    if (!val) return;
+    if (el.classList.contains('feat-subline') ||
+        el.classList.contains('faq-a') ||
+        (el.tagName === 'P' && el.querySelector('strong'))) {
+      el.innerHTML = val;
+    } else {
+      el.textContent = val;
+    }
+  });
+  document.querySelectorAll('.lang-btn').forEach(function(b) {
+    b.classList.toggle('on', b.textContent.trim() === l.toUpperCase());
+  });
+}
+
+function closeMobileMenu() {
+  var hbg = document.getElementById('hbg');
+  var mm  = document.getElementById('mobile-menu');
+  if (hbg) hbg.classList.remove('open');
+  if (mm)  mm.classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+document.addEventListener('DOMContentLoaded', function() { setLang('en'); });
+</script>
+</head>
+<body>
+
+<div class="line-strip"></div>
+
+<nav class="nav" id="nav" aria-label="Navigare principală">
+  <div class="nav-inner">
+    <a href="#" class="nav-brand"><div class="nav-brand-dot"></div>Metrou București</a>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="#features"    data-en="Features"    data-ro="Funcții">Funcții</a></li>
+      <li><a href="#screenshots" data-en="Screenshots" data-ro="Capturi">Capturi</a></li>
+      <li><a href="#map-preview" data-en="Metro Map"   data-ro="Harta Metrou">Harta Metrou</a></li>
+      <li><a href="#download"    data-en="Download"    data-ro="Descarcă">Descarcă</a></li>
+    </ul>
+    <div class="nav-end">
+      <div class="lang-toggle" style="display:flex;gap:4px">
+        <button class="lang-btn"    onclick="setLang('en')">EN</button>
+        <button class="lang-btn on" onclick="setLang('ro')">RO</button>
+      </div>
+      <a href="#download" class="nav-dl" data-en="Free — Get the App" data-ro="Gratuit — Descarcă">Gratuit — Descarcă</a>
+      <button class="hamburger" id="hbg" aria-label="Meniu"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</nav>
+
+<div class="mobile-menu" id="mobile-menu" role="dialog" aria-label="Meniu mobil">
+  <p class="mobile-menu-section" data-en="Navigate" data-ro="Navigare">Navigare</p>
+  <a href="#features"    onclick="closeMobileMenu()"><span class="mm-icon">✦</span> <span data-en="Features" data-ro="Funcții">Funcții</span></a>
+  <a href="#screenshots" onclick="closeMobileMenu()"><span class="mm-icon">📱</span> <span data-en="Screenshots" data-ro="Capturi">Capturi</span></a>
+  <a href="#map-preview" onclick="closeMobileMenu()"><span class="mm-icon">🗺️</span> <span data-en="Metro Map" data-ro="Harta Metroului">Harta Metroului</span></a>
+  <a href="map.html"><span class="mm-icon">🗺️</span> <span data-en="Full Map Page" data-ro="Pagina Hartă completă">Pagina Hartă completă</span></a>
+  <a href="#download" onclick="closeMobileMenu()"><span class="mm-icon">▶</span> <span data-en="Download" data-ro="Descarcă">Descarcă</span></a>
+  <p class="mobile-menu-section" data-en="Legal" data-ro="Legal">Legal</p>
+  <a href="https://lxtech.ro/metroubucuresti/metrou-bucuresti-terms.html"      target="_blank"><span class="mm-icon">📄</span> <span data-en="Terms &amp; Conditions" data-ro="Termeni și condiții">Termeni și condiții</span></a>
+  <a href="https://lxtech.ro/metroubucuresti/metrou-bucuresti-privacy.html"    target="_blank"><span class="mm-icon">🔒</span> <span data-en="Privacy Policy" data-ro="Politică confidențialitate">Politică confidențialitate</span></a>
+  <a href="https://lxtech.ro/metroubucuresti/metrou-bucuresti-data-usage.html" target="_blank"><span class="mm-icon">📊</span> <span data-en="Data Usage" data-ro="Utilizare date">Utilizare date</span></a>
+  <a href="https://play.google.com/store/apps/details?id=com.MetroBuc" class="mobile-menu-dl" target="_blank">&#9654;&nbsp; <span data-en="Get it on Google Play — FREE" data-ro="Descarcă pe Google Play — GRATUIT">Descarcă pe Google Play — GRATUIT</span></a>
+</div>
+
+<section class="hero" id="top" aria-labelledby="hero-heading">
+  <div class="hero-mesh"></div>
+  <div class="hero-left">
+    <div class="hero-tag rv" data-en="Free Android App" data-ro="Aplicație Android gratuită">Aplicație Android gratuită</div>
+    <h1 class="rv rv1" id="hero-heading">
+      <span data-en="Navigate" data-ro="Navighează">Navighează</span><br>
+      <em data-en="Bucharest Metro" data-ro="Metroul București">Metroul București</em><br>
+      <span data-en="with Ease" data-ro="cu Ușurință">cu Ușurință</span>
+    </h1>
+    <p class="hero-desc rv rv2"
+       data-en="Smart route planning across all 5 lines, GPS journey tracking, door-opening indicators, elevator &amp; wheelchair access info, interactive map and nearby places — all stored on your device."
+       data-ro="Planificare inteligentă pe toate cele 5 linii, urmărire GPS, indicatori pentru uși, informații lifturi și accesibilitate, harta metroului București și locuri din apropiere — totul stocat local.">
+      Planificare inteligentă pe toate cele 5 linii, urmărire GPS, indicatori pentru uși, informații lifturi și accesibilitate, harta metroului București și locuri din apropiere — totul stocat local.
+    </p>
+    <div class="hero-btns rv rv3">
+      <a href="#download" class="btn-fill"><span>▶</span><span data-en="FREE Download" data-ro="Descarcă Gratuit">Descarcă Gratuit</span></a>
+      <a href="#map-preview" class="btn-line"><span>🗺️</span><span data-en="View Metro Map" data-ro="Vezi Harta Metroului">Vezi Harta Metroului</span></a>
+    </div>
+    <div class="hero-stats rv rv4">
+      <div class="hstat"><div class="hstat-icon">🛤️</div><div class="hstat-text"><strong>M1 – M5</strong><span data-en="All 5 lines" data-ro="Toate 5 liniile">Toate 5 liniile</span></div></div>
+      <div class="hstat"><div class="hstat-icon">🌍</div><div class="hstat-text"><strong data-en="6 Languages" data-ro="6 Limbi">6 Limbi</strong><span>RO EN FR IT DE ES</span></div></div>
+      <div class="hstat"><div class="hstat-icon">📵</div><div class="hstat-text"><strong data-en="100% Offline" data-ro="100% Offline">100% Offline</strong><span data-en="Zero data, always works" data-ro="Zero date, mereu funcționează">Zero date, mereu funcționează</span></div></div>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="phone-scene">
+      <div class="phone-glow"></div>
+      <div class="phone-frame">
+        <img src="https://lxtech.ro/metroubucuresti/images/splash-screen.png"
+             alt="Metrou București — aplicație harta metroului din București cu planificare rute M1–M5"
+             onerror="this.parentNode.innerHTML='<div class=\'phone-fallback\'><span>🚇</span><p>Metrou București</p></div>'">
+      </div>
+      <div class="badge b1">M1 Magistrala 1</div>
+      <div class="badge b2">M2 Magistrala 2</div>
+      <div class="badge b3">M3 Magistrala 3</div>
+      <div class="badge b4">M4 Magistrala 4</div>
+      <div class="badge b5">M5 Magistrala 5</div>
+    </div>
+  </div>
+</section>
+
+<div class="lines-bar" aria-label="Linii metrou București">
+  <div class="lpill lp1"><div class="lpill-dot" style="background:var(--m1)"></div>M1 — Dristor–Pantelimon / Preciziei</div>
+  <div class="lpill lp2"><div class="lpill-dot" style="background:var(--m2)"></div>M2 — Tudor Arghezi–Pipera</div>
+  <div class="lpill lp3"><div class="lpill-dot" style="background:var(--m3)"></div>M3 — Preciziei–Pantelimon</div>
+  <div class="lpill lp4"><div class="lpill-dot" style="background:var(--m4)"></div>M4 — Gara de Nord–Straulești</div>
+  <div class="lpill lp5"><div class="lpill-dot" style="background:var(--m5)"></div>M5 — Eroilor–Râul Doamnei / Valea Cascadelor</div>
+</div>
+
+<div class="beta-banner">
+  <div class="beta-pill">Beta închisă</div>
+  <p class="beta-banner-text"
+     data-en="Metrou București is currently in <strong>closed beta</strong>. Want early access? <a href='../feedback.html'>Join the beta →</a>"
+     data-ro="Metrou București este momentan în <strong>beta închisă</strong>. Vrei acces timpuriu? <a href='../feedback.html'>Alătură-te beta →</a>">
+    Metrou București este momentan în <strong>beta închisă</strong>. Vrei acces timpuriu? <a href="../feedback.html">Alătură-te beta →</a>
+  </p>
+</div>
+
+<section class="features" id="features" aria-labelledby="feat-heading">
+  <div class="feat-header">
+    <p class="feat-eyebrow rv" data-en="What it does" data-ro="Ce face aplicația">Ce face aplicația</p>
+    <h2 class="rv rv1" id="feat-heading">
+      <span data-en="Everything you need" data-ro="Tot ce ai nevoie">Tot ce ai nevoie</span><br>
+      <em data-en="underground" data-ro="în subteran">în subteran</em>
+    </h2>
+    <p class="feat-subline rv rv2"
+       data-en="<strong>FREE</strong> to download, works fully <strong>OFFLINE</strong> — no accounts needed, no sign-up, no internet required."
+       data-ro="<strong>GRATUIT</strong> de descărcat, funcționează complet <strong>OFFLINE</strong> — fără conturi, fără înregistrare, fără să ai nevoie de internet.">
+      <strong>GRATUIT</strong> de descărcat, funcționează complet <strong>OFFLINE</strong> — fără conturi, fără înregistrare, fără să ai nevoie de internet.
+    </p>
+  </div>
+  <div class="feat-grid">
+    <div class="feat-item rv rv1"><div class="feat-item-header"><span class="feat-emoji">🗺️</span><p class="feat-name" data-en="Smart Route Planning" data-ro="Planificare inteligentă rute">Planificare inteligentă rute</p><span class="feat-chevron"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></span></div><div class="feat-body"><p class="feat-copy" data-en="Find the best path across M1–M5 with automatic transfer optimisation, door-side recommendations, and journey time estimates." data-ro="Găsește cel mai bun traseu pe liniile M1–M5 ale metroului din București cu optimizare automată a transferurilor, recomandări pentru uși și estimări de timp.">Găsește cel mai bun traseu pe liniile M1–M5 ale metroului din București cu optimizare automată a transferurilor, recomandări pentru uși și estimări de timp.</p></div></div>
+    <div class="feat-item rv rv2"><div class="feat-item-header"><span class="feat-emoji">📍</span><p class="feat-name" data-en="GPS Route Tracking" data-ro="Urmărire GPS traseu">Urmărire GPS traseu</p><span class="feat-chevron"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></span></div><div class="feat-body"><p class="feat-copy" data-en="Follow your journey step-by-step in real time. Get notified before transfers and when to get off — even with the screen off." data-ro="Urmărește-ți traseul pas cu pas. Fii notificat înainte de transferuri și când să cobori — chiar și cu ecranul stins.">Urmărește-ți traseul pas cu pas. Fii notificat înainte de transferuri și când să cobori — chiar și cu ecranul stins.</p></div></div>
+    <div class="feat-item rv rv3"><div class="feat-item-header"><span class="feat-emoji">🚪</span><p class="feat-name" data-en="Door Direction Indicators" data-ro="Indicatori direcție uși">Indicatori direcție uși</p><span class="feat-chevron"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></span></div><div class="feat-body"><p class="feat-copy" data-en="Know exactly which side the doors open at every station so you can position yourself before the train arrives." data-ro="Știi exact pe ce parte se deschid ușile la fiecare stație, ca să te poziționezi înainte să sosească trenul.">Știi exact pe ce parte se deschid ușile la fiecare stație, ca să te poziționezi înainte să sosească trenul.</p></div></div>
+    <div class="feat-item rv rv1"><div class="feat-item-header"><span class="feat-emoji">♿</span><p class="feat-name" data-en="Accessibility &amp; Station Info" data-ro="Accesibilitate și info stație">Accesibilitate și info stație</p><span class="feat-chevron"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></span></div><div class="feat-body"><p class="feat-copy" data-en="See elevator availability and wheelchair-accessible entrances at every station. Includes bathroom locations, transport connections, and nearby places." data-ro="Vezi disponibilitatea lifturilor și intrările accesibile la fiecare stație. Include locații toalete, conexiuni transport și locuri din apropiere.">Vezi disponibilitatea lifturilor și intrările accesibile la fiecare stație. Include locații toalete, conexiuni transport și locuri din apropiere.</p></div></div>
+    <div class="feat-item rv rv2"><div class="feat-item-header"><span class="feat-emoji">⭐</span><p class="feat-name" data-en="Favourites &amp; Notes" data-ro="Favorite și note">Favorite și note</p><span class="feat-chevron"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></span></div><div class="feat-body"><p class="feat-copy" data-en="Save your most-used routes for one-tap navigation and attach personal notes to any station — stored only on your device." data-ro="Salvează rutele frecvente și adaugă note personale la orice stație — stocate doar pe dispozitivul tău.">Salvează rutele frecvente și adaugă note personale la orice stație — stocate doar pe dispozitivul tău.</p></div></div>
+    <div class="feat-item rv rv3"><div class="feat-item-header"><span class="feat-emoji">🕐</span><p class="feat-name" data-en="Train Timetables" data-ro="Orare metrou București">Orare metrou București</p><span class="feat-chevron"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></span></div><div class="feat-body"><p class="feat-copy" data-en="Next departures, first and last train times, peak-hour schedules for weekdays and weekends — all fully offline." data-ro="Următoarele plecări, orele primului și ultimului tren, orarele de vârf pentru zile lucrătoare și weekend — complet offline.">Următoarele plecări, orele primului și ultimului tren, orarele de vârf pentru zile lucrătoare și weekend — complet offline.</p></div></div>
+    <div class="feat-item rv rv1"><div class="feat-item-header"><span class="feat-emoji">🗺️</span><p class="feat-name" data-en="Interactive Map &amp; Nearby Places" data-ro="Harta metrou interactivă">Harta metrou interactivă</p><span class="feat-chevron"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></span></div><div class="feat-body"><p class="feat-copy" data-en="Zoomable metro map with live station markers, entrance pins, elevator locations, and nearby restaurants, parks and landmarks." data-ro="Harta metroului din București cu markere de stații, intrări, lifturi și locuri din apropiere pe o hartă OpenStreetMap interactivă.">Harta metroului din București cu markere de stații, intrări, lifturi și locuri din apropiere pe o hartă OpenStreetMap interactivă.</p></div></div>
+    <div class="feat-item rv rv2"><div class="feat-item-header"><span class="feat-emoji">🌙</span><p class="feat-name" data-en="Theme &amp; Language" data-ro="Temă și limbă">Temă și limbă</p><span class="feat-chevron"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></span></div><div class="feat-body"><p class="feat-copy" data-en="Light, dark, or system theme. Switch instantly between English, Romanian, French, Italian, German, and Spanish." data-ro="Temă clară, întunecată sau sistem. Comută instant între română, engleză, franceză, italiană, germană și spaniolă.">Temă clară, întunecată sau sistem. Comută instant între română, engleză, franceză, italiană, germană și spaniolă.</p></div></div>
+    <div class="feat-item rv rv3"><div class="feat-item-header"><span class="feat-emoji">📵</span><p class="feat-name" data-en="100% Offline — Always" data-ro="100% Offline — Mereu">100% Offline — Mereu</p><span class="feat-chevron"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></span></div><div class="feat-body"><p class="feat-copy" data-en="No internet required. Ever. Routes, timetables, maps, accessibility info and tracking all work underground without a single byte of mobile data." data-ro="Fără internet. Niciodată. Rute, orare, hărți, informații accesibilitate și urmărire — toate funcționează sub pământ fără niciun byte de date mobile.">Fără internet. Niciodată. Rute, orare, hărți, informații accesibilitate și urmărire — toate funcționează sub pământ fără niciun byte de date mobile.</p></div></div>
+  </div>
+</section>
+
+<section class="shots" id="screenshots" aria-labelledby="shots-heading">
+  <div class="shots-left">
+    <p class="shots-eyebrow rv" data-en="In action" data-ro="În acțiune">În acțiune</p>
+    <h2 class="rv rv1" id="shots-heading">
+      <span data-en="Designed for" data-ro="Creat pentru">Creat pentru</span><br>
+      <em data-en="the underground" data-ro="subteran">subteran</em>
+    </h2>
+    <ul class="shots-list rv rv2">
+      <li data-en="Plan a route in seconds across all 5 lines" data-ro="Planifică o rută în câteva secunde pe toate cele 5 linii">Planifică o rută în câteva secunde pe toate cele 5 linii</li>
+      <li data-en="GPS tracking step-by-step through your journey" data-ro="Urmărire GPS pas cu pas pe tot traseul">Urmărire GPS pas cu pas pe tot traseul</li>
+      <li data-en="Know which door side to stand on at each station" data-ro="Știi pe ce parte a ușii să stai la fiecare stație">Știi pe ce parte a ușii să stai la fiecare stație</li>
+      <li data-en="Explore station entrances and nearby places" data-ro="Explorează intrări și locuri din apropierea stațiilor">Explorează intrări și locuri din apropierea stațiilor</li>
+      <li data-en="Save favourite routes and personal station notes" data-ro="Salvează rute favorite și note personale">Salvează rute favorite și note personale</li>
+      <li data-en="Elevator and wheelchair access info per station" data-ro="Info lifturi și acces cu scaunul cu rotile per stație">Info lifturi și acces cu scaunul cu rotile per stație</li>
+      <li data-en="Interactive metro map with nearby places" data-ro="Harta interactivă a metroului cu locuri din apropiere">Harta interactivă a metroului cu locuri din apropiere</li>
+      <li data-en="100% offline — no internet needed" data-ro="100% offline — fără internet, niciodată">100% offline — fără internet, niciodată</li>
+    </ul>
+    <a href="#download" class="btn-fill rv rv3" style="align-self:flex-start" data-en="Download the app →" data-ro="Descarcă aplicația →">Descarcă aplicația →</a>
+  </div>
+  <div class="shots-right">
+    <div class="ss short"><img src="https://lxtech.ro/metroubucuresti/images/station-details.png" alt="Detalii stație metrou București" onerror="this.outerHTML='<div class=\'ss-ph\'><span>🏢</span><p>Detalii Stație</p></div>'"></div>
+    <div class="ss tall"><img src="https://lxtech.ro/metroubucuresti/images/journey-tracking.png" alt="Planificare rute metrou București M1–M5" onerror="this.outerHTML='<div class=\'ss-ph\'><span>🗺️</span><p>Planificare Rute</p></div>'"></div>
+    <div class="ss short"><img src="https://lxtech.ro/metroubucuresti/images/live_tracking.png" alt="Urmărire GPS live în metroul din București" onerror="this.outerHTML='<div class=\'ss-ph\'><span>📍</span><p>Urmărire Live</p></div>'"></div>
+  </div>
+</section>
+
+<section class="map-preview" id="map-preview" aria-labelledby="map-heading">
+  <div class="map-preview-header">
+    <div>
+      <p class="map-preview-eyebrow rv" data-en="Interactive Map" data-ro="Hartă interactivă">Hartă interactivă</p>
+      <h2 class="rv rv1" id="map-heading">
+        <span data-en="Harta Metroului" data-ro="Harta Metroului">Harta Metroului</span><br>
+        <em data-en="București — M1 to M5" data-ro="București — M1 până la M5">București — M1 până la M5</em>
+      </h2>
+      <p class="map-preview-desc rv rv2"
+         data-en="Interactive map of Bucharest's full metro network. All 5 lines — M1 through M5. Search any station, zoom and pan freely."
+         data-ro="Harta interactivă a rețelei complete de metrou din București. Toate cele 5 linii — M1 până la M5. Caută orice stație, zoom și navigare liberă.">
+        Harta interactivă a rețelei complete de metrou din București. Toate cele 5 linii — M1 până la M5. Caută orice stație, zoom și navigare liberă.
+      </p>
+    </div>
+    <div class="map-preview-cta rv rv3">
+      <a href="map.html" class="btn-fill"><span>⛶</span><span data-en="Open Full Map" data-ro="Deschide Harta Completă">Deschide Harta Completă</span></a>
+      <a href="#download" class="btn-line"><span>▶</span><span data-en="Get the App" data-ro="Descarcă Aplicația">Descarcă Aplicația</span></a>
+    </div>
+  </div>
+  <div class="map-line-badges" aria-label="Linii disponibile pe hartă">
+    <div class="mlbadge mlb1"><div class="mlbadge-dot" style="background:#CC3333"></div>M1 — Dristor–Pantelimon / Preciziei</div>
+    <div class="mlbadge mlb2"><div class="mlbadge-dot" style="background:#3366CC"></div>M2 — Tudor Arghezi–Pipera</div>
+    <div class="mlbadge mlb3"><div class="mlbadge-dot" style="background:#DDAA00"></div>M3 — Preciziei–Pantelimon</div>
+    <div class="mlbadge mlb4"><div class="mlbadge-dot" style="background:#2E8B57"></div>M4 — Gara de Nord–Straulești</div>
+    <div class="mlbadge mlb5"><div class="mlbadge-dot" style="background:#FF9831"></div>M5 — Eroilor–Râul Doamnei / Valea Cascadelor</div>
+  </div>
+  <a href="map.html" class="map-svg-wrap" aria-label="Deschide harta interactivă a metroului din București">
+    <img class="map-preview-img" src="https://lxtech.ro/metroubucuresti/images/metro-map-preview.png"
+         alt="Harta interactivă a metroului din București — toate liniile M1, M2, M3, M4, M5" width="1920" height="500" loading="lazy">
+    <div class="map-img-fade"></div>
+    <div class="map-img-cta">
+      <span class="map-img-cta-btn"><span>⛶</span><span data-en="Open Interactive Map" data-ro="Deschide Harta Completă">Deschide Harta Completă</span></span>
+    </div>
+    <div class="map-svg-hover">
+      <span data-en="Open interactive map →" data-ro="Deschide harta interactivă →">Deschide harta interactivă →</span>
+    </div>
+  </a>
+</section>
+
+<section class="beta-section" id="beta" aria-labelledby="beta-heading">
+  <div class="beta-card rv">
+    <div class="beta-card-left">
+      <p class="beta-eyebrow" data-en="Closed Beta" data-ro="Beta Închisă">Beta Închisă</p>
+      <h2 id="beta-heading">
+        <span data-en="Help us build" data-ro="Ajută-ne să construim">Ajută-ne să construim</span><br>
+        <em data-en="the app you need" data-ro="aplicația de care ai nevoie">aplicația de care ai nevoie</em>
+      </h2>
+      <p data-en="Metrou București is currently in <strong>closed beta</strong>. Your feedback shapes every feature — routes, timetables, accessibility info, and more. By joining, you're not just testing an app — you're helping build something that thousands of daily commuters will rely on."
+         data-ro="Metrou București este momentan în <strong>beta închisă</strong>. Feedback-ul tău modelează fiecare funcție — rute, orare, informații de accesibilitate și altele. Alăturându-te, nu testezi doar o aplicație — ajuți la construirea a ceva de care mii de navetisti vor depinde zilnic.">
+        Metrou București este momentan în <strong>beta închisă</strong>. Feedback-ul tău modelează fiecare funcție — rute, orare, informații de accesibilitate și altele. Alăturându-te, nu testezi doar o aplicație — ajuți la construirea a ceva de care mii de navetisti vor depinde zilnic.
+      </p>
+      <a href="../feedback.html" class="beta-join-btn"><span>✦</span><span data-en="Request beta access →" data-ro="Solicită acces beta →">Solicită acces beta →</span></a>
+    </div>
+    <div class="beta-card-right">
+      <div class="beta-stat">
+        <div class="beta-stat-val">M1 <em>→</em> M5</div>
+        <div class="beta-stat-label" data-en="All 5 lines covered — routes, timetables, entrances, accessibility" data-ro="Toate cele 5 linii acoperite — rute, orare, intrări, accesibilitate">Toate cele 5 linii acoperite — rute, orare, intrări, accesibilitate</div>
+      </div>
+      <ul class="beta-perks">
+        <li data-en="Early access to new features before public release" data-ro="Acces timpuriu la funcții noi înainte de lansarea publică">Acces timpuriu la funcții noi înainte de lansarea publică</li>
+        <li data-en="Your feedback directly influences what gets built next" data-ro="Feedback-ul tău influențează direct ce se construiește în continuare">Feedback-ul tău influențează direct ce se construiește în continuare</li>
+        <li data-en="Help shape a navigation tool for thousands of daily commuters" data-ro="Ajută la modelarea unui instrument de navigare pentru mii de navetisti zilnici">Ajută la modelarea unui instrument de navigare pentru mii de navetisti zilnici</li>
+        <li data-en="Direct line to the developer — your voice matters here" data-ro="Contact direct cu dezvoltatorul — vocea ta contează">Contact direct cu dezvoltatorul — vocea ta contează</li>
+      </ul>
+      <a href="../feedback.html" class="btn-line" style="align-self:flex-start;margin-top:4px;"><span>✉</span><span data-en="Contact us to join" data-ro="Contactează-ne pentru a te alătura">Contactează-ne pentru a te alătura</span></a>
+    </div>
+  </div>
+</section>
+
+<section class="faq-section" id="faq" aria-labelledby="faq-heading">
+  <p class="faq-eyebrow rv" data-en="Questions" data-ro="Întrebări frecvente">Întrebări frecvente</p>
+  <h2 class="rv rv1" id="faq-heading">
+    <span data-en="Frequently Asked" data-ro="Cel mai des">Cel mai des</span>
+    <em data-en=" Questions" data-ro=" întrebate"> întrebate</em>
+  </h2>
+  <div class="faq-grid rv rv2">
+    <div class="faq-item">
+      <p class="faq-q" data-en="Where can I find the Bucharest metro map?" data-ro="Unde găsesc harta metroului din București?">Unde găsesc harta metroului din București?</p>
+      <p class="faq-a" data-en='The interactive Bucharest metro map with all 5 lines (M1–M5) is available for free at <a href="map.html">metroubucuresti.ro/map.html</a>. You can zoom in, search any station, and toggle individual lines.' data-ro='Harta interactivă a metroului din București cu toate cele 5 linii (M1–M5) este disponibilă gratuit la <a href="map.html">metroubucuresti.ro/map.html</a>. Poți aplica zoom, căuta orice stație și filtra liniile individual.'>Harta interactivă a metroului din București cu toate cele 5 linii (M1–M5) este disponibilă gratuit la <a href="map.html">metroubucuresti.ro/map.html</a>. Poți aplica zoom, căuta orice stație și filtra liniile individual.</p>
+    </div>
+    <div class="faq-item">
+      <p class="faq-q" data-en="How many metro lines does Bucharest have?" data-ro="Câte linii de metrou are Bucureștiul?">Câte linii de metrou are Bucureștiul?</p>
+      <p class="faq-a" data-en="Bucharest has 5 active metro lines operated by Metrorex S.A.: M1 (yellow/gold), M2 (blue), M3 (yellow/red), M4 (green) and M5 (orange), covering approximately 78 km across 63 stations." data-ro="Bucureștiul are 5 linii de metrou active operate de Metrorex S.A.: M1 (auriu), M2 (albastru), M3 (galben/roșu), M4 (verde) și M5 (portocaliu), acoperind aproximativ 78 km pe 63 de stații.">Bucureștiul are 5 linii de metrou active operate de Metrorex S.A.: M1 (auriu), M2 (albastru), M3 (galben/roșu), M4 (verde) și M5 (portocaliu), acoperind aproximativ 78 km pe 63 de stații.</p>
+    </div>
+    <div class="faq-item">
+      <p class="faq-q" data-en="Is the Metrou București app free?" data-ro="Aplicația Metrou București este gratuită?">Aplicația Metrou București este gratuită?</p>
+      <p class="faq-a" data-en="Yes, completely free to download and use on Android. No subscription, no in-app purchases for core features. It works 100% offline — no internet needed for routes, timetables or GPS tracking." data-ro="Da, complet gratuită de descărcat și utilizat pe Android. Fără abonament, fără cumpărături în aplicație pentru funcțiile principale. Funcționează 100% offline — fără internet pentru rute, orare sau urmărire GPS.">Da, complet gratuită de descărcat și utilizat pe Android. Fără abonament, fără cumpărături în aplicație pentru funcțiile principale. Funcționează 100% offline — fără internet pentru rute, orare sau urmărire GPS.</p>
+    </div>
+    <div class="faq-item">
+      <p class="faq-q" data-en="Does the app work without internet?" data-ro="Funcționează aplicația fără internet?">Funcționează aplicația fără internet?</p>
+      <p class="faq-a" data-en="Yes — 100% offline. Route planning, timetables, GPS tracking, accessibility info and station details all work underground with zero mobile data usage." data-ro="Da — 100% offline. Planificarea rutelor, orarele, urmărirea GPS, informațiile de accesibilitate și detaliile stațiilor funcționează toate sub pământ fără niciun byte de date mobile.">Da — 100% offline. Planificarea rutelor, orarele, urmărirea GPS, informațiile de accesibilitate și detaliile stațiilor funcționează toate sub pământ fără niciun byte de date mobile.</p>
+    </div>
+    <div class="faq-item">
+      <p class="faq-q" data-en="Which metro lines does the app cover?" data-ro="Ce linii de metrou acoperă aplicația?">Ce linii de metrou acoperă aplicația?</p>
+      <p class="faq-a" data-en="All 5 active Bucharest metro lines: M1 (Dristor–Pantelimon/Preciziei), M2 (Tudor Arghezi–Pipera), M3 (Preciziei–Pantelimon), M4 (Gara de Nord–Straulești), M5 (Eroilor–Râul Doamnei/Valea Cascadelor)." data-ro="Toate cele 5 linii active: M1 (Dristor–Pantelimon/Preciziei), M2 (Tudor Arghezi–Pipera), M3 (Preciziei–Pantelimon), M4 (Gara de Nord–Straulești), M5 (Eroilor–Râul Doamnei/Valea Cascadelor).">Toate cele 5 linii active: M1 (Dristor–Pantelimon/Preciziei), M2 (Tudor Arghezi–Pipera), M3 (Preciziei–Pantelimon), M4 (Gara de Nord–Straulești), M5 (Eroilor–Râul Doamnei/Valea Cascadelor).</p>
+    </div>
+    <div class="faq-item">
+      <p class="faq-q" data-en="In what languages is the app available?" data-ro="În ce limbi este disponibilă aplicația?">În ce limbi este disponibilă aplicația?</p>
+      <p class="faq-a" data-en="The app is available in 6 languages: Romanian (Română), English, French (Français), Italian (Italiano), German (Deutsch) and Spanish (Español). You can switch languages instantly from Settings." data-ro="Aplicația este disponibilă în 6 limbi: Română, Engleză (English), Franceză (Français), Italiană (Italiano), Germană (Deutsch) și Spaniolă (Español). Poți schimba limba instant din Setări.">Aplicația este disponibilă în 6 limbi: Română, Engleză (English), Franceză (Français), Italiană (Italiano), Germană (Deutsch) și Spaniolă (Español). Poți schimba limba instant din Setări.</p>
+    </div>
+  </div>
+</section>
+
+<div class="cta-wrap" id="download">
+  <div class="cta-card rv">
+    <div class="cta-text">
+      <h2 data-en="Ready to navigate smarter?" data-ro="Gata să navighezi mai inteligent?">Gata să navighezi mai inteligent?</h2>
+      <p data-en="Metrou București is in closed beta — request access and be among the first to experience it. Your support helps build an app that works for you and thousands of fellow commuters."
+         data-ro="Metrou București este în beta închisă — solicită acces și fii printre primii care o testează. Sprijinul tău ajută la construirea unei aplicații care funcționează pentru tine și mii de alți navetisti.">
+        Metrou București este în beta închisă — solicită acces și fii printre primii care o testează. Sprijinul tău ajută la construirea unei aplicații care funcționează pentru tine și mii de alți navetisti.
+      </p>
+    </div>
+    <div class="cta-actions">
+      <a href="../feedback.html" class="btn-fill"><span>✦</span><span data-en="Request Beta Access" data-ro="Solicită Acces Beta">Solicită Acces Beta</span></a>
+      <a href="https://play.google.com/store/apps/details?id=com.MetroBuc" class="btn-line" target="_blank" rel="noopener"><span>▶</span><span data-en="View on Google Play" data-ro="Vezi pe Google Play">Vezi pe Google Play</span></a>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="foot-top">
+    <div>
+      <p class="foot-brand"><span class="foot-brand-dot"></span>Metrou București</p>
+      <p class="foot-desc" data-en="An unofficial, independently developed Android app for navigating Bucharest's metro system. Not affiliated with Metrorex S.A." data-ro="Aplicație Android independentă pentru navigarea prin metroul din București. Nu este afiliată cu Metrorex S.A.">Aplicație Android independentă pentru navigarea prin metroul din București. Nu este afiliată cu Metrorex S.A.</p>
+    </div>
+    <div class="foot-col">
+      <h4 data-en="App" data-ro="Aplicație">Aplicație</h4>
+      <a href="#features"    data-en="Features"      data-ro="Funcții">Funcții</a>
+      <a href="#screenshots" data-en="Screenshots"   data-ro="Capturi">Capturi</a>
+      <a href="#map-preview" data-en="Metro Map"     data-ro="Harta Metroului">Harta Metroului</a>
+      <a href="map.html"     data-en="Full Map Page" data-ro="Pagina Hartă">Pagina Hartă</a>
+      <a href="#beta"        data-en="Join Beta"     data-ro="Alătură-te Beta">Alătură-te Beta</a>
+      <a href="#download"    data-en="Download"      data-ro="Descarcă">Descarcă</a>
+    </div>
+    <div class="foot-col">
+      <h4 data-en="Legal" data-ro="Legal">Legal</h4>
+      <a href="https://lxtech.ro/metroubucuresti/metrou-bucuresti-terms.html"      data-en="Terms &amp; Conditions" data-ro="Termeni și condiții">Termeni și condiții</a>
+      <a href="https://lxtech.ro/metroubucuresti/metrou-bucuresti-privacy.html"    data-en="Privacy Policy"        data-ro="Politică confidențialitate">Politică confidențialitate</a>
+      <a href="https://lxtech.ro/metroubucuresti/metrou-bucuresti-data-usage.html" data-en="Data Usage / Ads"      data-ro="Utilizare date / Reclame">Utilizare date / Reclame</a>
+    </div>
+    <div class="foot-col">
+      <h4 data-en="Contact" data-ro="Contact">Contact</h4>
+      <a href="mailto:help@lxtech.ro">help@lxtech.ro</a>
+      <a href="https://metroubucuresti.ro">metroubucuresti.ro</a>
+      <a href="https://play.google.com/store/apps/details?id=com.MetroBuc" target="_blank" rel="noopener">Google Play</a>
+    </div>
+  </div>
+  <div class="foot-bottom">
+    <div class="foot-legal">
+      <span data-en="© 2024–2026 Metrou București. All rights reserved." data-ro="© 2024–2026 Metrou București. Toate drepturile rezervate.">© 2024–2026 Metrou București. Toate drepturile rezervate.</span>
+    </div>
+    <div class="foot-dots">
+      <div class="fd" style="background:var(--m1)"></div>
+      <div class="fd" style="background:var(--m2)"></div>
+      <div class="fd" style="background:var(--m3)"></div>
+      <div class="fd" style="background:var(--m4)"></div>
+      <div class="fd" style="background:var(--m5)"></div>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function() {
+  var nav = document.getElementById('nav');
+  window.addEventListener('scroll', function() {
+    nav.classList.toggle('solid', window.scrollY > 60);
+  }, {passive: true});
+
+  var hbg = document.getElementById('hbg');
+  var mobileMenu = document.getElementById('mobile-menu');
+  hbg.addEventListener('click', function() {
+    var isOpen = mobileMenu.classList.toggle('open');
+    hbg.classList.toggle('open', isOpen);
+    document.body.style.overflow = isOpen ? 'hidden' : '';
+  });
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closeMobileMenu();
+  });
+  document.addEventListener('click', function(e) {
+    if (mobileMenu.classList.contains('open') &&
+        !mobileMenu.contains(e.target) && !hbg.contains(e.target))
+      closeMobileMenu();
+  });
+
+  document.querySelectorAll('.feat-item').forEach(function(item) {
+    item.addEventListener('click', function() {
+      var wasActive = item.classList.contains('active');
+      document.querySelectorAll('.feat-item.active').forEach(function(i) { i.classList.remove('active'); });
+      if (!wasActive) item.classList.add('active');
+    });
+  });
+
+  var rvObs = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) {
+      if (e.isIntersecting) { e.target.classList.add('in'); rvObs.unobserve(e.target); }
+    });
+  }, {threshold: 0.12});
+  document.querySelectorAll('.rv').forEach(function(el) { rvObs.observe(el); });
+})();
+</script>
+</body>
+</html>
