@@ -477,7 +477,60 @@ footer{border-top:1px solid var(--border);padding:60px clamp(24px,calc((100vw - 
 /* Make all screenshot images feel clickable */
 .ss img,.gshot img{cursor:zoom-in;transition:transform .3s,box-shadow .3s;}
 .ss img:hover{transform:scale(1.04);}
-  .hero-phone{width:100%;max-width:280px;aspect-ratio:9/18;overflow:hidden;border-radius:32px}.hero-phone-video{width:110%;height:100%;object-fit:cover;display:block;transform:translateX(-5%)}@keyframes bgFloat{0%{transform:translate3d(0,0,0);opacity:.9}50%{transform:translate3d(0,-12px,0);opacity:1}100%{transform:translate3d(0,0,0);opacity:.9}}.bg-orbit{position:fixed;inset:0;pointer-events:none;z-index:-1}.bg-orbit::before,.bg-orbit::after{content:"";position:absolute;border-radius:999px;border:1px solid rgba(255,255,255,.06);box-shadow:0 0 40px rgba(78,205,196,.12)}.bg-orbit::before{width:52vw;height:52vw;top:-18vw;left:-10vw;border-color:rgba(74,144,217,.12);box-shadow:0 0 60px rgba(74,144,217,.18);animation:bgFloat 16s ease-in-out infinite}.bg-orbit::after{width:42vw;height:42vw;bottom:-14vw;right:-12vw;border-color:rgba(67,160,71,.14);box-shadow:0 0 48px rgba(67,160,71,.22);animation:bgFloat 22s ease-in-out infinite reverse}@media (prefers-reduced-motion: reduce){.bg-orbit::before,.bg-orbit::after{animation:none}}@keyframes screenFloat{0%{transform:translate3d(0,0,0)}50%{transform:translate3d(0,-8px,0)}100%{transform:translate3d(0,0,0)}}.screen-float{animation:screenFloat 10s ease-in-out infinite;will-change:transform}.screen-float:nth-child(2){animation-duration:12s;animation-delay:-2s}.screen-float:nth-child(3){animation-duration:14s;animation-delay:-4s}@media (prefers-reduced-motion: reduce){.screen-float{animation:none}.js-reveal{transition:none}}.js-reveal{opacity:0;transform:translateY(24px);transition:opacity 600ms cubic-bezier(0.16,1,0.3,1),transform 600ms cubic-bezier(0.16,1,0.3,1)}.js-reveal.is-visible{opacity:1;transform:translateY(0)}</style>
+  .hero-phone{width:100%;max-width:280px;aspect-ratio:9/18;overflow:hidden;border-radius:32px}.hero-phone-video{width:110%;height:100%;object-fit:cover;display:block;transform:translateX(-5%)}@keyframes bgFloat{0%{transform:translate3d(0,0,0);opacity:.9}50%{transform:translate3d(0,-12px,0);opacity:1}100%{transform:translate3d(0,0,0);opacity:.9}}.bg-orbit{position:fixed;inset:0;pointer-events:none;z-index:-1}.bg-orbit::before,.bg-orbit::after{content:"";position:absolute;border-radius:999px;border:1px solid rgba(255,255,255,.06);box-shadow:0 0 40px rgba(78,205,196,.12)}.bg-orbit::before{width:52vw;height:52vw;top:-18vw;left:-10vw;border-color:rgba(74,144,217,.12);box-shadow:0 0 60px rgba(74,144,217,.18);animation:bgFloat 16s ease-in-out infinite}.bg-orbit::after{width:42vw;height:42vw;bottom:-14vw;right:-12vw;border-color:rgba(67,160,71,.14);box-shadow:0 0 48px rgba(67,160,71,.22);animation:bgFloat 22s ease-in-out infinite reverse}@media (prefers-reduced-motion: reduce){.bg-orbit::before,.bg-orbit::after{animation:none}}@keyframes screenFloat{0%{transform:translate3d(0,0,0)}50%{transform:translate3d(0,-8px,0)}100%{transform:translate3d(0,0,0)}}.screen-float{animation:screenFloat 10s ease-in-out infinite;will-change:transform}.screen-float:nth-child(2){animation-duration:12s;animation-delay:-2s}.screen-float:nth-child(3){animation-duration:14s;animation-delay:-4s}@media (prefers-reduced-motion: reduce){.screen-float{animation:none}.js-reveal{transition:none}}.js-reveal{opacity:0;transform:translateY(24px);transition:opacity 600ms cubic-bezier(0.16,1,0.3,1),transform 600ms cubic-bezier(0.16,1,0.3,1)}.js-reveal.is-visible{opacity:1;transform:translateY(0)}
+/* === Lightbox mobile fixes v2 === */
+#lightboxOverlay,
+#lightbox {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+}
+
+.lb-outerContainer {
+  max-width: 100vw !important;
+  max-height: 100vh !important;
+}
+
+.lb-container {
+  max-width: 100vw !important;
+}
+
+.lb-image {
+  display: block;
+  margin: 0 auto;
+  max-width: 100vw !important;
+  max-height: calc(100vh - 80px) !important; /* leave room for controls */
+  height: auto !important;
+}
+
+/* Position controls inside the viewport bottom */
+.lb-dataContainer {
+  width: 100vw !important;
+}
+
+.lb-data {
+  max-width: 100vw !important;
+}
+
+.lb-close {
+  position: fixed !important;
+  top: 12px;
+  right: 12px;
+  z-index: 10001;
+}
+
+.lb-nav a.lb-prev,
+.lb-nav a.lb-next {
+  z-index: 10000;
+}
+
+body.lb-open {
+  overflow: hidden;
+}
+
+</style>
  </head>
  <body>
   <div class="bg-orbit"></div>
@@ -1719,5 +1772,33 @@ if ('IntersectionObserver' in window) {
   });
 })();
   </script>
- </body>
+ 
+<script>
+  (function() {
+    // Fallback if Lightbox2 custom events are not available:
+    // watch DOM for lightbox visibility
+    function setBodyLock(visible) {
+      if (visible) {
+        document.body.classList.add('lb-open');
+      } else {
+        document.body.classList.remove('lb-open');
+      }
+    }
+
+    var observer = new MutationObserver(function(mutations) {
+      mutations.forEach(function(m) {
+        if (m.attributeName === 'style' && m.target.id === 'lightboxOverlay') {
+          var display = window.getComputedStyle(m.target).display;
+          setBodyLock(display !== 'none');
+        }
+      });
+    });
+
+    var overlay = document.getElementById('lightboxOverlay');
+    if (overlay) {
+      observer.observe(overlay, { attributes: true });
+    }
+  })();
+</script>
+</body>
 </html>
